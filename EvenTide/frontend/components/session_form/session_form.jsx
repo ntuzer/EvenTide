@@ -3,20 +3,25 @@ import { Link, withRouter } from 'react-router-dom';
 
 class SessionForm extends React.Component {
   constructor(props) {
+    console.log("constructor");
     super(props);
     this.state = {
       email: '',
-      password: ''
+      password: '',
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log('sf cwrp');
     if (nextProps.loggedIn) {
       this.props.history.push('/');
     }
-//    if (nextProps.)  if previous path is equal (or not equal?) to current path
-//
+
+    if (nextProps.location !== this.props.location) {
+      this.props.clearErrors();
+    }
+
   }
 
   update(field) {
@@ -26,12 +31,14 @@ class SessionForm extends React.Component {
   }
 
   handleSubmit(e) {
+    console.log('handleSubmit');
     e.preventDefault();
     const user = this.state;
     this.props.processForm({user});
   }
 
   navLink() {
+    console.log('sf navlink');
     if (this.props.formType === 'login') {
       return <Link to="/signup">sign up instead</Link>;
     } else {
@@ -40,9 +47,11 @@ class SessionForm extends React.Component {
   }
 
   renderErrors() {
+    console.log('sf renderErrors');
     if (this.props.errors === null) return null;
     return(
       <ul>
+
         {this.props.errors.map((error, i) => (
           <li key={`error-${i}`}>
             {error}
@@ -53,6 +62,7 @@ class SessionForm extends React.Component {
   }
 
   render() {
+    console.log('sf render');
     return (
       <div className="login-form-container">
         <form onSubmit={this.handleSubmit} className="login-form-box">
