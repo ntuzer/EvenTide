@@ -26418,17 +26418,35 @@ var App = function App() {
   return _react2.default.createElement(
     'div',
     null,
-    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _navbar_container2.default }),
+    _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _navbar_container2.default }),
+    console.log(1),
     _react2.default.createElement(
       _reactRouterDom.Switch,
       null,
-      _react2.default.createElement(_route_util.AuthRoute, { exact: true, path: '/login', component: _session_form_container2.default }),
-      _react2.default.createElement(_route_util.AuthRoute, { exact: true, path: '/signup', component: _session_form_container2.default }),
-      _react2.default.createElement(_reactRouterDom.Redirect, { to: '/404', component: _four_container2.default })
+      console.log(2),
+      _react2.default.createElement(_route_util.AuthRoute, { path: '/login', component: _session_form_container2.default }),
+      console.log(3),
+      _react2.default.createElement(_route_util.AuthRoute, { path: '/signup', component: _session_form_container2.default }),
+      console.log(4),
+      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/home', render: function render() {
+          return 'home';
+        } }),
+      _react2.default.createElement(_reactRouterDom.Route, { path: '/', render: function render(props) {
+          props.history.push('/home');
+          return _react2.default.createElement(
+            'p',
+            null,
+            'placeholer'
+          );
+        } }),
+      console.log(5)
     )
   );
 };
 exports.default = App;
+// <Route exact path="/404" component={FourContainer} />
+// <Route render={() => <Redirect to="/404" />} />
+
 
 // <Switch>
 //   <Route exact path="/" component={PostIndexContainer}/>
@@ -26462,8 +26480,19 @@ var Auth = function Auth(_ref) {
   var Component = _ref.component,
       path = _ref.path,
       loggedIn = _ref.loggedIn;
+
+
+  console.log("route util auth");
+  console.log("component", Component);
+  console.log("path", path);
   return _react2.default.createElement(_reactRouterDom.Route, { path: path, render: function render(props) {
-      return !loggedIn ? _react2.default.createElement(Component, props) : _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' });
+      console.log('crazy route util auth return', loggedIn);
+      console.log('props', props);
+      if (!loggedIn) {
+        return _react2.default.createElement(Component, props);
+      } else {
+        return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' });
+      }
     } });
 };
 
@@ -26471,18 +26500,36 @@ var Protected = function Protected(_ref2) {
   var Component = _ref2.component,
       path = _ref2.path,
       loggedIn = _ref2.loggedIn;
+
+  console.log("route util protected");
   return _react2.default.createElement(_reactRouterDom.Route, { path: path, render: function render(props) {
-      return loggedIn ? _react2.default.createElement(Component, props) : _react2.default.createElement(_reactRouterDom.Redirect, { to: '/login' });
+      return loggedIn ? _react2.default.createElement(Component, props) : _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' });
     } });
 };
 
 var mapStateToProps = function mapStateToProps(state) {
+  console.log('route util mstp');
   return { loggedIn: Boolean(state.session.currentUser) };
 };
 
 var AuthRoute = exports.AuthRoute = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps, null)(Auth));
 
 var ProtectedRoute = exports.ProtectedRoute = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps, null)(Protected));
+
+//
+// const Auth = ({ component: Component, path, loggedIn }) => {
+//
+//   console.log("route util auth");
+//   return (
+//     <Route path={path} render={(props) => (
+//       !loggedIn ? (
+//         <Component {...props} />
+//       ) : (
+//         <Redirect to="/feed" />
+//       )
+//     )} />
+//   );
+// };
 
 /***/ }),
 /* 144 */
@@ -26834,7 +26881,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   console.log('nav mstp state:', state);
-  console.log('nav mstp ownprops:', ownProps);
+  // console.log('nav mstp ownprops:', ownProps);
   return {
     loggedIn: Boolean(state.session.currentUser)
     // errors: state.errors.session

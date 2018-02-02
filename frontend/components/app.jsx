@@ -5,7 +5,8 @@ import {
   Redirect,
   Switch,
   Link,
-  HashRouter
+  HashRouter,
+  Refresh
 } from 'react-router-dom';
 import SessionFormContainer from './session_form/session_form_container';
 import NavbarContainer from './navbar/navbar_container';
@@ -15,16 +16,29 @@ const App = () => {
   console.log('App file');
   return (
     <div>
-      <Route exact path="/" component={NavbarContainer} />
+      <Route path="/" component={NavbarContainer} />
+      {console.log(1)}
       <Switch>
-        <AuthRoute exact path="/login" component={SessionFormContainer} />
-        <AuthRoute exact path="/signup" component={SessionFormContainer} />
-        <Redirect to="/404" component={FourContainer} />
+        {console.log(2)}
+        <AuthRoute path="/login" component={SessionFormContainer} />
+        {console.log(3)}
+        <AuthRoute path="/signup" component={SessionFormContainer} />
+        {console.log(4)}
+
+        <Route exact path="/home" render={() => 'home'} />
+        <Route path="/" render={(props) => {
+          props.history.push('/home');
+          return (<p>placeholer</p>);
+        }
+      } />
+        {console.log(5)}
       </Switch>
     </div>
   );
 };
 export default App;
+// <Route exact path="/404" component={FourContainer} />
+// <Route render={() => <Redirect to="/404" />} />
 
 
 // <Switch>

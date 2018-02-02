@@ -5,7 +5,7 @@ import Navbar from './navbar';
 
 const mapStateToProps = (state, ownProps) => {
   console.log('nav mstp state:', state);
-  console.log('nav mstp ownprops:', ownProps);
+  // console.log('nav mstp ownprops:', ownProps);
   return {
     loggedIn: Boolean(state.session.currentUser),
     // errors: state.errors.session
