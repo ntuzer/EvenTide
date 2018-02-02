@@ -12,7 +12,7 @@
     transform: scale(0.5);
   }
   50% {
-    transform: scale(1.2);
+    transform: scale(1.4);
   }
   100% {
     transform: scale(1);
@@ -72,7 +72,7 @@
   padding-top: 80px;
 }
 .e-circle {
-  animation: etransition 0.3s;
+  animation: etransition 0.6s;
   height: 72px;
   width: 72px;
   background: $logo;

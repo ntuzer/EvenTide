@@ -26407,6 +26407,10 @@ var _navbar_container = __webpack_require__(147);
 
 var _navbar_container2 = _interopRequireDefault(_navbar_container);
 
+var _four_container = __webpack_require__(223);
+
+var _four_container2 = _interopRequireDefault(_four_container);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App() {
@@ -26414,13 +26418,13 @@ var App = function App() {
   return _react2.default.createElement(
     'div',
     null,
-    _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _navbar_container2.default }),
+    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _navbar_container2.default }),
     _react2.default.createElement(
       _reactRouterDom.Switch,
       null,
       _react2.default.createElement(_route_util.AuthRoute, { exact: true, path: '/login', component: _session_form_container2.default }),
       _react2.default.createElement(_route_util.AuthRoute, { exact: true, path: '/signup', component: _session_form_container2.default }),
-      _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' })
+      _react2.default.createElement(_reactRouterDom.Redirect, { to: '/404', component: _four_container2.default })
     )
   );
 };
@@ -26683,11 +26687,23 @@ var SessionForm = function (_React$Component) {
     key: 'demo',
     value: function demo(e) {
       e.preventDefault();
-      this.setState({ email: "test", password: "password" });
+      // let Email = "DemoUser@EvenTide.com";
+      // let Pass = "password";
+      // let tEmail;
+      // let tPass;
+      // if (this.state.email !== "DemoUser@EvenTide.com") {
+      //   for (var i = 0; i <= Email.length; i++) {
+      //     tEmail = Email.slice(0,i+1);
+      //     this.setState({"email": tEmail, password: "" });
+      //     setTimeout(this.update("email"), 500);
+      //   }
+      // }
+
+
+      this.setState({ email: "DemoUser@EvenTide.com", password: "password" });
       console.log("demo", this.state);
       this.props.processForm({ user: { email: "test", password: "password" } });
       // setTimeout(() => this.handleSubmit, 300);
-
     }
   }, {
     key: 'home',
@@ -29317,6 +29333,96 @@ exports.default = function () {
       return state;
   }
 };
+
+/***/ }),
+/* 223 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _reactRedux = __webpack_require__(16);
+
+var _four = __webpack_require__(224);
+
+var _four2 = _interopRequireDefault(_four);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  return {};
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+  return {};
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_four2.default);
+
+/***/ }),
+/* 224 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(10);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Four = function (_React$Component) {
+  _inherits(Four, _React$Component);
+
+  function Four(props) {
+    _classCallCheck(this, Four);
+
+    return _possibleConstructorReturn(this, (Four.__proto__ || Object.getPrototypeOf(Four)).call(this, props));
+  }
+
+  _createClass(Four, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'fo-fo' },
+        _react2.default.createElement(
+          'h2',
+          null,
+          '404'
+        ),
+        _react2.default.createElement(
+          'p',
+          null,
+          'Page does not exist.'
+        )
+      );
+    }
+  }]);
+
+  return Four;
+}(_react2.default.Component);
+
+exports.default = Four;
 
 /***/ })
 /******/ ]);

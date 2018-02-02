@@ -9,18 +9,18 @@ import {
 } from 'react-router-dom';
 import SessionFormContainer from './session_form/session_form_container';
 import NavbarContainer from './navbar/navbar_container';
+import FourContainer from './four/four_container';
 
 const App = () => {
   console.log('App file');
   return (
     <div>
-      <Route path="/" component={NavbarContainer} />
+      <Route exact path="/" component={NavbarContainer} />
       <Switch>
         <AuthRoute exact path="/login" component={SessionFormContainer} />
         <AuthRoute exact path="/signup" component={SessionFormContainer} />
-        <Redirect to="/" />
+        <Redirect to="/404" component={FourContainer} />
       </Switch>
-
     </div>
   );
 };

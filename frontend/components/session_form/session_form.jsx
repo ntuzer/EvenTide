@@ -65,12 +65,25 @@ class SessionForm extends React.Component {
 
   demo(e){
     e.preventDefault();
-    this.setState({email: "test", password: "password"});
+    // let Email = "DemoUser@EvenTide.com";
+    // let Pass = "password";
+    // let tEmail;
+    // let tPass;
+    // if (this.state.email !== "DemoUser@EvenTide.com") {
+    //   for (var i = 0; i <= Email.length; i++) {
+    //     tEmail = Email.slice(0,i+1);
+    //     this.setState({"email": tEmail, password: "" });
+    //     setTimeout(this.update("email"), 500);
+    //   }
+    // }
+
+
+
+
+    this.setState({email: "DemoUser@EvenTide.com", password: "password"});
     console.log("demo", this.state);
     this.props.processForm({user: {email: "test", password: "password"}});
     // setTimeout(() => this.handleSubmit, 300);
-
-
 
   }
 
