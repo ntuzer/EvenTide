@@ -63,32 +63,41 @@ class SessionForm extends React.Component {
 
   render() {
     console.log('sf render');
+    console.log("helooooooooo", this.props.formType);
     return (
-      <div className="login-form-container">
-        <form onSubmit={this.handleSubmit} className="login-form-box">
-          Please {this.props.formType} or {this.navLink()}
-          {this.renderErrors()}
-          <div className="login-form">
-            <br/>
-            <label>Email:
-              <input type="text"
-                value={this.state.email}
-                onChange={this.update('email')}
-                className="login-input"
-              />
-            </label>
-            <br/>
-            <label>Password:
-              <input type="password"
-                value={this.state.password}
-                onChange={this.update('password')}
-                className="login-input"
-              />
-            </label>
-            <br/>
-            <input type="submit" value="Submit" />
+      <div className="growing-box">
+        <div className="outer-form">
+          <div className="form-box">
+            <div>
+              <span className="e-circle">E</span>
+            </div>
+            <a className="sent-one">Let's get you signed {this.props.formType === "signup" ? "up" : "in"}.</a>
+            <a className="sent-two">Or would you like to {this.navLink()}?</a>
+            <form onSubmit={this.handleSubmit} className="login-form-box">
+              {this.renderErrors()}
+              <div className="login-form">
+                <br/>
+                <label>Email address
+                  <input type="text"
+                    value={this.state.email}
+                    onChange={this.update('email')}
+                    className="login-input"
+                  />
+                </label>
+                <br/>
+                <label>Password:
+                  <input type="password"
+                    value={this.state.password}
+                    onChange={this.update('password')}
+                    className="login-input"
+                  />
+                </label>
+                <br/>
+                <input type="submit" className="submit" value="Submit" />
+              </div>
+            </form>
           </div>
-        </form>
+        </div>
       </div>
     );
   }

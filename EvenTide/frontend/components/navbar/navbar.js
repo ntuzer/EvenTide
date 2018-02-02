@@ -7,17 +7,33 @@ class Navbar extends React.Component {
 
   render(){
     return(
-      <div className='navbar'>
-        <a className="logo">
-          <img src={staticImages.logo} alt=""/>
-        </a>
-        <div className="button1">
-        </div>
-        <div className="button2">
-        </div>
-      </div>
+      <header className='navbar'>
+        <nav>
+
+          <div className="navleft">
+            <Link to="/" >
+              <p className="logo">
+                EvenTide
+              </p>
+            </Link>
+          </div>
+
+          <div className="navRight">
+            <div className="createEvent">
+              Create Event
+            </div>
+            <div className="user">
+              Sign In
+            </div>
+          </div>
+
+        </nav>
+
+    </header>
     );
   }
 }
 
 export default withRouter(Navbar); //why do i need withRouter here?
+
+// <img src={staticImages.logo} alt=""/>
