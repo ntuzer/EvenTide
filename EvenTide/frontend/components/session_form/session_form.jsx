@@ -75,7 +75,7 @@ class SessionForm extends React.Component {
     return (
       <div className="growing-box">
         <div className="close-form">
-
+          <Link to="/" >x</Link>
         </div>
         <div className="outer-form">
           <div className="form-box">
