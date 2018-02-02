@@ -7,7 +7,17 @@
     transform: scale(1);
   }
 }
-
+@keyframes etransition {
+  0% {
+    transform: scale(0.5);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 .growing-box{
   animation: growtransition 0.2s;
   position: absolute;
@@ -53,6 +63,7 @@
   padding-top: 80px;
 }
 .e-circle {
+  animation: etransition 0.6s;
   height: 72px;
   width: 72px;
   background: $logo;
@@ -81,9 +92,17 @@
   padding: 8px 12px 9px;
   box-sizing: border-box;
   background-color: #fff;
-  border-radius: 2px;
+  border-radius: 3px;
   border: 1px solid lightgrey;
 }
+
+.form-errors {
+  margin-top: 20px;
+  color: red;
+  list-style-type: circle;
+  list-style-position: inside;
+}
+
 
 .submit {
   width: 100%;
@@ -94,4 +113,29 @@
   display: flex;
   justify-content: center;
   margin-top: 15px;
+}
+.submit:hover {
+  width: 100%;
+  background: #fd348b;
+  background-image: radial-gradient(farthest-corner at 0% 100%,#f86044 0,#fd348b 100%);
+  border-radius: 40px;
+  height: 40px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+.demo-user {
+  width: 100%;
+  background: lightgrey;
+  border-radius: 40px;
+  height: 40px;
+  color: $logo;
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.demo-user:hover {
+  background-image: radial-gradient(farthest-corner at 0% 100%,lightgrey 0,darkgray 100%);
 }

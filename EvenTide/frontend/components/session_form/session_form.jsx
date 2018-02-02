@@ -10,6 +10,7 @@ class SessionForm extends React.Component {
       password: '',
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.demo = this.demo.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -50,7 +51,7 @@ class SessionForm extends React.Component {
     console.log('sf renderErrors');
     if (this.props.errors === null) return null;
     return(
-      <ul>
+      <ul className="form-errors">
 
         {this.props.errors.map((error, i) => (
           <li key={`error-${i}`}>
@@ -61,18 +62,28 @@ class SessionForm extends React.Component {
     );
   }
 
+  demo(e){
+    e.preventDefault();
+    this.setState({email: "test", password: "password"});
+    this.props.processForm(this.state);
+
+  }
+
   render() {
-    console.log('sf render');
-    console.log("helooooooooo", this.props.formType);
+    // console.log('sf render');
+    // console.log("helooooooooo", this.props.formType);
     return (
       <div className="growing-box">
+        <div className="close-form">
+
+        </div>
         <div className="outer-form">
           <div className="form-box">
             <div>
               <span className="e-circle">E</span>
             </div>
-            <a className="sent-one">Let's get you signed {this.props.formType === "signup" ? "up" : "in"}.</a>
-            <a className="sent-two">Or would you like to {this.navLink()}?</a>
+            <div className="sent-one">Let's get you signed {this.props.formType === "signup" ? "up" : "in"}.</div>
+            <div className="sent-two">Or would you like to {this.navLink()}?</div>
             <form onSubmit={this.handleSubmit} className="login-form-box">
               {this.renderErrors()}
               <div className="login-form">
@@ -82,6 +93,8 @@ class SessionForm extends React.Component {
                     value={this.state.email}
                     onChange={this.update('email')}
                     className="login-input"
+                    autoFocus
+                    placeholder="Enter email"
                   />
                 </label>
                 <br/>
@@ -94,6 +107,7 @@ class SessionForm extends React.Component {
                 </label>
                 <br/>
                 <input type="submit" className="submit" value="Submit" />
+                <button className="demo-user" onClick={this.demo}>Demo User</button>
               </div>
             </form>
           </div>
