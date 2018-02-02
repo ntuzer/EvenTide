@@ -44,15 +44,25 @@ header nav {
   border-left: 1px solid #EFF2F5;
   padding-left: 20px;
   padding-right: 20px;
-  letter-spacing: 0.5px;
   border-radius: 0px;
   color: #0278b8;
   letter-spacing: 0.05em;
 }
 .user {
-  padding: 22px 20px 19px 20px;
   display: flex;
   align-items: center;
+}
+.user:hover {
+  background: #EFF2F5;
+}
+.navRight button {
+  padding: 22px 20px 19px 20px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 15px;
+  color: gray;
+  width: 100%;;
+  height: 100%;
 }
 
 .logo {

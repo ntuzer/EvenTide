@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, withRouter, Redirect } from 'react-router-dom';
 
 class SessionForm extends React.Component {
   constructor(props) {
@@ -11,6 +11,7 @@ class SessionForm extends React.Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.demo = this.demo.bind(this);
+    this.home = this.home.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -41,9 +42,9 @@ class SessionForm extends React.Component {
   navLink() {
     console.log('sf navlink');
     if (this.props.formType === 'login') {
-      return <Link to="/signup">sign up instead</Link>;
+      return <Link to="/signup">Or would you like to sign up instead</Link>;
     } else {
-      return <Link to="/login">log in instead</Link>;
+      return <Link to="/login">Or would you like to log in instead</Link>;
     }
   }
 
@@ -65,8 +66,17 @@ class SessionForm extends React.Component {
   demo(e){
     e.preventDefault();
     this.setState({email: "test", password: "password"});
-    this.props.processForm(this.state);
+    console.log("demo", this.state);
+    this.props.processForm({user: {email: "test", password: "password"}});
+    // setTimeout(() => this.handleSubmit, 300);
 
+
+
+  }
+
+  home(e){
+    e.preventDefault();
+    this.props.history.push("/");
   }
 
   render() {
@@ -74,16 +84,18 @@ class SessionForm extends React.Component {
     // console.log("helooooooooo", this.props.formType);
     return (
       <div className="growing-box">
-        <div className="close-form">
-          <Link to="/" >x</Link>
-        </div>
+        <button className="close-form" onClick={this.home}>
+          <div>x</div>
+        </button>
         <div className="outer-form">
           <div className="form-box">
             <div>
               <span className="e-circle">E</span>
             </div>
-            <div className="sent-one">Let's get you signed {this.props.formType === "signup" ? "up" : "in"}.</div>
-            <div className="sent-two">Or would you like to {this.navLink()}?</div>
+            <div className="sent-one">Let's get signed {this.props.formType === "signup" ? "up" : "in"}.</div>
+              <div className="sent-two">
+                <h3>{this.navLink()}?</h3>
+              </div>
             <form onSubmit={this.handleSubmit} className="login-form-box">
               {this.renderErrors()}
               <div className="login-form">
@@ -98,7 +110,7 @@ class SessionForm extends React.Component {
                   />
                 </label>
                 <br/>
-                <label>Password:
+                <label>Password
                   <input type="password"
                     value={this.state.password}
                     onChange={this.update('password')}

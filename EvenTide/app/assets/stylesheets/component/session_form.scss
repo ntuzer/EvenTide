@@ -36,7 +36,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  font-family: 'Open Sans Condensed';
+  font-family: 'Exo 2';
 
 }
 
@@ -46,13 +46,22 @@
 }
 
 .sent-one {
-  font-size: 30px;
-  font-weight: 0;
-  font-family: 'Open Sans Condensed';
+  font-size: 35px;
+  font-weight: 600;
+  font-family: 'Exo 2';
+  color: #45494e;
 }
 .sent-two {
   color: grey;
   letter-spacing: 0.1em;
+  font-family: 'Exo 2';
+  color: #656972;
+  display: inline-block;
+}
+.sent-two h3 {
+  color: #42557f;
+  font-size: inherit;
+  font-weight: bold;
 }
 
 .form-box {
@@ -63,7 +72,7 @@
   padding-top: 80px;
 }
 .e-circle {
-  animation: etransition 0.6s;
+  animation: etransition 0.3s;
   height: 72px;
   width: 72px;
   background: $logo;
@@ -84,6 +93,12 @@
   margin-bottom: 10px;
 }
 
+.login-form label {
+  color: #000;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+}
+
 .login-input {
   // border: 1px solid red;
   // display: block;
@@ -94,6 +109,7 @@
   background-color: #fff;
   border-radius: 3px;
   border: 1px solid lightgrey;
+  letter-spacing: 0.1em;
 }
 
 .form-errors {
@@ -107,12 +123,22 @@
   position: absolute;
   top: 15px;
   right: 30px;
-  background: lightgrey;
+  background: #fafafb;
   width: 40px;
   height: 40px;
   border-radius: 40px;
-  justify-content: center;
+}
+
+.close-form div {
+  display: flex;
   align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: grey;
+}
+.close-form div:hover {
+  color: black;
 }
 
 
