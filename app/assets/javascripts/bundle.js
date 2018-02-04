@@ -27104,15 +27104,15 @@ var _errors_reducer = __webpack_require__(221);
 
 var _errors_reducer2 = _interopRequireDefault(_errors_reducer);
 
-var _albums_reducer = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./albums_reducer\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+var _events_reducer = __webpack_require__(225);
 
-var _albums_reducer2 = _interopRequireDefault(_albums_reducer);
+var _events_reducer2 = _interopRequireDefault(_events_reducer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var rootReducer = (0, _redux.combineReducers)({
   session: _session_reducer2.default,
-  albums: _albums_reducer2.default,
+  events: _events_reducer2.default,
   errors: _errors_reducer2.default
 });
 
@@ -29473,6 +29473,136 @@ var Four = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Four;
+
+/***/ }),
+/* 225 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _merge2 = __webpack_require__(154);
+
+var _merge3 = _interopRequireDefault(_merge2);
+
+var _event_actions = __webpack_require__(226);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var eventsReducer = function eventsReducer() {
+  var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments[1];
+
+  Object.freeze(preloadedState);
+  var newState = void 0;
+  switch (action.type) {
+    case _event_actions.RECEIVE_EVENTS:
+      newState = (0, _merge3.default)({}, action.albums);
+      return newState;
+    case _event_actions.RECEIVE_EVENT:
+      newState = (0, _merge3.default)({}, preloadedState, _defineProperty({}, action.albums.id, action.albums));
+      return newState;
+    // case RECEIVE_MY_EVENTS:
+    default:
+      return preloadedState;
+  }
+};
+
+/***/ }),
+/* 226 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.deleteEvent = exports.fetchEvent = exports.fetchEvents = exports.RECEIVE_MY_EVENTS = exports.RECEIVE_EVENT_ERRORS = exports.RECEIVE_EVENT = exports.RECEIVE_EVENTS = undefined;
+
+var _session_api_util = __webpack_require__(145);
+
+var EventAPIUtil = _interopRequireWildcard(_session_api_util);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+var RECEIVE_EVENTS = exports.RECEIVE_EVENTS = 'RECEIVE_EVENTS';
+var RECEIVE_EVENT = exports.RECEIVE_EVENT = 'RECEIVE_EVENT';
+var RECEIVE_EVENT_ERRORS = exports.RECEIVE_EVENT_ERRORS = 'RECEIVE_EVENT_ERRORS';
+var RECEIVE_MY_EVENTS = exports.RECEIVE_MY_EVENTS = 'RECEIVE_MY_EVENTS';
+
+var receiveAllEvents = function receiveAllEvents(events) {
+  console.log('action receiveEvents');
+  return {
+    type: RECEIVE_EVENTS,
+    events: events
+  };
+};
+
+var receiveMyEvents = function receiveMyEvents(events) {
+  return {
+    type: RECEIVE_MY_EVENTS,
+    events: events
+  };
+};
+
+var receiveSingleEvent = function receiveSingleEvent(events) {
+  console.log('action receiveEvents');
+  return {
+    type: RECEIVE_EVENTS,
+    events: events
+  };
+};
+
+var receiveErrors = function receiveErrors(errors) {
+  console.log('action receiveErrors');
+  return {
+    type: RECEIVE_EVENT_ERRORS,
+    errors: errors
+  };
+};
+
+var fetchEvents = exports.fetchEvents = function fetchEvents() {
+  return function (dispatch) {
+    console.log('action fetchEvents');
+    return EventAPIUtil.fetchEvents().then(function (events) {
+      return dispatch(receiveAllEvents(events));
+    }, function (err) {
+      return dispatch(receiveErrors(err.responseJSON));
+    });
+  };
+};
+
+var fetchEvent = exports.fetchEvent = function fetchEvent(id) {
+  return function (dispatch) {
+    console.log('action signin');
+    return EventAPIUtil.signin(id).then(function (event) {
+      return dispatch(receiveSingleEvent(event));
+    }, function (err) {
+      return dispatch(receiveErrors(err.responseJSON));
+    });
+  };
+};
+
+var deleteEvent = exports.deleteEvent = function deleteEvent(eventId) {
+  return function (dispatch) {
+    console.log('action deleteEvent');
+    return EventAPIUtil.deleteEvent(eventId).then(function (event) {
+      return dispatch(receiveSingleEvent(null));
+    }, function (err) {
+      return dispatch(receiveErrors(err.responseJSON));
+    });
+  };
+};
+
+// export const fetchMyEvents = () => dispatch => {
+//   console.log('action myevents');
+//   return EventAPIUtil.?????().then(events => (
+//     dispatch(receiveMyEvents(events))
+//   ));
+// };
 
 /***/ })
 /******/ ]);
