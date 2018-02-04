@@ -27104,15 +27104,20 @@ var _errors_reducer = __webpack_require__(221);
 
 var _errors_reducer2 = _interopRequireDefault(_errors_reducer);
 
+var _albums_reducer = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./albums_reducer\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+var _albums_reducer2 = _interopRequireDefault(_albums_reducer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import entities from './entities_reducer';
-// import ui from './ui_reducer';
 var rootReducer = (0, _redux.combineReducers)({
   session: _session_reducer2.default,
+  albums: _albums_reducer2.default,
   errors: _errors_reducer2.default
 });
 
+// import entities from './entities_reducer';
+// import ui from './ui_reducer';
 exports.default = rootReducer;
 
 // const rootReducer = () => {
