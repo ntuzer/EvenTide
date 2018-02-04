@@ -1,27 +1,27 @@
 export const fetchEvents = () => {
   return $.ajax({
-    url: '',
-    method: '',
+    url: 'api/events',
+    method: 'GET',
   });
 };
 export const fetchEvent = (id) => {
   return $.ajax({
-    url: '',
-    method: '',
+    url: `api/events/${id}`,
+    method: 'GET',
   });
 };
 
 export const createEvent = event => {
   return $.ajax({
-    url: '',
-    method: '',
+    url: 'api/events',
+    method: 'POST',
     data: { event }
   });
 };
 
 export const deleteEvent = eventId => {
   return $.ajax({
-    url: '',
-    method: '',
+    url: `api/events/${eventId}`,
+    method: 'DELETE',
   });
 };
