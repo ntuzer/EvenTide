@@ -8,7 +8,7 @@ class CreateEvents < ActiveRecord::Migration[5.1]
       t.string :event_image_url
       t.integer :category_id, null: false
       t.integer :min_price, null: false
-      t.integer :max_price, null: false
+      t.integer :max_price
       t.datetime :start_date, null: false
       t.datetime :end_date, null: false
 
