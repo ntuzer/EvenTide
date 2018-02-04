@@ -17,21 +17,16 @@ const App = () => {
   return (
     <div>
       <Route path="/" component={NavbarContainer} />
-      {console.log(1)}
       <Switch>
-        {console.log(2)}
         <AuthRoute path="/login" component={SessionFormContainer} />
-        {console.log(3)}
         <AuthRoute path="/signup" component={SessionFormContainer} />
-        {console.log(4)}
-
         <Route exact path="/home" render={() => 'home'} />
         <Route path="/" render={(props) => {
-          props.history.push('/home');
-          return (<p>placeholer</p>);
-        }
-      } />
-        {console.log(5)}
+              props.history.push('/home');
+              return (<p>placeholer</p>);
+            }
+          }
+        />
       </Switch>
     </div>
   );

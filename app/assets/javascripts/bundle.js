@@ -26419,15 +26419,11 @@ var App = function App() {
     'div',
     null,
     _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _navbar_container2.default }),
-    console.log(1),
     _react2.default.createElement(
       _reactRouterDom.Switch,
       null,
-      console.log(2),
       _react2.default.createElement(_route_util.AuthRoute, { path: '/login', component: _session_form_container2.default }),
-      console.log(3),
       _react2.default.createElement(_route_util.AuthRoute, { path: '/signup', component: _session_form_container2.default }),
-      console.log(4),
       _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/home', render: function render() {
           return 'home';
         } }),
@@ -26438,8 +26434,8 @@ var App = function App() {
             null,
             'placeholer'
           );
-        } }),
-      console.log(5)
+        }
+      })
     )
   );
 };
