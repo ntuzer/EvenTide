@@ -26411,6 +26411,10 @@ var _four_container = __webpack_require__(223);
 
 var _four_container2 = _interopRequireDefault(_four_container);
 
+var _EventIndexContainer = __webpack_require__(227);
+
+var _EventIndexContainer2 = _interopRequireDefault(_EventIndexContainer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App() {
@@ -26424,6 +26428,7 @@ var App = function App() {
       null,
       _react2.default.createElement(_route_util.AuthRoute, { path: '/login', component: _session_form_container2.default }),
       _react2.default.createElement(_route_util.AuthRoute, { path: '/signup', component: _session_form_container2.default }),
+      _react2.default.createElement(_route_util.ProtectedRoute, { path: '/index', component: _EventIndexContainer2.default }),
       _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/home', render: function render() {
           return 'home';
         } }),
@@ -27157,6 +27162,7 @@ var sessionReducer = function sessionReducer() {
   var action = arguments[1];
 
   console.log('sessionReducer');
+  console.log('sR preloadedState', state);
   Object.freeze(state);
   switch (action.type) {
     case _session_actions.RECEIVE_CURRENT_USER:
@@ -29481,6 +29487,10 @@ exports.default = Four;
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _merge2 = __webpack_require__(154);
 
 var _merge3 = _interopRequireDefault(_merge2);
@@ -29495,6 +29505,8 @@ var eventsReducer = function eventsReducer() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments[1];
 
+  console.log('events reducer');
+  console.log('eR preloadedState', preloadedState);
   Object.freeze(preloadedState);
   var newState = void 0;
   switch (action.type) {
@@ -29509,6 +29521,8 @@ var eventsReducer = function eventsReducer() {
       return preloadedState;
   }
 };
+
+exports.default = eventsReducer;
 
 /***/ }),
 /* 226 */
@@ -29603,6 +29617,40 @@ var deleteEvent = exports.deleteEvent = function deleteEvent(eventId) {
 //     dispatch(receiveMyEvents(events))
 //   ));
 // };
+
+/***/ }),
+/* 227 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _reactRedux = __webpack_require__(16);
+
+__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../../actions/album_actions\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+var _eventIndex = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./eventIndex\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+var _eventIndex2 = _interopRequireDefault(_eventIndex);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+
+  console.log('VC mstp eic state', state);
+  console.log('eic op', ownProps);
+  return {};
+};
+
+var mapDispatchToProps = function mapDispatchToProps(state, ownProps) {
+  return {};
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_eventIndex2.default);
 
 /***/ })
 /******/ ]);

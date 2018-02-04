@@ -4,7 +4,7 @@ import EventIndex from './eventIndex';
 
 const mapStateToProps = (state, ownProps) => {
 
-  console.log('eic state', state);
+  console.log('VC mstp eic state', state);
   console.log('eic op', ownProps);
   return {};
 };
