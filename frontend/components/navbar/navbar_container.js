@@ -4,8 +4,8 @@ import Navbar from './navbar';
 
 
 const mapStateToProps = (state, ownProps) => {
-  console.log('nav mstp state:', state);
-  // console.log('nav mstp ownprops:', ownProps);
+  console.log('VC nav mstp state:', state);
+  console.log('VC nav mstp ownprops:', ownProps);
   return {
     loggedIn: Boolean(state.session.currentUser),
     // errors: state.errors.session
@@ -14,7 +14,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, { location }) => {
   // const processForm = (formType === 'login') ? signin : signup;
-  console.log('nav mdtp');
+  console.log('VC nav mdtp');
   return {
     signOut: () => dispatch(logout())
     // processForm: user => dispatch(processForm(user)),

@@ -3,7 +3,7 @@ import { Link, withRouter, Redirect } from 'react-router-dom';
 
 class SessionForm extends React.Component {
   constructor(props) {
-    console.log("constructor");
+    console.log("VIEW constructor");
     super(props);
     this.state = {
       email: '',
@@ -15,7 +15,7 @@ class SessionForm extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('sf cwrp');
+    console.log('VIEW sf cwrp');
     if (nextProps.loggedIn) {
       this.props.history.push('/');
     }
@@ -33,14 +33,14 @@ class SessionForm extends React.Component {
   }
 
   handleSubmit(e) {
-    console.log('handleSubmit');
+    console.log('VIEW sf handleSubmit');
     e.preventDefault();
     const user = this.state;
     this.props.processForm({user});
   }
 
   navLink() {
-    console.log('sf navlink');
+    console.log('VIEW sf navlink');
     if (this.props.formType === 'login') {
       return <Link to="/signup">Or would you like to sign up instead</Link>;
     } else {
@@ -49,7 +49,7 @@ class SessionForm extends React.Component {
   }
 
   renderErrors() {
-    console.log('sf renderErrors');
+    console.log('VIEW sf renderErrors');
     if (this.props.errors === null) return null;
     return(
       <ul className="form-errors">
@@ -93,7 +93,7 @@ class SessionForm extends React.Component {
   }
 
   render() {
-    // console.log('sf render');
+    console.log('VIEW sf render');
     // console.log("helooooooooo", this.props.formType);
     return (
       <div className="growing-box">

@@ -26507,8 +26507,9 @@ var Protected = function Protected(_ref2) {
     } });
 };
 
-var mapStateToProps = function mapStateToProps(state) {
+var mapStateToProps = function mapStateToProps(state, ownProps) {
   console.log('route util mstp');
+  console.log('route util ownProps', ownProps);
   return { loggedIn: Boolean(state.session.currentUser) };
 };
 
@@ -26553,8 +26554,8 @@ var _session_form2 = _interopRequireDefault(_session_form);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state) {
-  console.log('sfc state: ', state);
-  console.log('sfc mstp');
+  console.log('VC sfc state: ', state);
+  console.log('VC sfc mstp');
   return {
     loggedIn: Boolean(state.session.currentUser),
     errors: state.errors.session
@@ -26564,7 +26565,7 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch, _ref) {
   var location = _ref.location;
 
-  console.log('sfc mdtp');
+  console.log('VC sfc mdtp');
   var formType = location.pathname.slice(1);
   var _processForm = formType === 'login' ? _session_actions.signin : _session_actions.signup;
   return {
@@ -26652,7 +26653,7 @@ var SessionForm = function (_React$Component) {
   function SessionForm(props) {
     _classCallCheck(this, SessionForm);
 
-    console.log("constructor");
+    console.log("VIEW constructor");
 
     var _this = _possibleConstructorReturn(this, (SessionForm.__proto__ || Object.getPrototypeOf(SessionForm)).call(this, props));
 
@@ -26669,7 +26670,7 @@ var SessionForm = function (_React$Component) {
   _createClass(SessionForm, [{
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
-      console.log('sf cwrp');
+      console.log('VIEW sf cwrp');
       if (nextProps.loggedIn) {
         this.props.history.push('/');
       }
@@ -26690,7 +26691,7 @@ var SessionForm = function (_React$Component) {
   }, {
     key: 'handleSubmit',
     value: function handleSubmit(e) {
-      console.log('handleSubmit');
+      console.log('VIEW sf handleSubmit');
       e.preventDefault();
       var user = this.state;
       this.props.processForm({ user: user });
@@ -26698,7 +26699,7 @@ var SessionForm = function (_React$Component) {
   }, {
     key: 'navLink',
     value: function navLink() {
-      console.log('sf navlink');
+      console.log('VIEW sf navlink');
       if (this.props.formType === 'login') {
         return _react2.default.createElement(
           _reactRouterDom.Link,
@@ -26716,7 +26717,7 @@ var SessionForm = function (_React$Component) {
   }, {
     key: 'renderErrors',
     value: function renderErrors() {
-      console.log('sf renderErrors');
+      console.log('VIEW sf renderErrors');
       if (this.props.errors === null) return null;
       return _react2.default.createElement(
         'ul',
@@ -26761,7 +26762,7 @@ var SessionForm = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      // console.log('sf render');
+      console.log('VIEW sf render');
       // console.log("helooooooooo", this.props.formType);
       return _react2.default.createElement(
         'div',
@@ -26880,8 +26881,8 @@ var _navbar2 = _interopRequireDefault(_navbar);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  console.log('nav mstp state:', state);
-  // console.log('nav mstp ownprops:', ownProps);
+  console.log('VC nav mstp state:', state);
+  console.log('VC nav mstp ownprops:', ownProps);
   return {
     loggedIn: Boolean(state.session.currentUser)
     // errors: state.errors.session
@@ -26892,7 +26893,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, _ref) {
   var location = _ref.location;
 
   // const processForm = (formType === 'login') ? signin : signup;
-  console.log('nav mdtp');
+  console.log('VC nav mdtp');
   return {
     signOut: function signOut() {
       return dispatch((0, _session_actions.logout)());
@@ -26957,6 +26958,7 @@ var Navbar = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      console.log('VIEW navbar render');
       var inorout = this.props.loggedIn ? "sign out" : "sign in";
 
       // let signout = inorout === "sign out" ? ;

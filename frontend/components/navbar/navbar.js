@@ -17,6 +17,7 @@ class Navbar extends React.Component {
   }
 
   render(){
+    console.log('VIEW navbar render');
     let inorout = this.props.loggedIn ? "sign out" : "sign in";
 
     // let signout = inorout === "sign out" ? ;

@@ -38,8 +38,9 @@ const Protected = ({ component: Component, path, loggedIn }) => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
   console.log('route util mstp');
+  console.log('route util ownProps', ownProps);
   return (
     {loggedIn: Boolean(state.session.currentUser)}
   );
