@@ -26415,6 +26415,10 @@ var _event_index_container = __webpack_require__(230);
 
 var _event_index_container2 = _interopRequireDefault(_event_index_container);
 
+var _event_form_container = __webpack_require__(232);
+
+var _event_form_container2 = _interopRequireDefault(_event_form_container);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App(store) {
@@ -26430,6 +26434,7 @@ var App = function App(store) {
       _react2.default.createElement(_route_util.AuthRoute, { path: '/login', component: _session_form_container2.default }),
       _react2.default.createElement(_route_util.AuthRoute, { path: '/signup', component: _session_form_container2.default }),
       _react2.default.createElement(_route_util.ProtectedRoute, { path: '/user', component: _event_index_container2.default }),
+      _react2.default.createElement(_route_util.ProtectedRoute, { path: 'events/new', component: _event_form_container2.default }),
       _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/home', render: function render() {
           return 'home';
         } }),
@@ -29714,6 +29719,13 @@ var EventIndex = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = EventIndex;
+
+/***/ }),
+/* 232 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 /***/ })
 /******/ ]);

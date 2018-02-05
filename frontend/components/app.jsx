@@ -12,6 +12,7 @@ import SessionFormContainer from './session_form/session_form_container';
 import NavbarContainer from './navbar/navbar_container';
 import FourContainer from './four/four_container';
 import EventIndexContainer from './events/event_index_container';
+import EventFormContainer from './events/event_form_container';
 
 
 const App = (store) => {
@@ -24,6 +25,7 @@ const App = (store) => {
         <AuthRoute path="/login" component={SessionFormContainer} />
         <AuthRoute path="/signup" component={SessionFormContainer} />
         <ProtectedRoute path='/user' component={EventIndexContainer} />
+        <ProtectedRoute path='events/new' component={EventFormContainer} />
         <Route exact path="/home" render={() => 'home'} />
         <Route path="/" render={(props) => {
               props.history.push('/home');
