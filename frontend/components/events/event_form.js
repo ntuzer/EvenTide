@@ -12,7 +12,7 @@ class EventForm extends React.Component {
   }
 
   render(){
-    console.log('VIEW eF');
+    // console.log('VIEW eF');
     return (
       <div>
         <form onSubmit={this.handleSubmit}>

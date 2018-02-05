@@ -26430,19 +26430,20 @@ var App = function App(store) {
     _react2.default.createElement(
       _reactRouterDom.Switch,
       null,
+      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _event_index_container2.default }),
       _react2.default.createElement(_route_util.AuthRoute, { path: '/login', component: _session_form_container2.default }),
       _react2.default.createElement(_route_util.AuthRoute, { path: '/signup', component: _session_form_container2.default }),
       _react2.default.createElement(_route_util.ProtectedRoute, { path: '/user', component: _event_index_container2.default }),
       _react2.default.createElement(_route_util.ProtectedRoute, { path: '/events/new', component: _event_form_container2.default }),
-      _react2.default.createElement(_reactRouterDom.Route, { path: '/home', render: function render() {
+      _react2.default.createElement(_reactRouterDom.Route, { path: '/index', render: function render() {
           return 'home';
         } }),
       _react2.default.createElement(_reactRouterDom.Route, { path: '/', render: function render(props) {
-          props.history.push('/home');
+          props.history.push('/index');
           return _react2.default.createElement(
             'p',
             null,
-            'placeholer'
+            'placeholder'
           );
         }
       })
@@ -26450,15 +26451,19 @@ var App = function App(store) {
   );
 };
 exports.default = App;
+
 // <Route exact path="/404" component={FourContainer} />
 // <Route render={() => <Redirect to="/404" />} />
 
 
-// <Switch>
-//   <Route exact path="/" component={PostIndexContainer}/>
-//   <Route exact path="/posts/:postId" component={PostShowContainer}/>
-//   <Route path="/posts/:postId/edit" component={PostFormContainer}/>
-// </Switch>
+//
+// <Route path="/home" render={() => 'home'} />
+// <Route path="/" render={(props) => {
+//   props.history.push('/home');
+//   return (<p>placeholer</p>);
+// }
+// }
+// />
 
 /***/ }),
 /* 143 */
@@ -29786,7 +29791,7 @@ var EventForm = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      console.log('VIEW eF');
+      // console.log('VIEW eF');
       return _react2.default.createElement(
         'div',
         null,

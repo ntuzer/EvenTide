@@ -21,28 +21,36 @@ const App = (store) => {
     <div>
     <Route path="/" component={NavbarContainer} />
       <Switch>
+        <Route exact path="/" component={EventIndexContainer} />
         <AuthRoute path="/login" component={SessionFormContainer} />
         <AuthRoute path="/signup" component={SessionFormContainer} />
         <ProtectedRoute path='/user' component={EventIndexContainer} />
         <ProtectedRoute path='/events/new' component={EventFormContainer} />
-        <Route path="/home" render={() => 'home'} />
+
+
+        <Route path="/index" render={() => 'home'} />
         <Route path="/" render={(props) => {
-              props.history.push('/home');
-              return (<p>placeholer</p>);
-            }
-          }
+          props.history.push('/index');
+          return (<p>placeholder</p>);
+        }
+        }
         />
+
       </Switch>
     </div>
   );
 };
 export default App;
+
 // <Route exact path="/404" component={FourContainer} />
 // <Route render={() => <Redirect to="/404" />} />
 
 
-// <Switch>
-//   <Route exact path="/" component={PostIndexContainer}/>
-//   <Route exact path="/posts/:postId" component={PostShowContainer}/>
-//   <Route path="/posts/:postId/edit" component={PostFormContainer}/>
-// </Switch>
+//
+// <Route path="/home" render={() => 'home'} />
+// <Route path="/" render={(props) => {
+//   props.history.push('/home');
+//   return (<p>placeholer</p>);
+// }
+// }
+// />

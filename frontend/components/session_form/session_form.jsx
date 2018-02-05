@@ -103,7 +103,9 @@ class SessionForm extends React.Component {
             <div>
               <span className="e-circle">E</span>
             </div>
-            <div className="sent-one">Let's get signed {this.props.formType === "signup" ? "up" : "in"}.</div>
+            <div className="sent-one">
+            Let's get signed {this.props.formType === "signup" ? "up" : "in"}.
+            </div>
               <div className="sent-two">
                 <h3>{this.navLink()}</h3>
               </div>
