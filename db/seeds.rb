@@ -13,3 +13,28 @@ User.new(email: "rewel", password: "password")
 User.new(email: "dahveed", password: "password")
 User.new(email: "joe@schmo.com", password: "password")
 User.new(email: "DemoUser@EvenTide.com", password: "password")
+
+
+Event.new({
+  organizer_id: 5,
+  title: 'Party of the year',
+  location: "Atlanta",
+  description: "FUN Times",
+  category_id: 1,
+  min_price: 0,
+  start_date: '2018-03-22T17:00',
+  end_date: '2018-03-22T19:00',
+  }
+);
+
+Event.new({
+  organizer_id: 5,
+  title: 'Party of the millenium',
+  location: "SFO",
+  description: "Great Times",
+  category_id: 1,
+  min_price: 0,
+  start_date: '2018-03-22T17:00',
+  end_date: '2018-03-22T19:00',
+  }
+);

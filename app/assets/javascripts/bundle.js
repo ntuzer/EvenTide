@@ -29728,6 +29728,7 @@ var _event_form2 = _interopRequireDefault(_event_form);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state) {
+  console.log('efc mstp state', state);
   return {
     // loggedIn: Boolean(state.session.currentUser),
     errors: state.errors.session
@@ -29770,6 +29771,8 @@ var _reactRouterDom = __webpack_require__(10);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -29782,10 +29785,29 @@ var EventForm = function (_React$Component) {
   function EventForm(props) {
     _classCallCheck(this, EventForm);
 
-    return _possibleConstructorReturn(this, (EventForm.__proto__ || Object.getPrototypeOf(EventForm)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (EventForm.__proto__ || Object.getPrototypeOf(EventForm)).call(this, props));
+
+    console.log('props', props);
+    return _this;
   }
 
   _createClass(EventForm, [{
+    key: 'update',
+    value: function update(field) {
+      var _this2 = this;
+
+      return function (e) {
+        return _this2.setState(_defineProperty({}, field, e.currentTarget.value));
+      };
+    }
+  }, {
+    key: 'handleSubmit',
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      var user = this.state;
+      this.props.processForm({ user: user });
+    }
+  }, {
     key: 'handleSubmit',
     value: function handleSubmit() {}
   }, {
@@ -29802,24 +29824,27 @@ var EventForm = function (_React$Component) {
             'label',
             null,
             'Event Title',
+            _react2.default.createElement('br', null),
             _react2.default.createElement('input', { type: 'text',
-              placeholder: 'Give it a short distinct name',
-              value: '' })
+              placeholder: 'Give it a short distinct name'
+            })
           ),
           _react2.default.createElement('br', null),
           _react2.default.createElement(
             'label',
             null,
             'Location',
+            _react2.default.createElement('br', null),
             _react2.default.createElement('input', { type: 'text',
-              placeholder: 'Enter address of venue',
-              value: '' })
+              placeholder: 'Enter address of venue'
+            })
           ),
           _react2.default.createElement('br', null),
           _react2.default.createElement(
             'label',
             null,
             'Start date',
+            _react2.default.createElement('br', null),
             _react2.default.createElement('input', { type: 'datetime-local',
               value: '' })
           ),
@@ -29828,6 +29853,7 @@ var EventForm = function (_React$Component) {
             'label',
             null,
             'End date',
+            _react2.default.createElement('br', null),
             _react2.default.createElement('input', { type: 'datetime-local',
               value: '' })
           ),
@@ -29836,8 +29862,51 @@ var EventForm = function (_React$Component) {
             'label',
             null,
             'Description',
-            _react2.default.createElement('input', { placeholder: 'Enter a Description' })
-          )
+            _react2.default.createElement('br', null),
+            _react2.default.createElement('input', { type: 'text', placeholder: 'Enter a Description' })
+          ),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement(
+            'label',
+            null,
+            'Ticket'
+          ),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement(
+            'label',
+            null,
+            'Ticket'
+          ),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement(
+            'label',
+            null,
+            'Ticket'
+          ),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement(
+            'select',
+            { className: 'category-dropdown' },
+            _react2.default.createElement(
+              'option',
+              { value: '' },
+              'Food & Drink'
+            ),
+            _react2.default.createElement(
+              'option',
+              { value: '' },
+              'Party'
+            ),
+            _react2.default.createElement(
+              'option',
+              { value: '' },
+              'Nature'
+            )
+          ),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement('input', { type: 'submit', name: '', value: 'Make your event live' })
         )
       );
     }

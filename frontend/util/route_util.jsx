@@ -19,10 +19,6 @@ const Auth = ({ component: Component, path, loggedIn }) => {
   );
 };
 
-
-
-
-
 const Protected = ({ component: Component, path, loggedIn }) => {
   // console.log('PROTECTED');
   // console.log("route util protected");
