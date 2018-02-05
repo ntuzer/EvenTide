@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180205022855) do
+ActiveRecord::Schema.define(version: 20180205034108) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,9 +40,20 @@ ActiveRecord::Schema.define(version: 20180205022855) do
     t.index ["title"], name: "index_events_on_title"
   end
 
+  create_table "rsvps", force: :cascade do |t|
+    t.integer "ticket_id", null: false
+    t.integer "user_id", null: false
+    t.integer "quantity", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_rsvps_on_user_id"
+  end
+
   create_table "tickets", force: :cascade do |t|
-    t.string "ticket_type", null: false
+    t.string "ticket_name", null: false
     t.integer "event_id", null: false
+    t.integer "price", null: false
+    t.integer "quantity", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_tickets_on_event_id"
