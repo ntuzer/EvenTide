@@ -83,22 +83,12 @@ class SessionForm extends React.Component {
 
   demo(e){
     e.preventDefault();
-    // let Email = "DemoUser@EvenTide.com";
-    // let Pass = "password";
-    // let tEmail;
-    // let tPass;
-    // if (this.state.email !== "DemoUser@EvenTide.com") {
-    //   for (var i = 0; i <= Email.length; i++) {
-    //     tEmail = Email.slice(0,i+1);
-    //     this.setState({"email": tEmail, password: "" });
-    //     setTimeout(this.update("email"), 500);
-    //   }
-    // }
 
     this.setState({email: "DemoUser@EvenTide.com", password: "password"});
     console.log("demo", this.state);
-    this.props.processForm({user: {email: "DemoUser@EvenTide.com", password: "password"}});
-    // setTimeout(() => this.handleSubmit, 300);
+    this.props.demoForm(
+      {user: {email: "DemoUser@EvenTide.com", password: "password"}}
+    );
 
   }
 
@@ -109,7 +99,6 @@ class SessionForm extends React.Component {
 
   render() {
     console.log('VIEW sf render');
-    // console.log("helooooooooo", this.props.formType);
     return (
       <div className="growing-box">
         <button className="close-form" onClick={this.home}>

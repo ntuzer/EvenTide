@@ -26584,6 +26584,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, _ref) {
     processForm: function processForm(user) {
       return dispatch(_processForm(user));
     },
+    demoForm: function demoForm(user) {
+      return dispatch((0, _session_actions.signin)(user));
+    },
     formType: formType,
     clearErrors: function clearErrors() {
       return dispatch((0, _session_actions.receiveErrors)([]));
@@ -26765,22 +26768,10 @@ var SessionForm = function (_React$Component) {
     key: 'demo',
     value: function demo(e) {
       e.preventDefault();
-      // let Email = "DemoUser@EvenTide.com";
-      // let Pass = "password";
-      // let tEmail;
-      // let tPass;
-      // if (this.state.email !== "DemoUser@EvenTide.com") {
-      //   for (var i = 0; i <= Email.length; i++) {
-      //     tEmail = Email.slice(0,i+1);
-      //     this.setState({"email": tEmail, password: "" });
-      //     setTimeout(this.update("email"), 500);
-      //   }
-      // }
 
       this.setState({ email: "DemoUser@EvenTide.com", password: "password" });
       console.log("demo", this.state);
-      this.props.processForm({ user: { email: "DemoUser@EvenTide.com", password: "password" } });
-      // setTimeout(() => this.handleSubmit, 300);
+      this.props.demoForm({ user: { email: "DemoUser@EvenTide.com", password: "password" } });
     }
   }, {
     key: 'home',
@@ -26792,7 +26783,6 @@ var SessionForm = function (_React$Component) {
     key: 'render',
     value: function render() {
       console.log('VIEW sf render');
-      // console.log("helooooooooo", this.props.formType);
       return _react2.default.createElement(
         'div',
         { className: 'growing-box' },
