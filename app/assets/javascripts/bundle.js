@@ -26411,14 +26411,15 @@ var _four_container = __webpack_require__(223);
 
 var _four_container2 = _interopRequireDefault(_four_container);
 
-var _EventIndexContainer = __webpack_require__(227);
+var _event_index_container = __webpack_require__(230);
 
-var _EventIndexContainer2 = _interopRequireDefault(_EventIndexContainer);
+var _event_index_container2 = _interopRequireDefault(_event_index_container);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var App = function App() {
+var App = function App(store) {
   console.log('App file');
+  console.log("APP store", store);
   return _react2.default.createElement(
     'div',
     null,
@@ -26428,7 +26429,7 @@ var App = function App() {
       null,
       _react2.default.createElement(_route_util.AuthRoute, { path: '/login', component: _session_form_container2.default }),
       _react2.default.createElement(_route_util.AuthRoute, { path: '/signup', component: _session_form_container2.default }),
-      _react2.default.createElement(_route_util.ProtectedRoute, { path: '/index', component: _EventIndexContainer2.default }),
+      _react2.default.createElement(_route_util.ProtectedRoute, { path: '/user', component: _event_index_container2.default }),
       _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/home', render: function render() {
           return 'home';
         } }),
@@ -26482,7 +26483,7 @@ var Auth = function Auth(_ref) {
       path = _ref.path,
       loggedIn = _ref.loggedIn;
 
-
+  console.log('AUTH');
   console.log("route util auth");
   console.log("component", Component);
   console.log("path", path);
@@ -26492,7 +26493,7 @@ var Auth = function Auth(_ref) {
       if (!loggedIn) {
         return _react2.default.createElement(Component, props);
       } else {
-        return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' });
+        return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/user' });
       }
     } });
 };
@@ -26502,7 +26503,10 @@ var Protected = function Protected(_ref2) {
       path = _ref2.path,
       loggedIn = _ref2.loggedIn;
 
+  console.log('PROTECTED');
   console.log("route util protected");
+  console.log('component', Component);
+  // console.log("protected props", props);
   return _react2.default.createElement(_reactRouterDom.Route, { path: path, render: function render(props) {
       return loggedIn ? _react2.default.createElement(Component, props) : _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' });
     } });
@@ -26673,7 +26677,7 @@ var SessionForm = function (_React$Component) {
     value: function componentWillReceiveProps(nextProps) {
       console.log('VIEW sf cwrp');
       if (nextProps.loggedIn) {
-        this.props.history.push('/');
+        this.props.history.push('/index');
       }
 
       if (nextProps.location !== this.props.location) {
@@ -29619,7 +29623,10 @@ var deleteEvent = exports.deleteEvent = function deleteEvent(eventId) {
 // };
 
 /***/ }),
-/* 227 */
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29631,11 +29638,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _reactRedux = __webpack_require__(16);
 
-__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../../actions/album_actions\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+var _event_actions = __webpack_require__(226);
 
-var _eventIndex = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./eventIndex\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+var _event_index = __webpack_require__(231);
 
-var _eventIndex2 = _interopRequireDefault(_eventIndex);
+var _event_index2 = _interopRequireDefault(_event_index);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29650,7 +29657,63 @@ var mapDispatchToProps = function mapDispatchToProps(state, ownProps) {
   return {};
 };
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_eventIndex2.default);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_event_index2.default);
+
+/***/ }),
+/* 231 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(10);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var EventIndex = function (_React$Component) {
+  _inherits(EventIndex, _React$Component);
+
+  function EventIndex(props) {
+    _classCallCheck(this, EventIndex);
+
+    return _possibleConstructorReturn(this, (EventIndex.__proto__ || Object.getPrototypeOf(EventIndex)).call(this, props));
+  }
+
+  _createClass(EventIndex, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'h1',
+          null,
+          'Event Index'
+        )
+      );
+    }
+  }]);
+
+  return EventIndex;
+}(_react2.default.Component);
+
+exports.default = EventIndex;
 
 /***/ })
 /******/ ]);

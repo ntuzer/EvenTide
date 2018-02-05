@@ -5,7 +5,7 @@ import { Route, Redirect, withRouter } from 'react-router-dom';
 
 
 const Auth = ({ component: Component, path, loggedIn }) => {
-
+  console.log('AUTH');
   console.log("route util auth");
   console.log("component",Component);
   console.log("path", path);
@@ -16,7 +16,7 @@ const Auth = ({ component: Component, path, loggedIn }) => {
       if (!loggedIn) {
         return (<Component {...props} />);
       } else {
-        return (<Redirect to="/" />);
+        return (<Redirect to="/user" />);
       }
     }} />
   );
@@ -27,7 +27,10 @@ const Auth = ({ component: Component, path, loggedIn }) => {
 
 
 const Protected = ({ component: Component, path, loggedIn }) => {
+  console.log('PROTECTED');
   console.log("route util protected");
+  console.log('component', Component);
+  // console.log("protected props", props);
   return (<Route path={path} render={(props) => (
        loggedIn ? (
         <Component {...props} />

@@ -17,7 +17,7 @@ class SessionForm extends React.Component {
   componentWillReceiveProps(nextProps) {
     console.log('VIEW sf cwrp');
     if (nextProps.loggedIn) {
-      this.props.history.push('/');
+      this.props.history.push('/index');
     }
 
     if (nextProps.location !== this.props.location) {

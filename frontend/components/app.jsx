@@ -11,21 +11,19 @@ import {
 import SessionFormContainer from './session_form/session_form_container';
 import NavbarContainer from './navbar/navbar_container';
 import FourContainer from './four/four_container';
-import EventIndexContainer from './events/EventIndexContainer';
+import EventIndexContainer from './events/event_index_container';
 
 
-const App = () => {
+const App = (store) => {
   console.log('App file');
+  console.log("APP store", store);
   return (
     <div>
       <Route path="/" component={NavbarContainer} />
       <Switch>
         <AuthRoute path="/login" component={SessionFormContainer} />
         <AuthRoute path="/signup" component={SessionFormContainer} />
-        <ProtectedRoute path="/index" component={EventIndexContainer} />
-
-
-
+        <ProtectedRoute path='/user' component={EventIndexContainer} />
         <Route exact path="/home" render={() => 'home'} />
         <Route path="/" render={(props) => {
               props.history.push('/home');

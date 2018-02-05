@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
-import {  } from '../../actions/album_actions';
-import EventIndex from './eventIndex';
+import {
+  fetchEvents, fetchEvent, createEvent, deleteEvent
+} from '../../actions/event_actions';
+import EventIndex from './event_index';
 
 const mapStateToProps = (state, ownProps) => {
 
