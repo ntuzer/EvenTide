@@ -23,6 +23,12 @@ class SessionForm extends React.Component {
     if (nextProps.location !== this.props.location) {
       this.props.clearErrors();
     }
+    this.setState({email: "", password: ""});
+
+  }
+
+  componentWillUnmount(){
+    this.props.clearErrors();
 
   }
 
@@ -77,12 +83,9 @@ class SessionForm extends React.Component {
     //   }
     // }
 
-
-
-
     this.setState({email: "DemoUser@EvenTide.com", password: "password"});
     console.log("demo", this.state);
-    this.props.processForm({user: {email: "test", password: "password"}});
+    this.props.processForm({user: {email: "DemoUser@EvenTide.com", password: "password"}});
     // setTimeout(() => this.handleSubmit, 300);
 
   }

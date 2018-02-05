@@ -26515,7 +26515,7 @@ var Protected = function Protected(_ref2) {
   console.log('component', Component);
   // console.log("protected props", props);
   return _react2.default.createElement(_reactRouterDom.Route, { path: path, render: function render(props) {
-      return loggedIn ? _react2.default.createElement(Component, props) : _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' });
+      return loggedIn ? _react2.default.createElement(Component, props) : _react2.default.createElement(_reactRouterDom.Redirect, { to: '/login' });
     } });
 };
 
@@ -26690,6 +26690,12 @@ var SessionForm = function (_React$Component) {
       if (nextProps.location !== this.props.location) {
         this.props.clearErrors();
       }
+      this.setState({ email: "", password: "" });
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this.props.clearErrors();
     }
   }, {
     key: 'update',
@@ -26759,10 +26765,9 @@ var SessionForm = function (_React$Component) {
       //   }
       // }
 
-
       this.setState({ email: "DemoUser@EvenTide.com", password: "password" });
       console.log("demo", this.state);
-      this.props.processForm({ user: { email: "test", password: "password" } });
+      this.props.processForm({ user: { email: "DemoUser@EvenTide.com", password: "password" } });
       // setTimeout(() => this.handleSubmit, 300);
     }
   }, {
@@ -29824,6 +29829,9 @@ var EventForm = function (_React$Component) {
   }
 
   _createClass(EventForm, [{
+    key: 'handleSubmit',
+    value: function handleSubmit() {}
+  }, {
     key: 'render',
     value: function render() {
       console.log('VIEW eF');
@@ -29831,9 +29839,48 @@ var EventForm = function (_React$Component) {
         'div',
         null,
         _react2.default.createElement(
-          'h1',
-          null,
-          'Event Form'
+          'form',
+          { onSubmit: this.handleSubmit },
+          _react2.default.createElement(
+            'label',
+            null,
+            'Event Title',
+            _react2.default.createElement('input', { type: 'text',
+              placeholder: 'Give it a short distinct name',
+              value: '' })
+          ),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement(
+            'label',
+            null,
+            'Location',
+            _react2.default.createElement('input', { type: 'text',
+              placeholder: 'Enter address of venue',
+              value: '' })
+          ),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement(
+            'label',
+            null,
+            'Start date',
+            _react2.default.createElement('input', { type: 'datetime-local',
+              value: '' })
+          ),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement(
+            'label',
+            null,
+            'End date',
+            _react2.default.createElement('input', { type: 'datetime-local',
+              value: '' })
+          ),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement(
+            'label',
+            null,
+            'Description',
+            _react2.default.createElement('input', { placeholder: 'Enter a Description' })
+          )
         )
       );
     }
