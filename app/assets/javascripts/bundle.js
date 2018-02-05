@@ -26720,15 +26720,27 @@ var SessionForm = function (_React$Component) {
       console.log('VIEW sf navlink');
       if (this.props.formType === 'login') {
         return _react2.default.createElement(
-          _reactRouterDom.Link,
-          { to: '/signup' },
-          'Or would you like to sign up instead'
+          'div',
+          { className: 'sent-two-other' },
+          'Or would you like to',
+          _react2.default.createElement(
+            _reactRouterDom.Link,
+            { to: '/signup', className: 'sent-two-link' },
+            ' SIGN UP '
+          ),
+          'instead?'
         );
       } else {
         return _react2.default.createElement(
-          _reactRouterDom.Link,
-          { to: '/login' },
-          'Or would you like to log in instead'
+          'div',
+          { className: 'sent-two-other' },
+          'Or would you like to',
+          _react2.default.createElement(
+            _reactRouterDom.Link,
+            { to: '/login', className: 'sent-two-link' },
+            ' LOGIN '
+          ),
+          'instead?'
         );
       }
     }
@@ -26821,14 +26833,17 @@ var SessionForm = function (_React$Component) {
               _react2.default.createElement(
                 'h3',
                 null,
-                this.navLink(),
-                '?'
+                this.navLink()
               )
             ),
             _react2.default.createElement(
               'form',
               { onSubmit: this.handleSubmit, className: 'login-form-box' },
-              this.renderErrors(),
+              _react2.default.createElement(
+                'div',
+                { className: 'login-errors' },
+                this.renderErrors()
+              ),
               _react2.default.createElement(
                 'div',
                 { className: 'login-form' },

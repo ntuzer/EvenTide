@@ -51,17 +51,24 @@
   font-family: 'Exo 2';
   color: #45494e;
 }
-.sent-two {
-  color: grey;
-  letter-spacing: 0.1em;
-  font-family: 'Exo 2';
-  color: #656972;
-  display: inline-block;
-}
-.sent-two h3 {
-  color: #42557f;
+// .sent-two {
+//   color: grey;
+//   letter-spacing: 0.1em;
+//   font-family: 'Exo 2';
+//   color: #656972;
+//   display: inline-block;
+// }
+
+
+
+.sent-two-other {
+  color: #000;
   font-size: inherit;
   font-weight: bold;
+}
+
+.sent-two-link {
+  color: #3f6ac7;
 }
 
 .form-box {
