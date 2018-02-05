@@ -6,7 +6,7 @@ import App from './app';
 
 
 const Root = ({ store }) => {
-  console.log('Root file');
+  // console.log('Root file');
   return (
     <Provider store={store}>
       <HashRouter>

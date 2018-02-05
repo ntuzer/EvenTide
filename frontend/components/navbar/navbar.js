@@ -28,12 +28,8 @@ class Navbar extends React.Component {
   }
 
   render(){
-    console.log('VIEW navbar render');
-    console.log('linkylinkylinky',this.props);
+    // console.log('VIEW navbar render');
     let inorout = this.props.loggedIn ? "sign out" : "sign in";
-
-    // let signout = inorout === "sign out" ? ;
-    // console.log("yoooo",this.props);
     return(
       <header className='navbar'>
         <nav>

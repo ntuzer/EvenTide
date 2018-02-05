@@ -7,8 +7,6 @@ import EventForm from './event_form';
 
 
 const mapStateToProps = (state) => {
-  console.log('VC efc state: ', state);
-  console.log('VC efc mstp');
   return {
     // loggedIn: Boolean(state.session.currentUser),
     errors: state.errors.session
@@ -16,7 +14,6 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch, { location }) => {
-  console.log('VC efc mdtp');
   return {
     createForm: event => dispatch(createEvent(event)),
     clearErrors: () => dispatch(receiveErrors([]))

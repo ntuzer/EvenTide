@@ -1187,7 +1187,7 @@ var RECEIVE_CURRENT_USER = exports.RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER'
 var RECEIVE_SESSION_ERRORS = exports.RECEIVE_SESSION_ERRORS = 'RECEIVE_SESSION_ERRORS';
 
 var receiveCurrentUser = exports.receiveCurrentUser = function receiveCurrentUser(currentUser) {
-  console.log('action receiveCurrentUser');
+  // console.log('action receiveCurrentUser');
   return {
     type: RECEIVE_CURRENT_USER,
     currentUser: currentUser
@@ -1195,7 +1195,7 @@ var receiveCurrentUser = exports.receiveCurrentUser = function receiveCurrentUse
 };
 
 var receiveErrors = exports.receiveErrors = function receiveErrors(errors) {
-  console.log('action receiveErrors');
+  // console.log('action receiveErrors');
   return {
     type: RECEIVE_SESSION_ERRORS,
     errors: errors
@@ -1204,7 +1204,7 @@ var receiveErrors = exports.receiveErrors = function receiveErrors(errors) {
 
 var signup = exports.signup = function signup(user) {
   return function (dispatch) {
-    console.log('action signup');
+    // console.log('action signup');
     return APIUtil.signup(user).then(function (rUser) {
       return dispatch(receiveCurrentUser(rUser));
     }, function (err) {
@@ -1215,7 +1215,7 @@ var signup = exports.signup = function signup(user) {
 
 var signin = exports.signin = function signin(user) {
   return function (dispatch) {
-    console.log('action signin');
+    // console.log('action signin');
     return APIUtil.signin(user).then(function (rUser) {
       return dispatch(receiveCurrentUser(rUser));
     }, function (err) {
@@ -1226,7 +1226,7 @@ var signin = exports.signin = function signin(user) {
 
 var logout = exports.logout = function logout() {
   return function (dispatch) {
-    console.log('action logout');
+    // console.log('action logout');
     return APIUtil.logout().then(function (user) {
       return dispatch(receiveCurrentUser(null));
     });
@@ -4315,7 +4315,7 @@ var _store2 = _interopRequireDefault(_store);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 document.addEventListener('DOMContentLoaded', function () {
-  console.log('entry file');
+  // console.log('entry file');
   var root = document.getElementById('root');
   var store = void 0;
   if (window.currentUser) {
@@ -4330,7 +4330,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   window.getState = store.getState;
   window.dispatch = store.dispatch;
-  console.log('does it come back?');
+  // console.log('does it come back?');
   _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 });
 
@@ -21651,7 +21651,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Root = function Root(_ref) {
   var store = _ref.store;
 
-  console.log('Root file');
+  // console.log('Root file');
   return _react2.default.createElement(
     _reactRedux.Provider,
     { store: store },
@@ -26422,8 +26422,7 @@ var _event_form_container2 = _interopRequireDefault(_event_form_container);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App(store) {
-  console.log('App file');
-  console.log("APP store", store);
+  // console.log('App file');
   return _react2.default.createElement(
     'div',
     null,
@@ -26456,8 +26455,6 @@ exports.default = App;
 
 
 // <Switch>
-
-
 //   <Route exact path="/" component={PostIndexContainer}/>
 //   <Route exact path="/posts/:postId" component={PostShowContainer}/>
 //   <Route path="/posts/:postId/edit" component={PostFormContainer}/>
@@ -26490,13 +26487,10 @@ var Auth = function Auth(_ref) {
       path = _ref.path,
       loggedIn = _ref.loggedIn;
 
-  console.log('AUTH');
-  console.log("route util auth");
-  console.log("component", Component);
-  console.log("path", path);
+  // console.log('AUTH');
+  // console.log("route util auth");
+
   return _react2.default.createElement(_reactRouterDom.Route, { path: path, render: function render(props) {
-      console.log('crazy route util auth return', loggedIn);
-      console.log('props', props);
       if (!loggedIn) {
         return _react2.default.createElement(Component, props);
       } else {
@@ -26510,18 +26504,16 @@ var Protected = function Protected(_ref2) {
       path = _ref2.path,
       loggedIn = _ref2.loggedIn;
 
-  console.log('PROTECTED');
-  console.log("route util protected");
-  console.log('component', Component);
-  // console.log("protected props", props);
+  // console.log('PROTECTED');
+  // console.log("route util protected");
+
   return _react2.default.createElement(_reactRouterDom.Route, { path: path, render: function render(props) {
       return loggedIn ? _react2.default.createElement(Component, props) : _react2.default.createElement(_reactRouterDom.Redirect, { to: '/login' });
     } });
 };
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  console.log('route util mstp');
-  console.log('route util ownProps', ownProps);
+
   return { loggedIn: Boolean(state.session.currentUser) };
 };
 
@@ -26566,8 +26558,6 @@ var _session_form2 = _interopRequireDefault(_session_form);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state) {
-  console.log('VC sfc state: ', state);
-  console.log('VC sfc mstp');
   return {
     loggedIn: Boolean(state.session.currentUser),
     errors: state.errors.session
@@ -26577,7 +26567,6 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch, _ref) {
   var location = _ref.location;
 
-  console.log('VC sfc mdtp');
   var formType = location.pathname.slice(1);
   var _processForm = formType === 'login' ? _session_actions.signin : _session_actions.signup;
   return {
@@ -26668,8 +26657,6 @@ var SessionForm = function (_React$Component) {
   function SessionForm(props) {
     _classCallCheck(this, SessionForm);
 
-    console.log("VIEW constructor");
-
     var _this = _possibleConstructorReturn(this, (SessionForm.__proto__ || Object.getPrototypeOf(SessionForm)).call(this, props));
 
     _this.state = {
@@ -26685,7 +26672,6 @@ var SessionForm = function (_React$Component) {
   _createClass(SessionForm, [{
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
-      console.log('VIEW sf cwrp');
       if (nextProps.loggedIn) {
         this.props.history.push('/index');
       }
@@ -26712,7 +26698,6 @@ var SessionForm = function (_React$Component) {
   }, {
     key: 'handleSubmit',
     value: function handleSubmit(e) {
-      console.log('VIEW sf handleSubmit');
       e.preventDefault();
       var user = this.state;
       this.props.processForm({ user: user });
@@ -26720,7 +26705,6 @@ var SessionForm = function (_React$Component) {
   }, {
     key: 'navLink',
     value: function navLink() {
-      console.log('VIEW sf navlink');
       if (this.props.formType === 'login') {
         return _react2.default.createElement(
           'div',
@@ -26750,7 +26734,6 @@ var SessionForm = function (_React$Component) {
   }, {
     key: 'renderErrors',
     value: function renderErrors() {
-      console.log('VIEW sf renderErrors');
       if (this.props.errors === null) return null;
       return _react2.default.createElement(
         'ul',
@@ -26770,7 +26753,6 @@ var SessionForm = function (_React$Component) {
       e.preventDefault();
 
       this.setState({ email: "DemoUser@EvenTide.com", password: "password" });
-      console.log("demo", this.state);
       this.props.demoForm({ user: { email: "DemoUser@EvenTide.com", password: "password" } });
     }
   }, {
@@ -26782,7 +26764,7 @@ var SessionForm = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      console.log('VIEW sf render');
+      // console.log('VIEW sf render');
       return _react2.default.createElement(
         'div',
         { className: 'growing-box' },
@@ -26903,8 +26885,6 @@ var _navbar2 = _interopRequireDefault(_navbar);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  console.log('VC nav mstp state:', state);
-  console.log('VC nav mstp ownprops:', ownProps);
   return {
     loggedIn: Boolean(state.session.currentUser)
     // errors: state.errors.session
@@ -26914,14 +26894,10 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch, _ref) {
   var location = _ref.location;
 
-  // const processForm = (formType === 'login') ? signin : signup;
-  console.log('VC nav mdtp');
   return {
     signOut: function signOut() {
       return dispatch((0, _session_actions.logout)());
     }
-    // processForm: user => dispatch(processForm(user)),
-    // formType,
     // clearErrors: () => dispatch(receiveErrors([]))
   };
 };
@@ -26992,12 +26968,8 @@ var Navbar = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      console.log('VIEW navbar render');
-      console.log('linkylinkylinky', this.props);
+      // console.log('VIEW navbar render');
       var inorout = this.props.loggedIn ? "sign out" : "sign in";
-
-      // let signout = inorout === "sign out" ? ;
-      // console.log("yoooo",this.props);
       return _react2.default.createElement(
         'header',
         { className: 'navbar' },
@@ -27076,8 +27048,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-  console.log('Initialized THE STORE');
-  return (0, _redux.createStore)(_root_reducer2.default, preloadedState, (0, _redux.applyMiddleware)(_reduxThunk2.default, _reduxLogger2.default));
+  // console.log('Initialized THE STORE');
+  return (0, _redux.createStore)(_root_reducer2.default, preloadedState, (0, _redux.applyMiddleware)(_reduxThunk2.default));
 };
 
 exports.default = configureStore;
@@ -27156,15 +27128,6 @@ var rootReducer = (0, _redux.combineReducers)({
 // import ui from './ui_reducer';
 exports.default = rootReducer;
 
-// const rootReducer = () => {
-//   console.log('rootReducer');
-//   return combineReducers({
-//     session,
-//     errors,
-//   });
-// };
-// export default rootReducer;
-
 /***/ }),
 /* 153 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -27192,15 +27155,12 @@ var sessionReducer = function sessionReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _nullUser;
   var action = arguments[1];
 
-  console.log('sessionReducer');
-  console.log('sR preloadedState', state);
+  // console.log('sessionReducer');
   Object.freeze(state);
   switch (action.type) {
     case _session_actions.RECEIVE_CURRENT_USER:
       var newState = { currentUser: null };
       newState.currentUser = action.currentUser;
-      // console.log('state: ', state);
-      // console.log('act: ', action);
       return newState;
     default:
       return state;
@@ -29403,16 +29363,10 @@ exports.default = function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments[1];
 
-  console.log('session error reducer');
+  // console.log('session error reducer');
   Object.freeze(state);
-  console.log("action.type:", action.type);
   switch (action.type) {
     case _session_actions.RECEIVE_SESSION_ERRORS:
-      console.log("err red", action.errors);
-      // if (action) {
-      //   console.log('innnnnnn');
-      //   return state;
-      // }
       return action.errors;
     case _session_actions.RECEIVE_CURRENT_USER:
       return null;
@@ -29536,8 +29490,7 @@ var eventsReducer = function eventsReducer() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments[1];
 
-  console.log('events reducer');
-  console.log('eR preloadedState', preloadedState);
+  // console.log('events reducer');
   Object.freeze(preloadedState);
   var newState = void 0;
   switch (action.type) {
@@ -29579,7 +29532,7 @@ var RECEIVE_EVENT_ERRORS = exports.RECEIVE_EVENT_ERRORS = 'RECEIVE_EVENT_ERRORS'
 var RECEIVE_MY_EVENTS = exports.RECEIVE_MY_EVENTS = 'RECEIVE_MY_EVENTS';
 
 var receiveAllEvents = function receiveAllEvents(events) {
-  console.log('action receiveEvents');
+  // console.log('action receiveEvents');
   return {
     type: RECEIVE_EVENTS,
     events: events
@@ -29594,7 +29547,7 @@ var receiveMyEvents = function receiveMyEvents(events) {
 };
 
 var receiveSingleEvent = function receiveSingleEvent(events) {
-  console.log('action receiveEvents');
+  // console.log('action receiveEvents');
   return {
     type: RECEIVE_EVENTS,
     events: events
@@ -29602,7 +29555,7 @@ var receiveSingleEvent = function receiveSingleEvent(events) {
 };
 
 var receiveErrors = function receiveErrors(errors) {
-  console.log('action receiveErrors');
+  // console.log('action receiveErrors');
   return {
     type: RECEIVE_EVENT_ERRORS,
     errors: errors
@@ -29611,7 +29564,7 @@ var receiveErrors = function receiveErrors(errors) {
 
 var fetchEvents = exports.fetchEvents = function fetchEvents() {
   return function (dispatch) {
-    console.log('action fetchEvents');
+    // console.log('action fetchEvents');
     return EventAPIUtil.fetchEvents().then(function (events) {
       return dispatch(receiveAllEvents(events));
     }, function (err) {
@@ -29622,7 +29575,7 @@ var fetchEvents = exports.fetchEvents = function fetchEvents() {
 
 var fetchEvent = exports.fetchEvent = function fetchEvent(id) {
   return function (dispatch) {
-    console.log('action fetch event');
+    // console.log('action fetch event');
     return EventAPIUtil.fetchEvent(id).then(function (event) {
       return dispatch(receiveSingleEvent(event));
     }, function (err) {
@@ -29633,7 +29586,7 @@ var fetchEvent = exports.fetchEvent = function fetchEvent(id) {
 
 var createEvent = exports.createEvent = function createEvent(event) {
   return function (dispatch) {
-    console.log('action create event');
+    // console.log('action create event');
     return EventAPIUtil.createEvent(event).then(function (evt) {
       return dispatch(receiveSingleEvent(evt.id));
     });
@@ -29642,7 +29595,7 @@ var createEvent = exports.createEvent = function createEvent(event) {
 
 var deleteEvent = exports.deleteEvent = function deleteEvent(eventId) {
   return function (dispatch) {
-    console.log('action deleteEvent');
+    // console.log('action deleteEvent');
     return EventAPIUtil.deleteEvent(eventId).then(function (event) {
       return dispatch(receiveSingleEvent(null));
     }, function (err) {
@@ -29683,9 +29636,6 @@ var _event_index2 = _interopRequireDefault(_event_index);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-
-  console.log('VC mstp eic state', state);
-  console.log('eic op', ownProps);
   return {};
 };
 
@@ -29773,8 +29723,6 @@ var _event_form2 = _interopRequireDefault(_event_form);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state) {
-  console.log('VC efc state: ', state);
-  console.log('VC efc mstp');
   return {
     // loggedIn: Boolean(state.session.currentUser),
     errors: state.errors.session
@@ -29784,7 +29732,6 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch, _ref) {
   var location = _ref.location;
 
-  console.log('VC efc mdtp');
   return {
     createForm: function createForm(event) {
       return dispatch((0, _event_actions.createEvent)(event));

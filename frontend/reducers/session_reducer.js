@@ -9,15 +9,12 @@ const _nullUser = Object.freeze({
 });
 
 const sessionReducer = (state = _nullUser, action) => {
-  console.log('sessionReducer');
-  console.log('sR preloadedState', state);
+  // console.log('sessionReducer');
   Object.freeze(state);
   switch(action.type) {
     case RECEIVE_CURRENT_USER:
       let newState = {currentUser: null};
       newState.currentUser = action.currentUser;
-      // console.log('state: ', state);
-      // console.log('act: ', action);
       return newState;
     default:
       return state;

@@ -7,8 +7,6 @@ import SessionForm from './session_form';
 
 
 const mapStateToProps = (state) => {
-  console.log('VC sfc state: ', state);
-  console.log('VC sfc mstp');
   return {
     loggedIn: Boolean(state.session.currentUser),
     errors: state.errors.session
@@ -16,7 +14,6 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch, { location }) => {
-  console.log('VC sfc mdtp');
   const formType = location.pathname.slice(1);
   const processForm = (formType === 'login') ? signin : signup;
   return {

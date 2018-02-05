@@ -3,7 +3,6 @@ import { Link, withRouter, Redirect } from 'react-router-dom';
 
 class SessionForm extends React.Component {
   constructor(props) {
-    console.log("VIEW constructor");
     super(props);
     this.state = {
       email: '',
@@ -15,7 +14,6 @@ class SessionForm extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('VIEW sf cwrp');
     if (nextProps.loggedIn) {
       this.props.history.push('/index');
     }
@@ -39,14 +37,12 @@ class SessionForm extends React.Component {
   }
 
   handleSubmit(e) {
-    console.log('VIEW sf handleSubmit');
     e.preventDefault();
     const user = this.state;
     this.props.processForm({user});
   }
 
   navLink() {
-    console.log('VIEW sf navlink');
     if (this.props.formType === 'login') {
       return (
         <div className="sent-two-other">
@@ -67,7 +63,6 @@ class SessionForm extends React.Component {
   }
 
   renderErrors() {
-    console.log('VIEW sf renderErrors');
     if (this.props.errors === null) return null;
     return(
       <ul className="form-errors">
@@ -85,7 +80,6 @@ class SessionForm extends React.Component {
     e.preventDefault();
 
     this.setState({email: "DemoUser@EvenTide.com", password: "password"});
-    console.log("demo", this.state);
     this.props.demoForm(
       {user: {email: "DemoUser@EvenTide.com", password: "password"}}
     );
@@ -98,7 +92,7 @@ class SessionForm extends React.Component {
   }
 
   render() {
-    console.log('VIEW sf render');
+    // console.log('VIEW sf render');
     return (
       <div className="growing-box">
         <button className="close-form" onClick={this.home}>

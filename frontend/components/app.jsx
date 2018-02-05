@@ -16,8 +16,7 @@ import EventFormContainer from './events/event_form_container';
 
 
 const App = (store) => {
-  console.log('App file');
-  console.log("APP store", store);
+  // console.log('App file');
   return (
     <div>
     <Route path="/" component={NavbarContainer} />
@@ -43,8 +42,6 @@ export default App;
 
 
 // <Switch>
-
-
 //   <Route exact path="/" component={PostIndexContainer}/>
 //   <Route exact path="/posts/:postId" component={PostShowContainer}/>
 //   <Route path="/posts/:postId/edit" component={PostFormContainer}/>

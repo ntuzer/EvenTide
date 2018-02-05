@@ -7,7 +7,7 @@ export const RECEIVE_MY_EVENTS = 'RECEIVE_MY_EVENTS';
 
 
 const receiveAllEvents = events => {
-  console.log('action receiveEvents');
+  // console.log('action receiveEvents');
   return {
     type: RECEIVE_EVENTS,
     events
@@ -23,7 +23,7 @@ const receiveMyEvents = events => {
 
 
 const receiveSingleEvent = events => {
-  console.log('action receiveEvents');
+  // console.log('action receiveEvents');
   return {
     type: RECEIVE_EVENTS,
     events
@@ -31,7 +31,7 @@ const receiveSingleEvent = events => {
 };
 
 const receiveErrors = errors => {
-  console.log('action receiveErrors');
+  // console.log('action receiveErrors');
   return {
   type: RECEIVE_EVENT_ERRORS,
   errors
@@ -40,7 +40,7 @@ const receiveErrors = errors => {
 
 
 export const fetchEvents = () => dispatch => {
-  console.log('action fetchEvents');
+  // console.log('action fetchEvents');
   return EventAPIUtil.fetchEvents().then(events => (
     dispatch(receiveAllEvents(events))
   ), err => (
@@ -49,7 +49,7 @@ export const fetchEvents = () => dispatch => {
 };
 
 export const fetchEvent = id => dispatch => {
-  console.log('action fetch event');
+  // console.log('action fetch event');
   return EventAPIUtil.fetchEvent(id).then(event => (
     dispatch(receiveSingleEvent(event))
   ), err => (
@@ -58,13 +58,13 @@ export const fetchEvent = id => dispatch => {
 };
 
 export const createEvent = event => dispatch => {
-  console.log('action create event');
+  // console.log('action create event');
   return EventAPIUtil.createEvent(event)
     .then(evt => dispatch(receiveSingleEvent(evt.id)));
 };
 
 export const deleteEvent = eventId => dispatch => {
-  console.log('action deleteEvent');
+  // console.log('action deleteEvent');
   return EventAPIUtil.deleteEvent(eventId)
     .then(event => (dispatch(receiveSingleEvent(null))),
           err => (dispatch(receiveErrors(err.responseJSON))

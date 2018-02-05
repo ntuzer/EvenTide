@@ -13,12 +13,3 @@ const rootReducer = combineReducers({
 });
 
 export default rootReducer;
-
-// const rootReducer = () => {
-//   console.log('rootReducer');
-//   return combineReducers({
-//     session,
-//     errors,
-//   });
-// };
-// export default rootReducer;

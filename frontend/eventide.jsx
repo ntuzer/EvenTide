@@ -4,7 +4,7 @@ import Root from './components/root';
 import configureStore from './store/store';
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('entry file');
+  // console.log('entry file');
   const root = document.getElementById('root');
   let store;
   if (window.currentUser) {
@@ -20,6 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   window.getState = store.getState;
   window.dispatch = store.dispatch;
-  console.log('does it come back?');
+  // console.log('does it come back?');
   ReactDOM.render(<Root store={store} />, root);
 });
