@@ -26434,19 +26434,7 @@ var App = function App(store) {
       _react2.default.createElement(_route_util.AuthRoute, { path: '/login', component: _session_form_container2.default }),
       _react2.default.createElement(_route_util.AuthRoute, { path: '/signup', component: _session_form_container2.default }),
       _react2.default.createElement(_route_util.ProtectedRoute, { path: '/user', component: _event_index_container2.default }),
-      _react2.default.createElement(_route_util.ProtectedRoute, { path: 'events/new', component: _event_form_container2.default }),
-      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/home', render: function render() {
-          return 'home';
-        } }),
-      _react2.default.createElement(_reactRouterDom.Route, { path: '/', render: function render(props) {
-          props.history.push('/home');
-          return _react2.default.createElement(
-            'p',
-            null,
-            'placeholer'
-          );
-        }
-      })
+      _react2.default.createElement(_route_util.ProtectedRoute, { path: '/events/new', component: _event_form_container2.default })
     )
   );
 };
@@ -26456,6 +26444,12 @@ exports.default = App;
 
 
 // <Switch>
+// <Route exact path="/home" render={() => 'home'} />
+// <Route path="/" render={(props) => {
+//   props.history.push('/home');
+//   return (<p>placeholer</p>);
+
+
 //   <Route exact path="/" component={PostIndexContainer}/>
 //   <Route exact path="/posts/:postId" component={PostShowContainer}/>
 //   <Route path="/posts/:postId/edit" component={PostFormContainer}/>
@@ -26952,6 +26946,7 @@ var Navbar = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Navbar.__proto__ || Object.getPrototypeOf(Navbar)).call(this, props));
 
     _this.uporout = _this.uporout.bind(_this);
+    _this.createEventButton = _this.createEventButton.bind(_this);
     return _this;
   }
 
@@ -26966,9 +26961,21 @@ var Navbar = function (_React$Component) {
       }
     }
   }, {
+    key: 'createEventButton',
+    value: function createEventButton() {
+      if (this.props.location.pathname !== '/events/new') {
+        return _react2.default.createElement(
+          _reactRouterDom.Link,
+          { className: 'createEvent', to: '/events/new' },
+          'Create Event'
+        );
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
       console.log('VIEW navbar render');
+      console.log('linkylinkylinky', this.props);
       var inorout = this.props.loggedIn ? "sign out" : "sign in";
 
       // let signout = inorout === "sign out" ? ;
@@ -26995,11 +27002,7 @@ var Navbar = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'navRight' },
-            _react2.default.createElement(
-              _reactRouterDom.Link,
-              { className: 'createEvent', to: '/events/new' },
-              'Create Event'
-            ),
+            this.createEventButton(),
             _react2.default.createElement(
               'div',
               { className: 'user' },
@@ -27019,6 +27022,7 @@ var Navbar = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = (0, _reactRouterDom.withRouter)(Navbar); //why do i need withRouter here?
+// this.props.location.pathname !== '/events/new'
 
 // <img src={staticImages.logo} alt=""/>
 
@@ -29754,7 +29758,7 @@ var mapStateToProps = function mapStateToProps(state) {
   console.log('VC efc state: ', state);
   console.log('VC efc mstp');
   return {
-    loggedIn: Boolean(state.session.currentUser),
+    // loggedIn: Boolean(state.session.currentUser),
     errors: state.errors.session
   };
 };
@@ -29781,6 +29785,56 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 
 "use strict";
 
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(10);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var EventForm = function (_React$Component) {
+  _inherits(EventForm, _React$Component);
+
+  function EventForm(props) {
+    _classCallCheck(this, EventForm);
+
+    return _possibleConstructorReturn(this, (EventForm.__proto__ || Object.getPrototypeOf(EventForm)).call(this, props));
+  }
+
+  _createClass(EventForm, [{
+    key: 'render',
+    value: function render() {
+      console.log('VIEW eF');
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'h1',
+          null,
+          'Event Form'
+        )
+      );
+    }
+  }]);
+
+  return EventForm;
+}(_react2.default.Component);
+
+exports.default = EventForm;
 
 /***/ })
 /******/ ]);

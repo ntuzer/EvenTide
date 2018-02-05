@@ -10,7 +10,7 @@ const mapStateToProps = (state) => {
   console.log('VC efc state: ', state);
   console.log('VC efc mstp');
   return {
-    loggedIn: Boolean(state.session.currentUser),
+    // loggedIn: Boolean(state.session.currentUser),
     errors: state.errors.session
   };
 };

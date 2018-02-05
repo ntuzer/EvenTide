@@ -5,6 +5,7 @@ class Navbar extends React.Component {
   constructor(props){
     super(props);
     this.uporout = this.uporout.bind(this);
+    this.createEventButton = this.createEventButton.bind(this);
   }
 
   uporout(e){
@@ -16,8 +17,19 @@ class Navbar extends React.Component {
     }
   }
 
+  createEventButton(){
+    if (this.props.location.pathname !== '/events/new') {
+      return (
+        <Link className="createEvent" to="/events/new">
+        Create Event
+        </Link>
+      );
+    }
+  }
+
   render(){
     console.log('VIEW navbar render');
+    console.log('linkylinkylinky',this.props);
     let inorout = this.props.loggedIn ? "sign out" : "sign in";
 
     // let signout = inorout === "sign out" ? ;
@@ -35,9 +47,7 @@ class Navbar extends React.Component {
           </div>
 
           <div className="navRight">
-            <Link className="createEvent" to="/events/new">
-              Create Event
-            </Link>
+            { this.createEventButton() }
             <div className="user">
               <button onClick={this.uporout}>{inorout}</button>
             </div>
@@ -50,6 +60,7 @@ class Navbar extends React.Component {
 }
 
 export default withRouter(Navbar); //why do i need withRouter here?
+// this.props.location.pathname !== '/events/new'
 
 // <img src={staticImages.logo} alt=""/>
 
