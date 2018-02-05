@@ -26,6 +26,13 @@ const App = (store) => {
         <AuthRoute path="/signup" component={SessionFormContainer} />
         <ProtectedRoute path='/user' component={EventIndexContainer} />
         <ProtectedRoute path='/events/new' component={EventFormContainer} />
+        <Route path="/home" render={() => 'home'} />
+        <Route path="/" render={(props) => {
+              props.history.push('/home');
+              return (<p>placeholer</p>);
+            }
+          }
+        />
       </Switch>
     </div>
   );
@@ -36,11 +43,6 @@ export default App;
 
 
 // <Switch>
-// <Route exact path="/home" render={() => 'home'} />
-// <Route path="/" render={(props) => {
-//   props.history.push('/home');
-//   return (<p>placeholer</p>);
-
 
 
 //   <Route exact path="/" component={PostIndexContainer}/>

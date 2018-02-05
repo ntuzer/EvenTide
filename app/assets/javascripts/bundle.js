@@ -26434,7 +26434,19 @@ var App = function App(store) {
       _react2.default.createElement(_route_util.AuthRoute, { path: '/login', component: _session_form_container2.default }),
       _react2.default.createElement(_route_util.AuthRoute, { path: '/signup', component: _session_form_container2.default }),
       _react2.default.createElement(_route_util.ProtectedRoute, { path: '/user', component: _event_index_container2.default }),
-      _react2.default.createElement(_route_util.ProtectedRoute, { path: '/events/new', component: _event_form_container2.default })
+      _react2.default.createElement(_route_util.ProtectedRoute, { path: '/events/new', component: _event_form_container2.default }),
+      _react2.default.createElement(_reactRouterDom.Route, { path: '/home', render: function render() {
+          return 'home';
+        } }),
+      _react2.default.createElement(_reactRouterDom.Route, { path: '/', render: function render(props) {
+          props.history.push('/home');
+          return _react2.default.createElement(
+            'p',
+            null,
+            'placeholer'
+          );
+        }
+      })
     )
   );
 };
@@ -26444,10 +26456,6 @@ exports.default = App;
 
 
 // <Switch>
-// <Route exact path="/home" render={() => 'home'} />
-// <Route path="/" render={(props) => {
-//   props.history.push('/home');
-//   return (<p>placeholer</p>);
 
 
 //   <Route exact path="/" component={PostIndexContainer}/>
