@@ -49,12 +49,18 @@ export const fetchEvents = () => dispatch => {
 };
 
 export const fetchEvent = id => dispatch => {
-  console.log('action signin');
-  return EventAPIUtil.signin(id).then(event => (
+  console.log('action fetch event');
+  return EventAPIUtil.fetchEvent(id).then(event => (
     dispatch(receiveSingleEvent(event))
   ), err => (
     dispatch(receiveErrors(err.responseJSON))
   ));
+};
+
+export const createEvent = event => dispatch => {
+  console.log('action create event');
+  return EventAPIUtil.createEvent(event)
+    .then(evt => dispatch(receiveSingleEvent(evt.id)));
 };
 
 export const deleteEvent = eventId => dispatch => {

@@ -29543,7 +29543,7 @@ exports.default = eventsReducer;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.deleteEvent = exports.fetchEvent = exports.fetchEvents = exports.RECEIVE_MY_EVENTS = exports.RECEIVE_EVENT_ERRORS = exports.RECEIVE_EVENT = exports.RECEIVE_EVENTS = undefined;
+exports.deleteEvent = exports.createEvent = exports.fetchEvent = exports.fetchEvents = exports.RECEIVE_MY_EVENTS = exports.RECEIVE_EVENT_ERRORS = exports.RECEIVE_EVENT = exports.RECEIVE_EVENTS = undefined;
 
 var _session_api_util = __webpack_require__(145);
 
@@ -29600,11 +29600,20 @@ var fetchEvents = exports.fetchEvents = function fetchEvents() {
 
 var fetchEvent = exports.fetchEvent = function fetchEvent(id) {
   return function (dispatch) {
-    console.log('action signin');
-    return EventAPIUtil.signin(id).then(function (event) {
+    console.log('action fetch event');
+    return EventAPIUtil.fetchEvent(id).then(function (event) {
       return dispatch(receiveSingleEvent(event));
     }, function (err) {
       return dispatch(receiveErrors(err.responseJSON));
+    });
+  };
+};
+
+var createEvent = exports.createEvent = function createEvent(event) {
+  return function (dispatch) {
+    console.log('action create event');
+    return EventAPIUtil.createEvent(event).then(function (evt) {
+      return dispatch(receiveSingleEvent(evt.id));
     });
   };
 };
@@ -29722,6 +29731,52 @@ exports.default = EventIndex;
 
 /***/ }),
 /* 232 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _reactRedux = __webpack_require__(16);
+
+var _event_actions = __webpack_require__(226);
+
+var _event_form = __webpack_require__(233);
+
+var _event_form2 = _interopRequireDefault(_event_form);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state) {
+  console.log('VC efc state: ', state);
+  console.log('VC efc mstp');
+  return {
+    loggedIn: Boolean(state.session.currentUser),
+    errors: state.errors.session
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch, _ref) {
+  var location = _ref.location;
+
+  console.log('VC efc mdtp');
+  return {
+    createForm: function createForm(event) {
+      return dispatch((0, _event_actions.createEvent)(event));
+    },
+    clearErrors: function clearErrors() {
+      return dispatch((0, _event_actions.receiveErrors)([]));
+    }
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_event_form2.default);
+
+/***/ }),
+/* 233 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
