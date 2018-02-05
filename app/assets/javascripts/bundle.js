@@ -26991,8 +26991,8 @@ var Navbar = function (_React$Component) {
             'div',
             { className: 'navRight' },
             _react2.default.createElement(
-              'div',
-              { className: 'createEvent' },
+              _reactRouterDom.Link,
+              { className: 'createEvent', to: '/events/new' },
               'Create Event'
             ),
             _react2.default.createElement(
