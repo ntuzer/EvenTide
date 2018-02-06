@@ -12,13 +12,14 @@ const eventsReducer = (preloadedState = {}, action) => {
   let newState;
   switch (action.type) {
     case RECEIVE_EVENTS:
-      newState = merge({}, action.albums);
+      console.log("REDUCER", action);
+      newState = merge({}, action.events);
       return newState;
     case RECEIVE_EVENT:
       newState = merge(
         {},
         preloadedState,
-        {[action.albums.id]: action.albums}
+        {[action.events.id]: action.events}
       );
       return newState;
     // case RECEIVE_MY_EVENTS:

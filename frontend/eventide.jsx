@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Root from './components/root';
 import configureStore from './store/store';
+// import { fetchEvents } from './util/events_api_util';
 
 document.addEventListener('DOMContentLoaded', () => {
   // console.log('entry file');
@@ -20,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   window.getState = store.getState;
   window.dispatch = store.dispatch;
+  // window.fetchEvents = fetchEvents;
   // console.log('does it come back?');
   ReactDOM.render(<Root store={store} />, root);
 });

@@ -7,15 +7,16 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.destroy_all
+Event.destroy_all
 
-User.new(email: "test", password: "password")
-User.new(email: "rewel", password: "password")
-User.new(email: "dahveed", password: "password")
-User.new(email: "joe@schmo.com", password: "password")
-User.new(email: "DemoUser@EvenTide.com", password: "password")
+User.create(email: "test", password: "password")
+User.create(email: "rewel", password: "password")
+User.create(email: "dahveed", password: "password")
+User.create(email: "joe@schmo.com", password: "password")
+User.create(email: "DemoUser@EvenTide.com", password: "password")
 
 
-Event.new({
+Event.create({
   organizer_id: 5,
   title: 'Party of the year',
   location: "Atlanta",
@@ -25,9 +26,9 @@ Event.new({
   start_date: '2018-03-22T17:00',
   end_date: '2018-03-22T19:00',
   }
-);
+)
 
-Event.new({
+Event.create({
   organizer_id: 5,
   title: 'Party of the millenium',
   location: "SFO",
@@ -37,4 +38,4 @@ Event.new({
   start_date: '2018-03-22T17:00',
   end_date: '2018-03-22T19:00',
   }
-);
+)

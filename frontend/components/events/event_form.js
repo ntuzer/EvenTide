@@ -5,7 +5,6 @@ import { Link, withRouter, Redirect } from 'react-router-dom';
 class EventForm extends React.Component {
   constructor(props) {
     super(props);
-    console.log('props', props);
   }
 
 

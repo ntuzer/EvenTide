@@ -27,7 +27,6 @@ const App = (store) => {
         <ProtectedRoute path='/user' component={EventIndexContainer} />
         <ProtectedRoute path='/events/new' component={EventFormContainer} />
 
-
         <Route path="/index" render={() => 'home'} />
         <Route path="/" render={(props) => {
           props.history.push('/index');

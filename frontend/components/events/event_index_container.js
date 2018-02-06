@@ -5,11 +5,15 @@ import {
 import EventIndex from './event_index';
 
 const mapStateToProps = (state, ownProps) => {
-  return {};
+  return {
+    events: Object.values(state.events),
+  };
 };
 
-const mapDispatchToProps = (state, ownProps) => {
-  return {};
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    fetchEvents: () => dispatch(fetchEvents()),
+  };
 };
 
 export default connect(
