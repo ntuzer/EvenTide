@@ -1,5 +1,5 @@
 class Api::EventsController < ApplicationController
-  before_action :require_logged_in, only: [:create, :index, :destroy]
+  before_action :require_logged_in, only: [:create, :destroy]
 
   def create
     @event = Event.new(event_params)

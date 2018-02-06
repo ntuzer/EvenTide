@@ -27344,7 +27344,10 @@ var EventIndex = function (_React$Component) {
   function EventIndex(props) {
     _classCallCheck(this, EventIndex);
 
-    return _possibleConstructorReturn(this, (EventIndex.__proto__ || Object.getPrototypeOf(EventIndex)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (EventIndex.__proto__ || Object.getPrototypeOf(EventIndex)).call(this, props));
+
+    _this.shuffle = _this.shuffle.bind(_this);
+    return _this;
   }
 
   _createClass(EventIndex, [{
@@ -27353,20 +27356,31 @@ var EventIndex = function (_React$Component) {
       this.props.fetchEvents();
     }
   }, {
+    key: 'shuffle',
+    value: function shuffle(a) {
+      for (var i = a.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var _ref = [a[j], a[i]];
+        a[i] = _ref[0];
+        a[j] = _ref[1];
+      }
+      return a;
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
+        { className: 'event-index' },
         _react2.default.createElement(
           'h1',
           null,
-          'Event Index'
+          'Local events for you.'
         ),
         _react2.default.createElement(
           'ul',
           null,
-          this.props.events.map(function (event) {
+          this.shuffle(this.props.events).slice(0, 9).map(function (event) {
             return _react2.default.createElement(_event_index_item2.default, { key: event.id, event: event });
           })
         )

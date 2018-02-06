@@ -39,3 +39,123 @@ Event.create({
   end_date: '2018-03-22T19:00',
   }
 )
+
+Event.create({
+  organizer_id: 5,
+  title: 'Party 1',
+  location: "SFO",
+  description: "Great Times",
+  category_id: 1,
+  min_price: 0,
+  start_date: '2018-03-22T17:00',
+  end_date: '2018-03-22T19:00',
+  }
+)
+
+Event.create({
+  organizer_id: 5,
+  title: 'Party 2',
+  location: "SFO",
+  description: "Great Times",
+  category_id: 1,
+  min_price: 0,
+  start_date: '2018-03-22T17:00',
+  end_date: '2018-03-22T19:00',
+  }
+)
+
+Event.create({
+  organizer_id: 5,
+  title: 'Party 3',
+  location: "SFO",
+  description: "Great Times",
+  category_id: 1,
+  min_price: 0,
+  start_date: '2018-03-22T17:00',
+  end_date: '2018-03-22T19:00',
+  }
+)
+
+Event.create({
+  organizer_id: 5,
+  title: 'Party 4',
+  location: "SFO",
+  description: "Great Times",
+  category_id: 1,
+  min_price: 0,
+  start_date: '2018-03-22T17:00',
+  end_date: '2018-03-22T19:00',
+  }
+)
+
+Event.create({
+  organizer_id: 5,
+  title: 'Party 5',
+  location: "SFO",
+  description: "Great Times",
+  category_id: 1,
+  min_price: 0,
+  start_date: '2018-03-22T17:00',
+  end_date: '2018-03-22T19:00',
+  }
+)
+
+Event.create({
+  organizer_id: 5,
+  title: 'Party 6',
+  location: "SFO",
+  description: "Great Times",
+  category_id: 1,
+  min_price: 0,
+  start_date: '2018-03-22T17:00',
+  end_date: '2018-03-22T19:00',
+  }
+)
+
+Event.create({
+  organizer_id: 5,
+  title: 'Party 7',
+  location: "SFO",
+  description: "Great Times",
+  category_id: 1,
+  min_price: 0,
+  start_date: '2018-03-22T17:00',
+  end_date: '2018-03-22T19:00',
+  }
+)
+
+Event.create({
+  organizer_id: 5,
+  title: 'Party 8',
+  location: "SFO",
+  description: "Great Times",
+  category_id: 1,
+  min_price: 0,
+  start_date: '2018-03-22T17:00',
+  end_date: '2018-03-22T19:00',
+  }
+)
+
+Event.create({
+  organizer_id: 5,
+  title: 'Party 9',
+  location: "SFO",
+  description: "Great Times",
+  category_id: 1,
+  min_price: 0,
+  start_date: '2018-03-22T17:00',
+  end_date: '2018-03-22T19:00',
+  }
+)
+
+Event.create({
+  organizer_id: 5,
+  title: 'Party 10',
+  location: "SFO",
+  description: "Great Times",
+  category_id: 1,
+  min_price: 0,
+  start_date: '2018-03-22T17:00',
+  end_date: '2018-03-22T19:00',
+  }
+)
