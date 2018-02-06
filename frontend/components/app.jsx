@@ -34,7 +34,8 @@ const App = (store) => {
         }
         }
         />
-
+        <Route exact path='/events/:eventId'
+          component={EventShowContainer} />
       </Switch>
     </div>
   );

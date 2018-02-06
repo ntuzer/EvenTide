@@ -26634,7 +26634,9 @@ var App = function App(store) {
             'placeholder'
           );
         }
-      })
+      }),
+      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/events/:eventId',
+        component: EventShowContainer })
     )
   );
 };
