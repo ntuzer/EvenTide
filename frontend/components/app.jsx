@@ -13,7 +13,7 @@ import NavbarContainer from './navbar/navbar_container';
 import FourContainer from './four/four_container';
 import EventIndexContainer from './events/event_index_container';
 import EventFormContainer from './events/event_form_container';
-
+import EventShowContainer from './events/event_show_container';
 
 const App = (store) => {
   // console.log('App file');
@@ -26,7 +26,8 @@ const App = (store) => {
         <AuthRoute path="/signup" component={SessionFormContainer} />
         <ProtectedRoute path='/user' component={EventIndexContainer} />
         <ProtectedRoute path='/events/new' component={EventFormContainer} />
-
+        <Route exact path='/events/:eventId'
+        component={EventShowContainer} />
         <Route path="/index" render={() => 'home'} />
         <Route path="/" render={(props) => {
           props.history.push('/index');
@@ -34,8 +35,6 @@ const App = (store) => {
         }
         }
         />
-        <Route exact path='/events/:eventId'
-          component={EventShowContainer} />
       </Switch>
     </div>
   );

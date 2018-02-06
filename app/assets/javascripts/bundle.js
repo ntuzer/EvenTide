@@ -26607,6 +26607,10 @@ var _event_form_container = __webpack_require__(155);
 
 var _event_form_container2 = _interopRequireDefault(_event_form_container);
 
+var _event_show_container = __webpack_require__(234);
+
+var _event_show_container2 = _interopRequireDefault(_event_show_container);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App(store) {
@@ -26623,6 +26627,8 @@ var App = function App(store) {
       _react2.default.createElement(_route_util.AuthRoute, { path: '/signup', component: _session_form_container2.default }),
       _react2.default.createElement(_route_util.ProtectedRoute, { path: '/user', component: _event_index_container2.default }),
       _react2.default.createElement(_route_util.ProtectedRoute, { path: '/events/new', component: _event_form_container2.default }),
+      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/events/:eventId',
+        component: _event_show_container2.default }),
       _react2.default.createElement(_reactRouterDom.Route, { path: '/index', render: function render() {
           return 'home';
         } }),
@@ -26634,9 +26640,7 @@ var App = function App(store) {
             'placeholder'
           );
         }
-      }),
-      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/events/:eventId',
-        component: EventShowContainer })
+      })
     )
   );
 };
@@ -30011,6 +30015,43 @@ var EventIndexItem = function EventIndexItem(_ref) {
 
 exports.default = EventIndexItem;
 // onClick={() => deleteEvent(event.id)}
+
+/***/ }),
+/* 234 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _reactRedux = __webpack_require__(7);
+
+var _event_actions = __webpack_require__(37);
+
+var _event_index = __webpack_require__(154);
+
+var _event_index2 = _interopRequireDefault(_event_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  return {
+    events: Object.values(state.event)
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+  return {
+    fetchEvent: function fetchEvent() {
+      return dispatch((0, _event_actions.fetchEvent)());
+    }
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_event_index2.default);
 
 /***/ })
 /******/ ]);

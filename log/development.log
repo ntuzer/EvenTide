@@ -20990,3 +20990,12 @@ Processing by Api::EventsController#index as JSON
 Completed 200 OK in 39ms (Views: 26.6ms | ActiveRecord: 2.1ms)
 
 
+Started GET "/" for 127.0.0.1 at 2018-02-05 18:11:27 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "3DML5rxz-IpvkFfVM0qXXA"], ["LIMIT", 1]]
+  Rendered api/users/_user.json.jbuilder (1.0ms)
+  Rendered static_pages/root.html.erb within layouts/application (6.5ms)
+Completed 200 OK in 790ms (Views: 786.1ms | ActiveRecord: 0.3ms)
+
+
