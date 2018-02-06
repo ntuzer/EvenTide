@@ -27497,100 +27497,204 @@ var EventForm = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      var divStyle = { paddingTop: 0 };
       // console.log('VIEW eF');
       return _react2.default.createElement(
         'div',
-        null,
+        { className: 'main-form-page' },
         _react2.default.createElement(
-          'form',
-          { onSubmit: this.handleSubmit },
+          'div',
+          { className: 'create-bar' },
           _react2.default.createElement(
-            'label',
+            'h1',
             null,
-            'Event Title',
-            _react2.default.createElement('br', null),
-            _react2.default.createElement('input', { type: 'text',
-              placeholder: 'Give it a short distinct name'
-            })
-          ),
-          _react2.default.createElement('br', null),
+            'Create An Event'
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'gray-bar' },
           _react2.default.createElement(
-            'label',
+            'h2',
             null,
-            'Location',
-            _react2.default.createElement('br', null),
-            _react2.default.createElement('input', { type: 'text',
-              placeholder: 'Enter address of venue'
-            })
-          ),
-          _react2.default.createElement('br', null),
+            'EDIT'
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'main-form' },
           _react2.default.createElement(
-            'label',
-            null,
-            'Start date',
-            _react2.default.createElement('br', null),
-            _react2.default.createElement('input', { type: 'datetime-local',
-              value: '' })
-          ),
-          _react2.default.createElement('br', null),
-          _react2.default.createElement(
-            'label',
-            null,
-            'End date',
-            _react2.default.createElement('br', null),
-            _react2.default.createElement('input', { type: 'datetime-local',
-              value: '' })
-          ),
-          _react2.default.createElement('br', null),
-          _react2.default.createElement(
-            'label',
-            null,
-            'Description',
-            _react2.default.createElement('br', null),
-            _react2.default.createElement('input', { type: 'text', placeholder: 'Enter a Description' })
-          ),
-          _react2.default.createElement('br', null),
-          _react2.default.createElement('br', null),
-          _react2.default.createElement(
-            'label',
-            null,
-            'Ticket'
-          ),
-          _react2.default.createElement('br', null),
-          _react2.default.createElement(
-            'label',
-            null,
-            'Ticket'
-          ),
-          _react2.default.createElement('br', null),
-          _react2.default.createElement(
-            'label',
-            null,
-            'Ticket'
-          ),
-          _react2.default.createElement('br', null),
-          _react2.default.createElement('br', null),
-          _react2.default.createElement(
-            'select',
-            { className: 'category-dropdown' },
+            'div',
+            { className: 'form-header' },
             _react2.default.createElement(
-              'option',
-              { value: '' },
-              'Food & Drink'
+              'div',
+              null,
+              '1'
             ),
             _react2.default.createElement(
-              'option',
-              { value: '' },
-              'Party'
-            ),
-            _react2.default.createElement(
-              'option',
-              { value: '' },
-              'Nature'
+              'h2',
+              null,
+              'Event Details'
             )
           ),
-          _react2.default.createElement('br', null),
-          _react2.default.createElement('input', { type: 'submit', name: '', value: 'Make your event live' })
+          _react2.default.createElement(
+            'div',
+            { className: 'header-line' },
+            _react2.default.createElement('hr', null)
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'form' },
+            _react2.default.createElement(
+              'form',
+              { onSubmit: this.handleSubmit },
+              _react2.default.createElement(
+                'div',
+                null,
+                'Event Title',
+                _react2.default.createElement('br', null),
+                _react2.default.createElement('input', { type: 'text',
+                  placeholder: 'Give it a short distinct name'
+                })
+              ),
+              _react2.default.createElement('br', null),
+              _react2.default.createElement(
+                'div',
+                null,
+                'Location',
+                _react2.default.createElement('br', null),
+                _react2.default.createElement('input', { type: 'text',
+                  placeholder: 'Enter address of venue'
+                })
+              ),
+              _react2.default.createElement('br', null),
+              _react2.default.createElement(
+                'label',
+                null,
+                'Starts',
+                _react2.default.createElement('br', null),
+                _react2.default.createElement('input', { type: 'datetime-local',
+                  value: '' })
+              ),
+              _react2.default.createElement('br', null),
+              _react2.default.createElement(
+                'label',
+                null,
+                'Ends',
+                _react2.default.createElement('br', null),
+                _react2.default.createElement('input', { type: 'datetime-local',
+                  value: '' })
+              ),
+              _react2.default.createElement('br', null),
+              _react2.default.createElement(
+                'div',
+                null,
+                'Description',
+                _react2.default.createElement('br', null),
+                _react2.default.createElement('textarea', {
+                  className: 'form-desc',
+                  type: 'text',
+                  placeholder: 'Enter a Description' })
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'form-header2' },
+                _react2.default.createElement(
+                  'div',
+                  null,
+                  '2'
+                ),
+                _react2.default.createElement(
+                  'h2',
+                  null,
+                  'Create Tickets'
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'header-line2', style: divStyle },
+                _react2.default.createElement('hr', null)
+              ),
+              _react2.default.createElement('br', null),
+              _react2.default.createElement(
+                'label',
+                null,
+                'Ticket'
+              ),
+              _react2.default.createElement('br', null),
+              _react2.default.createElement(
+                'label',
+                null,
+                'Ticket'
+              ),
+              _react2.default.createElement('br', null),
+              _react2.default.createElement(
+                'label',
+                null,
+                'Ticket'
+              ),
+              _react2.default.createElement('br', null),
+              _react2.default.createElement(
+                'div',
+                { className: 'form-header2' },
+                _react2.default.createElement(
+                  'div',
+                  null,
+                  '3'
+                ),
+                _react2.default.createElement(
+                  'h2',
+                  null,
+                  'Additional Settings'
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'header-line2', style: divStyle },
+                _react2.default.createElement('hr', null)
+              ),
+              _react2.default.createElement(
+                'label',
+                null,
+                'Event Type'
+              ),
+              _react2.default.createElement('br', null),
+              _react2.default.createElement(
+                'select',
+                { className: 'category-dropdown' },
+                _react2.default.createElement(
+                  'option',
+                  { value: '' },
+                  'Food & Drink'
+                ),
+                _react2.default.createElement(
+                  'option',
+                  { value: '' },
+                  'Party'
+                ),
+                _react2.default.createElement(
+                  'option',
+                  { value: '' },
+                  'Nature'
+                )
+              ),
+              _react2.default.createElement('br', null)
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'space' },
+            _react2.default.createElement(
+              'div',
+              null,
+              _react2.default.createElement(
+                'label',
+                null,
+                'Nice job! You\'re almost done.'
+              ),
+              _react2.default.createElement('input', { type: 'submit', name: '', value: 'Make your event live' })
+            )
+          )
         )
       );
     }
