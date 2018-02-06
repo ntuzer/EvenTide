@@ -2,21 +2,22 @@ import { connect } from 'react-redux';
 import {
   fetchEvent, createEvent, deleteEvent
 } from '../../actions/event_actions';
-import EventIndex from './event_index';
+import EventShow from './event_show';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    events: Object.values(state.event),
+    events: state.events,
+    eventId: ownProps.match.params.eventId,
   };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    fetchEvent: () => dispatch(fetchEvent()),
+    fetchEvent: eventId => dispatch(fetchEvent(eventId)),
   };
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(EventIndex);
+)(EventShow);

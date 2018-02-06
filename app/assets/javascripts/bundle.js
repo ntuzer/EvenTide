@@ -30031,27 +30031,180 @@ var _reactRedux = __webpack_require__(7);
 
 var _event_actions = __webpack_require__(37);
 
-var _event_index = __webpack_require__(154);
+var _event_show = __webpack_require__(235);
 
-var _event_index2 = _interopRequireDefault(_event_index);
+var _event_show2 = _interopRequireDefault(_event_show);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
-    events: Object.values(state.event)
+    events: state.events,
+    eventId: ownProps.match.params.eventId
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
   return {
-    fetchEvent: function fetchEvent() {
-      return dispatch((0, _event_actions.fetchEvent)());
+    fetchEvent: function fetchEvent(eventId) {
+      return dispatch((0, _event_actions.fetchEvent)(eventId));
     }
   };
 };
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_event_index2.default);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_event_show2.default);
+
+/***/ }),
+/* 235 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(6);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var EventShow = function (_React$Component) {
+  _inherits(EventShow, _React$Component);
+
+  function EventShow() {
+    _classCallCheck(this, EventShow);
+
+    return _possibleConstructorReturn(this, (EventShow.__proto__ || Object.getPrototypeOf(EventShow)).apply(this, arguments));
+  }
+
+  _createClass(EventShow, [{
+    key: 'componentDidMount',
+
+    // constructor(props){
+    //   super(props);
+    //   this.state = this.props.events;
+    // }
+
+    value: function componentDidMount() {
+      console.log("fe", this.props);
+      this.props.fetchEvent(this.props.eventId);
+    }
+
+    // componentWillReceiveProps(nextProps) {
+    //   this.props.fetchEvent(nextProps.match.params.eventId);
+    // }
+
+  }, {
+    key: 'render',
+    value: function render() {
+      if (this.props.events.title === undefined) return null;
+      var event = this.props.events;
+      return _react2.default.createElement(
+        'div',
+        { className: 'event-show' },
+        _react2.default.createElement(
+          'div',
+          { className: 'show-top' },
+          _react2.default.createElement('img', { src: event.event_image_url, alt: 'img' }),
+          _react2.default.createElement(
+            'div',
+            { className: 'show-top-right' },
+            _react2.default.createElement(
+              'h1',
+              { className: 'show-title' },
+              'Title: ',
+              event.title
+            ),
+            _react2.default.createElement(
+              'h3',
+              { className: 'show-date' },
+              'Date: ',
+              event.start_date
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'show-bar' },
+          _react2.default.createElement(
+            'button',
+            { type: 'button', name: 'ticket' },
+            'Register'
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'show-bottom' },
+          _react2.default.createElement(
+            'div',
+            { className: 'show-bottom-left' },
+            _react2.default.createElement(
+              'label',
+              null,
+              'Description',
+              _react2.default.createElement(
+                'h3',
+                null,
+                event.description
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'show-bottom-right' },
+            _react2.default.createElement(
+              'label',
+              null,
+              'Date',
+              _react2.default.createElement(
+                'h3',
+                null,
+                event.start_date
+              )
+            ),
+            _react2.default.createElement(
+              'label',
+              null,
+              'Time',
+              _react2.default.createElement(
+                'h3',
+                null,
+                event.start_date
+              )
+            ),
+            _react2.default.createElement(
+              'label',
+              null,
+              'Location',
+              _react2.default.createElement(
+                'h3',
+                null,
+                event.location
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return EventShow;
+}(_react2.default.Component);
+
+exports.default = EventShow;
 
 /***/ })
 /******/ ]);
