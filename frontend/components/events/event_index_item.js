@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 
 const EventIndexItem = ({ event }) => {
+  console.log('EVENT',event);
   return (
     <li key={event.id}>
       EVENT:

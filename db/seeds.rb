@@ -18,9 +18,10 @@ User.create(email: "DemoUser@EvenTide.com", password: "password")
 
 Event.create({
   organizer_id: 5,
-  title: 'Party of the year',
+  title: 'Come take a class',
   location: "Atlanta",
   description: "FUN Times",
+  event_image_url: "https://upload.wikimedia.org/wikipedia/en/f/f5/Campus-classroom.jpg",
   category_id: 1,
   min_price: 0,
   start_date: '2018-03-22T17:00',
@@ -33,6 +34,7 @@ Event.create({
   title: 'Party of the millenium',
   location: "SFO",
   description: "Great Times",
+  event_image_url: "http://maxpixel.freegreatpicture.com/static/photo/1x/Club-Music-Event-Concert-Fun-Confetti-Party-2527495.jpg",
   category_id: 1,
   min_price: 0,
   start_date: '2018-03-22T17:00',
@@ -45,6 +47,7 @@ Event.create({
   title: 'Party 1',
   location: "SFO",
   description: "Great Times",
+  event_image_url: "",
   category_id: 1,
   min_price: 0,
   start_date: '2018-03-22T17:00',

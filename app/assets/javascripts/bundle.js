@@ -30018,6 +30018,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var EventIndexItem = function EventIndexItem(_ref) {
   var event = _ref.event;
 
+  console.log('EVENT', event);
   return _react2.default.createElement(
     'li',
     { key: event.id },
