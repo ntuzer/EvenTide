@@ -22,15 +22,16 @@ class EventIndex extends React.Component {
   render(){
     return (
       <div className="event-index">
-        <h1>Local events for you.</h1>
-
-        <ul>
-        {
-          this.shuffle(this.props.events).slice(0, 9).map(event => (
-            <EventIndexItem key={event.id} event={event} />
-          ))
-        }
-        </ul>
+        <div className="event-inner">
+          <h1>Local events for you.</h1>
+          <div className="event-main">
+            {
+              this.shuffle(this.props.events).slice(0, 9).map(event => (
+                <EventIndexItem key={event.id} event={event} />
+              ))
+            }
+          </div>
+        </div>
       </div>
     );
   }

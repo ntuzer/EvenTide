@@ -27373,16 +27373,20 @@ var EventIndex = function (_React$Component) {
         'div',
         { className: 'event-index' },
         _react2.default.createElement(
-          'h1',
-          null,
-          'Local events for you.'
-        ),
-        _react2.default.createElement(
-          'ul',
-          null,
-          this.shuffle(this.props.events).slice(0, 9).map(function (event) {
-            return _react2.default.createElement(_event_index_item2.default, { key: event.id, event: event });
-          })
+          'div',
+          { className: 'event-inner' },
+          _react2.default.createElement(
+            'h1',
+            null,
+            'Local events for you.'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'event-main' },
+            this.shuffle(this.props.events).slice(0, 9).map(function (event) {
+              return _react2.default.createElement(_event_index_item2.default, { key: event.id, event: event });
+            })
+          )
         )
       );
     }
@@ -30123,12 +30127,65 @@ var EventIndexItem = function EventIndexItem(_ref) {
   var event = _ref.event;
 
   console.log('EVENT', event);
+  var price = "Placeholder";
+  var date = "Placeholder";
+  var category = "Placeholder";
+  if (event === undefined) return null;
   return _react2.default.createElement(
-    'li',
-    { key: event.id },
-    'EVENT:',
-    _react2.default.createElement('br', null),
-    event.title
+    'div',
+    { key: event.id, classNameName: 'event-index-item' },
+    _react2.default.createElement(
+      'div',
+      { className: 'ii-upper' },
+      _react2.default.createElement(
+        _reactRouterDom.Link,
+        { to: '/events/' + event.id },
+        _react2.default.createElement(
+          'div',
+          { className: 'ii-img' },
+          _react2.default.createElement('img', { src: event.event_image_url, alt: '' }),
+          _react2.default.createElement(
+            'span',
+            null,
+            price
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'ii-text' },
+          _react2.default.createElement(
+            'div',
+            { className: 'ii-t-date' },
+            date
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'ii-t-title' },
+            event.title
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'ii-t-location' },
+            event.date
+          )
+        )
+      )
+    ),
+    _react2.default.createElement(
+      'div',
+      { className: 'ii-footer' },
+      _react2.default.createElement(
+        _reactRouterDom.Link,
+        { to: '/' },
+        '#',
+        category
+      ),
+      _react2.default.createElement(
+        'div',
+        { className: 'ii-bookmark' },
+        _react2.default.createElement(_reactRouterDom.Link, { to: '/' })
+      )
+    )
   );
 };
 
