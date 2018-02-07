@@ -1,4 +1,4 @@
-import * as TicketAPIUtil from '../util/events_api_util';
+import * as TicketAPIUtil from '../util/tickets_api_util';
 
 export const RECEIVE_TICKET = 'RECEIVE_TICKET';
 export const RECEIVE_TICKET_ERRORS = 'RECEIVE_TICKET_ERRORS';

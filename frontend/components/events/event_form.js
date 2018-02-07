@@ -12,7 +12,7 @@ class EventForm extends React.Component {
         start_date: "", min_price: 0, max_price: 0, end_date: "",
         event_image_url: "", category_id: 1 },
         ticketType: undefined,
-        ticket: { ticket_name: "", quantity: 100, price: 0, event_id: undefined}
+        ticket: undefined,
       };
     }else {
       this.state = {
@@ -42,7 +42,7 @@ class EventForm extends React.Component {
     e.preventDefault();
     const event = this.state.event;
     this.props.createForm(event)
-      .then(evt => this.createTicket(
+      .then(evt => this.props.createTicket(
         merge(this.state.ticket, {event_id: evt.id})
         )
       );
@@ -65,6 +65,8 @@ class EventForm extends React.Component {
   render(){
     let divStyle = {paddingTop: 0};
     let errors = this.prettyErrors();
+    console.log("event form state", this.state);
+    console.log("event form props", this.props);
     // let ticketForm = this.ticketForm();
     return (
       <div className="main-form-page">

@@ -27500,7 +27500,7 @@ var EventForm = function (_React$Component) {
           start_date: "", min_price: 0, max_price: 0, end_date: "",
           event_image_url: "", category_id: 1 },
         ticketType: undefined,
-        ticket: { ticket_name: "", quantity: 100, price: 0, event_id: undefined }
+        ticket: undefined
       };
     } else {
       _this.state = {
@@ -27539,7 +27539,7 @@ var EventForm = function (_React$Component) {
       e.preventDefault();
       var event = this.state.event;
       this.props.createForm(event).then(function (evt) {
-        return _this3.createTicket((0, _merge3.default)(_this3.state.ticket, { event_id: evt.id }));
+        return _this3.props.createTicket((0, _merge3.default)(_this3.state.ticket, { event_id: evt.id }));
       });
 
       // this.props.history.push('/');
@@ -27562,6 +27562,8 @@ var EventForm = function (_React$Component) {
     value: function render() {
       var divStyle = { paddingTop: 0 };
       var errors = this.prettyErrors();
+      console.log("event form state", this.state);
+      console.log("event form props", this.props);
       // let ticketForm = this.ticketForm();
       return _react2.default.createElement(
         'div',
@@ -30574,9 +30576,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.deleteTicket = exports.createTicket = exports.fetchTicket = exports.receiveErrors = exports.RECEIVE_TICKET_ERRORS = exports.RECEIVE_TICKET = undefined;
 
-var _events_api_util = __webpack_require__(232);
+var _tickets_api_util = __webpack_require__(241);
 
-var TicketAPIUtil = _interopRequireWildcard(_events_api_util);
+var TicketAPIUtil = _interopRequireWildcard(_tickets_api_util);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -30689,6 +30691,36 @@ exports.default = function () {
     default:
       return state;
   }
+};
+
+/***/ }),
+/* 241 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var fetchTicket = exports.fetchTicket = function fetchTicket(id) {
+  return $.ajax({
+    url: 'api/tickets/' + id,
+    method: 'GET'
+  });
+};
+var createTicket = exports.createTicket = function createTicket(ticket) {
+  return $.ajax({
+    url: 'api/tickets',
+    method: 'POST',
+    data: { ticket: ticket }
+  });
+};
+var deleteTicket = exports.deleteTicket = function deleteTicket(ticketId) {
+  return $.ajax({
+    url: 'api/tickets/' + ticketId,
+    method: 'DELETE'
+  });
 };
 
 /***/ })

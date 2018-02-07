@@ -1,5 +1,5 @@
 class Api::EventsController < ApplicationController
-  before_action :require_logged_in, only: [:create, :destroy]
+  before_action :require_logged_in, only: [:create, :destroy, :update]
 
   def create
     @event = Event.new(event_params)
@@ -8,6 +8,19 @@ class Api::EventsController < ApplicationController
       render :show
     else
       render json: @event.errors.full_messages, status: 422
+    end
+  end
+
+  def update
+    @event = Event.find_by(id: params[:id])
+    if current_user.id = @event.organizer_id
+      if @event.update_attribute(event_params)
+        render :show
+      else
+        render json: @event.errors.full_messages, status: 404
+      end
+    else
+      render json: ['Unauthorized'], status: 403
     end
   end
 
@@ -30,7 +43,7 @@ class Api::EventsController < ApplicationController
       @event.delete
       render :show
     else
-      render json: ["Unauthorized"], status: 404
+      render json: ["Unauthorized"], status: 403
     end
   end
 
