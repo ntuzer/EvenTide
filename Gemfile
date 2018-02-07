@@ -29,6 +29,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 gem 'pry-rails'
 gem 'jquery-rails'
+ruby '2.3.4'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
