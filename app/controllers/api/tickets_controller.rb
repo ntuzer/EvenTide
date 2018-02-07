@@ -1,5 +1,14 @@
 class Api::TicketsController < ApplicationController
 
+  def show
+    @ticket = Ticket.find_by(id: params[:id])
+    if @event
+      render :show
+    else
+      render json: ['Ticket not found!'], status: 404
+    end
+  end
+
   def create
     @ticket = Ticket.new(ticket_params)
 
