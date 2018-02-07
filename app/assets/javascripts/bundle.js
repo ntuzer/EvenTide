@@ -27419,7 +27419,7 @@ var _reactRedux = __webpack_require__(7);
 
 var _event_actions = __webpack_require__(37);
 
-var _ticket_actions = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../../actions/ticket_actions\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+var _ticket_actions = __webpack_require__(238);
 
 var _event_form = __webpack_require__(156);
 
@@ -30550,6 +30550,71 @@ exports.default = function () {
     default:
       return state;
   }
+};
+
+/***/ }),
+/* 238 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.deleteTicket = exports.createTicket = exports.fetchTicket = exports.receiveErrors = exports.RECEIVE_TICKET_ERRORS = exports.RECEIVE_TICKET = undefined;
+
+var _events_api_util = __webpack_require__(232);
+
+var TicketAPIUtil = _interopRequireWildcard(_events_api_util);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+var RECEIVE_TICKET = exports.RECEIVE_TICKET = 'RECEIVE_TICKET';
+var RECEIVE_TICKET_ERRORS = exports.RECEIVE_TICKET_ERRORS = 'RECEIVE_TICKET_ERRORS';
+
+var receiveTicket = function receiveTicket(ticket) {
+  return {
+    type: RECEIVE_TICKET,
+    ticket: ticket
+  };
+};
+
+var receiveErrors = exports.receiveErrors = function receiveErrors(errors) {
+  return {
+    type: RECEIVE_TICKET_ERRORS,
+    errors: errors
+  };
+};
+
+var fetchTicket = exports.fetchTicket = function fetchTicket(id) {
+  return function (dispatch) {
+    return TicketAPIUtil.fetchTicket(id).then(function (ticket) {
+      return dispatch(receiveTicket(ticket));
+    }, function (err) {
+      return dispatch(receiveErrors(err.responseJSON));
+    });
+  };
+};
+
+var createTicket = exports.createTicket = function createTicket(ticket) {
+  return function (dispatch) {
+    return TicketAPIUtil.createTicket(ticket).then(function (tk) {
+      return dispatch(receiveTicket(tk));
+    }, function (err) {
+      return dispatch(receiveErrors(err.responseJSON));
+    });
+  };
+};
+
+var deleteTicket = exports.deleteTicket = function deleteTicket(id) {
+  return function (dispatch) {
+    return TicketAPIUtil.deleteTicket(id).then(function (ticket) {
+      return dispatch(receiveTicket(null));
+    }, function (err) {
+      return dispatch(receiveErrors(err.responseJSON));
+    });
+  };
 };
 
 /***/ })
