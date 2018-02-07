@@ -1,14 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import moment from './moments';
+
 
 const EventIndexItem = ({ event }) => {
   let price = event.max_price - event.min_price === 0 ? "Free" : `$${event.max_price - event.min_price}`;
   let dateObj = new Date(event.start_date).toString();
-  let ampm = 2;
   let date = `${dateObj.slice(0,3)}, ${dateObj.slice(4,15)}`;
   let category = "category";
-  console.log('DATE', date);
   if (event === undefined) return null;
   return (
     <div key={event.id} className="e-i-i">

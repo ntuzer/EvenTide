@@ -7,7 +7,7 @@ import EventForm from './event_form';
 
 
 const mapStateToProps = (state) => {
-  console.log('efc mstp state', state);
+  // console.log('efc mstp state', state);
   return {
     // loggedIn: Boolean(state.session.currentUser),
     errors: state.errors.session

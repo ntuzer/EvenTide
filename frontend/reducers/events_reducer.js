@@ -12,7 +12,7 @@ const eventsReducer = (preloadedState = {}, action) => {
   let newState;
   switch (action.type) {
     case RECEIVE_EVENTS:
-      console.log("REDUCER", action);
+      // console.log("REDUCER", action);
       newState = merge({}, action.events);
       return newState;
     case RECEIVE_EVENT:
