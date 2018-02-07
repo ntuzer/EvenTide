@@ -30,7 +30,7 @@ const receiveSingleEvent = event => {
   };
 };
 
-const receiveErrors = errors => {
+export const receiveErrors = errors => {
   // console.log('action receiveErrors');
   return {
   type: RECEIVE_EVENT_ERRORS,

@@ -14,7 +14,7 @@ class User < ApplicationRecord
       class_name: :Event
 
 
-    has_many :rsvps,
+    has_many :paid_tickets,
       primary_key: :id,
       foreign_key: :user_id,
       class_name: :Rsvp

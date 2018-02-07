@@ -2074,7 +2074,7 @@ var createTransitionManager = function createTransitionManager() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.deleteEvent = exports.createEvent = exports.fetchEvent = exports.fetchEvents = exports.RECEIVE_MY_EVENTS = exports.RECEIVE_EVENT_ERRORS = exports.RECEIVE_EVENT = exports.RECEIVE_EVENTS = undefined;
+exports.deleteEvent = exports.createEvent = exports.fetchEvent = exports.fetchEvents = exports.receiveErrors = exports.RECEIVE_MY_EVENTS = exports.RECEIVE_EVENT_ERRORS = exports.RECEIVE_EVENT = exports.RECEIVE_EVENTS = undefined;
 
 var _events_api_util = __webpack_require__(232);
 
@@ -2110,7 +2110,7 @@ var receiveSingleEvent = function receiveSingleEvent(event) {
   };
 };
 
-var receiveErrors = function receiveErrors(errors) {
+var receiveErrors = exports.receiveErrors = function receiveErrors(errors) {
   // console.log('action receiveErrors');
   return {
     type: RECEIVE_EVENT_ERRORS,
@@ -27513,8 +27513,12 @@ var EventForm = function (_React$Component) {
   //   );
   // }
 
-
   _createClass(EventForm, [{
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this.props.clearErrors();
+    }
+  }, {
     key: 'update',
     value: function update(field) {
       var _this2 = this;

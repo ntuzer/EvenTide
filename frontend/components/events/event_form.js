@@ -17,7 +17,7 @@ class EventForm extends React.Component {
     // this.renderErrors = this.renderErrors.bind(this);
     this.prettyErrors = this.prettyErrors.bind(this);
   }
-  
+
   // renderErrors() {
   //   if (this.props.errors === null) return (<ul className="form-errors"></ul>);
   //   return(
@@ -31,6 +31,10 @@ class EventForm extends React.Component {
   //     </ul>
   //   );
   // }
+
+  componentWillUnmount(){
+    this.props.clearErrors();
+  }
 
 
   update(field) {
