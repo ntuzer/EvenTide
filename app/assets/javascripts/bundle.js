@@ -30083,11 +30083,16 @@ var _events_errors_reducer = __webpack_require__(237);
 
 var _events_errors_reducer2 = _interopRequireDefault(_events_errors_reducer);
 
+var _tickets_errors_reducer = __webpack_require__(240);
+
+var _tickets_errors_reducer2 = _interopRequireDefault(_tickets_errors_reducer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = (0, _redux.combineReducers)({
   session: _session_errors_reducer2.default,
-  events: _events_errors_reducer2.default
+  events: _events_errors_reducer2.default,
+  tickets: _tickets_errors_reducer2.default
 });
 
 /***/ }),
@@ -30658,6 +30663,33 @@ var ticketsReducer = function ticketsReducer() {
 };
 
 exports.default = ticketsReducer;
+
+/***/ }),
+/* 240 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _ticket_actions = __webpack_require__(238);
+
+exports.default = function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments[1];
+
+  // console.log('events error reducer', action);
+  Object.freeze(state);
+  switch (action.type) {
+    case _ticket_actions.RECEIVE_TICKET_ERRORS:
+      return action.errors;
+    default:
+      return state;
+  }
+};
 
 /***/ })
 /******/ ]);
