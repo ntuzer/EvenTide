@@ -30202,6 +30202,14 @@ var createEvent = exports.createEvent = function createEvent(event) {
   });
 };
 
+var updateEvent = exports.updateEvent = function updateEvent(event) {
+  return $.ajax({
+    url: 'api/events/' + event.id,
+    method: 'PATCH',
+    data: { event: event }
+  });
+};
+
 var deleteEvent = exports.deleteEvent = function deleteEvent(eventId) {
   return $.ajax({
     url: 'api/events/' + eventId,
