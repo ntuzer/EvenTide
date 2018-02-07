@@ -23,6 +23,7 @@ class EventIndex extends React.Component {
     return (
       <div className="event-index">
         <div className="event-inner">
+          <div className="event-spacer"></div>
           <h1>Local events for you.</h1>
           <div className="event-main">
             {

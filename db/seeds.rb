@@ -24,8 +24,8 @@ Event.create({
   event_image_url: "https://upload.wikimedia.org/wikipedia/en/f/f5/Campus-classroom.jpg",
   category_id: 1,
   min_price: 0,
-  start_date: '2018-03-22T17:00',
-  end_date: '2018-03-22T19:00',
+  start_date: '2018-03-05T17:00',
+  end_date: '2018-03-05T19:00',
   }
 )
 
@@ -47,7 +47,7 @@ Event.create({
   title: 'Party 1',
   location: "SFO",
   description: "Great Times",
-  event_image_url: "",
+  event_image_url: "https://upload.wikimedia.org/wikipedia/en/f/f5/Campus-classroom.jpg",
   category_id: 1,
   min_price: 0,
   start_date: '2018-03-22T17:00',
@@ -60,8 +60,10 @@ Event.create({
   title: 'Party 2',
   location: "SFO",
   description: "Great Times",
+  event_image_url: "https://upload.wikimedia.org/wikipedia/en/f/f5/Campus-classroom.jpg",
   category_id: 1,
   min_price: 0,
+  max_price: 199,
   start_date: '2018-03-22T17:00',
   end_date: '2018-03-22T19:00',
   }
@@ -72,8 +74,10 @@ Event.create({
   title: 'Party 3',
   location: "SFO",
   description: "Great Times",
+  event_image_url: "https://upload.wikimedia.org/wikipedia/en/f/f5/Campus-classroom.jpg",
   category_id: 1,
   min_price: 0,
+  max_price: 199,
   start_date: '2018-03-22T17:00',
   end_date: '2018-03-22T19:00',
   }
@@ -84,8 +88,10 @@ Event.create({
   title: 'Party 4',
   location: "SFO",
   description: "Great Times",
+  event_image_url: "https://upload.wikimedia.org/wikipedia/en/f/f5/Campus-classroom.jpg",
   category_id: 1,
   min_price: 0,
+  max_price: 199,
   start_date: '2018-03-22T17:00',
   end_date: '2018-03-22T19:00',
   }
@@ -96,8 +102,10 @@ Event.create({
   title: 'Party 5',
   location: "SFO",
   description: "Great Times",
+  event_image_url: "https://upload.wikimedia.org/wikipedia/en/f/f5/Campus-classroom.jpg",
   category_id: 1,
   min_price: 0,
+  max_price: 199,
   start_date: '2018-03-22T17:00',
   end_date: '2018-03-22T19:00',
   }
@@ -108,10 +116,12 @@ Event.create({
   title: 'Party 6',
   location: "SFO",
   description: "Great Times",
+  event_image_url: "https://upload.wikimedia.org/wikipedia/en/f/f5/Campus-classroom.jpg",
   category_id: 1,
   min_price: 0,
-  start_date: '2018-03-22T17:00',
-  end_date: '2018-03-22T19:00',
+  max_price: 199,
+  start_date: '2018-03-05T17:00',
+  end_date: '2018-03-05T19:00',
   }
 )
 
@@ -120,10 +130,11 @@ Event.create({
   title: 'Party 7',
   location: "SFO",
   description: "Great Times",
+  event_image_url: "https://upload.wikimedia.org/wikipedia/en/f/f5/Campus-classroom.jpg",
   category_id: 1,
   min_price: 0,
-  start_date: '2018-03-22T17:00',
-  end_date: '2018-03-22T19:00',
+  start_date: '2018-03-05T17:00',
+  end_date: '2018-03-05T19:00',
   }
 )
 
@@ -132,10 +143,11 @@ Event.create({
   title: 'Party 8',
   location: "SFO",
   description: "Great Times",
+  event_image_url: "https://upload.wikimedia.org/wikipedia/en/f/f5/Campus-classroom.jpg",
   category_id: 1,
   min_price: 0,
-  start_date: '2018-03-22T17:00',
-  end_date: '2018-03-22T19:00',
+  start_date: '2018-03-05T17:00',
+  end_date: '2018-03-05T19:00',
   }
 )
 
@@ -144,10 +156,11 @@ Event.create({
   title: 'Party 9',
   location: "SFO",
   description: "Great Times",
+  event_image_url: "https://upload.wikimedia.org/wikipedia/en/f/f5/Campus-classroom.jpg",
   category_id: 1,
   min_price: 0,
-  start_date: '2018-03-22T17:00',
-  end_date: '2018-03-22T19:00',
+  start_date: '2018-03-05T17:00',
+  end_date: '2018-03-05T19:00',
   }
 )
 
@@ -156,9 +169,10 @@ Event.create({
   title: 'Party 10',
   location: "SFO",
   description: "Great Times",
+  event_image_url: "https://upload.wikimedia.org/wikipedia/en/f/f5/Campus-classroom.jpg",
   category_id: 1,
   min_price: 0,
-  start_date: '2018-03-22T17:00',
-  end_date: '2018-03-22T19:00',
+  start_date: '2018-03-05T17:00',
+  end_date: '2018-03-05T19:00',
   }
 )

@@ -1,0 +1,32 @@
+.event-index {
+  font-family: Lato;
+  background: #f8f8fa;
+  color: #45494E;
+}
+
+.event-spacer {
+  height: 70px;
+}
+
+.event-inner {
+  max-width: 1080px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.event-inner h1 {
+  font-size: 25px;
+  line-height: 30px;
+  font-weight: 500;
+  // border: 1px solid red;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.event-main {
+  display: flex;
+  flex-wrap: wrap;
+}
