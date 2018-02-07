@@ -2142,7 +2142,7 @@ var fetchEvent = exports.fetchEvent = function fetchEvent(id) {
 
 var createEvent = exports.createEvent = function createEvent(event) {
   return function (dispatch) {
-    console.log('action create event');
+    // console.log('action create event');
     return EventAPIUtil.createEvent(event).then(function (evt) {
       return dispatch(receiveSingleEvent(evt.id));
     });
@@ -4515,10 +4515,10 @@ document.addEventListener('DOMContentLoaded', function () {
   } else {
     store = (0, _store2.default)();
   }
-  window.store = store;
-  window.getState = store.getState;
-  window.dispatch = store.dispatch;
-  window.createEvent = _event_actions.createEvent;
+  // window.store = store;
+  // window.getState = store.getState;
+  // window.dispatch = store.dispatch;
+  // window.createEvent = createEvent;
   // console.log('does it come back?');
   _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 });
@@ -27010,7 +27010,8 @@ var SessionForm = function (_React$Component) {
                 _react2.default.createElement('input', { type: 'submit', className: 'submit', value: 'Submit' }),
                 _react2.default.createElement(
                   'button',
-                  { className: 'demo-user', onClick: this.demo },
+                  { className: 'demo-user',
+                    onClick: this.demo },
                   'Demo User'
                 )
               )
@@ -27370,7 +27371,7 @@ var EventIndex = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      console.log("events index", this.props);
+      // console.log("events index", this.props);
       if (this.props.events === undefined) return null;
       return _react2.default.createElement(
         'div',
@@ -27535,7 +27536,7 @@ var EventForm = function (_React$Component) {
     value: function render() {
       var divStyle = { paddingTop: 0 };
       // console.log('VIEW eF');
-      console.log("render", this.state);
+      // console.log("render", this.state);
       // console.log("errors", this.renderErrors());
       return _react2.default.createElement(
         'div',
@@ -27593,7 +27594,8 @@ var EventForm = function (_React$Component) {
                 'Event Title',
                 _react2.default.createElement('br', null),
                 _react2.default.createElement('input', { type: 'text', onChange: this.update("title"),
-                  placeholder: 'Give it a short distinct name', value: this.state.title
+                  placeholder: 'Give it a short distinct name',
+                  value: this.state.title
                 })
               ),
               _react2.default.createElement('br', null),
@@ -27603,7 +27605,8 @@ var EventForm = function (_React$Component) {
                 'Location',
                 _react2.default.createElement('br', null),
                 _react2.default.createElement('input', { type: 'text', onChange: this.update("location"),
-                  placeholder: 'Enter address of venue', value: this.state.location
+                  placeholder: 'Enter address of venue',
+                  value: this.state.location
                 })
               ),
               _react2.default.createElement('br', null),
@@ -27612,7 +27615,8 @@ var EventForm = function (_React$Component) {
                 null,
                 'Starts',
                 _react2.default.createElement('br', null),
-                _react2.default.createElement('input', { type: 'datetime-local', onChange: this.update("start_date"),
+                _react2.default.createElement('input', { type: 'datetime-local',
+                  onChange: this.update("start_date"),
                   value: this.state.start_date })
               ),
               _react2.default.createElement('br', null),
@@ -27775,7 +27779,7 @@ var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   // console.log('Initialized THE STORE');
-  return (0, _redux.createStore)(_root_reducer2.default, preloadedState, (0, _redux.applyMiddleware)(_reduxThunk2.default, _reduxLogger2.default));
+  return (0, _redux.createStore)(_root_reducer2.default, preloadedState, (0, _redux.applyMiddleware)(_reduxThunk2.default));
 };
 
 exports.default = configureStore;
@@ -30081,17 +30085,17 @@ var eventsReducer = function eventsReducer() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments[1];
 
-  console.log('events reducer');
+  // console.log('events reducer');
   Object.freeze(preloadedState);
   var newState = void 0;
   switch (action.type) {
     case _event_actions.RECEIVE_EVENTS:
-      console.log("RED RECEIVE_EVENTS", action);
+      // console.log("RED RECEIVE_EVENTS", action);
       newState = (0, _merge3.default)({}, action.events);
       return newState;
     case _event_actions.RECEIVE_EVENT:
-      console.log("RED RECEIVE_EVENT", action);
-      newState = (0, _merge3.default)({}, preloadedState, _defineProperty({}, action.events.id, action.events));
+      // console.log("RED RECEIVE_EVENT", action);
+      newState = (0, _merge3.default)({}, preloadedState, _defineProperty({}, action.event.id, action.event));
       return newState;
     // case RECEIVE_MY_EVENTS:
     default:
@@ -30312,6 +30316,7 @@ var EventShow = function (_React$Component) {
 
     console.log('constructor', _this.props);
     _this.state = _this.props.event;
+    _this.prettyDate = _this.prettyDate.bind(_this);
     return _this;
   }
 
@@ -30328,15 +30333,8 @@ var EventShow = function (_React$Component) {
     // }
 
   }, {
-    key: 'render',
-    value: function render() {
-      var event = this.state;
-      if (this.state === null) {
-        console.log('in if statement');
-        return null;
-      }
-
-      console.log('eventShow', this.state);
+    key: 'prettyDate',
+    value: function prettyDate(event) {
       var dateObj = new Date(event.start_date).toString();
       var dateEnd = new Date(event.end_date).toString();
       var ampm1 = parseInt(dateObj.slice(16, 18)) > 12 ? "PM" : "AM";
@@ -30346,7 +30344,14 @@ var EventShow = function (_React$Component) {
       var day = '' + dateObj.slice(8, 10);
       var date = dateObj.slice(0, 3) + ', ' + dateObj.slice(4, 15);
       var price = event.max_price - event.min_price === 0 ? "Free" : '$' + (event.max_price - event.min_price);
-
+      return { dateObj: dateObj, dateEnd: dateEnd, ampm1: ampm1, ampm2: ampm2, times: times, mon: mon, day: day, date: date, price: price };
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var event = this.state;
+      if (event === null) return null;
+      var prettyDate = this.prettyDate(this.state);
       return _react2.default.createElement(
         'div',
         { className: 'event-back' },
@@ -30363,12 +30368,12 @@ var EventShow = function (_React$Component) {
               _react2.default.createElement(
                 'h1',
                 { className: 'show-mon' },
-                mon
+                prettyDate.mon
               ),
               _react2.default.createElement(
                 'h1',
                 { className: 'show-day' },
-                day
+                prettyDate.day
               ),
               _react2.default.createElement(
                 'h1',
@@ -30379,7 +30384,7 @@ var EventShow = function (_React$Component) {
               _react2.default.createElement(
                 'h1',
                 { className: 'show-price' },
-                price
+                prettyDate.price
               )
             )
           ),
@@ -30432,12 +30437,12 @@ var EventShow = function (_React$Component) {
                 _react2.default.createElement(
                   'h3',
                   null,
-                  date
+                  prettyDate.date
                 ),
                 _react2.default.createElement(
                   'h3',
                   null,
-                  times
+                  prettyDate.times
                 )
               ),
               _react2.default.createElement(

@@ -54,7 +54,7 @@ class EventForm extends React.Component {
   render(){
     let divStyle = {paddingTop: 0};
     // console.log('VIEW eF');
-    console.log("render", this.state);
+    // console.log("render", this.state);
     // console.log("errors", this.renderErrors());
     return (
       <div className="main-form-page">
@@ -79,7 +79,8 @@ class EventForm extends React.Component {
                 Event Title
                 <br/>
                 <input type="text" onChange={this.update("title")}
-                 placeholder="Give it a short distinct name" value={this.state.title}
+                 placeholder="Give it a short distinct name"
+                 value={this.state.title}
                  ></input>
               </div>
               <br/>
@@ -87,15 +88,17 @@ class EventForm extends React.Component {
                 Location
                 <br/>
                 <input type="text" onChange={this.update("location")}
-                 placeholder="Enter address of venue" value={this.state.location}
+                 placeholder="Enter address of venue"
+                 value={this.state.location}
                  ></input>
               </div>
               <br/>
               <label>
                 Starts
                 <br/>
-                <input type="datetime-local" onChange={this.update("start_date")}
-                 value={this.state.start_date}></input>
+                <input type="datetime-local"
+                  onChange={this.update("start_date")}
+                  value={this.state.start_date}></input>
               </label>
               <br/>
               <label>

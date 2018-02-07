@@ -19,10 +19,10 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     store = configureStore();
   }
-  window.store = store;
-  window.getState = store.getState;
-  window.dispatch = store.dispatch;
-  window.createEvent = createEvent;
+  // window.store = store;
+  // window.getState = store.getState;
+  // window.dispatch = store.dispatch;
+  // window.createEvent = createEvent;
   // console.log('does it come back?');
   ReactDOM.render(<Root store={store} />, root);
 });
