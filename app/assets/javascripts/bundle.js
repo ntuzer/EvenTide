@@ -27419,6 +27419,8 @@ var _reactRedux = __webpack_require__(7);
 
 var _event_actions = __webpack_require__(37);
 
+var _ticket_actions = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../../actions/ticket_actions\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
 var _event_form = __webpack_require__(156);
 
 var _event_form2 = _interopRequireDefault(_event_form);
@@ -27437,6 +27439,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, _ref) {
   var location = _ref.location;
 
   return {
+    createTicket: function createTicket(ticket) {
+      return dispatch((0, _ticket_actions.createTicket)(ticket));
+    },
     createForm: function createForm(event) {
       return dispatch((0, _event_actions.createEvent)(event));
     },
@@ -27493,10 +27498,16 @@ var EventForm = function (_React$Component) {
       _this.state = {
         event: { title: "", description: "", location: "",
           start_date: "", min_price: 0, max_price: 0, end_date: "",
-          event_image_url: "", category_id: 1 }
+          event_image_url: "", category_id: 1 },
+        ticketType: undefined,
+        ticket: { ticket_name: "", quantity: 100, price: 0, event_id: undefined }
       };
     } else {
-      _this.state = { event: props.event };
+      _this.state = {
+        event: props.event,
+        ticketType: props.ticketType,
+        ticket: props.ticket
+      };
     }
     _this.handleSubmit = _this.handleSubmit.bind(_this);
     _this.update = _this.update.bind(_this);
@@ -27522,10 +27533,15 @@ var EventForm = function (_React$Component) {
   }, {
     key: 'handleSubmit',
     value: function handleSubmit(e) {
+      var _this3 = this;
+
       console.log('handleSubmit', this.state);
       e.preventDefault();
       var event = this.state.event;
-      this.props.createForm(event);
+      this.props.createForm(event).then(function (evt) {
+        return _this3.createTicket((0, _merge3.default)(_this3.state.ticket, { event_id: evt.id }));
+      });
+
       // this.props.history.push('/');
     }
   }, {

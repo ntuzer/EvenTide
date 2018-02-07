@@ -11,9 +11,15 @@ class EventForm extends React.Component {
         event: { title: "", description: "", location: "",
         start_date: "", min_price: 0, max_price: 0, end_date: "",
         event_image_url: "", category_id: 1 },
+        ticketType: undefined,
+        ticket: { ticket_name: "", quantity: 100, price: 0, event_id: undefined}
       };
     }else {
-      this.state = {event: props.event};
+      this.state = {
+        event: props.event,
+        ticketType: props.ticketType,
+        ticket: props.ticket
+      };
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.update = this.update.bind(this);
@@ -35,8 +41,13 @@ class EventForm extends React.Component {
     console.log('handleSubmit', this.state);
     e.preventDefault();
     const event = this.state.event;
-    this.props.createForm(event);
-    // this.props.history.push('/');
+    this.props.createForm(event)
+      .then(evt => this.createTicket(
+        merge(this.state.ticket, {event_id: evt.id})
+        )
+      );
+
+     // this.props.history.push('/');
   }
 
   prettyErrors(){
@@ -50,7 +61,6 @@ class EventForm extends React.Component {
     });
     return result;
   }
-
 
   render(){
     let divStyle = {paddingTop: 0};
