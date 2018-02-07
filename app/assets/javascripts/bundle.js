@@ -27895,16 +27895,21 @@ var _events_reducer = __webpack_require__(230);
 
 var _events_reducer2 = _interopRequireDefault(_events_reducer);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _tickets_reducer = __webpack_require__(239);
 
-var rootReducer = (0, _redux.combineReducers)({
-  session: _session_reducer2.default,
-  events: _events_reducer2.default,
-  errors: _errors_reducer2.default
-});
+var _tickets_reducer2 = _interopRequireDefault(_tickets_reducer);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // import entities from './entities_reducer';
 // import ui from './ui_reducer';
+var rootReducer = (0, _redux.combineReducers)({
+  session: _session_reducer2.default,
+  events: _events_reducer2.default,
+  tickets: _tickets_reducer2.default,
+  errors: _errors_reducer2.default
+});
+
 exports.default = rootReducer;
 
 /***/ }),
@@ -30616,6 +30621,43 @@ var deleteTicket = exports.deleteTicket = function deleteTicket(id) {
     });
   };
 };
+
+/***/ }),
+/* 239 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _merge2 = __webpack_require__(66);
+
+var _merge3 = _interopRequireDefault(_merge2);
+
+var _ticket_actions = __webpack_require__(238);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var ticketsReducer = function ticketsReducer() {
+  var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments[1];
+
+  Object.freeze(preloadedState);
+  var newState = void 0;
+  switch (action.type) {
+    case _ticket_actions.RECEIVE_TICKET:
+      return (0, _merge3.default)({}, preloadedState, _defineProperty({}, action.id, action));
+    default:
+      return preloadedState;
+  }
+};
+
+exports.default = ticketsReducer;
 
 /***/ })
 /******/ ]);
