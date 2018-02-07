@@ -10,7 +10,7 @@ const mapStateToProps = (state) => {
   // console.log('efc mstp state', state);
   return {
     // loggedIn: Boolean(state.session.currentUser),
-    errors: state.errors.session
+    errors: state.errors.events
   };
 };
 

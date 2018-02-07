@@ -100,10 +100,17 @@
 
 .form div {
   padding-top: 15px;
-  margin-right: 90px;
+  margin-right: 0;
   width: inherit;
   text-transform: uppercase;
   font-weight: 900;
+
+
+}
+
+.errors {
+  color: red;
+  height: 10px;
 }
 
 .form div input {

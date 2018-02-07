@@ -59,8 +59,11 @@ export const fetchEvent = id => dispatch => {
 
 export const createEvent = event => dispatch => {
   // console.log('action create event');
-  return EventAPIUtil.createEvent(event)
-    .then(evt => dispatch(receiveSingleEvent(evt.id)));
+  return EventAPIUtil.createEvent(event).then(evt => (
+      dispatch(receiveSingleEvent(evt.id))
+    ), err => (
+      dispatch(receiveErrors(err.responseJSON))
+    ));
 };
 
 export const deleteEvent = eventId => dispatch => {

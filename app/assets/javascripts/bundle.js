@@ -2145,6 +2145,8 @@ var createEvent = exports.createEvent = function createEvent(event) {
     // console.log('action create event');
     return EventAPIUtil.createEvent(event).then(function (evt) {
       return dispatch(receiveSingleEvent(evt.id));
+    }, function (err) {
+      return dispatch(receiveErrors(err.responseJSON));
     });
   };
 };
@@ -27427,7 +27429,7 @@ var mapStateToProps = function mapStateToProps(state) {
   // console.log('efc mstp state', state);
   return {
     // loggedIn: Boolean(state.session.currentUser),
-    errors: state.errors.session
+    errors: state.errors.events
   };
 };
 
@@ -27490,30 +27492,29 @@ var EventForm = function (_React$Component) {
     } else {
       _this.state = props.event;
     }
-
     _this.handleSubmit = _this.handleSubmit.bind(_this);
     _this.update = _this.update.bind(_this);
-    _this.renderErrors = _this.renderErrors.bind(_this);
+    // this.renderErrors = this.renderErrors.bind(this);
+    _this.prettyErrors = _this.prettyErrors.bind(_this);
     return _this;
   }
 
+  // renderErrors() {
+  //   if (this.props.errors === null) return (<ul className="form-errors"></ul>);
+  //   return(
+  //     <ul className="form-errors">
+  //
+  //       {this.props.errors.map((error, i) => (
+  //         <li key={`error-${i}`}>
+  //           {error}
+  //         </li>
+  //       ))}
+  //     </ul>
+  //   );
+  // }
+
+
   _createClass(EventForm, [{
-    key: 'renderErrors',
-    value: function renderErrors() {
-      if (this.props.errors === null) return _react2.default.createElement('ul', { className: 'form-errors' });
-      return _react2.default.createElement(
-        'ul',
-        { className: 'form-errors' },
-        this.props.errors.map(function (error, i) {
-          return _react2.default.createElement(
-            'li',
-            { key: 'error-' + i },
-            error
-          );
-        })
-      );
-    }
-  }, {
     key: 'update',
     value: function update(field) {
       var _this2 = this;
@@ -27529,7 +27530,20 @@ var EventForm = function (_React$Component) {
       e.preventDefault();
       var event = this.state;
       this.props.createForm(event);
-      this.props.history.push('/');
+      // this.props.history.push('/');
+    }
+  }, {
+    key: 'prettyErrors',
+    value: function prettyErrors() {
+      var result = { title: "", location: "", description: "", start: "", end: "" };
+      this.props.errors.map(function (el) {
+        if (el === 'Title can\'t be blank') result.title = el;
+        if (el === 'Location can\'t be blank') result.location = el;
+        if (el === 'Description can\'t be blank') result.description = el;
+        if (el === 'Start date can\'t be blank') result.start = el;
+        if (el === 'End date can\'t be blank') result.end = el;
+      });
+      return result;
     }
   }, {
     key: 'render',
@@ -27538,6 +27552,7 @@ var EventForm = function (_React$Component) {
       // console.log('VIEW eF');
       // console.log("render", this.state);
       // console.log("errors", this.renderErrors());
+      var errors = this.prettyErrors();
       return _react2.default.createElement(
         'div',
         { className: 'main-form-page' },
@@ -27559,7 +27574,6 @@ var EventForm = function (_React$Component) {
             'EDIT'
           )
         ),
-        this.renderErrors(),
         _react2.default.createElement(
           'div',
           { className: 'main-form' },
@@ -27591,8 +27605,13 @@ var EventForm = function (_React$Component) {
               _react2.default.createElement(
                 'div',
                 null,
-                'Event Title',
                 _react2.default.createElement('br', null),
+                'Event Title ',
+                _react2.default.createElement(
+                  'h1',
+                  { className: 'errors' },
+                  errors.title
+                ),
                 _react2.default.createElement('input', { type: 'text', onChange: this.update("title"),
                   placeholder: 'Give it a short distinct name',
                   value: this.state.title
@@ -27602,8 +27621,13 @@ var EventForm = function (_React$Component) {
               _react2.default.createElement(
                 'div',
                 null,
-                'Location',
                 _react2.default.createElement('br', null),
+                'Location ',
+                _react2.default.createElement(
+                  'h1',
+                  { className: 'errors' },
+                  errors.location
+                ),
                 _react2.default.createElement('input', { type: 'text', onChange: this.update("location"),
                   placeholder: 'Enter address of venue',
                   value: this.state.location
@@ -27613,8 +27637,13 @@ var EventForm = function (_React$Component) {
               _react2.default.createElement(
                 'label',
                 null,
-                'Starts',
                 _react2.default.createElement('br', null),
+                'Starts ',
+                _react2.default.createElement(
+                  'h1',
+                  { className: 'errors' },
+                  errors.start
+                ),
                 _react2.default.createElement('input', { type: 'datetime-local',
                   onChange: this.update("start_date"),
                   value: this.state.start_date })
@@ -27623,8 +27652,13 @@ var EventForm = function (_React$Component) {
               _react2.default.createElement(
                 'label',
                 null,
-                'Ends',
                 _react2.default.createElement('br', null),
+                'Ends ',
+                _react2.default.createElement(
+                  'h1',
+                  { className: 'errors' },
+                  errors.end
+                ),
                 _react2.default.createElement('input', { type: 'datetime-local', onChange: this.update("end_date"),
                   value: this.state.end_date })
               ),
@@ -27632,7 +27666,12 @@ var EventForm = function (_React$Component) {
               _react2.default.createElement(
                 'div',
                 null,
-                'Description',
+                'Description ',
+                _react2.default.createElement(
+                  'h1',
+                  { className: 'errors' },
+                  errors.description
+                ),
                 _react2.default.createElement('br', null),
                 _react2.default.createElement('textarea', {
                   className: 'form-desc', onChange: this.update("description"),
@@ -30025,10 +30064,15 @@ var _session_errors_reducer = __webpack_require__(229);
 
 var _session_errors_reducer2 = _interopRequireDefault(_session_errors_reducer);
 
+var _events_errors_reducer = __webpack_require__(237);
+
+var _events_errors_reducer2 = _interopRequireDefault(_events_errors_reducer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = (0, _redux.combineReducers)({
-  session: _session_errors_reducer2.default
+  session: _session_errors_reducer2.default,
+  events: _events_errors_reducer2.default
 });
 
 /***/ }),
@@ -30097,7 +30141,6 @@ var eventsReducer = function eventsReducer() {
       // console.log("RED RECEIVE_EVENT", action);
       newState = (0, _merge3.default)({}, preloadedState, _defineProperty({}, action.event.id, action.event));
       return newState;
-    // case RECEIVE_MY_EVENTS:
     default:
       return preloadedState;
   }
@@ -30312,9 +30355,9 @@ var EventShow = function (_React$Component) {
   function EventShow(props) {
     _classCallCheck(this, EventShow);
 
+    // console.log('constructor', this.props);
     var _this = _possibleConstructorReturn(this, (EventShow.__proto__ || Object.getPrototypeOf(EventShow)).call(this, props));
 
-    console.log('constructor', _this.props);
     _this.state = _this.props.event;
     _this.prettyDate = _this.prettyDate.bind(_this);
     return _this;
@@ -30323,9 +30366,9 @@ var EventShow = function (_React$Component) {
   _createClass(EventShow, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      console.log('before', this.props);
+      // console.log('before',this.props);
       this.props.fetchEvent(this.props.eventId);
-      console.log('after', this.props);
+      // console.log('after',this.props);
     }
 
     // componentWillReceiveProps(nextProps) {
@@ -30470,6 +30513,34 @@ var EventShow = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = EventShow;
+
+/***/ }),
+/* 236 */,
+/* 237 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _event_actions = __webpack_require__(37);
+
+exports.default = function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments[1];
+
+  // console.log('events error reducer', action);
+  Object.freeze(state);
+  switch (action.type) {
+    case _event_actions.RECEIVE_EVENT_ERRORS:
+      return action.errors;
+    default:
+      return state;
+  }
+};
 
 /***/ })
 /******/ ]);

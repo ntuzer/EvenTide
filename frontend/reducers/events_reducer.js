@@ -4,6 +4,7 @@ import {
   RECEIVE_EVENTS,
   RECEIVE_EVENT,
   RECEIVE_MY_EVENTS,
+  RECEIVE_EVENT_ERRORS,
 } from '../actions/event_actions';
 
 const eventsReducer = (preloadedState = {}, action) => {
@@ -23,7 +24,6 @@ const eventsReducer = (preloadedState = {}, action) => {
         {[action.event.id]: action.event}
       );
       return newState;
-    // case RECEIVE_MY_EVENTS:
     default:
       return preloadedState;
   }

@@ -5,15 +5,15 @@ import { Link, withRouter, Redirect } from 'react-router-dom';
 class EventShow extends React.Component {
   constructor(props){
     super(props);
-    console.log('constructor', this.props);
+    // console.log('constructor', this.props);
     this.state = this.props.event;
     this.prettyDate = this.prettyDate.bind(this);
   }
 
   componentDidMount(){
-    console.log('before',this.props);
+    // console.log('before',this.props);
     this.props.fetchEvent(this.props.eventId);
-    console.log('after',this.props);
+    // console.log('after',this.props);
   }
 
 
