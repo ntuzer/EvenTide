@@ -3,13 +3,16 @@ import { Link, withRouter, Redirect } from 'react-router-dom';
 
 
 class EventShow extends React.Component {
-  // constructor(props){
-  //   super(props);
-  //   this.state = this.props.events;
-  // }
+  constructor(props){
+    super(props);
+    console.log('constructor', this.props);
+    this.state = this.props.event;
+  }
 
   componentDidMount(){
+    console.log('before',this.props);
     this.props.fetchEvent(this.props.eventId);
+    console.log('after',this.props);
   }
 
 
@@ -18,7 +21,13 @@ class EventShow extends React.Component {
   // }
 
   render(){
-    let event = this.props.events;
+    let event = this.state;
+    if (this.state === null) {
+      console.log('in if statement');
+      return null;
+    }
+
+    console.log('eventShow', this.state);
     let dateObj = new Date(event.start_date).toString();
     let dateEnd = new Date(event.end_date).toString();
     let ampm1 = parseInt(dateObj.slice(16,18)) > 12 ? "PM" : "AM";
@@ -29,7 +38,6 @@ class EventShow extends React.Component {
     let date = `${dateObj.slice(0,3)}, ${dateObj.slice(4,15)}`;
     let price = event.max_price - event.min_price === 0 ? "Free" : `$${event.max_price - event.min_price}`;
 
-    if (this.props.events.title === undefined) return null;
     return (
       <div className="event-back">
         <div className="event-show">

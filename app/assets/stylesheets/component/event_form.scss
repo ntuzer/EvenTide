@@ -125,7 +125,7 @@
   border-radius: 3px;
   margin: 10px 0;
   padding: 9px 12px;
-  width: 200px;
+  width: 250px;
   border: 1px #D2D6DF solid;
   background: #fff;
   font-size: 18px;
@@ -240,4 +240,8 @@ font-weight: 900;
   color: white;
   text-transform: uppercase;
   font-weight: bold;
+}
+
+.space div input:hover {
+  background: #00451b;
 }

@@ -7,15 +7,16 @@ import {
 } from '../actions/event_actions';
 
 const eventsReducer = (preloadedState = {}, action) => {
-  // console.log('events reducer');
+  console.log('events reducer');
   Object.freeze(preloadedState);
   let newState;
   switch (action.type) {
     case RECEIVE_EVENTS:
-      // console.log("REDUCER", action);
+      console.log("RED RECEIVE_EVENTS", action);
       newState = merge({}, action.events);
       return newState;
     case RECEIVE_EVENT:
+      console.log("RED RECEIVE_EVENT", action);
       newState = merge(
         {},
         preloadedState,

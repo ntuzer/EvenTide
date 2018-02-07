@@ -2102,11 +2102,11 @@ var receiveMyEvents = function receiveMyEvents(events) {
   };
 };
 
-var receiveSingleEvent = function receiveSingleEvent(events) {
+var receiveSingleEvent = function receiveSingleEvent(event) {
   // console.log('action receiveEvents');
   return {
-    type: RECEIVE_EVENTS,
-    events: events
+    type: RECEIVE_EVENT,
+    event: event
   };
 };
 
@@ -2142,7 +2142,7 @@ var fetchEvent = exports.fetchEvent = function fetchEvent(id) {
 
 var createEvent = exports.createEvent = function createEvent(event) {
   return function (dispatch) {
-    // console.log('action create event');
+    console.log('action create event');
     return EventAPIUtil.createEvent(event).then(function (evt) {
       return dispatch(receiveSingleEvent(evt.id));
     });
@@ -4497,9 +4497,9 @@ var _store = __webpack_require__(157);
 
 var _store2 = _interopRequireDefault(_store);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _event_actions = __webpack_require__(37);
 
-// import { fetchEvents } from './util/events_api_util';
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 document.addEventListener('DOMContentLoaded', function () {
   // console.log('entry file');
@@ -4515,9 +4515,10 @@ document.addEventListener('DOMContentLoaded', function () {
   } else {
     store = (0, _store2.default)();
   }
+  window.store = store;
   window.getState = store.getState;
   window.dispatch = store.dispatch;
-  // window.fetchEvents = fetchEvents;
+  window.createEvent = _event_actions.createEvent;
   // console.log('does it come back?');
   _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 });
@@ -27369,6 +27370,7 @@ var EventIndex = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      console.log("events index", this.props);
       if (this.props.events === undefined) return null;
       return _react2.default.createElement(
         'div',
@@ -27478,10 +27480,39 @@ var EventForm = function (_React$Component) {
   function EventForm(props) {
     _classCallCheck(this, EventForm);
 
-    return _possibleConstructorReturn(this, (EventForm.__proto__ || Object.getPrototypeOf(EventForm)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (EventForm.__proto__ || Object.getPrototypeOf(EventForm)).call(this, props));
+
+    if (props.event === undefined) {
+      _this.state = { title: "", description: "", location: "", start_date: "",
+        min_price: 0, max_price: 0, end_date: "", event_image_url: "",
+        category_id: 1 };
+    } else {
+      _this.state = props.event;
+    }
+
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
+    _this.update = _this.update.bind(_this);
+    _this.renderErrors = _this.renderErrors.bind(_this);
+    return _this;
   }
 
   _createClass(EventForm, [{
+    key: 'renderErrors',
+    value: function renderErrors() {
+      if (this.props.errors === null) return _react2.default.createElement('ul', { className: 'form-errors' });
+      return _react2.default.createElement(
+        'ul',
+        { className: 'form-errors' },
+        this.props.errors.map(function (error, i) {
+          return _react2.default.createElement(
+            'li',
+            { key: 'error-' + i },
+            error
+          );
+        })
+      );
+    }
+  }, {
     key: 'update',
     value: function update(field) {
       var _this2 = this;
@@ -27493,18 +27524,19 @@ var EventForm = function (_React$Component) {
   }, {
     key: 'handleSubmit',
     value: function handleSubmit(e) {
+      // console.log('handleSubmit');
       e.preventDefault();
-      var user = this.state;
-      this.props.processForm({ user: user });
+      var event = this.state;
+      this.props.createForm(event);
+      this.props.history.push('/');
     }
-  }, {
-    key: 'handleSubmit',
-    value: function handleSubmit() {}
   }, {
     key: 'render',
     value: function render() {
       var divStyle = { paddingTop: 0 };
       // console.log('VIEW eF');
+      console.log("render", this.state);
+      // console.log("errors", this.renderErrors());
       return _react2.default.createElement(
         'div',
         { className: 'main-form-page' },
@@ -27526,6 +27558,7 @@ var EventForm = function (_React$Component) {
             'EDIT'
           )
         ),
+        this.renderErrors(),
         _react2.default.createElement(
           'div',
           { className: 'main-form' },
@@ -27559,8 +27592,8 @@ var EventForm = function (_React$Component) {
                 null,
                 'Event Title',
                 _react2.default.createElement('br', null),
-                _react2.default.createElement('input', { type: 'text',
-                  placeholder: 'Give it a short distinct name'
+                _react2.default.createElement('input', { type: 'text', onChange: this.update("title"),
+                  placeholder: 'Give it a short distinct name', value: this.state.title
                 })
               ),
               _react2.default.createElement('br', null),
@@ -27569,8 +27602,8 @@ var EventForm = function (_React$Component) {
                 null,
                 'Location',
                 _react2.default.createElement('br', null),
-                _react2.default.createElement('input', { type: 'text',
-                  placeholder: 'Enter address of venue'
+                _react2.default.createElement('input', { type: 'text', onChange: this.update("location"),
+                  placeholder: 'Enter address of venue', value: this.state.location
                 })
               ),
               _react2.default.createElement('br', null),
@@ -27579,8 +27612,8 @@ var EventForm = function (_React$Component) {
                 null,
                 'Starts',
                 _react2.default.createElement('br', null),
-                _react2.default.createElement('input', { type: 'datetime-local',
-                  value: '' })
+                _react2.default.createElement('input', { type: 'datetime-local', onChange: this.update("start_date"),
+                  value: this.state.start_date })
               ),
               _react2.default.createElement('br', null),
               _react2.default.createElement(
@@ -27588,8 +27621,8 @@ var EventForm = function (_React$Component) {
                 null,
                 'Ends',
                 _react2.default.createElement('br', null),
-                _react2.default.createElement('input', { type: 'datetime-local',
-                  value: '' })
+                _react2.default.createElement('input', { type: 'datetime-local', onChange: this.update("end_date"),
+                  value: this.state.end_date })
               ),
               _react2.default.createElement('br', null),
               _react2.default.createElement(
@@ -27598,8 +27631,8 @@ var EventForm = function (_React$Component) {
                 'Description',
                 _react2.default.createElement('br', null),
                 _react2.default.createElement('textarea', {
-                  className: 'form-desc',
-                  type: 'text',
+                  className: 'form-desc', onChange: this.update("description"),
+                  type: 'text', value: this.state.description,
                   placeholder: 'Enter a Description' })
               ),
               _react2.default.createElement(
@@ -27684,21 +27717,21 @@ var EventForm = function (_React$Component) {
                   'Nature'
                 )
               ),
-              _react2.default.createElement('br', null)
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'space' },
-            _react2.default.createElement(
-              'div',
-              null,
+              _react2.default.createElement('br', null),
               _react2.default.createElement(
-                'label',
-                null,
-                'Nice job! You\'re almost done.'
-              ),
-              _react2.default.createElement('input', { type: 'submit', name: '', value: 'Make your event live' })
+                'div',
+                { className: 'space' },
+                _react2.default.createElement(
+                  'div',
+                  null,
+                  _react2.default.createElement(
+                    'label',
+                    null,
+                    'Nice job! You\'re almost done.'
+                  ),
+                  _react2.default.createElement('input', { type: 'submit', value: 'Make your event live' })
+                )
+              )
             )
           )
         )
@@ -27742,7 +27775,7 @@ var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   // console.log('Initialized THE STORE');
-  return (0, _redux.createStore)(_root_reducer2.default, preloadedState, (0, _redux.applyMiddleware)(_reduxThunk2.default));
+  return (0, _redux.createStore)(_root_reducer2.default, preloadedState, (0, _redux.applyMiddleware)(_reduxThunk2.default, _reduxLogger2.default));
 };
 
 exports.default = configureStore;
@@ -30048,15 +30081,16 @@ var eventsReducer = function eventsReducer() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments[1];
 
-  // console.log('events reducer');
+  console.log('events reducer');
   Object.freeze(preloadedState);
   var newState = void 0;
   switch (action.type) {
     case _event_actions.RECEIVE_EVENTS:
-      // console.log("REDUCER", action);
+      console.log("RED RECEIVE_EVENTS", action);
       newState = (0, _merge3.default)({}, action.events);
       return newState;
     case _event_actions.RECEIVE_EVENT:
+      console.log("RED RECEIVE_EVENT", action);
       newState = (0, _merge3.default)({}, preloadedState, _defineProperty({}, action.events.id, action.events));
       return newState;
     // case RECEIVE_MY_EVENTS:
@@ -30224,8 +30258,9 @@ var _event_show2 = _interopRequireDefault(_event_show);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
+  // console.log('escOP',ownProps);
   return {
-    events: state.events,
+    event: state.events[ownProps.match.params.eventId],
     eventId: ownProps.match.params.eventId
   };
 };
@@ -30270,22 +30305,22 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var EventShow = function (_React$Component) {
   _inherits(EventShow, _React$Component);
 
-  function EventShow() {
+  function EventShow(props) {
     _classCallCheck(this, EventShow);
 
-    return _possibleConstructorReturn(this, (EventShow.__proto__ || Object.getPrototypeOf(EventShow)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (EventShow.__proto__ || Object.getPrototypeOf(EventShow)).call(this, props));
+
+    console.log('constructor', _this.props);
+    _this.state = _this.props.event;
+    return _this;
   }
 
   _createClass(EventShow, [{
     key: 'componentDidMount',
-
-    // constructor(props){
-    //   super(props);
-    //   this.state = this.props.events;
-    // }
-
     value: function componentDidMount() {
+      console.log('before', this.props);
       this.props.fetchEvent(this.props.eventId);
+      console.log('after', this.props);
     }
 
     // componentWillReceiveProps(nextProps) {
@@ -30295,7 +30330,13 @@ var EventShow = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var event = this.props.events;
+      var event = this.state;
+      if (this.state === null) {
+        console.log('in if statement');
+        return null;
+      }
+
+      console.log('eventShow', this.state);
       var dateObj = new Date(event.start_date).toString();
       var dateEnd = new Date(event.end_date).toString();
       var ampm1 = parseInt(dateObj.slice(16, 18)) > 12 ? "PM" : "AM";
@@ -30306,7 +30347,6 @@ var EventShow = function (_React$Component) {
       var date = dateObj.slice(0, 3) + ', ' + dateObj.slice(4, 15);
       var price = event.max_price - event.min_price === 0 ? "Free" : '$' + (event.max_price - event.min_price);
 
-      if (this.props.events.title === undefined) return null;
       return _react2.default.createElement(
         'div',
         { className: 'event-back' },

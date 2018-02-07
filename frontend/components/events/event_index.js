@@ -20,6 +20,7 @@ class EventIndex extends React.Component {
   }
 
   render(){
+    console.log("events index", this.props);
     if (this.props.events === undefined) return null;
     return (
       <div className="event-index">
