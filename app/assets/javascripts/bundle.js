@@ -2074,7 +2074,7 @@ var createTransitionManager = function createTransitionManager() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.deleteEvent = exports.createEvent = exports.fetchEvent = exports.fetchEvents = exports.receiveErrors = exports.RECEIVE_MY_EVENTS = exports.RECEIVE_EVENT_ERRORS = exports.RECEIVE_EVENT = exports.RECEIVE_EVENTS = undefined;
+exports.deleteEvent = exports.updateEvent = exports.createEvent = exports.fetchEvent = exports.fetchEvents = exports.receiveErrors = exports.RECEIVE_MY_EVENTS = exports.RECEIVE_EVENT_ERRORS = exports.RECEIVE_EVENT = exports.RECEIVE_EVENTS = undefined;
 
 var _events_api_util = __webpack_require__(232);
 
@@ -2144,6 +2144,16 @@ var createEvent = exports.createEvent = function createEvent(event) {
   return function (dispatch) {
     // console.log('action create event');
     return EventAPIUtil.createEvent(event).then(function (evt) {
+      return dispatch(receiveSingleEvent(evt.id));
+    }, function (err) {
+      return dispatch(receiveErrors(err.responseJSON));
+    });
+  };
+};
+
+var updateEvent = exports.updateEvent = function updateEvent(event) {
+  return function (dispatch) {
+    return EventAPIUtil.updateEvent(event).then(function (evt) {
       return dispatch(receiveSingleEvent(evt.id));
     }, function (err) {
       return dispatch(receiveErrors(err.responseJSON));

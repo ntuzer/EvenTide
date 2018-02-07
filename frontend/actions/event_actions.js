@@ -66,6 +66,14 @@ export const createEvent = event => dispatch => {
     ));
 };
 
+export const updateEvent = event => dispatch => {
+  return EventAPIUtil.updateEvent(event).then(evt => (
+    dispatch(receiveSingleEvent(evt.id))
+  ), err => (
+    dispatch(receiveErrors(err.responseJSON))
+  ));
+};
+
 export const deleteEvent = eventId => dispatch => {
   // console.log('action deleteEvent');
   return EventAPIUtil.deleteEvent(eventId)
