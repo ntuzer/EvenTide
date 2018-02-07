@@ -46,8 +46,8 @@ class EventShow extends React.Component {
           </div>
 
           <div className="show-bar">
-            <Link to="/"><i className="far fa-bookmark fa-lg"></i></Link>
-            <button type="button" name="ticket">Register</button>
+            <Link to="/" className="show-bar-icon"><i className="far fa-bookmark fa-lg"></i></Link>
+            <Link to="/" className="show-register">Register</Link>
           </div>
 
           <div className="show-bottom">

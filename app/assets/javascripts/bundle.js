@@ -27369,6 +27369,7 @@ var EventIndex = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      if (this.props.events === undefined) return null;
       return _react2.default.createElement(
         'div',
         { className: 'event-index' },
@@ -27741,7 +27742,7 @@ var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   // console.log('Initialized THE STORE');
-  return (0, _redux.createStore)(_root_reducer2.default, preloadedState, (0, _redux.applyMiddleware)(_reduxThunk2.default, _reduxLogger2.default));
+  return (0, _redux.createStore)(_root_reducer2.default, preloadedState, (0, _redux.applyMiddleware)(_reduxThunk2.default));
 };
 
 exports.default = configureStore;
@@ -30347,12 +30348,12 @@ var EventShow = function (_React$Component) {
             { className: 'show-bar' },
             _react2.default.createElement(
               _reactRouterDom.Link,
-              { to: '/' },
+              { to: '/', className: 'show-bar-icon' },
               _react2.default.createElement('i', { className: 'far fa-bookmark fa-lg' })
             ),
             _react2.default.createElement(
-              'button',
-              { type: 'button', name: 'ticket' },
+              _reactRouterDom.Link,
+              { to: '/', className: 'show-register' },
               'Register'
             )
           ),

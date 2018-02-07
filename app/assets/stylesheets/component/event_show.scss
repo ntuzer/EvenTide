@@ -51,15 +51,15 @@
   justify-content: space-between;
   color: gray;
 }
-.show-bar a {
+.show-bar-icon {
   color: #0278b8;
-  width: 44px;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-left: 10px;
 }
 
-.show-bar button {
+.show-register {
   height: 44px;
   color: white;
   width: 340px;
@@ -67,6 +67,9 @@
   border-radius: 3px;
   text-transform: uppercase;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .show-bottom {
   padding-top: 50px;
