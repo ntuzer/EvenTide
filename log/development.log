@@ -49269,3 +49269,28 @@ Processing by Api::EventsController#index as JSON
 Completed 200 OK in 71ms (Views: 67.4ms | ActiveRecord: 0.7ms)
 
 
+Started GET "/api/events" for 127.0.0.1 at 2018-02-07 10:17:08 -0800
+Processing by Api::EventsController#index as JSON
+  Rendering api/events/index.json.jbuilder
+  [1m[36mEvent Load (1.1ms)[0m  [1m[34mSELECT "events".* FROM "events"[0m
+  Rendered api/events/_event.json.jbuilder (0.9ms)
+  Rendered api/events/_event.json.jbuilder (0.5ms)
+  Rendered api/events/_event.json.jbuilder (0.4ms)
+  Rendered api/events/_event.json.jbuilder (0.5ms)
+  Rendered api/events/_event.json.jbuilder (0.6ms)
+  Rendered api/events/_event.json.jbuilder (0.5ms)
+  Rendered api/events/_event.json.jbuilder (0.3ms)
+  Rendered api/events/_event.json.jbuilder (0.6ms)
+  Rendered api/events/_event.json.jbuilder (0.5ms)
+  Rendered api/events/_event.json.jbuilder (0.4ms)
+  Rendered api/events/_event.json.jbuilder (0.5ms)
+  Rendered api/events/_event.json.jbuilder (0.7ms)
+  Rendered api/events/_event.json.jbuilder (0.6ms)
+  Rendered api/events/_event.json.jbuilder (0.4ms)
+  Rendered api/events/_event.json.jbuilder (1.5ms)
+  Rendered api/events/_event.json.jbuilder (0.4ms)
+  Rendered api/events/_event.json.jbuilder (1.5ms)
+  Rendered api/events/index.json.jbuilder (51.8ms)
+Completed 200 OK in 64ms (Views: 58.8ms | ActiveRecord: 1.1ms)
+
+
