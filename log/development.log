@@ -50302,3 +50302,513 @@ ActionController::ParameterMissing (param is missing or the value is empty: tick
 app/controllers/api/tickets_controller.rb:35:in `ticket_params'
 app/controllers/api/tickets_controller.rb:13:in `create'
   [1m[36mEvent Load (1.0ms)[0m  [1m[34mSELECT "events".* FROM "events"[0m
+Started GET "/" for 127.0.0.1 at 2018-02-07 14:56:31 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  Rendered api/users/_user.json.jbuilder (1.2ms)
+  Rendered static_pages/root.html.erb within layouts/application (53.5ms)
+Completed 200 OK in 766ms (Views: 749.7ms | ActiveRecord: 12.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-02-07 14:56:32 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (3.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  Rendered api/users/_user.json.jbuilder (0.9ms)
+  Rendered static_pages/root.html.erb within layouts/application (21.0ms)
+Completed 200 OK in 90ms (Views: 84.2ms | ActiveRecord: 3.5ms)
+
+
+Started POST "/api/events" for 127.0.0.1 at 2018-02-07 14:57:52 -0800
+Processing by Api::EventsController#create as JSON
+  Parameters: {"event"=>{"title"=>"TESTEST1111", "description"=>"asdffasdf", "location"=>"asdf", "start_date"=>"2018-01-02T01:00", "min_price"=>"0", "max_price"=>"0", "end_date"=>"2019-01-01T01:00", "event_image_url"=>"", "category_id"=>"1"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 53], ["LIMIT", 1]]
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "events" ("organizer_id", "title", "location", "description", "event_image_url", "category_id", "min_price", "max_price", "start_date", "end_date", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["organizer_id", 53], ["title", "TESTEST1111"], ["location", "asdf"], ["description", "asdffasdf"], ["event_image_url", ""], ["category_id", 1], ["min_price", 0], ["max_price", 0], ["start_date", "2018-01-02 01:00:00"], ["end_date", "2019-01-01 01:00:00"], ["created_at", "2018-02-07 22:57:52.212689"], ["updated_at", "2018-02-07 22:57:52.212689"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  Rendering api/events/show.json.jbuilder
+  Rendered api/events/_event.json.jbuilder (0.9ms)
+  Rendered api/events/show.json.jbuilder (3.6ms)
+Completed 200 OK in 64ms (Views: 11.9ms | ActiveRecord: 9.2ms)
+
+
+Started POST "/api/tickets" for 127.0.0.1 at 2018-02-07 14:57:52 -0800
+Processing by Api::TicketsController#create as JSON
+Completed 400 Bad Request in 8ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: ticket):
+  
+app/controllers/api/tickets_controller.rb:35:in `ticket_params'
+app/controllers/api/tickets_controller.rb:13:in `create'
+Started POST "/api/events" for 127.0.0.1 at 2018-02-07 14:57:56 -0800
+Processing by Api::EventsController#create as JSON
+  Parameters: {"event"=>{"title"=>"TESTEST1111", "description"=>"asdffasdf", "location"=>"asdf", "start_date"=>"2018-01-02T01:00", "min_price"=>"0", "max_price"=>"0", "end_date"=>"2019-01-01T01:00", "event_image_url"=>"", "category_id"=>"1"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 53], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "events" ("organizer_id", "title", "location", "description", "event_image_url", "category_id", "min_price", "max_price", "start_date", "end_date", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["organizer_id", 53], ["title", "TESTEST1111"], ["location", "asdf"], ["description", "asdffasdf"], ["event_image_url", ""], ["category_id", 1], ["min_price", 0], ["max_price", 0], ["start_date", "2018-01-02 01:00:00"], ["end_date", "2019-01-01 01:00:00"], ["created_at", "2018-02-07 22:57:56.884319"], ["updated_at", "2018-02-07 22:57:56.884319"]]
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  Rendering api/events/show.json.jbuilder
+  Rendered api/events/_event.json.jbuilder (0.8ms)
+  Rendered api/events/show.json.jbuilder (2.7ms)
+Completed 200 OK in 24ms (Views: 9.7ms | ActiveRecord: 4.1ms)
+
+
+Started POST "/api/tickets" for 127.0.0.1 at 2018-02-07 14:57:56 -0800
+Processing by Api::TicketsController#create as JSON
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: ticket):
+  
+app/controllers/api/tickets_controller.rb:35:in `ticket_params'
+app/controllers/api/tickets_controller.rb:13:in `create'
+  [1m[36mEvent Load (1.0ms)[0m  [1m[34mSELECT "events".* FROM "events"[0m
+Started GET "/" for 127.0.0.1 at 2018-02-07 15:05:02 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  Rendered api/users/_user.json.jbuilder (0.6ms)
+  Rendered static_pages/root.html.erb within layouts/application (10.6ms)
+Completed 200 OK in 727ms (Views: 723.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-02-07 15:05:05 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  Rendered api/users/_user.json.jbuilder (0.8ms)
+  Rendered static_pages/root.html.erb within layouts/application (6.2ms)
+Completed 200 OK in 51ms (Views: 47.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-02-07 15:05:11 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  Rendered api/users/_user.json.jbuilder (0.9ms)
+  Rendered static_pages/root.html.erb within layouts/application (7.4ms)
+Completed 200 OK in 56ms (Views: 53.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-02-07 15:05:16 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  Rendered api/users/_user.json.jbuilder (1.0ms)
+  Rendered static_pages/root.html.erb within layouts/application (7.3ms)
+Completed 200 OK in 622ms (Views: 619.0ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/api/events" for 127.0.0.1 at 2018-02-07 15:07:01 -0800
+Processing by Api::EventsController#create as JSON
+  Parameters: {"event"=>{"title"=>"", "description"=>"", "location"=>"", "start_date"=>"", "min_price"=>"0", "max_price"=>"0", "end_date"=>"", "event_image_url"=>"", "category_id"=>"1"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 53], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+Completed 422 Unprocessable Entity in 12ms (Views: 1.1ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-02-07 15:07:21 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  Rendered api/users/_user.json.jbuilder (0.5ms)
+  Rendered static_pages/root.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 571ms (Views: 567.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-02-07 15:07:23 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  Rendered api/users/_user.json.jbuilder (0.9ms)
+  Rendered static_pages/root.html.erb within layouts/application (7.1ms)
+Completed 200 OK in 59ms (Views: 56.0ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/api/events" for 127.0.0.1 at 2018-02-07 15:07:24 -0800
+Processing by Api::EventsController#create as JSON
+  Parameters: {"event"=>{"title"=>"", "description"=>"", "location"=>"", "start_date"=>"", "min_price"=>"0", "max_price"=>"0", "end_date"=>"", "event_image_url"=>"", "category_id"=>"1"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 53], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+Completed 422 Unprocessable Entity in 13ms (Views: 0.3ms | ActiveRecord: 1.3ms)
+
+
+Started POST "/api/events" for 127.0.0.1 at 2018-02-07 15:07:43 -0800
+Processing by Api::EventsController#create as JSON
+  Parameters: {"event"=>{"title"=>"asdf", "description"=>"asdf", "location"=>"asdf", "start_date"=>"2018-01-01T01:00", "min_price"=>"0", "max_price"=>"0", "end_date"=>"2018-01-02T02:00", "event_image_url"=>"", "category_id"=>"1"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 53], ["LIMIT", 1]]
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "events" ("organizer_id", "title", "location", "description", "event_image_url", "category_id", "min_price", "max_price", "start_date", "end_date", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["organizer_id", 53], ["title", "asdf"], ["location", "asdf"], ["description", "asdf"], ["event_image_url", ""], ["category_id", 1], ["min_price", 0], ["max_price", 0], ["start_date", "2018-01-01 01:00:00"], ["end_date", "2018-01-02 02:00:00"], ["created_at", "2018-02-07 23:07:43.124093"], ["updated_at", "2018-02-07 23:07:43.124093"]]
+  [1m[35m (3.5ms)[0m  [1m[35mCOMMIT[0m
+  Rendering api/events/show.json.jbuilder
+  Rendered api/events/_event.json.jbuilder (1.2ms)
+  Rendered api/events/show.json.jbuilder (4.3ms)
+Completed 200 OK in 30ms (Views: 16.5ms | ActiveRecord: 5.1ms)
+
+
+Started POST "/api/tickets" for 127.0.0.1 at 2018-02-07 15:07:43 -0800
+Processing by Api::TicketsController#create as JSON
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: ticket):
+  
+app/controllers/api/tickets_controller.rb:35:in `ticket_params'
+app/controllers/api/tickets_controller.rb:13:in `create'
+Started GET "/" for 127.0.0.1 at 2018-02-07 15:08:56 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  Rendered api/users/_user.json.jbuilder (0.9ms)
+  Rendered static_pages/root.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 665ms (Views: 662.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-02-07 15:08:58 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  Rendered api/users/_user.json.jbuilder (0.9ms)
+  Rendered static_pages/root.html.erb within layouts/application (6.5ms)
+Completed 200 OK in 50ms (Views: 47.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-02-07 15:08:59 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  Rendered api/users/_user.json.jbuilder (0.8ms)
+  Rendered static_pages/root.html.erb within layouts/application (8.9ms)
+Completed 200 OK in 50ms (Views: 46.2ms | ActiveRecord: 1.6ms)
+
+
+Started POST "/api/events" for 127.0.0.1 at 2018-02-07 15:09:14 -0800
+Processing by Api::EventsController#create as JSON
+  Parameters: {"event"=>{"title"=>"asdf", "description"=>"asdf", "location"=>"asdf", "start_date"=>"2018-01-01T01:00", "min_price"=>"0", "max_price"=>"0", "end_date"=>"2018-01-01T01:01", "event_image_url"=>"", "category_id"=>"1"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 53], ["LIMIT", 1]]
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "events" ("organizer_id", "title", "location", "description", "event_image_url", "category_id", "min_price", "max_price", "start_date", "end_date", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["organizer_id", 53], ["title", "asdf"], ["location", "asdf"], ["description", "asdf"], ["event_image_url", ""], ["category_id", 1], ["min_price", 0], ["max_price", 0], ["start_date", "2018-01-01 01:00:00"], ["end_date", "2018-01-01 01:01:00"], ["created_at", "2018-02-07 23:09:14.404404"], ["updated_at", "2018-02-07 23:09:14.404404"]]
+  [1m[35m (1.5ms)[0m  [1m[35mCOMMIT[0m
+  Rendering api/events/show.json.jbuilder
+  Rendered api/events/_event.json.jbuilder (0.5ms)
+  Rendered api/events/show.json.jbuilder (3.0ms)
+Completed 200 OK in 38ms (Views: 13.8ms | ActiveRecord: 3.3ms)
+
+
+Started POST "/api/tickets" for 127.0.0.1 at 2018-02-07 15:09:14 -0800
+Processing by Api::TicketsController#create as JSON
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: ticket):
+  
+app/controllers/api/tickets_controller.rb:35:in `ticket_params'
+app/controllers/api/tickets_controller.rb:13:in `create'
+Started GET "/" for 127.0.0.1 at 2018-02-07 15:11:58 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  Rendered api/users/_user.json.jbuilder (0.8ms)
+  Rendered static_pages/root.html.erb within layouts/application (7.3ms)
+Completed 200 OK in 47ms (Views: 44.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-02-07 15:12:02 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  Rendered api/users/_user.json.jbuilder (0.7ms)
+  Rendered static_pages/root.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 596ms (Views: 593.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-02-07 15:12:04 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  Rendered api/users/_user.json.jbuilder (0.8ms)
+  Rendered static_pages/root.html.erb within layouts/application (6.1ms)
+Completed 200 OK in 48ms (Views: 45.7ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/api/events" for 127.0.0.1 at 2018-02-07 15:12:18 -0800
+Processing by Api::EventsController#create as JSON
+  Parameters: {"event"=>{"title"=>"asdf", "description"=>"asdf", "location"=>"asdf", "start_date"=>"2018-01-02T01:00", "min_price"=>"0", "max_price"=>"0", "end_date"=>"2018-01-01T01:00", "event_image_url"=>"", "category_id"=>"1"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 53], ["LIMIT", 1]]
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "events" ("organizer_id", "title", "location", "description", "event_image_url", "category_id", "min_price", "max_price", "start_date", "end_date", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["organizer_id", 53], ["title", "asdf"], ["location", "asdf"], ["description", "asdf"], ["event_image_url", ""], ["category_id", 1], ["min_price", 0], ["max_price", 0], ["start_date", "2018-01-02 01:00:00"], ["end_date", "2018-01-01 01:00:00"], ["created_at", "2018-02-07 23:12:18.388033"], ["updated_at", "2018-02-07 23:12:18.388033"]]
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  Rendering api/events/show.json.jbuilder
+  Rendered api/events/_event.json.jbuilder (0.5ms)
+  Rendered api/events/show.json.jbuilder (4.0ms)
+Completed 200 OK in 33ms (Views: 15.8ms | ActiveRecord: 3.9ms)
+
+
+Started POST "/api/tickets" for 127.0.0.1 at 2018-02-07 15:12:18 -0800
+Processing by Api::TicketsController#create as JSON
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: ticket):
+  
+app/controllers/api/tickets_controller.rb:35:in `ticket_params'
+app/controllers/api/tickets_controller.rb:13:in `create'
+Started GET "/" for 127.0.0.1 at 2018-02-07 15:14:12 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  Rendered api/users/_user.json.jbuilder (0.6ms)
+  Rendered static_pages/root.html.erb within layouts/application (4.8ms)
+Completed 200 OK in 597ms (Views: 595.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-02-07 15:14:14 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  Rendered api/users/_user.json.jbuilder (1.3ms)
+  Rendered static_pages/root.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 60ms (Views: 56.9ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/api/events" for 127.0.0.1 at 2018-02-07 15:14:44 -0800
+Processing by Api::EventsController#create as JSON
+  Parameters: {"event"=>{"title"=>"asdf", "description"=>"asdf", "location"=>"asdf", "start_date"=>"2018-01-01T01:00", "min_price"=>"0", "max_price"=>"0", "end_date"=>"2018-01-01T01:00", "event_image_url"=>"", "category_id"=>"1"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 53], ["LIMIT", 1]]
+  [1m[35mSQL (1.7ms)[0m  [1m[32mINSERT INTO "events" ("organizer_id", "title", "location", "description", "event_image_url", "category_id", "min_price", "max_price", "start_date", "end_date", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["organizer_id", 53], ["title", "asdf"], ["location", "asdf"], ["description", "asdf"], ["event_image_url", ""], ["category_id", 1], ["min_price", 0], ["max_price", 0], ["start_date", "2018-01-01 01:00:00"], ["end_date", "2018-01-01 01:00:00"], ["created_at", "2018-02-07 23:14:44.798716"], ["updated_at", "2018-02-07 23:14:44.798716"]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  Rendering api/events/show.json.jbuilder
+  Rendered api/events/_event.json.jbuilder (0.8ms)
+  Rendered api/events/show.json.jbuilder (4.1ms)
+Completed 200 OK in 27ms (Views: 12.6ms | ActiveRecord: 5.9ms)
+
+
+Started POST "/api/tickets" for 127.0.0.1 at 2018-02-07 15:14:44 -0800
+Processing by Api::TicketsController#create as JSON
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: ticket):
+  
+app/controllers/api/tickets_controller.rb:35:in `ticket_params'
+app/controllers/api/tickets_controller.rb:13:in `create'
+Started GET "/" for 127.0.0.1 at 2018-02-07 15:17:24 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  Rendered api/users/_user.json.jbuilder (2.4ms)
+  Rendered static_pages/root.html.erb within layouts/application (6.2ms)
+Completed 200 OK in 33ms (Views: 31.5ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/api/events" for 127.0.0.1 at 2018-02-07 15:17:44 -0800
+Processing by Api::EventsController#create as JSON
+  Parameters: {"event"=>{"title"=>"ssdfsdaf", "description"=>"asdf\n", "location"=>"asdfa", "start_date"=>"2018-01-01T01:00", "min_price"=>"0", "max_price"=>"0", "end_date"=>"2019-01-01T01:00", "event_image_url"=>"", "category_id"=>"1"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 53], ["LIMIT", 1]]
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "events" ("organizer_id", "title", "location", "description", "event_image_url", "category_id", "min_price", "max_price", "start_date", "end_date", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["organizer_id", 53], ["title", "ssdfsdaf"], ["location", "asdfa"], ["description", "asdf\n"], ["event_image_url", ""], ["category_id", 1], ["min_price", 0], ["max_price", 0], ["start_date", "2018-01-01 01:00:00"], ["end_date", "2019-01-01 01:00:00"], ["created_at", "2018-02-07 23:17:44.491551"], ["updated_at", "2018-02-07 23:17:44.491551"]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  Rendering api/events/show.json.jbuilder
+  Rendered api/events/_event.json.jbuilder (0.6ms)
+  Rendered api/events/show.json.jbuilder (3.5ms)
+Completed 200 OK in 21ms (Views: 10.9ms | ActiveRecord: 2.9ms)
+
+
+Started POST "/api/tickets" for 127.0.0.1 at 2018-02-07 15:17:44 -0800
+Processing by Api::TicketsController#create as JSON
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: ticket):
+  
+app/controllers/api/tickets_controller.rb:35:in `ticket_params'
+app/controllers/api/tickets_controller.rb:13:in `create'
+Started GET "/" for 127.0.0.1 at 2018-02-07 15:17:58 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  Rendered api/users/_user.json.jbuilder (0.7ms)
+  Rendered static_pages/root.html.erb within layouts/application (5.4ms)
+Completed 200 OK in 33ms (Views: 30.6ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/api/events" for 127.0.0.1 at 2018-02-07 15:18:08 -0800
+Processing by Api::EventsController#create as JSON
+  Parameters: {"event"=>{"title"=>"asdf", "description"=>"asdf", "location"=>"asdf", "start_date"=>"2018-01-01T01:00", "min_price"=>"0", "max_price"=>"0", "end_date"=>"2018-01-01T01:00", "event_image_url"=>"", "category_id"=>"1"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 53], ["LIMIT", 1]]
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "events" ("organizer_id", "title", "location", "description", "event_image_url", "category_id", "min_price", "max_price", "start_date", "end_date", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["organizer_id", 53], ["title", "asdf"], ["location", "asdf"], ["description", "asdf"], ["event_image_url", ""], ["category_id", 1], ["min_price", 0], ["max_price", 0], ["start_date", "2018-01-01 01:00:00"], ["end_date", "2018-01-01 01:00:00"], ["created_at", "2018-02-07 23:18:08.779833"], ["updated_at", "2018-02-07 23:18:08.779833"]]
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  Rendering api/events/show.json.jbuilder
+  Rendered api/events/_event.json.jbuilder (0.8ms)
+  Rendered api/events/show.json.jbuilder (5.1ms)
+Completed 200 OK in 29ms (Views: 14.5ms | ActiveRecord: 3.1ms)
+
+
+Started POST "/api/tickets" for 127.0.0.1 at 2018-02-07 15:18:08 -0800
+Processing by Api::TicketsController#create as JSON
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: ticket):
+  
+app/controllers/api/tickets_controller.rb:35:in `ticket_params'
+app/controllers/api/tickets_controller.rb:13:in `create'
+Started GET "/" for 127.0.0.1 at 2018-02-07 15:18:51 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  Rendered api/users/_user.json.jbuilder (0.5ms)
+  Rendered static_pages/root.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 32ms (Views: 29.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-02-07 15:18:53 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  Rendered api/users/_user.json.jbuilder (0.8ms)
+  Rendered static_pages/root.html.erb within layouts/application (6.3ms)
+Completed 200 OK in 77ms (Views: 73.6ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/api/events" for 127.0.0.1 at 2018-02-07 15:19:05 -0800
+Processing by Api::EventsController#create as JSON
+  Parameters: {"event"=>{"title"=>"asdf", "description"=>"asdf", "location"=>"asdf", "start_date"=>"2018-01-01T01:00", "min_price"=>"0", "max_price"=>"0", "end_date"=>"2018-01-01T01:00", "event_image_url"=>"", "category_id"=>"1"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 53], ["LIMIT", 1]]
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "events" ("organizer_id", "title", "location", "description", "event_image_url", "category_id", "min_price", "max_price", "start_date", "end_date", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["organizer_id", 53], ["title", "asdf"], ["location", "asdf"], ["description", "asdf"], ["event_image_url", ""], ["category_id", 1], ["min_price", 0], ["max_price", 0], ["start_date", "2018-01-01 01:00:00"], ["end_date", "2018-01-01 01:00:00"], ["created_at", "2018-02-07 23:19:05.087453"], ["updated_at", "2018-02-07 23:19:05.087453"]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  Rendering api/events/show.json.jbuilder
+  Rendered api/events/_event.json.jbuilder (0.9ms)
+  Rendered api/events/show.json.jbuilder (3.1ms)
+Completed 200 OK in 22ms (Views: 11.2ms | ActiveRecord: 2.8ms)
+
+
+Started POST "/api/tickets" for 127.0.0.1 at 2018-02-07 15:19:05 -0800
+Processing by Api::TicketsController#create as JSON
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: ticket):
+  
+app/controllers/api/tickets_controller.rb:35:in `ticket_params'
+app/controllers/api/tickets_controller.rb:13:in `create'
+Started GET "/" for 127.0.0.1 at 2018-02-07 15:19:59 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  Rendered api/users/_user.json.jbuilder (0.5ms)
+  Rendered static_pages/root.html.erb within layouts/application (4.6ms)
+Completed 200 OK in 530ms (Views: 527.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-02-07 15:20:02 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  Rendered api/users/_user.json.jbuilder (0.5ms)
+  Rendered static_pages/root.html.erb within layouts/application (4.5ms)
+Completed 200 OK in 46ms (Views: 43.4ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/api/events" for 127.0.0.1 at 2018-02-07 15:20:13 -0800
+Processing by Api::EventsController#create as JSON
+  Parameters: {"event"=>{"title"=>"asdf", "description"=>"asdf", "location"=>"adsf", "start_date"=>"2018-01-01T02:00", "min_price"=>"0", "max_price"=>"0", "end_date"=>"2018-01-01T01:00", "event_image_url"=>"", "category_id"=>"1"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 53], ["LIMIT", 1]]
+  [1m[35mSQL (2.4ms)[0m  [1m[32mINSERT INTO "events" ("organizer_id", "title", "location", "description", "event_image_url", "category_id", "min_price", "max_price", "start_date", "end_date", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["organizer_id", 53], ["title", "asdf"], ["location", "adsf"], ["description", "asdf"], ["event_image_url", ""], ["category_id", 1], ["min_price", 0], ["max_price", 0], ["start_date", "2018-01-01 02:00:00"], ["end_date", "2018-01-01 01:00:00"], ["created_at", "2018-02-07 23:20:13.029394"], ["updated_at", "2018-02-07 23:20:13.029394"]]
+  [1m[35m (1.5ms)[0m  [1m[35mCOMMIT[0m
+  Rendering api/events/show.json.jbuilder
+  Rendered api/events/_event.json.jbuilder (0.9ms)
+  Rendered api/events/show.json.jbuilder (4.5ms)
+Completed 200 OK in 36ms (Views: 14.5ms | ActiveRecord: 4.9ms)
+
+
+Started POST "/api/tickets" for 127.0.0.1 at 2018-02-07 15:20:13 -0800
+Processing by Api::TicketsController#create as JSON
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: ticket):
+  
+app/controllers/api/tickets_controller.rb:35:in `ticket_params'
+app/controllers/api/tickets_controller.rb:13:in `create'
+Started GET "/" for 127.0.0.1 at 2018-02-07 15:20:43 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  Rendered api/users/_user.json.jbuilder (0.6ms)
+  Rendered static_pages/root.html.erb within layouts/application (6.5ms)
+Completed 200 OK in 40ms (Views: 36.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-02-07 15:20:45 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  Rendered api/users/_user.json.jbuilder (0.8ms)
+  Rendered static_pages/root.html.erb within layouts/application (6.4ms)
+Completed 200 OK in 59ms (Views: 56.1ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/api/events" for 127.0.0.1 at 2018-02-07 15:20:59 -0800
+Processing by Api::EventsController#create as JSON
+  Parameters: {"event"=>{"title"=>"asdf", "description"=>"sdfasdf", "location"=>"asdf", "start_date"=>"2018-01-01T02:00", "min_price"=>"0", "max_price"=>"0", "end_date"=>"2018-01-01T03:00", "event_image_url"=>"", "category_id"=>"1"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 53], ["LIMIT", 1]]
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "events" ("organizer_id", "title", "location", "description", "event_image_url", "category_id", "min_price", "max_price", "start_date", "end_date", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["organizer_id", 53], ["title", "asdf"], ["location", "asdf"], ["description", "sdfasdf"], ["event_image_url", ""], ["category_id", 1], ["min_price", 0], ["max_price", 0], ["start_date", "2018-01-01 02:00:00"], ["end_date", "2018-01-01 03:00:00"], ["created_at", "2018-02-07 23:20:59.329921"], ["updated_at", "2018-02-07 23:20:59.329921"]]
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  Rendering api/events/show.json.jbuilder
+  Rendered api/events/_event.json.jbuilder (0.9ms)
+  Rendered api/events/show.json.jbuilder (3.1ms)
+Completed 200 OK in 34ms (Views: 11.2ms | ActiveRecord: 2.8ms)
+
+
+Started POST "/api/tickets" for 127.0.0.1 at 2018-02-07 15:20:59 -0800
+Processing by Api::TicketsController#create as JSON
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: ticket):
+  
+app/controllers/api/tickets_controller.rb:35:in `ticket_params'
+app/controllers/api/tickets_controller.rb:13:in `create'
+Started GET "/" for 127.0.0.1 at 2018-02-07 15:22:44 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "d53Jm8Ge3pYEcqxknP_PkA"], ["LIMIT", 1]]
+  Rendered api/users/_user.json.jbuilder (0.8ms)
+  Rendered static_pages/root.html.erb within layouts/application (7.9ms)
+Completed 200 OK in 795ms (Views: 792.9ms | ActiveRecord: 0.4ms)
+
+

@@ -2144,7 +2144,7 @@ var createEvent = exports.createEvent = function createEvent(event) {
   return function (dispatch) {
     // console.log('action create event');
     return EventAPIUtil.createEvent(event).then(function (evt) {
-      return dispatch(receiveSingleEvent(evt.id));
+      return dispatch(receiveSingleEvent(evt));
     }, function (err) {
       return dispatch(receiveErrors(err.responseJSON));
     });
@@ -2154,7 +2154,7 @@ var createEvent = exports.createEvent = function createEvent(event) {
 var updateEvent = exports.updateEvent = function updateEvent(event) {
   return function (dispatch) {
     return EventAPIUtil.updateEvent(event).then(function (evt) {
-      return dispatch(receiveSingleEvent(evt.id));
+      return dispatch(receiveSingleEvent(event));
     }, function (err) {
       return dispatch(receiveErrors(err.responseJSON));
     });
@@ -27440,20 +27440,22 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var mapStateToProps = function mapStateToProps(state) {
   // console.log('efc mstp state', state);
   return {
-    // loggedIn: Boolean(state.session.currentUser),
-    errors: state.errors.events
+    errors: state.errors.events,
+    eventId: state.events.id
   };
 };
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch, _ref) {
-  var location = _ref.location;
-
+var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+  // console.log("efc mdtp",ownProps);
   return {
     createTicket: function createTicket(ticket) {
       return dispatch((0, _ticket_actions.createTicket)(ticket));
     },
     createForm: function createForm(event) {
       return dispatch((0, _event_actions.createEvent)(event));
+    },
+    updateEvent: function updateEvent(event) {
+      return dispatch((0, _event_actions.updateEvent)(event));
     },
     clearErrors: function clearErrors() {
       return dispatch((0, _event_actions.receiveErrors)([]));
@@ -27545,13 +27547,20 @@ var EventForm = function (_React$Component) {
     value: function handleSubmit(e) {
       var _this3 = this;
 
-      console.log('handleSubmit', this.state);
+      console.log('handleSubmit props', this.props);
       e.preventDefault();
       var event = this.state.event;
-      this.props.createForm(event).then(function (evt) {
-        return _this3.props.createTicket((0, _merge3.default)(_this3.state.ticket, { event_id: evt.id }));
-      });
+      console.log("handleSubmit event", event);
 
+      if (this.props.eventId === undefined) {
+        this.props.createForm(event).then(function (evt) {
+          return _this3.props.createTicket((0, _merge3.default)(_this3.state.ticket, { event_id: evt.id }));
+        });
+      } else {
+        this.props.createForm(event).then(function (evt) {
+          return _this3.props.updateEvent((0, _merge3.default)(_this3.state.ticket, { event_id: evt.id }));
+        });
+      }
       // this.props.history.push('/');
     }
   }, {
@@ -27572,8 +27581,8 @@ var EventForm = function (_React$Component) {
     value: function render() {
       var divStyle = { paddingTop: 0 };
       var errors = this.prettyErrors();
-      console.log("event form state", this.state);
-      console.log("event form props", this.props);
+      // console.log("event form state", this.state);
+      // console.log("event form props", this.props);
       // let ticketForm = this.ticketForm();
       return _react2.default.createElement(
         'div',

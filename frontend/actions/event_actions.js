@@ -60,7 +60,7 @@ export const fetchEvent = id => dispatch => {
 export const createEvent = event => dispatch => {
   // console.log('action create event');
   return EventAPIUtil.createEvent(event).then(evt => (
-      dispatch(receiveSingleEvent(evt.id))
+      dispatch(receiveSingleEvent(evt))
     ), err => (
       dispatch(receiveErrors(err.responseJSON))
     ));
@@ -68,7 +68,7 @@ export const createEvent = event => dispatch => {
 
 export const updateEvent = event => dispatch => {
   return EventAPIUtil.updateEvent(event).then(evt => (
-    dispatch(receiveSingleEvent(evt.id))
+    dispatch(receiveSingleEvent(event))
   ), err => (
     dispatch(receiveErrors(err.responseJSON))
   ));

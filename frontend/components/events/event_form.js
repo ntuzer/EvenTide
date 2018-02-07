@@ -38,15 +38,24 @@ class EventForm extends React.Component {
   }
 
   handleSubmit(e) {
-    console.log('handleSubmit', this.state);
+    console.log('handleSubmit props', this.props);
     e.preventDefault();
     const event = this.state.event;
-    this.props.createForm(event)
-      .then(evt => this.props.createTicket(
-        merge(this.state.ticket, {event_id: evt.id})
-        )
-      );
+    console.log("handleSubmit event", event);
 
+    if (this.props.eventId === undefined){
+      this.props.createForm(event)
+        .then(evt => this.props.createTicket(
+          merge(this.state.ticket, {event_id: evt.id})
+          )
+        );
+    } else{
+      this.props.createForm(event)
+        .then(evt => this.props.updateEvent(
+          merge(this.state.ticket, {event_id: evt.id})
+          )
+        );
+    }
      // this.props.history.push('/');
   }
 
@@ -65,8 +74,8 @@ class EventForm extends React.Component {
   render(){
     let divStyle = {paddingTop: 0};
     let errors = this.prettyErrors();
-    console.log("event form state", this.state);
-    console.log("event form props", this.props);
+    // console.log("event form state", this.state);
+    // console.log("event form props", this.props);
     // let ticketForm = this.ticketForm();
     return (
       <div className="main-form-page">

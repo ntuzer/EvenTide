@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import {
-  fetchEvents, fetchEvent, createEvent, deleteEvent, receiveErrors
+  fetchEvents, fetchEvent, createEvent, updateEvent, deleteEvent, receiveErrors
 } from '../../actions/event_actions';
 import { createTicket } from '../../actions/ticket_actions';
 import EventForm from './event_form';
@@ -10,15 +10,17 @@ import EventForm from './event_form';
 const mapStateToProps = (state) => {
   // console.log('efc mstp state', state);
   return {
-    // loggedIn: Boolean(state.session.currentUser),
-    errors: state.errors.events
+    errors: state.errors.events,
+    eventId: state.events.id
   };
 };
 
-const mapDispatchToProps = (dispatch, { location }) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
+  // console.log("efc mdtp",ownProps);
   return {
     createTicket: ticket => dispatch(createTicket(ticket)),
     createForm: event => dispatch(createEvent(event)),
+    updateEvent: event => dispatch(updateEvent(event)),
     clearErrors: () => dispatch(receiveErrors([]))
   };
 };
