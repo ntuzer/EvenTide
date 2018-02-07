@@ -27467,6 +27467,10 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(6);
 
+var _merge2 = __webpack_require__(66);
+
+var _merge3 = _interopRequireDefault(_merge2);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -27486,11 +27490,13 @@ var EventForm = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (EventForm.__proto__ || Object.getPrototypeOf(EventForm)).call(this, props));
 
     if (props.event === undefined) {
-      _this.state = { title: "", description: "", location: "", start_date: "",
-        min_price: 0, max_price: 0, end_date: "", event_image_url: "",
-        category_id: 1 };
+      _this.state = {
+        event: { title: "", description: "", location: "",
+          start_date: "", min_price: 0, max_price: 0, end_date: "",
+          event_image_url: "", category_id: 1 }
+      };
     } else {
-      _this.state = props.event;
+      _this.state = { event: props.event };
     }
     _this.handleSubmit = _this.handleSubmit.bind(_this);
     _this.update = _this.update.bind(_this);
@@ -27498,20 +27504,6 @@ var EventForm = function (_React$Component) {
     _this.prettyErrors = _this.prettyErrors.bind(_this);
     return _this;
   }
-
-  // renderErrors() {
-  //   if (this.props.errors === null) return (<ul className="form-errors"></ul>);
-  //   return(
-  //     <ul className="form-errors">
-  //
-  //       {this.props.errors.map((error, i) => (
-  //         <li key={`error-${i}`}>
-  //           {error}
-  //         </li>
-  //       ))}
-  //     </ul>
-  //   );
-  // }
 
   _createClass(EventForm, [{
     key: 'componentWillUnmount',
@@ -27524,15 +27516,15 @@ var EventForm = function (_React$Component) {
       var _this2 = this;
 
       return function (e) {
-        return _this2.setState(_defineProperty({}, field, e.currentTarget.value));
+        return _this2.setState((0, _merge3.default)(_this2.state.event, _defineProperty({}, field, e.currentTarget.value)));
       };
     }
   }, {
     key: 'handleSubmit',
     value: function handleSubmit(e) {
-      // console.log('handleSubmit');
+      console.log('handleSubmit', this.state);
       e.preventDefault();
-      var event = this.state;
+      var event = this.state.event;
       this.props.createForm(event);
       // this.props.history.push('/');
     }
@@ -27553,10 +27545,8 @@ var EventForm = function (_React$Component) {
     key: 'render',
     value: function render() {
       var divStyle = { paddingTop: 0 };
-      // console.log('VIEW eF');
-      // console.log("render", this.state);
-      // console.log("errors", this.renderErrors());
       var errors = this.prettyErrors();
+      // let ticketForm = this.ticketForm();
       return _react2.default.createElement(
         'div',
         { className: 'main-form-page' },
@@ -27618,7 +27608,7 @@ var EventForm = function (_React$Component) {
                 ),
                 _react2.default.createElement('input', { type: 'text', onChange: this.update("title"),
                   placeholder: 'Give it a short distinct name',
-                  value: this.state.title
+                  value: this.state.event.title
                 })
               ),
               _react2.default.createElement('br', null),
@@ -27634,7 +27624,7 @@ var EventForm = function (_React$Component) {
                 ),
                 _react2.default.createElement('input', { type: 'text', onChange: this.update("location"),
                   placeholder: 'Enter address of venue',
-                  value: this.state.location
+                  value: this.state.event.location
                 })
               ),
               _react2.default.createElement('br', null),
@@ -27650,7 +27640,7 @@ var EventForm = function (_React$Component) {
                 ),
                 _react2.default.createElement('input', { type: 'datetime-local',
                   onChange: this.update("start_date"),
-                  value: this.state.start_date })
+                  value: this.state.event.start_date })
               ),
               _react2.default.createElement('br', null),
               _react2.default.createElement(
@@ -27664,7 +27654,7 @@ var EventForm = function (_React$Component) {
                   errors.end
                 ),
                 _react2.default.createElement('input', { type: 'datetime-local', onChange: this.update("end_date"),
-                  value: this.state.end_date })
+                  value: this.state.event.end_date })
               ),
               _react2.default.createElement('br', null),
               _react2.default.createElement(
@@ -27679,7 +27669,7 @@ var EventForm = function (_React$Component) {
                 _react2.default.createElement('br', null),
                 _react2.default.createElement('textarea', {
                   className: 'form-desc', onChange: this.update("description"),
-                  type: 'text', value: this.state.description,
+                  type: 'text', value: this.state.event.description,
                   placeholder: 'Enter a Description' })
               ),
               _react2.default.createElement(

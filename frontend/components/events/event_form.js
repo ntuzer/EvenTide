@@ -1,16 +1,19 @@
 import React from 'react';
 import { Link, withRouter, Redirect } from 'react-router-dom';
+import merge from 'lodash/merge';
 
 
 class EventForm extends React.Component {
   constructor(props) {
     super(props);
     if (props.event === undefined) {
-      this.state = { title: "", description: "", location: "", start_date: "",
-        min_price: 0, max_price: 0, end_date: "", event_image_url: "",
-        category_id: 1 };
+      this.state = {
+        event: { title: "", description: "", location: "",
+        start_date: "", min_price: 0, max_price: 0, end_date: "",
+        event_image_url: "", category_id: 1 },
+      };
     }else {
-      this.state = props.event;
+      this.state = {event: props.event};
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.update = this.update.bind(this);
@@ -18,38 +21,24 @@ class EventForm extends React.Component {
     this.prettyErrors = this.prettyErrors.bind(this);
   }
 
-  // renderErrors() {
-  //   if (this.props.errors === null) return (<ul className="form-errors"></ul>);
-  //   return(
-  //     <ul className="form-errors">
-  //
-  //       {this.props.errors.map((error, i) => (
-  //         <li key={`error-${i}`}>
-  //           {error}
-  //         </li>
-  //       ))}
-  //     </ul>
-  //   );
-  // }
-
   componentWillUnmount(){
     this.props.clearErrors();
   }
 
-
   update(field) {
-    return e => this.setState({
-      [field]: e.currentTarget.value
-    });
+    return e => this.setState(
+      merge(this.state.event, {[field]: e.currentTarget.value})
+    );
   }
 
   handleSubmit(e) {
-    // console.log('handleSubmit');
+    console.log('handleSubmit', this.state);
     e.preventDefault();
-    const event = this.state;
+    const event = this.state.event;
     this.props.createForm(event);
     // this.props.history.push('/');
   }
+
   prettyErrors(){
     let result = {title: "", location: "", description: "", start: "", end: ""};
     this.props.errors.map(el => {
@@ -65,10 +54,8 @@ class EventForm extends React.Component {
 
   render(){
     let divStyle = {paddingTop: 0};
-    // console.log('VIEW eF');
-    // console.log("render", this.state);
-    // console.log("errors", this.renderErrors());
     let errors = this.prettyErrors();
+    // let ticketForm = this.ticketForm();
     return (
       <div className="main-form-page">
         <div className="create-bar">
@@ -93,7 +80,7 @@ class EventForm extends React.Component {
                 Event Title <h1 className="errors">{errors.title}</h1>
                 <input type="text" onChange={this.update("title")}
                  placeholder="Give it a short distinct name"
-                 value={this.state.title}
+                 value={this.state.event.title}
                  ></input>
               </div>
               <br/>
@@ -102,7 +89,7 @@ class EventForm extends React.Component {
                 Location <h1 className="errors">{errors.location}</h1>
                 <input type="text" onChange={this.update("location")}
                  placeholder="Enter address of venue"
-                 value={this.state.location}
+                 value={this.state.event.location}
                  ></input>
               </div>
               <br/>
@@ -111,14 +98,14 @@ class EventForm extends React.Component {
                 Starts <h1 className="errors">{errors.start}</h1>
                 <input type="datetime-local"
                   onChange={this.update("start_date")}
-                  value={this.state.start_date}></input>
+                  value={this.state.event.start_date}></input>
               </label>
               <br/>
               <label>
                 <br/>
                 Ends <h1 className="errors">{errors.end}</h1>
                 <input type="datetime-local" onChange={this.update("end_date")}
-                 value={this.state.end_date}></input>
+                 value={this.state.event.end_date}></input>
               </label>
               <br/>
               <div>
@@ -126,7 +113,7 @@ class EventForm extends React.Component {
                 <br/>
                 <textarea
                   className="form-desc" onChange={this.update("description")}
-                  type="text" value={this.state.description}
+                  type="text" value={this.state.event.description}
                   placeholder="Enter a Description"></textarea>
               </div>
 
