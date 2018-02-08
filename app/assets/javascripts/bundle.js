@@ -27484,13 +27484,11 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(6);
 
-var _merge2 = __webpack_require__(66);
+var _merge = __webpack_require__(66);
 
-var _merge3 = _interopRequireDefault(_merge2);
+var _merge2 = _interopRequireDefault(_merge);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -27506,25 +27504,29 @@ var EventForm = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (EventForm.__proto__ || Object.getPrototypeOf(EventForm)).call(this, props));
 
+    console.log('constructor', props);
     if (props.event === undefined) {
       _this.state = {
         event: { title: "", description: "", location: "",
           start_date: "", min_price: 0, max_price: 0, end_date: "",
           event_image_url: "", category_id: 1 },
         ticketType: undefined,
-        ticket: undefined
+        ticket: { ticket_name: undefined, quantity: undefined, price: undefined, event_id: undefined }
       };
     } else {
+      console.log("i'll never execute");
       _this.state = {
         event: props.event,
         ticketType: props.ticketType,
         ticket: props.ticket
       };
     }
+
     _this.handleSubmit = _this.handleSubmit.bind(_this);
     _this.update = _this.update.bind(_this);
-    // this.renderErrors = this.renderErrors.bind(this);
     _this.prettyErrors = _this.prettyErrors.bind(_this);
+    _this.ticketForm = _this.ticketForm.bind(_this);
+    _this.updateState = _this.updateState.bind(_this);
     return _this;
   }
 
@@ -27535,11 +27537,16 @@ var EventForm = function (_React$Component) {
     }
   }, {
     key: 'update',
-    value: function update(field) {
+    value: function update(type, field) {
       var _this2 = this;
 
+      var newState = (0, _merge2.default)({}, this.state);
       return function (e) {
-        return _this2.setState((0, _merge3.default)(_this2.state.event, _defineProperty({}, field, e.currentTarget.value)));
+        // newState.event.field = e.currentTarget.value;
+        var value = e.currentTarget.value;
+        if (field === "quantity" || field === "price") value = parseInt(value);
+        newState[type][field] = value;
+        return _this2.setState(newState);
       };
     }
   }, {
@@ -27547,22 +27554,29 @@ var EventForm = function (_React$Component) {
     value: function handleSubmit(e) {
       var _this3 = this;
 
-      console.log('handleSubmit props', this.props);
       e.preventDefault();
+      // console.log(merge({}, this.state.ticket, {event_id: 4564564}));
       var event = this.state.event;
-      console.log("handleSubmit event", event);
+      this.props.createForm(event).then(function (evt) {
+        // console.log("evt",evt);
+        var result = (0, _merge2.default)({}, _this3.state.ticket, { event_id: evt.event.id });
+        // console.log("result",result);
+        return _this3.props.createTicket(result).fail(function (evtId) {
+          console.log("evtId", evtId);
+          return _this3.props.deleteEvent(evtId);
+        });
+      } // AJ THIS WAS SOOOOO COMPLICATED BRO!!!
 
-      if (this.props.eventId === undefined) {
-        this.props.createForm(event).then(function (evt) {
-          return _this3.props.createTicket((0, _merge3.default)(_this3.state.ticket, { event_id: evt.id }));
-        });
-      } else {
-        this.props.createForm(event).then(function (evt) {
-          return _this3.props.updateEvent((0, _merge3.default)(_this3.state.ticket, { event_id: evt.id }));
-        });
-      }
+      );
       // this.props.history.push('/');
     }
+
+    // .fail(evtId => {
+    //   console.log("evtId", evtId);
+    //   return this.props.deleteEvent(evtId);
+    // })
+
+
   }, {
     key: 'prettyErrors',
     value: function prettyErrors() {
@@ -27577,13 +27591,83 @@ var EventForm = function (_React$Component) {
       return result;
     }
   }, {
+    key: 'ticketForm',
+    value: function ticketForm() {
+      var _this4 = this;
+
+      if (this.state.ticketType === undefined) {
+        return _react2.default.createElement(
+          'section',
+          { className: 'ticket-buttons' },
+          _react2.default.createElement(
+            'div',
+            { className: 'ticket-button',
+              onClick: function onClick() {
+                return _this4.updateState("ticketType", "freeTicket");
+              } },
+            'Free Ticket'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'ticket-button',
+              onClick: function onClick() {
+                return _this4.updateState("ticketType", "paidTicket");
+              } },
+            'Paid Ticket'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'ticket-button',
+              onClick: function onClick() {
+                return _this4.updateState("ticketType", "donation");
+              } },
+            'Donation'
+          )
+        );
+      } else if (this.state.ticketType === "freeTicket") {
+        return _react2.default.createElement(
+          'div',
+          { className: 'free-ticket-form' },
+          _react2.default.createElement('input', { onChange: this.update("ticket", "ticket_name"), placeholder: 'Name' }),
+          _react2.default.createElement('input', { onChange: this.update("ticket", "quantity"), placeholder: 'Qty' }),
+          _react2.default.createElement('input', { onChange: this.update("ticket", "price"), placeholder: 'Price' })
+        );
+      } else if (this.state.ticketType === "paidTicket") {
+        console.log('paidTicket');
+        return _react2.default.createElement(
+          'div',
+          { className: 'paid-ticket-form' },
+          _react2.default.createElement('input', null)
+        );
+      }
+    }
+  }, {
+    key: 'updateState',
+    value: function updateState(type, value) {
+      var newState = (0, _merge2.default)({}, this.state);
+      newState[type] = value;
+      this.setState(newState);
+    }
+    // freeTicket(){
+    //
+    // }
+    //
+    // paidTicket(){
+    //
+    // }
+    //
+    // donation(){
+    //
+    // }
+
+
+  }, {
     key: 'render',
     value: function render() {
       var divStyle = { paddingTop: 0 };
       var errors = this.prettyErrors();
-      // console.log("event form state", this.state);
-      // console.log("event form props", this.props);
-      // let ticketForm = this.ticketForm();
+      var ticketForm = this.ticketForm();
+
       return _react2.default.createElement(
         'div',
         { className: 'main-form-page' },
@@ -27643,7 +27727,7 @@ var EventForm = function (_React$Component) {
                   { className: 'errors' },
                   errors.title
                 ),
-                _react2.default.createElement('input', { type: 'text', onChange: this.update("title"),
+                _react2.default.createElement('input', { type: 'text', onChange: this.update("event", "title"),
                   placeholder: 'Give it a short distinct name',
                   value: this.state.event.title
                 })
@@ -27659,7 +27743,7 @@ var EventForm = function (_React$Component) {
                   { className: 'errors' },
                   errors.location
                 ),
-                _react2.default.createElement('input', { type: 'text', onChange: this.update("location"),
+                _react2.default.createElement('input', { type: 'text', onChange: this.update("event", "location"),
                   placeholder: 'Enter address of venue',
                   value: this.state.event.location
                 })
@@ -27676,7 +27760,7 @@ var EventForm = function (_React$Component) {
                   errors.start
                 ),
                 _react2.default.createElement('input', { type: 'datetime-local',
-                  onChange: this.update("start_date"),
+                  onChange: this.update("event", "start_date"),
                   value: this.state.event.start_date })
               ),
               _react2.default.createElement('br', null),
@@ -27690,7 +27774,7 @@ var EventForm = function (_React$Component) {
                   { className: 'errors' },
                   errors.end
                 ),
-                _react2.default.createElement('input', { type: 'datetime-local', onChange: this.update("end_date"),
+                _react2.default.createElement('input', { type: 'datetime-local', onChange: this.update("event", "end_date"),
                   value: this.state.event.end_date })
               ),
               _react2.default.createElement('br', null),
@@ -27705,7 +27789,7 @@ var EventForm = function (_React$Component) {
                 ),
                 _react2.default.createElement('br', null),
                 _react2.default.createElement('textarea', {
-                  className: 'form-desc', onChange: this.update("description"),
+                  className: 'form-desc', onChange: this.update("event", "description"),
                   type: 'text', value: this.state.event.description,
                   placeholder: 'Enter a Description' })
               ),
@@ -27729,23 +27813,7 @@ var EventForm = function (_React$Component) {
                 _react2.default.createElement('hr', null)
               ),
               _react2.default.createElement('br', null),
-              _react2.default.createElement(
-                'label',
-                null,
-                'Ticket'
-              ),
-              _react2.default.createElement('br', null),
-              _react2.default.createElement(
-                'label',
-                null,
-                'Ticket'
-              ),
-              _react2.default.createElement('br', null),
-              _react2.default.createElement(
-                'label',
-                null,
-                'Ticket'
-              ),
+              ticketForm,
               _react2.default.createElement('br', null),
               _react2.default.createElement(
                 'div',
@@ -30710,7 +30778,6 @@ exports.default = function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments[1];
 
-  // console.log('events error reducer', action);
   Object.freeze(state);
   switch (action.type) {
     case _ticket_actions.RECEIVE_TICKET_ERRORS:

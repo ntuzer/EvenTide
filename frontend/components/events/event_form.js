@@ -6,58 +6,71 @@ import merge from 'lodash/merge';
 class EventForm extends React.Component {
   constructor(props) {
     super(props);
+    console.log('constructor', props);
     if (props.event === undefined) {
       this.state = {
         event: { title: "", description: "", location: "",
         start_date: "", min_price: 0, max_price: 0, end_date: "",
         event_image_url: "", category_id: 1 },
         ticketType: undefined,
-        ticket: undefined,
+        ticket: {ticket_name: undefined, quantity: undefined, price: undefined, event_id: undefined},
       };
     }else {
+      console.log("i'll never execute");
       this.state = {
         event: props.event,
         ticketType: props.ticketType,
         ticket: props.ticket
       };
     }
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.update = this.update.bind(this);
-    // this.renderErrors = this.renderErrors.bind(this);
     this.prettyErrors = this.prettyErrors.bind(this);
+    this.ticketForm = this.ticketForm.bind(this);
+    this.updateState = this.updateState.bind(this);
   }
 
   componentWillUnmount(){
     this.props.clearErrors();
   }
 
-  update(field) {
-    return e => this.setState(
-      merge(this.state.event, {[field]: e.currentTarget.value})
-    );
+  update(type, field) {
+    let newState = merge({}, this.state);
+    return e => {
+      // newState.event.field = e.currentTarget.value;
+      let value = e.currentTarget.value;
+      if (field === "quantity" || field === "price") value = parseInt(value);
+      newState[type][field] = value;
+      return this.setState(newState);
+    };
   }
 
   handleSubmit(e) {
-    console.log('handleSubmit props', this.props);
     e.preventDefault();
+    // console.log(merge({}, this.state.ticket, {event_id: 4564564}));
     const event = this.state.event;
-    console.log("handleSubmit event", event);
+    this.props.createForm(event)
+      .then(evt => {
+        // console.log("evt",evt);
+        let result = merge({}, this.state.ticket, {event_id: evt.event.id});
+        // console.log("result",result);
+        return this.props.createTicket(result).fail(evtId => {
+            console.log("evtId", evtId);
+            return this.props.deleteEvent(evtId);
+          });
+      } // AJ THIS WAS SOOOOO COMPLICATED BRO!!!
 
-    if (this.props.eventId === undefined){
-      this.props.createForm(event)
-        .then(evt => this.props.createTicket(
-          merge(this.state.ticket, {event_id: evt.id})
-          )
-        );
-    } else{
-      this.props.createForm(event)
-        .then(evt => this.props.updateEvent(
-          merge(this.state.ticket, {event_id: evt.id})
-          )
-        );
-    }
+      );
      // this.props.history.push('/');
   }
+
+  // .fail(evtId => {
+  //   console.log("evtId", evtId);
+  //   return this.props.deleteEvent(evtId);
+  // })
+
+
 
   prettyErrors(){
     let result = {title: "", location: "", description: "", start: "", end: ""};
@@ -71,12 +84,62 @@ class EventForm extends React.Component {
     return result;
   }
 
+  ticketForm(){
+    if (this.state.ticketType === undefined) {
+      return (
+        <section className="ticket-buttons">
+          <div className="ticket-button"
+            onClick={() => this.updateState("ticketType", "freeTicket")}>Free Ticket</div>
+          <div className="ticket-button"
+            onClick={() => this.updateState("ticketType", "paidTicket")}>Paid Ticket</div>
+          <div className="ticket-button"
+            onClick={() => this.updateState("ticketType", "donation")}>Donation</div>
+        </section>
+      );
+    } else if (this.state.ticketType === "freeTicket") {
+      return (
+        <div className="free-ticket-form">
+          <input onChange={this.update("ticket", "ticket_name")} placeholder="Name"></input>
+          <input onChange={this.update("ticket", "quantity")} placeholder="Qty"></input>
+          <input onChange={this.update("ticket", "price")} placeholder="Price"></input>
+
+        </div>
+      );
+    } else if (this.state.ticketType === "paidTicket") {
+      console.log('paidTicket');
+      return (
+        <div className="paid-ticket-form">
+          <input></input>
+        </div>
+      );
+    }
+  }
+
+  updateState(type, value){
+    let newState = merge({}, this.state);
+    newState[type] = value;
+    this.setState(newState);
+  }
+  // freeTicket(){
+  //
+  // }
+  //
+  // paidTicket(){
+  //
+  // }
+  //
+  // donation(){
+  //
+  // }
+
+
+
+
   render(){
     let divStyle = {paddingTop: 0};
     let errors = this.prettyErrors();
-    // console.log("event form state", this.state);
-    // console.log("event form props", this.props);
-    // let ticketForm = this.ticketForm();
+    let ticketForm = this.ticketForm();
+
     return (
       <div className="main-form-page">
         <div className="create-bar">
@@ -99,7 +162,7 @@ class EventForm extends React.Component {
               <div>
                 <br/>
                 Event Title <h1 className="errors">{errors.title}</h1>
-                <input type="text" onChange={this.update("title")}
+                <input type="text" onChange={this.update("event", "title")}
                  placeholder="Give it a short distinct name"
                  value={this.state.event.title}
                  ></input>
@@ -108,7 +171,7 @@ class EventForm extends React.Component {
               <div>
                 <br/>
                 Location <h1 className="errors">{errors.location}</h1>
-                <input type="text" onChange={this.update("location")}
+                <input type="text" onChange={this.update("event", "location")}
                  placeholder="Enter address of venue"
                  value={this.state.event.location}
                  ></input>
@@ -118,14 +181,14 @@ class EventForm extends React.Component {
                 <br/>
                 Starts <h1 className="errors">{errors.start}</h1>
                 <input type="datetime-local"
-                  onChange={this.update("start_date")}
+                  onChange={this.update("event", "start_date")}
                   value={this.state.event.start_date}></input>
               </label>
               <br/>
               <label>
                 <br/>
                 Ends <h1 className="errors">{errors.end}</h1>
-                <input type="datetime-local" onChange={this.update("end_date")}
+                <input type="datetime-local" onChange={this.update("event", "end_date")}
                  value={this.state.event.end_date}></input>
               </label>
               <br/>
@@ -133,7 +196,7 @@ class EventForm extends React.Component {
                 Description <h1 className="errors">{errors.description}</h1>
                 <br/>
                 <textarea
-                  className="form-desc" onChange={this.update("description")}
+                  className="form-desc" onChange={this.update("event", "description")}
                   type="text" value={this.state.event.description}
                   placeholder="Enter a Description"></textarea>
               </div>
@@ -146,14 +209,12 @@ class EventForm extends React.Component {
                 <hr/>
               </div>
               <br/>
-              <label>Ticket</label>
-              <br/>
-              <label>Ticket</label>
-              <br/>
-              <label>Ticket</label>
+
+
+              {ticketForm}
+
 
               <br/>
-
               <div className="form-header2">
                 <div>3</div>
                 <h2>Additional Settings</h2>
@@ -161,6 +222,7 @@ class EventForm extends React.Component {
               <div className="header-line2" style={divStyle}>
                 <hr/>
               </div>
+
 
               <label>Event Type</label>
               <br/>
@@ -172,14 +234,16 @@ class EventForm extends React.Component {
 
 
               <br/>
-              <div className="space">
-              <div>
-              <label>Nice job! You're almost done.</label>
 
-              <input type="submit" value="Make your event live"></input>
+              <div className="space">
+                <div>
+                  <label>Nice job! You're almost done.</label>
+                  <input type="submit" value="Make your event live"></input>
+                </div>
               </div>
-              </div>
+
             </form>
+
           </div>
         </div>
       </div>

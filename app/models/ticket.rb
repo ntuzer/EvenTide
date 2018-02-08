@@ -1,5 +1,5 @@
 class Ticket < ApplicationRecord
-  validates :name, :quantity, :price, presence: true
+  validates :ticket_name, :quantity, :price, presence: true
 validates :quantity, :price, numericality: true
 
 has_many :rsvps,

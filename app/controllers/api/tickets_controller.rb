@@ -10,11 +10,12 @@ class Api::TicketsController < ApplicationController
   end
 
   def create
+    debugger
     @ticket = Ticket.new(ticket_params)
-
     if @ticket.save
       render :show
     else
+      # render json: params[:ticket][:event_id]
       render json: @ticket.errors.full_messages, status: 422
     end
   end
