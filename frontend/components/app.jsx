@@ -28,6 +28,7 @@ const App = (store) => {
         <ProtectedRoute path='/users/:userId' component={UserShowContainer} />
         <ProtectedRoute path='/user' component={EventIndexContainer} />
         <ProtectedRoute path='/events/new' component={EventFormContainer} />
+
         <Route exact path='/events/:eventId'
         component={EventShowContainer} />
         <Route path="/index" render={() => 'home'} />
