@@ -31139,19 +31139,27 @@ var _rsvp = __webpack_require__(245);
 
 var _rsvp2 = _interopRequireDefault(_rsvp);
 
+var _rsvp_actions = __webpack_require__(246);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     event: state.events[ownProps.match.params.eventId]
+
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
-  return {};
+  return {
+    createRSVP: function createRSVP(rsvp) {
+      return dispatch((0, _rsvp_actions.createRSVP)(rsvp));
+    }
+
+  };
 };
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps, null)(_rsvp2.default);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_rsvp2.default);
 
 /***/ }),
 /* 245 */
@@ -31183,15 +31191,33 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Rsvp = function (_React$Component) {
   _inherits(Rsvp, _React$Component);
 
-  function Rsvp() {
+  function Rsvp(props) {
     _classCallCheck(this, Rsvp);
 
-    return _possibleConstructorReturn(this, (Rsvp.__proto__ || Object.getPrototypeOf(Rsvp)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (Rsvp.__proto__ || Object.getPrototypeOf(Rsvp)).call(this, props));
+
+    _this.state = props.rsvp;
+    var a = { quantity: undefined, event_id: _this.props.match.params.eventId };
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
+
+    return _this;
   }
 
   _createClass(Rsvp, [{
+    key: 'handleSubmit',
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      this.props.createRSVP(this.state);
+    }
+  }, {
+    key: 'handleChange',
+    value: function handleChange(e) {
+      this.setState({ quantity: e.target.value, event_id: this.props.match.params.eventId });
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
 
       return _react2.default.createElement(
         'header',
@@ -31200,6 +31226,47 @@ var Rsvp = function (_React$Component) {
           'h1',
           null,
           'Register'
+        ),
+        _react2.default.createElement(
+          'select',
+          { className: 'ticket-num', onChange: function onChange(e) {
+              return _this2.handleChange(e);
+            } },
+          _react2.default.createElement(
+            'option',
+            { value: '0' },
+            '0'
+          ),
+          _react2.default.createElement(
+            'option',
+            { value: '1' },
+            '1'
+          ),
+          _react2.default.createElement(
+            'option',
+            { value: '2' },
+            '2'
+          ),
+          _react2.default.createElement(
+            'option',
+            { value: '3' },
+            '3'
+          ),
+          _react2.default.createElement(
+            'option',
+            { value: '4' },
+            '4'
+          ),
+          _react2.default.createElement(
+            'option',
+            { value: '5' },
+            '5'
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'register', onClick: this.handleSubmit },
+          'Register for Event'
         )
       );
     }
@@ -31209,6 +31276,70 @@ var Rsvp = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Rsvp;
+
+/***/ }),
+/* 246 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.createRSVP = exports.receiveErrors = exports.RECEIVE_RSVP_ERRORS = exports.RECEIVE_RSVP = undefined;
+
+var _rsvps_api_util = __webpack_require__(247);
+
+var RsvpAPIUtil = _interopRequireWildcard(_rsvps_api_util);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+var RECEIVE_RSVP = exports.RECEIVE_RSVP = 'RECEIVE_RSVP';
+var RECEIVE_RSVP_ERRORS = exports.RECEIVE_RSVP_ERRORS = 'RECEIVE_RSVP_ERRORS';
+
+var receiveRSVP = function receiveRSVP(rsvp) {
+  // console.log('action receiveEvents');
+  return {
+    type: RECEIVE_RSVP,
+    rsvp: rsvp
+  };
+};
+
+var receiveErrors = exports.receiveErrors = function receiveErrors(errors) {
+  return {
+    type: RECEIVE_RSVP_ERRORS,
+    errors: errors
+  };
+};
+
+var createRSVP = exports.createRSVP = function createRSVP(rsvp) {
+  return function (dispatch) {
+    return RsvpAPIUtil.createRSVP(rsvp).then(function (sRsvp) {
+      return dispatch(receiveRSVP(sRsvp));
+    }, function (err) {
+      return dispatch(receiveErrors(err.responseJSON));
+    });
+  };
+};
+
+/***/ }),
+/* 247 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var createRSVP = exports.createRSVP = function createRSVP(rsvp) {
+  return $.ajax({
+    url: 'api/rsvps',
+    method: 'POST',
+    data: { rsvp: rsvp }
+  });
+};
 
 /***/ })
 /******/ ]);
