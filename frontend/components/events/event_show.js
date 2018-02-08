@@ -59,7 +59,8 @@ class EventShow extends React.Component {
             <Link to="/" className="show-bar-icon">
               <i className="far fa-bookmark fa-lg"></i>
             </Link>
-            <Link to="/" className="show-register">Register</Link>
+            <Link to={`/events/${this.state.id}/rsvp`}
+              className="show-register">Register</Link>
           </div>
 
           <div className="show-bottom">

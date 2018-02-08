@@ -26627,6 +26627,10 @@ var _user_show_container = __webpack_require__(242);
 
 var _user_show_container2 = _interopRequireDefault(_user_show_container);
 
+var _rsvp_container = __webpack_require__(244);
+
+var _rsvp_container2 = _interopRequireDefault(_rsvp_container);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App(store) {
@@ -26646,6 +26650,8 @@ var App = function App(store) {
       _react2.default.createElement(_route_util.ProtectedRoute, { path: '/events/new', component: _event_form_container2.default }),
       _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/events/:eventId',
         component: _event_show_container2.default }),
+      _react2.default.createElement(_route_util.ProtectedRoute, { path: '/events/:eventId/rsvp',
+        component: _rsvp_container2.default }),
       _react2.default.createElement(_reactRouterDom.Route, { path: '/index', render: function render() {
           return 'home';
         } }),
@@ -30759,7 +30765,8 @@ var EventShow = function (_React$Component) {
             ),
             _react2.default.createElement(
               _reactRouterDom.Link,
-              { to: '/', className: 'show-register' },
+              { to: '/events/' + this.state.id + '/rsvp',
+                className: 'show-register' },
               'Register'
             )
           ),
@@ -31114,6 +31121,94 @@ var UserShow = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = UserShow;
+
+/***/ }),
+/* 244 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _reactRedux = __webpack_require__(7);
+
+var _rsvp = __webpack_require__(245);
+
+var _rsvp2 = _interopRequireDefault(_rsvp);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  return {
+    event: state.events[ownProps.match.params.eventId]
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+  return {};
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, null)(_rsvp2.default);
+
+/***/ }),
+/* 245 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(6);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Rsvp = function (_React$Component) {
+  _inherits(Rsvp, _React$Component);
+
+  function Rsvp() {
+    _classCallCheck(this, Rsvp);
+
+    return _possibleConstructorReturn(this, (Rsvp.__proto__ || Object.getPrototypeOf(Rsvp)).apply(this, arguments));
+  }
+
+  _createClass(Rsvp, [{
+    key: 'render',
+    value: function render() {
+
+      return _react2.default.createElement(
+        'header',
+        { className: 'profile-page' },
+        _react2.default.createElement(
+          'h1',
+          null,
+          'Register'
+        )
+      );
+    }
+  }]);
+
+  return Rsvp;
+}(_react2.default.Component);
+
+exports.default = Rsvp;
 
 /***/ })
 /******/ ]);

@@ -19,6 +19,10 @@ class Api::TicketsController < ApplicationController
     end
   end
 
+  def update
+
+  end
+
   def destroy
     @ticket = Event.find_by(id: params[:id])
     if @ticket && current_user.id == @ticket.organizer_id

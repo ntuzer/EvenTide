@@ -4,7 +4,7 @@ import Rsvp from './rsvp';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-
+    event: state.events[ownProps.match.params.eventId],
   };
 };
 

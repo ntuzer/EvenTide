@@ -15,6 +15,7 @@ import EventIndexContainer from './events/event_index_container';
 import EventFormContainer from './events/event_form_container';
 import EventShowContainer from './events/event_show_container';
 import UserShowContainer from './users/user_show_container';
+import RsvpContainer from './rsvp/rsvp_container';
 
 const App = (store) => {
   // console.log('App file');
@@ -28,9 +29,10 @@ const App = (store) => {
         <ProtectedRoute path='/users/:userId' component={UserShowContainer} />
         <ProtectedRoute path='/user' component={EventIndexContainer} />
         <ProtectedRoute path='/events/new' component={EventFormContainer} />
-
         <Route exact path='/events/:eventId'
-        component={EventShowContainer} />
+          component={EventShowContainer} />
+        <ProtectedRoute path='/events/:eventId/rsvp'
+          component={RsvpContainer} />
         <Route path="/index" render={() => 'home'} />
         <Route path="/" render={(props) => {
           props.history.push('/index');
