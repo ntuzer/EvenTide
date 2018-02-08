@@ -2164,9 +2164,8 @@ var updateEvent = exports.updateEvent = function updateEvent(event) {
 var deleteEvent = exports.deleteEvent = function deleteEvent(eventId) {
   return function (dispatch) {
     // console.log('action deleteEvent');
-    return EventAPIUtil.deleteEvent(eventId).then(function (event) {
-      return dispatch(receiveSingleEvent(null));
-    }, function (err) {
+    // event => (dispatch(receiveSingleEvent(event)))
+    return EventAPIUtil.deleteEvent(eventId).then(null, function (err) {
       return dispatch(receiveErrors(err.responseJSON));
     });
   };
@@ -27440,7 +27439,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var mapStateToProps = function mapStateToProps(state) {
   // console.log('efc mstp state', state);
   return {
-    errors: state.errors.events,
+    errors: state.errors,
     eventId: state.events.id
   };
 };
@@ -27459,6 +27458,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
     },
     clearErrors: function clearErrors() {
       return dispatch((0, _event_actions.receiveErrors)([]));
+    },
+    deleteEvent: function deleteEvent(eventId) {
+      return dispatch((0, _event_actions.deleteEvent)(eventId));
     }
   };
 };
@@ -27511,7 +27513,12 @@ var EventForm = function (_React$Component) {
           start_date: "", min_price: 0, max_price: 0, end_date: "",
           event_image_url: "", category_id: 1 },
         ticketType: undefined,
-        ticket: { ticket_name: undefined, quantity: undefined, price: undefined, event_id: undefined }
+        ticket: {
+          ticket_name: undefined,
+          quantity: undefined,
+          price: undefined,
+          event_id: undefined
+        }
       };
     } else {
       console.log("i'll never execute");
@@ -27541,9 +27548,12 @@ var EventForm = function (_React$Component) {
       var _this2 = this;
 
       var newState = (0, _merge2.default)({}, this.state);
+
       return function (e) {
         // newState.event.field = e.currentTarget.value;
+
         var value = e.currentTarget.value;
+
         if (field === "quantity" || field === "price") value = parseInt(value);
         newState[type][field] = value;
         return _this2.setState(newState);
@@ -27555,38 +27565,35 @@ var EventForm = function (_React$Component) {
       var _this3 = this;
 
       e.preventDefault();
-      // console.log(merge({}, this.state.ticket, {event_id: 4564564}));
       var event = this.state.event;
       this.props.createForm(event).then(function (evt) {
-        // console.log("evt",evt);
         var result = (0, _merge2.default)({}, _this3.state.ticket, { event_id: evt.event.id });
-        // console.log("result",result);
-        return _this3.props.createTicket(result).fail(function (evtId) {
-          console.log("evtId", evtId);
-          return _this3.props.deleteEvent(evtId);
+        // AJ!!! THIS WAS SOOOOO COMPLICATED BRO!!! Please dont make me change it.
+        return _this3.props.createTicket(result).then(function () {
+          return _this3.props.history.push('/events/' + evt.event.id);
+        }, function () {
+          return _this3.props.deleteEvent(evt.event.id);
         });
-      } // AJ THIS WAS SOOOOO COMPLICATED BRO!!!
-
-      );
-      // this.props.history.push('/');
+      });
     }
-
-    // .fail(evtId => {
-    //   console.log("evtId", evtId);
-    //   return this.props.deleteEvent(evtId);
-    // })
-
-
   }, {
     key: 'prettyErrors',
     value: function prettyErrors() {
-      var result = { title: "", location: "", description: "", start: "", end: "" };
-      this.props.errors.map(function (el) {
+      var result = {
+        title: "", location: "", description: "",
+        start: "", end: "", tName: "", tQty: "", tPrice: ""
+      };
+      this.props.errors.events.map(function (el) {
         if (el === 'Title can\'t be blank') result.title = el;
         if (el === 'Location can\'t be blank') result.location = el;
         if (el === 'Description can\'t be blank') result.description = el;
         if (el === 'Start date can\'t be blank') result.start = el;
         if (el === 'End date can\'t be blank') result.end = el;
+      });
+      this.props.errors.tickets.map(function (el) {
+        if (el === "Ticket name can't be blank") result.tName = " * Ticket name can't be blank";
+        if (el === "Quantity can't be blank") result.tQty = " * Quantity can't be blank and must be a number";
+        if (el === "Price can't be blank") result.tPrice = " * Quantity can't be blank and must be a number";
       });
       return result;
     }
@@ -27595,6 +27602,7 @@ var EventForm = function (_React$Component) {
     value: function ticketForm() {
       var _this4 = this;
 
+      var errors = this.prettyErrors();
       if (this.state.ticketType === undefined) {
         return _react2.default.createElement(
           'section',
@@ -27627,17 +27635,99 @@ var EventForm = function (_React$Component) {
       } else if (this.state.ticketType === "freeTicket") {
         return _react2.default.createElement(
           'div',
-          { className: 'free-ticket-form' },
-          _react2.default.createElement('input', { onChange: this.update("ticket", "ticket_name"), placeholder: 'Name' }),
-          _react2.default.createElement('input', { onChange: this.update("ticket", "quantity"), placeholder: 'Qty' }),
-          _react2.default.createElement('input', { onChange: this.update("ticket", "price"), placeholder: 'Price' })
+          { className: 'ticket-form' },
+          _react2.default.createElement(
+            'div',
+            { className: 'free-ticket-form' },
+            'Ticket Name:',
+            _react2.default.createElement(
+              'h1',
+              null,
+              errors.tName
+            ),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement('input', { onChange: this.update("ticket", "ticket_name"),
+              placeholder: 'Name' }),
+            _react2.default.createElement('br', null),
+            'Quantity:',
+            _react2.default.createElement(
+              'h1',
+              null,
+              errors.tQty
+            ),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement('input', { onChange: this.update("ticket", "quantity"),
+              placeholder: 'Qty' })
+          )
         );
       } else if (this.state.ticketType === "paidTicket") {
-        console.log('paidTicket');
         return _react2.default.createElement(
           'div',
-          { className: 'paid-ticket-form' },
-          _react2.default.createElement('input', null)
+          { className: 'ticket-form' },
+          _react2.default.createElement(
+            'div',
+            { className: 'paid-ticket-form' },
+            'Ticket Name:',
+            _react2.default.createElement(
+              'h1',
+              null,
+              errors.tName
+            ),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement('input', { onChange: this.update("ticket", "ticket_name"),
+              placeholder: 'Name' }),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement('br', null),
+            'Quantity:',
+            _react2.default.createElement(
+              'h1',
+              null,
+              errors.tQty
+            ),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement('input', { onChange: this.update("ticket", "quantity"),
+              placeholder: 'Qty' }),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement('br', null),
+            'Price:',
+            _react2.default.createElement(
+              'h1',
+              null,
+              errors.tPrice
+            ),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement('input', { onChange: this.update("ticket", "price"),
+              placeholder: 'Price' }),
+            _react2.default.createElement('br', null)
+          )
+        );
+      } else if (this.state.ticketType === "donation") {
+        return _react2.default.createElement(
+          'div',
+          { className: 'ticket-form' },
+          _react2.default.createElement(
+            'div',
+            { className: 'donation-ticket-form' },
+            'Ticket Name:',
+            _react2.default.createElement(
+              'h1',
+              null,
+              errors.tName
+            ),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement('input', { onChange: this.update("ticket", "ticket_name"),
+              placeholder: 'Name' }),
+            _react2.default.createElement('br', null),
+            'Quantity:',
+            _react2.default.createElement(
+              'h1',
+              null,
+              errors.tQty
+            ),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement('input', { onChange: this.update("ticket", "quantity"),
+              placeholder: 'Qty' })
+          )
         );
       }
     }
@@ -27667,7 +27757,7 @@ var EventForm = function (_React$Component) {
       var divStyle = { paddingTop: 0 };
       var errors = this.prettyErrors();
       var ticketForm = this.ticketForm();
-
+      console.log('render');
       return _react2.default.createElement(
         'div',
         { className: 'main-form-page' },
@@ -27885,6 +27975,92 @@ var EventForm = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = EventForm;
+
+// <form onSubmit={this.handleSubmit}>
+//   <div>
+//     <br/>
+//     Event Title <h1 className="errors">{errors.title}</h1>
+//     <input type="text"
+//      placeholder="Give it a short distinct name"
+//      value="changeme"
+//      ></input>
+//   </div>
+//   <br/>
+//   <div>
+//     <br/>
+//     Location <h1 className="errors">{errors.location}</h1>
+//     <input type="text"
+//      placeholder="Enter address of venue"
+//      value="changeme"
+//      ></input>
+//   </div>
+//   <br/>
+//   <label>
+//     <br/>
+//     Starts <h1 className="errors">{errors.start}</h1>
+//     <input type="datetime-local"
+//       onChange={this.update("event", "start_date")}
+//       value={this.state.event.start_date}></input>
+//   </label>
+//   <br/>
+//   <label>
+//     <br/>
+//     Ends <h1 className="errors">{errors.end}</h1>
+//     <input type="datetime-local" onChange={this.update("event", "end_date")}
+//      value={this.state.event.end_date}></input>
+//   </label>
+//   <br/>
+//   <div>
+//     Description <h1 className="errors">{errors.description}</h1>
+//     <br/>
+//     <textarea
+//       className="form-desc"
+//       type="text" value="changeme"
+//       placeholder="Enter a Description"></textarea>
+//   </div>
+//
+//   <div className="form-header2">
+//     <div>2</div>
+//     <h2>Create Tickets</h2>
+//   </div>
+//   <div className="header-line2" style={divStyle}>
+//     <hr/>
+//   </div>
+//   <br/>
+//
+//
+//   {ticketForm}
+//
+//
+//   <br/>
+//   <div className="form-header2">
+//     <div>3</div>
+//     <h2>Additional Settings</h2>
+//   </div>
+//   <div className="header-line2" style={divStyle}>
+//     <hr/>
+//   </div>
+//
+//
+//   <label>Event Type</label>
+//   <br/>
+//   <select className="category-dropdown" >
+//     <option value="">Food & Drink</option>
+//     <option value="">Party</option>
+//     <option value="">Nature</option>
+//   </select>
+//
+//
+//   <br/>
+//
+//   <div className="space">
+//     <div>
+//       <label>Nice job! You're almost done.</label>
+//       <input type="submit" value="Make your event live"></input>
+//     </div>
+//   </div>
+//
+// </form>
 
 /***/ }),
 /* 157 */
@@ -30238,7 +30414,7 @@ var eventsReducer = function eventsReducer() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments[1];
 
-  // console.log('events reducer');
+  console.log('events reducer', action);
   Object.freeze(preloadedState);
   var newState = void 0;
   switch (action.type) {

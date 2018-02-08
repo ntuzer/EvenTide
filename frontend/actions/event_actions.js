@@ -76,8 +76,9 @@ export const updateEvent = event => dispatch => {
 
 export const deleteEvent = eventId => dispatch => {
   // console.log('action deleteEvent');
+  // event => (dispatch(receiveSingleEvent(event)))
   return EventAPIUtil.deleteEvent(eventId)
-    .then(event => (dispatch(receiveSingleEvent(null))),
+    .then(null,
           err => (dispatch(receiveErrors(err.responseJSON))
         ));
 };

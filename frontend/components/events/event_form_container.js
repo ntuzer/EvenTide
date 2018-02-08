@@ -10,7 +10,7 @@ import EventForm from './event_form';
 const mapStateToProps = (state) => {
   // console.log('efc mstp state', state);
   return {
-    errors: state.errors.events,
+    errors: state.errors,
     eventId: state.events.id
   };
 };
@@ -21,7 +21,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     createTicket: ticket => dispatch(createTicket(ticket)),
     createForm: event => dispatch(createEvent(event)),
     updateEvent: event => dispatch(updateEvent(event)),
-    clearErrors: () => dispatch(receiveErrors([]))
+    clearErrors: () => dispatch(receiveErrors([])),
+    deleteEvent: eventId => dispatch(deleteEvent(eventId))
   };
 };
 

@@ -10,7 +10,6 @@ class Api::TicketsController < ApplicationController
   end
 
   def create
-    debugger
     @ticket = Ticket.new(ticket_params)
     if @ticket.save
       render :show
