@@ -26623,6 +26623,10 @@ var _event_show_container = __webpack_require__(234);
 
 var _event_show_container2 = _interopRequireDefault(_event_show_container);
 
+var _user_show_container = __webpack_require__(242);
+
+var _user_show_container2 = _interopRequireDefault(_user_show_container);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App(store) {
@@ -26637,6 +26641,7 @@ var App = function App(store) {
       _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _event_index_container2.default }),
       _react2.default.createElement(_route_util.AuthRoute, { path: '/login', component: _session_form_container2.default }),
       _react2.default.createElement(_route_util.AuthRoute, { path: '/signup', component: _session_form_container2.default }),
+      _react2.default.createElement(_route_util.ProtectedRoute, { path: '/users/:userId', component: _user_show_container2.default }),
       _react2.default.createElement(_route_util.ProtectedRoute, { path: '/user', component: _event_index_container2.default }),
       _react2.default.createElement(_route_util.ProtectedRoute, { path: '/events/new', component: _event_form_container2.default }),
       _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/events/:eventId',
@@ -26700,7 +26705,6 @@ var Auth = function Auth(_ref) {
 
   // console.log('AUTH');
   // console.log("route util auth");
-
   return _react2.default.createElement(_reactRouterDom.Route, { path: path, render: function render(props) {
       if (!loggedIn) {
         return _react2.default.createElement(Component, props);
@@ -26717,7 +26721,6 @@ var Protected = function Protected(_ref2) {
 
   // console.log('PROTECTED');
   // console.log("route util protected");
-
   return _react2.default.createElement(_reactRouterDom.Route, { path: path, render: function render(props) {
       return loggedIn ? _react2.default.createElement(Component, props) : _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' });
     } });
@@ -27060,8 +27063,10 @@ var _navbar2 = _interopRequireDefault(_navbar);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
+  var id = state.session.currentUser ? state.session.currentUser.id : -1;
   return {
-    loggedIn: Boolean(state.session.currentUser)
+    loggedIn: Boolean(state.session.currentUser),
+    userId: id
     // errors: state.errors.session
   };
 };
@@ -27116,6 +27121,7 @@ var Navbar = function (_React$Component) {
 
     _this.uporout = _this.uporout.bind(_this);
     _this.createEventButton = _this.createEventButton.bind(_this);
+    _this.profile = _this.profile.bind(_this);
     return _this;
   }
 
@@ -27141,10 +27147,28 @@ var Navbar = function (_React$Component) {
       }
     }
   }, {
+    key: 'profile',
+    value: function profile(e) {
+      // e.preventDefault();
+
+      var profile = this.props.loggedIn ? _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          _reactRouterDom.Link,
+          { to: '/users/' + this.props.userId },
+          'Profile ',
+          this.props.userId
+        )
+      ) : _react2.default.createElement('div', null);
+      return profile;
+    }
+  }, {
     key: 'render',
     value: function render() {
       // console.log('VIEW navbar render');
       var inorout = this.props.loggedIn ? "sign out" : "sign in";
+      var button = this.profile();
       return _react2.default.createElement(
         'header',
         { className: 'navbar' },
@@ -27176,7 +27200,8 @@ var Navbar = function (_React$Component) {
                 { onClick: this.uporout },
                 inorout
               )
-            )
+            ),
+            button
           )
         )
       );
@@ -30992,6 +31017,103 @@ var deleteTicket = exports.deleteTicket = function deleteTicket(ticketId) {
     method: 'DELETE'
   });
 };
+
+/***/ }),
+/* 242 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _reactRedux = __webpack_require__(7);
+
+var _user_show = __webpack_require__(243);
+
+var _user_show2 = _interopRequireDefault(_user_show);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  return {
+    loggedIn: Boolean(state.session.currentUser),
+    email: state.session.currentUser.email
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, null)(_user_show2.default);
+
+/***/ }),
+/* 243 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(6);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var UserShow = function (_React$Component) {
+  _inherits(UserShow, _React$Component);
+
+  function UserShow() {
+    _classCallCheck(this, UserShow);
+
+    return _possibleConstructorReturn(this, (UserShow.__proto__ || Object.getPrototypeOf(UserShow)).apply(this, arguments));
+  }
+
+  _createClass(UserShow, [{
+    key: 'render',
+    value: function render() {
+
+      return _react2.default.createElement(
+        'header',
+        { className: 'profile-page' },
+        _react2.default.createElement(
+          'h1',
+          null,
+          'USERSHOW'
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'profile-bar' },
+          'Hi ',
+          this.props.email,
+          '!'
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'profile-event-links' },
+          'Your Events'
+        )
+      );
+    }
+  }]);
+
+  return UserShow;
+}(_react2.default.Component);
+
+exports.default = UserShow;
 
 /***/ })
 /******/ ]);

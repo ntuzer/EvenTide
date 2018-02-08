@@ -6,6 +6,7 @@ class Navbar extends React.Component {
     super(props);
     this.uporout = this.uporout.bind(this);
     this.createEventButton = this.createEventButton.bind(this);
+    this.profile = this.profile.bind(this);
   }
 
   uporout(e){
@@ -27,9 +28,18 @@ class Navbar extends React.Component {
     }
   }
 
+  profile(e){
+    // e.preventDefault();
+
+    let profile = this.props.loggedIn ? <div><Link to={`/users/${this.props.userId}`}>Profile {this.props.userId}</Link></div> : <div></div>;
+    return profile
+  }
+
+
   render(){
     // console.log('VIEW navbar render');
     let inorout = this.props.loggedIn ? "sign out" : "sign in";
+    let button = this.profile();
     return(
       <header className='navbar'>
         <nav>
@@ -47,6 +57,9 @@ class Navbar extends React.Component {
             <div className="user">
               <button onClick={this.uporout}>{inorout}</button>
             </div>
+            {
+              button
+            }
           </div>
         </nav>
 

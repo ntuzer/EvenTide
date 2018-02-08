@@ -7,7 +7,6 @@ import { Route, Redirect, withRouter } from 'react-router-dom';
 const Auth = ({ component: Component, path, loggedIn }) => {
   // console.log('AUTH');
   // console.log("route util auth");
-
   return (
     <Route path={path} render={(props) => {
       if (!loggedIn) {
@@ -22,7 +21,6 @@ const Auth = ({ component: Component, path, loggedIn }) => {
 const Protected = ({ component: Component, path, loggedIn }) => {
   // console.log('PROTECTED');
   // console.log("route util protected");
-
   return (<Route path={path} render={(props) => (
        loggedIn ? (
         <Component {...props} />
