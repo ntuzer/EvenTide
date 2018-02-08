@@ -27504,9 +27504,9 @@ var EventForm = function (_React$Component) {
   function EventForm(props) {
     _classCallCheck(this, EventForm);
 
+    // console.log('constructor', props);
     var _this = _possibleConstructorReturn(this, (EventForm.__proto__ || Object.getPrototypeOf(EventForm)).call(this, props));
 
-    console.log('constructor', props);
     if (props.event === undefined) {
       _this.state = {
         event: { title: "", description: "", location: "",
@@ -27516,12 +27516,12 @@ var EventForm = function (_React$Component) {
         ticket: {
           ticket_name: undefined,
           quantity: undefined,
-          price: undefined,
+          price: 0,
           event_id: undefined
         }
       };
     } else {
-      console.log("i'll never execute");
+      // console.log("i'll never execute");
       _this.state = {
         event: props.event,
         ticketType: props.ticketType,
@@ -27757,7 +27757,7 @@ var EventForm = function (_React$Component) {
       var divStyle = { paddingTop: 0 };
       var errors = this.prettyErrors();
       var ticketForm = this.ticketForm();
-      console.log('render');
+      // console.log('render');
       return _react2.default.createElement(
         'div',
         { className: 'main-form-page' },
@@ -30414,7 +30414,7 @@ var eventsReducer = function eventsReducer() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments[1];
 
-  console.log('events reducer', action);
+  // console.log('events reducer', action);
   Object.freeze(preloadedState);
   var newState = void 0;
   switch (action.type) {

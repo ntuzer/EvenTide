@@ -6,7 +6,7 @@ import merge from 'lodash/merge';
 class EventForm extends React.Component {
   constructor(props) {
     super(props);
-    console.log('constructor', props);
+    // console.log('constructor', props);
     if (props.event === undefined) {
       this.state = {
         event: { title: "", description: "", location: "",
@@ -16,12 +16,12 @@ class EventForm extends React.Component {
         ticket: {
           ticket_name: undefined,
           quantity: undefined,
-          price: undefined,
+          price: 0,
           event_id: undefined
         },
       };
     }else {
-      console.log("i'll never execute");
+      // console.log("i'll never execute");
       this.state = {
         event: props.event,
         ticketType: props.ticketType,
@@ -192,13 +192,11 @@ class EventForm extends React.Component {
   // }
 
 
-
-
   render(){
     let divStyle = {paddingTop: 0};
     let errors = this.prettyErrors();
     let ticketForm = this.ticketForm();
-    console.log('render');
+    // console.log('render');
     return (
       <div className="main-form-page">
         <div className="create-bar">

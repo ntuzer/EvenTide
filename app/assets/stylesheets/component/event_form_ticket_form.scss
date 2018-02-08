@@ -1,3 +1,31 @@
+// .ticket-buttons-outer {
+//   margin-left: auto;
+//   margin-right: auto;
+// }
+.ticket-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.ticket-button {
+  border: 2px solid #0278b8;
+  border-radius: 5px;
+  height: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #0278b8;
+
+}
+
+.ticket-button:hover {
+  border: 2px solid black;
+  border-radius: 5px;
+
+  color: white;
+  background: #3c4968;
+}
+
 .ticket-form div h1 {
   color: red;
 }

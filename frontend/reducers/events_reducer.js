@@ -8,7 +8,7 @@ import {
 } from '../actions/event_actions';
 
 const eventsReducer = (preloadedState = {}, action) => {
-  console.log('events reducer', action);
+  // console.log('events reducer', action);
   Object.freeze(preloadedState);
   let newState;
   switch (action.type) {
