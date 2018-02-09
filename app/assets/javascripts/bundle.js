@@ -28133,10 +28133,6 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(17);
 
-var _reduxLogger = __webpack_require__(158);
-
-var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
-
 var _reduxThunk = __webpack_require__(159);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
@@ -28157,14 +28153,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //   );
 // };
 
+// import logger from 'redux-logger';
 var middlewares = [_reduxThunk2.default];
 
 if (process.env.NODE_ENV !== 'production') {
   // must use 'require' (import only allowed at top of file)
   var _require = __webpack_require__(158),
-      _logger = _require.logger;
+      logger = _require.logger;
 
-  middlewares.push(_logger);
+  middlewares.push(logger);
 }
 
 var configureStore = function configureStore() {
