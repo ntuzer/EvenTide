@@ -27323,6 +27323,8 @@ var _reactRedux = __webpack_require__(7);
 
 var _event_actions = __webpack_require__(37);
 
+var _bookmark_actions = __webpack_require__(249);
+
 var _event_index = __webpack_require__(154);
 
 var _event_index2 = _interopRequireDefault(_event_index);
@@ -27330,8 +27332,10 @@ var _event_index2 = _interopRequireDefault(_event_index);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
+  console.log("eic state", state);
   return {
-    events: Object.values(state.events)
+    events: Object.values(state.events),
+    bookmarks: Object.values(state.bookmarks)
   };
 };
 
@@ -27339,6 +27343,15 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
   return {
     fetchEvents: function fetchEvents() {
       return dispatch((0, _event_actions.fetchEvents)());
+    },
+    fetchBookmarks: function fetchBookmarks() {
+      return dispatch((0, _bookmark_actions.fetchBookmarks)());
+    },
+    fetchBookmark: function fetchBookmark(id) {
+      return dispatch((0, _bookmark_actions.fetchBookmark)(id));
+    },
+    removeBookmark: function removeBookmark(id) {
+      return dispatch((0, _bookmark_actions.removeBookmark)(id));
     }
   };
 };
@@ -27392,6 +27405,7 @@ var EventIndex = function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.props.fetchEvents();
+      this.props.fetchBookmarks();
     }
   }, {
     key: 'shuffle',
@@ -27409,6 +27423,7 @@ var EventIndex = function (_React$Component) {
     value: function render() {
       // console.log("events index", this.props);
       if (this.props.events === undefined) return null;
+      var events = this.props.bookmarks;
       return _react2.default.createElement(
         'div',
         { className: 'event-index' },
@@ -27425,7 +27440,9 @@ var EventIndex = function (_React$Component) {
             'div',
             { className: 'event-main' },
             this.shuffle(this.props.events).slice(0, 9).map(function (event) {
-              return _react2.default.createElement(_event_index_item2.default, { key: event.id, event: event });
+              var bool = false;
+              if (events.includes(event)) bool = true;
+              return _react2.default.createElement(_event_index_item2.default, { key: event.id, bookmarked: bool, event: event });
             })
           )
         )
@@ -31058,7 +31075,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     loggedIn: Boolean(state.session.currentUser),
-    email: state.session.currentUser.email
+    email: state.session.currentUser.email,
+    bookmarks: Object.values(state.bookmarks)
   };
 };
 
@@ -31122,14 +31140,15 @@ var UserShow = function (_React$Component) {
   }
 
   _createClass(UserShow, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      var _this2 = this;
-
-      this.props.fetchBookmarks().then(function (bks) {
-        if (bks === undefined) return null;
-        return _this2.setState(Object.values(bks.bookmarks));
-      });
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.props.fetchBookmarks();
+      // .then(
+      //   bks => {
+      //     if (bks === undefined) return null;
+      //     return this.setState(Object.values(bks.bookmarks));
+      //   }
+      // );
     }
   }, {
     key: 'render',
@@ -31163,7 +31182,7 @@ var UserShow = function (_React$Component) {
             'div',
             { className: 'user-show-body' },
             events.map(function (evt) {
-              return _react2.default.createElement(_event_index_item2.default, { key: evt.id, event: evt });
+              return _react2.default.createElement(_event_index_item2.default, { key: evt.id, bookmarked: 'true', event: evt });
             })
           )
         )

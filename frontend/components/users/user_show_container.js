@@ -9,7 +9,8 @@ import {
 const mapStateToProps = (state, ownProps) => {
   return {
     loggedIn: Boolean(state.session.currentUser),
-    email: state.session.currentUser.email
+    email: state.session.currentUser.email,
+    bookmarks: Object.values(state.bookmarks)
   };
 };
 

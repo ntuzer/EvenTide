@@ -7,13 +7,14 @@ class UserShow extends React.Component {
     super(props);
     this.state = undefined;
   }
-  componentWillMount(){
-    this.props.fetchBookmarks().then(
-      bks => {
-        if (bks === undefined) return null;
-        return this.setState(Object.values(bks.bookmarks));
-      }
-    );
+  componentDidMount(){
+    this.props.fetchBookmarks();
+    // .then(
+    //   bks => {
+    //     if (bks === undefined) return null;
+    //     return this.setState(Object.values(bks.bookmarks));
+    //   }
+    // );
   }
 
   render(){
@@ -34,10 +35,9 @@ class UserShow extends React.Component {
           <div className="user-show-body">
             {
               events.map(evt => {
-                return <EventIndexItem key={evt.id} event={evt} />;
+                return <EventIndexItem key={evt.id} bookmarked="true" event={evt} />;
               })
             }
-
           </div>
         </section>
       </div>
