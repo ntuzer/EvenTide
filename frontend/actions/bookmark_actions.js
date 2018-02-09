@@ -46,3 +46,11 @@ export const removeBookmark = (id) => dispatch => {
     dispatch(receiveErrors(err.responseJSON))
   ));
 };
+
+export const createBookmark = (id) => dispatch => {
+  return BookAPIUtil.createBookmark(id).then(bk => (
+    dispatch(receiveBookmark(bk))
+  ), err => (
+    dispatch(receiveErrors(err.responseJSON))
+  ));
+};

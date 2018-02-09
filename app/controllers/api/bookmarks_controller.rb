@@ -2,7 +2,8 @@ class Api::BookmarksController < ApplicationController
   before_action :require_logged_in
 
   def create
-    @bookmark = Book.new(params[:event_id])
+    id = params[:event_id].to_i
+    @bookmark = Bookmark.new(event_id: id)
     @bookmark.user_id = current_user.id
     if @bookmark.save
       render :show

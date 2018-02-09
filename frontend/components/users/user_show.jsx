@@ -5,16 +5,17 @@ import EventIndexItem from '../events/event_index_item';
 class UserShow extends React.Component {
   constructor(props){
     super(props);
+    console.log('propsss', props);
     this.state = undefined;
   }
-  componentDidMount(){
-    this.props.fetchBookmarks();
-    // .then(
-    //   bks => {
-    //     if (bks === undefined) return null;
-    //     return this.setState(Object.values(bks.bookmarks));
-    //   }
-    // );
+
+  componentWillMount(){
+    this.props.fetchBookmarks().then(
+       bks => {
+         if (bks === undefined) return null;
+         return this.setState(Object.values(bks.bookmarks));
+       }
+     );
   }
 
   render(){
@@ -35,7 +36,7 @@ class UserShow extends React.Component {
           <div className="user-show-body">
             {
               events.map(evt => {
-                return <EventIndexItem key={evt.id} bookmarked="true" event={evt} />;
+                return <EventIndexItem key={evt.id} bookmark="true" event={evt} />;
               })
             }
           </div>

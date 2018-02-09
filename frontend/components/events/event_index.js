@@ -22,8 +22,9 @@ class EventIndex extends React.Component {
   }
 
   render(){
-    // console.log("events index", this.props);
+    console.log("events index", this.props);
     if (this.props.events === undefined) return null;
+    if (this.props.bookmarks === undefined) return null;
     let events = this.props.bookmarks;
     return (
       <div className="event-index">
@@ -33,9 +34,11 @@ class EventIndex extends React.Component {
           <div className="event-main">
             {
               this.shuffle(this.props.events).slice(0, 9).map(event => {
-                let bool = false;
-                if (events.includes(event)) bool = true;
-                return <EventIndexItem key={event.id} bookmarked={bool} event={event} />;
+                let bool = "false";
+                if (events.includes(event)) bool = "true";
+                return <EventIndexItem key={event.id}
+                  createBookmark={this.props.createBookmark}
+                  removeBookmark={this.props.removeBookmark} event={event} />;
               }
             )
             }

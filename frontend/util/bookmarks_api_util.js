@@ -1,8 +1,8 @@
-export const createBookmark = eventId => {
+export const createBookmark = event_id => {
   return $.ajax({
     url: 'api/bookmarks',
     method: 'POST',
-    data: { eventId }
+    data: { event_id }
   });
 };
 

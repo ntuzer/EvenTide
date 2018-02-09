@@ -5,7 +5,8 @@ import {
 import {
         fetchBookmarks,
         fetchBookmark,
-        removeBookmark
+        removeBookmark,
+        createBookmark,
       } from '../../actions/bookmark_actions';
 import EventIndex from './event_index';
 
@@ -19,6 +20,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
+    createBookmark: id => dispatch(createBookmark(id)),
     fetchEvents: () => dispatch(fetchEvents()),
     fetchBookmarks: () => dispatch(fetchBookmarks()),
     fetchBookmark: id => dispatch(fetchBookmark(id)),
