@@ -30387,12 +30387,17 @@ var _tickets_errors_reducer = __webpack_require__(240);
 
 var _tickets_errors_reducer2 = _interopRequireDefault(_tickets_errors_reducer);
 
+var _bookmarks_errors_reducer = __webpack_require__(251);
+
+var _bookmarks_errors_reducer2 = _interopRequireDefault(_bookmarks_errors_reducer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = (0, _redux.combineReducers)({
   session: _session_errors_reducer2.default,
   events: _events_errors_reducer2.default,
-  tickets: _tickets_errors_reducer2.default
+  tickets: _tickets_errors_reducer2.default,
+  bookmarks: _bookmarks_errors_reducer2.default
 });
 
 /***/ }),
@@ -31587,6 +31592,33 @@ var removeBookmark = exports.removeBookmark = function removeBookmark(id) {
     url: '/api/bookmarks/' + id,
     method: 'DELETE'
   });
+};
+
+/***/ }),
+/* 251 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _bookmark_actions = __webpack_require__(249);
+
+exports.default = function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments[1];
+
+  // console.log('events error reducer', action);
+  Object.freeze(state);
+  switch (action.type) {
+    case _bookmark_actions.RECEIVE_BOOKMARK_ERRORS:
+      return action.errors;
+    default:
+      return state;
+  }
 };
 
 /***/ })
