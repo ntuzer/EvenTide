@@ -30,7 +30,7 @@ header nav {
   font-size: 13px;
   font-weight: bold;
   text-transform: uppercase;
-  border-left: 1px solid #EFF2F5;
+  // border-left: 1px solid #EFF2F5;
   display: flex;
   flex-direction: row-reverse;
 }
@@ -50,6 +50,13 @@ header nav {
 .user {
   display: flex;
   align-items: center;
+  padding: 22px 20px 19px 20px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 15px;
+  color: gray;
+  border-left: 1px solid #EFF2F5;
+
 }
 .user:hover {
   background: #EFF2F5;

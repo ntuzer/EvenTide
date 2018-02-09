@@ -32,9 +32,9 @@ class Navbar extends React.Component {
     // e.preventDefault();
 
     let profile = this.props.loggedIn ?
-      <div><Link
+      <div className="user"><Link
         to={`/users/${this.props.userId}`}>
-        Profile {this.props.userId}
+        My Profile
       </Link></div> : <div></div>;
     return profile;
   }

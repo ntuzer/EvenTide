@@ -27154,13 +27154,12 @@ var Navbar = function (_React$Component) {
 
       var profile = this.props.loggedIn ? _react2.default.createElement(
         'div',
-        null,
+        { className: 'user' },
         _react2.default.createElement(
           _reactRouterDom.Link,
           {
             to: '/users/' + this.props.userId },
-          'Profile ',
-          this.props.userId
+          'My Profile'
         )
       ) : _react2.default.createElement('div', null);
       return profile;
@@ -31267,13 +31266,17 @@ var UserShow = function (_React$Component) {
           { className: 'user-show-body-outer' },
           _react2.default.createElement(
             'div',
-            { className: 'user-show-body' },
-            events.map(function (evt) {
-              return _react2.default.createElement(_event_index_item2.default, { key: evt.id,
-                createBookmark: _this3.props.createBookmark,
-                removeBookmark: _this3.props.removeBookmark,
-                bookmark: 'true', event: evt });
-            })
+            { className: 'u-s-b-o' },
+            _react2.default.createElement(
+              'div',
+              { className: 'user-show-body' },
+              events.map(function (evt) {
+                return _react2.default.createElement(_event_index_item2.default, { key: evt.id,
+                  createBookmark: _this3.props.createBookmark,
+                  removeBookmark: _this3.props.removeBookmark,
+                  bookmark: 'true', event: evt });
+              })
+            )
           )
         )
       );

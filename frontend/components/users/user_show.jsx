@@ -32,15 +32,17 @@ class UserShow extends React.Component {
           </div>
         </header>
         <section className="user-show-body-outer">
-          <div className="user-show-body">
-            {
-              events.map(evt => {
-                return <EventIndexItem key={evt.id}
-                  createBookmark={this.props.createBookmark}
-                  removeBookmark={this.props.removeBookmark}
-                  bookmark="true" event={evt} />;
-              })
-            }
+          <div className="u-s-b-o">
+            <div className="user-show-body">
+              {
+                events.map(evt => {
+                  return <EventIndexItem key={evt.id}
+                    createBookmark={this.props.createBookmark}
+                    removeBookmark={this.props.removeBookmark}
+                    bookmark="true" event={evt} />;
+                })
+              }
+            </div>
           </div>
         </section>
       </div>
