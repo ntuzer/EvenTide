@@ -7,12 +7,14 @@ import errors from './errors_reducer';
 import events from './events_reducer';
 import tickets from './tickets_reducer';
 import bookmarks from './bookmarks_reducer';
+import categories from './categories_reducer';
 
 const rootReducer = combineReducers({
   session,
   events,
   tickets,
   bookmarks,
+  categories,
   errors,
 });
 

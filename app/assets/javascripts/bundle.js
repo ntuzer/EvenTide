@@ -28226,18 +28226,23 @@ var _bookmarks_reducer = __webpack_require__(248);
 
 var _bookmarks_reducer2 = _interopRequireDefault(_bookmarks_reducer);
 
+var _categories_reducer = __webpack_require__(252);
+
+var _categories_reducer2 = _interopRequireDefault(_categories_reducer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// import entities from './entities_reducer';
+// import ui from './ui_reducer';
 var rootReducer = (0, _redux.combineReducers)({
   session: _session_reducer2.default,
   events: _events_reducer2.default,
   tickets: _tickets_reducer2.default,
   bookmarks: _bookmarks_reducer2.default,
+  categories: _categories_reducer2.default,
   errors: _errors_reducer2.default
 });
 
-// import entities from './entities_reducer';
-// import ui from './ui_reducer';
 exports.default = rootReducer;
 
 /***/ }),
@@ -31818,6 +31823,104 @@ exports.default = function () {
     default:
       return state;
   }
+};
+
+/***/ }),
+/* 252 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _merge = __webpack_require__(66);
+
+var _merge2 = _interopRequireDefault(_merge);
+
+var _category_actions = __webpack_require__(253);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var categoriesReducer = function categoriesReducer() {
+  var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments[1];
+
+  Object.freeze(preloadedState);
+  var newState = void 0;
+  switch (action.type) {
+    case _category_actions.RECEIVE_EVENTS_CATEGORIES:
+      return (0, _merge2.default)({}, preloadedState, action.catEvents);
+    default:
+      return preloadedState;
+  }
+};
+
+exports.default = categoriesReducer;
+
+/***/ }),
+/* 253 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.fetchEventsByCategory = exports.receiveErrors = exports.RECEIVE_CATEGORY_ERRORS = exports.RECEIVE_EVENTS_CATEGORIES = undefined;
+
+var _categories_api_util = __webpack_require__(254);
+
+var CatAPI = _interopRequireWildcard(_categories_api_util);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+var RECEIVE_EVENTS_CATEGORIES = exports.RECEIVE_EVENTS_CATEGORIES = 'RECEIVE_EVENTS_CATEGORIES';
+var RECEIVE_CATEGORY_ERRORS = exports.RECEIVE_CATEGORY_ERRORS = 'RECEIVE_CATEGORY_ERRORS';
+
+var receiveCategories = function receiveCategories(catEvents) {
+  return {
+    type: RECEIVE_EVENTS_CATEGORIES,
+    catEvents: catEvents
+  };
+};
+
+var receiveErrors = exports.receiveErrors = function receiveErrors(errors) {
+  return {
+    type: RECEIVE_CATEGORY_ERRORS,
+    errors: errors
+  };
+};
+
+var fetchEventsByCategory = exports.fetchEventsByCategory = function fetchEventsByCategory(id) {
+  return function (dispatch) {
+    return CatAPI.fetchEventsByCategory().then(function (events) {
+      return dispatch(receiveCategories(events));
+    }, function (err) {
+      return dispatch(receiveErrors(err.responseJSON));
+    });
+  };
+};
+
+/***/ }),
+/* 254 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var fetchEventsByCategory = exports.fetchEventsByCategory = function fetchEventsByCategory(id) {
+  return $.ajax({
+    url: '/api/categories/' + id,
+    method: 'GET',
+    data: { id: id }
+  });
 };
 
 /***/ })
