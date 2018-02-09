@@ -28151,7 +28151,7 @@ var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   // console.log('Initialized THE STORE');
-  return (0, _redux.createStore)(_root_reducer2.default, preloadedState, (0, _redux.applyMiddleware)(_reduxThunk2.default));
+  return (0, _redux.createStore)(_root_reducer2.default, preloadedState, (0, _redux.applyMiddleware)(_reduxThunk2.default, _reduxLogger2.default));
 };
 
 exports.default = configureStore;
@@ -30750,9 +30750,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   // console.log('escOP',ownProps);
+
   return {
     event: state.events[ownProps.match.params.eventId],
-    eventId: ownProps.match.params.eventId
+    eventId: ownProps.match.params.eventId,
+    bookmarks: Object.values(state.bookmarks)
   };
 };
 
@@ -30811,9 +30813,9 @@ var EventShow = function (_React$Component) {
   function EventShow(props) {
     _classCallCheck(this, EventShow);
 
+    // this.state = this.props.event;
     var _this = _possibleConstructorReturn(this, (EventShow.__proto__ || Object.getPrototypeOf(EventShow)).call(this, props));
 
-    _this.state = _this.props.event;
     _this.prettyDate = _this.prettyDate.bind(_this);
     return _this;
   }
@@ -30824,6 +30826,7 @@ var EventShow = function (_React$Component) {
       // console.log('before',this.props);
       this.props.fetchEvent(this.props.eventId);
       // this.props.fetchBookmark(this.props.eventId);
+      this.props.fetchBookmarks();
       // console.log('after',this.props);
     }
   }, {
@@ -30843,9 +30846,19 @@ var EventShow = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var event = this.state;
-      if (event === null) return null;
-      var prettyDate = this.prettyDate(this.state);
+      var _this2 = this;
+
+      var event = this.props.event;
+      if (event === undefined) return null;
+      var bookmark = "false";
+
+      this.props.bookmarks.map(function (el) {
+        el.id === _this2.props.event.id ? bookmark = "true" : bookmark = "false";
+      });
+      var icon = bookmark === "true" ? "fas fa-bookmark fa-lg" : "far fa-bookmark fa-lg";
+      var method = bookmark === "true" ? this.props.removeBookmark : this.props.createBookmark;
+      var prettyDate = this.prettyDate(event);
+
       return _react2.default.createElement(
         'div',
         { className: 'event-back' },
@@ -30886,13 +30899,15 @@ var EventShow = function (_React$Component) {
             'div',
             { className: 'show-bar' },
             _react2.default.createElement(
-              _reactRouterDom.Link,
-              { to: '/', className: 'show-bar-icon' },
-              _react2.default.createElement('i', { className: 'far fa-bookmark fa-lg' })
+              'div',
+              { key: Date.now(), className: 'show-bar-icon', onClick: function onClick() {
+                  return method(event.id);
+                } },
+              _react2.default.createElement('i', { className: icon })
             ),
             _react2.default.createElement(
               _reactRouterDom.Link,
-              { to: '/events/' + this.state.id + '/rsvp',
+              { to: '/events/' + event.id + '/rsvp',
                 className: 'show-register' },
               'Register'
             )
@@ -31430,8 +31445,9 @@ var Rsvp = function (_React$Component) {
       var _this3 = this;
 
       e.preventDefault();
+      var location = '/events/' + this.state.event_id;
       this.props.createRSVP(this.state).then(function () {
-        return _this3.props.history.push("/");
+        return _this3.props.history.push(location);
       });
     }
   }, {

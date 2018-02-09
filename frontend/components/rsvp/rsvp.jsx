@@ -28,7 +28,8 @@ class Rsvp extends React.Component {
 
   handleSubmit(e){
     e.preventDefault();
-    this.props.createRSVP(this.state).then(() => this.props.history.push("/"));
+    let location = `/events/${this.state.event_id}`;
+    this.props.createRSVP(this.state).then(() => this.props.history.push(location));
   }
 
   handleChange(e){

@@ -5,7 +5,7 @@ import { Link, withRouter, Redirect } from 'react-router-dom';
 class EventShow extends React.Component {
   constructor(props){
     super(props);
-    this.state = this.props.event;
+    // this.state = this.props.event;
     this.prettyDate = this.prettyDate.bind(this);
   }
 
@@ -13,6 +13,7 @@ class EventShow extends React.Component {
     // console.log('before',this.props);
     this.props.fetchEvent(this.props.eventId);
     // this.props.fetchBookmark(this.props.eventId);
+    this.props.fetchBookmarks();
     // console.log('after',this.props);
   }
 
@@ -33,9 +34,17 @@ class EventShow extends React.Component {
   }
 
   render(){
-    let event = this.state;
-    if (event === null) return null;
-    let prettyDate = this.prettyDate(this.state);
+    let event = this.props.event;
+    if (event === undefined) return null;
+    let bookmark = "false";
+
+    this.props.bookmarks.map(el => {
+      el.id === this.props.event.id ? bookmark = "true" : bookmark = "false";
+    });
+    let icon = bookmark === "true" ? "fas fa-bookmark fa-lg" : "far fa-bookmark fa-lg";
+    let method = bookmark === "true" ? this.props.removeBookmark : this.props.createBookmark;
+    let prettyDate = this.prettyDate(event);
+
     return (
       <div className="event-back">
         <div className="event-show">
@@ -52,10 +61,8 @@ class EventShow extends React.Component {
           </div>
 
           <div className="show-bar">
-            <Link to="/" className="show-bar-icon">
-              <i className="far fa-bookmark fa-lg"></i>
-            </Link>
-            <Link to={`/events/${this.state.id}/rsvp`}
+            <div key={Date.now()} className="show-bar-icon" onClick={() => method(event.id)}><i className={icon}></i></div>
+            <Link to={`/events/${event.id}/rsvp`}
               className="show-register">Register</Link>
           </div>
 
