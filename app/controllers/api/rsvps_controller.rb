@@ -13,6 +13,10 @@ class Api::RsvpsController < ApplicationController
     end
   end
 
+  def index
+    @rsvps = Rsvp.all.where(user_id: current_user.id)
+  end
+
   def show
 
   end
