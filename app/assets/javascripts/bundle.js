@@ -30424,13 +30424,18 @@ var _bookmarks_errors_reducer = __webpack_require__(251);
 
 var _bookmarks_errors_reducer2 = _interopRequireDefault(_bookmarks_errors_reducer);
 
+var _categories_error_reducer = __webpack_require__(255);
+
+var _categories_error_reducer2 = _interopRequireDefault(_categories_error_reducer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = (0, _redux.combineReducers)({
   session: _session_errors_reducer2.default,
   events: _events_errors_reducer2.default,
   tickets: _tickets_errors_reducer2.default,
-  bookmarks: _bookmarks_errors_reducer2.default
+  bookmarks: _bookmarks_errors_reducer2.default,
+  categories: _categories_error_reducer2.default
 });
 
 /***/ }),
@@ -31921,6 +31926,33 @@ var fetchEventsByCategory = exports.fetchEventsByCategory = function fetchEvents
     method: 'GET',
     data: { id: id }
   });
+};
+
+/***/ }),
+/* 255 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _category_actions = __webpack_require__(253);
+
+exports.default = function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments[1];
+
+  // console.log('events error reducer', action);
+  Object.freeze(state);
+  switch (action.type) {
+    case _category_actions.RECEIVE_CATEGORY_ERRORS:
+      return state;
+    default:
+      return state;
+  }
 };
 
 /***/ })
