@@ -2171,13 +2171,6 @@ var deleteEvent = exports.deleteEvent = function deleteEvent(eventId) {
   };
 };
 
-// export const fetchMyEvents = () => dispatch => {
-//   console.log('action myevents');
-//   return EventAPIUtil.?????().then(events => (
-//     dispatch(receiveMyEvents(events))
-//   ));
-// };
-
 /***/ }),
 /* 38 */
 /***/ (function(module, exports, __webpack_require__) {

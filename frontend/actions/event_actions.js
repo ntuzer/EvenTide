@@ -82,10 +82,3 @@ export const deleteEvent = eventId => dispatch => {
           err => (dispatch(receiveErrors(err.responseJSON))
         ));
 };
-
-// export const fetchMyEvents = () => dispatch => {
-//   console.log('action myevents');
-//   return EventAPIUtil.?????().then(events => (
-//     dispatch(receiveMyEvents(events))
-//   ));
-// };

@@ -12,3 +12,17 @@ export const fetchBookmarks = () => {
     method: 'GET',
   });
 };
+
+export const fetchBookmark = (id) => {
+  return $.ajax({
+    url: `/api/bookmarks/${id}`,
+    method: 'GET',
+  });
+};
+
+export const removeBookmark = (id) => {
+  return $.ajax({
+    url: `/api/bookmarks/${id}`,
+    method: 'DELETE',
+  });
+};
