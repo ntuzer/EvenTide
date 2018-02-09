@@ -28194,17 +28194,22 @@ var _tickets_reducer = __webpack_require__(239);
 
 var _tickets_reducer2 = _interopRequireDefault(_tickets_reducer);
 
+var _bookmarks_reducer = __webpack_require__(248);
+
+var _bookmarks_reducer2 = _interopRequireDefault(_bookmarks_reducer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import entities from './entities_reducer';
-// import ui from './ui_reducer';
 var rootReducer = (0, _redux.combineReducers)({
   session: _session_reducer2.default,
   events: _events_reducer2.default,
   tickets: _tickets_reducer2.default,
+  bookmarks: _bookmarks_reducer2.default,
   errors: _errors_reducer2.default
 });
 
+// import entities from './entities_reducer';
+// import ui from './ui_reducer';
 exports.default = rootReducer;
 
 /***/ }),
@@ -31432,6 +31437,155 @@ var createRSVP = exports.createRSVP = function createRSVP(rsvp) {
     url: 'api/rsvps',
     method: 'POST',
     data: { rsvp: rsvp }
+  });
+};
+
+/***/ }),
+/* 248 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _merge2 = __webpack_require__(66);
+
+var _merge3 = _interopRequireDefault(_merge2);
+
+var _bookmark_actions = __webpack_require__(249);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var bookmarksReducer = function bookmarksReducer() {
+  var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments[1];
+
+  Object.freeze(preloadedState);
+  var newState = void 0;
+  switch (action.type) {
+    case _bookmark_actions.RECEIVE_BOOKMARKS:
+      return (0, _merge3.default)({}, preloadedState, action.bookmarks);
+    case _bookmark_actions.RECEIVE_BOOKMARK:
+      return (0, _merge3.default)({}, preloadedState, _defineProperty({}, action.id, action.bookmark));
+    default:
+      return preloadedState;
+  }
+};
+
+exports.default = bookmarksReducer;
+
+/***/ }),
+/* 249 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.removeBookmark = exports.fetchBookmark = exports.fetchBookmarks = exports.receiveErrors = exports.RECEIVE_BOOKMARK_ERRORS = exports.RECEIVE_BOOKMARK = exports.RECEIVE_BOOKMARKS = undefined;
+
+var _bookmarks_api_util = __webpack_require__(250);
+
+var BookAPIUtil = _interopRequireWildcard(_bookmarks_api_util);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+var RECEIVE_BOOKMARKS = exports.RECEIVE_BOOKMARKS = 'RECEIVE_BOOKMARKS';
+var RECEIVE_BOOKMARK = exports.RECEIVE_BOOKMARK = 'RECEIVE_BOOKMARK';
+var RECEIVE_BOOKMARK_ERRORS = exports.RECEIVE_BOOKMARK_ERRORS = 'RECEIVE_BOOKMARK_ERRORS';
+
+var receiveBookmarks = function receiveBookmarks(bookmarks) {
+  return {
+    type: RECEIVE_BOOKMARKS,
+    bookmarks: bookmarks
+  };
+};
+
+var receiveBookmark = function receiveBookmark(bookmark) {
+  return {
+    type: RECEIVE_BOOKMARK,
+    bookmark: bookmark
+  };
+};
+
+var receiveErrors = exports.receiveErrors = function receiveErrors(errors) {
+  return {
+    type: RECEIVE_BOOKMARK_ERRORS,
+    errors: errors
+  };
+};
+
+var fetchBookmarks = exports.fetchBookmarks = function fetchBookmarks() {
+  return function (dispatch) {
+    return BookAPIUtil.fetchBookmarks().then(function (bks) {
+      return dispatch(receiveBookmarks(bks));
+    }, function (err) {
+      return dispatch(receiveErrors(err.responseJSON));
+    });
+  };
+};
+
+var fetchBookmark = exports.fetchBookmark = function fetchBookmark(id) {
+  return function (dispatch) {
+    return BookAPIUtil.fetchBookmark(id).then(function (bk) {
+      return dispatch(receiveBookmark(bk));
+    }, function (err) {
+      return dispatch(receiveErrors(err.responseJSON));
+    });
+  };
+};
+
+var removeBookmark = exports.removeBookmark = function removeBookmark(id) {
+  return function (dispatch) {
+    return BookAPIUtil.removeBookmark(id).then(null, function (err) {
+      return dispatch(receiveErrors(err.responseJSON));
+    });
+  };
+};
+
+/***/ }),
+/* 250 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var createBookmark = exports.createBookmark = function createBookmark(eventId) {
+  return $.ajax({
+    url: 'api/bookmarks',
+    method: 'POST',
+    data: { eventId: eventId }
+  });
+};
+
+var fetchBookmarks = exports.fetchBookmarks = function fetchBookmarks() {
+  return $.ajax({
+    url: '/api/bookmarks',
+    method: 'GET'
+  });
+};
+
+var fetchBookmark = exports.fetchBookmark = function fetchBookmark(id) {
+  return $.ajax({
+    url: '/api/bookmarks/' + id,
+    method: 'GET'
+  });
+};
+
+var removeBookmark = exports.removeBookmark = function removeBookmark(id) {
+  return $.ajax({
+    url: '/api/bookmarks/' + id,
+    method: 'DELETE'
   });
 };
 

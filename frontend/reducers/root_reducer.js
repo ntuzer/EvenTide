@@ -6,11 +6,13 @@ import session from './session_reducer';
 import errors from './errors_reducer';
 import events from './events_reducer';
 import tickets from './tickets_reducer';
+import bookmarks from './bookmarks_reducer';
 
 const rootReducer = combineReducers({
   session,
   events,
   tickets,
+  bookmarks,
   errors,
 });
 

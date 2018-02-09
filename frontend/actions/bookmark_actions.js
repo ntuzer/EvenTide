@@ -4,17 +4,17 @@ export const RECEIVE_BOOKMARKS = 'RECEIVE_BOOKMARKS';
 export const RECEIVE_BOOKMARK = 'RECEIVE_BOOKMARK';
 export const RECEIVE_BOOKMARK_ERRORS = 'RECEIVE_BOOKMARK_ERRORS';
 
-const receiveBookmarks = bks => {
+const receiveBookmarks = bookmarks => {
   return {
     type: RECEIVE_BOOKMARKS,
-    bks
+    bookmarks
   };
 };
 
-const receiveBookmark = bk => {
+const receiveBookmark = bookmark => {
   return {
     type: RECEIVE_BOOKMARK,
-    bk
+    bookmark
   };
 };
 
