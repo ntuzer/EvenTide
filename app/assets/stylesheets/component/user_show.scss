@@ -23,5 +23,7 @@
 }
 
 .user-show-body {
-
+  width: inherit;
+  display: flex;
+  flex-wrap: wrap;
 }
