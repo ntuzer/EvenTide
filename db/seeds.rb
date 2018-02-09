@@ -14,10 +14,10 @@ User.create(email: "rewel", password: "password")
 User.create(email: "dahveed", password: "password")
 User.create(email: "joe@schmo.com", password: "password")
 User.create(email: "DemoUser@EvenTide.com", password: "password")
-
+id = User.find_by(email: "DemoUser@EvenTide.com").id
 
 Event.create({
-  organizer_id: 5,
+  organizer_id: id,
   title: 'Come take a class',
   location: "Atlanta",
   description: "FUN Times",
@@ -30,7 +30,7 @@ Event.create({
 )
 
 Event.create({
-  organizer_id: 5,
+  organizer_id: id,
   title: 'Party of the millenium',
   location: "SFO",
   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -43,7 +43,7 @@ Event.create({
 )
 
 Event.create({
-  organizer_id: 5,
+  organizer_id: id,
   title: 'Party 1',
   location: "SFO",
   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -56,7 +56,7 @@ Event.create({
 )
 
 Event.create({
-  organizer_id: 5,
+  organizer_id: id,
   title: 'Party 2',
   location: "SFO",
   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -70,7 +70,7 @@ Event.create({
 )
 
 Event.create({
-  organizer_id: 5,
+  organizer_id: id,
   title: 'Party 3',
   location: "SFO",
   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -84,7 +84,7 @@ Event.create({
 )
 
 Event.create({
-  organizer_id: 5,
+  organizer_id: id,
   title: 'Party 4',
   location: "SFO",
   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -98,7 +98,7 @@ Event.create({
 )
 
 Event.create({
-  organizer_id: 5,
+  organizer_id: id,
   title: 'Party 5',
   location: "SFO",
   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -112,7 +112,7 @@ Event.create({
 )
 
 Event.create({
-  organizer_id: 5,
+  organizer_id: id,
   title: 'Party 6',
   location: "SFO",
   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -126,7 +126,7 @@ Event.create({
 )
 
 Event.create({
-  organizer_id: 5,
+  organizer_id: id,
   title: 'Party 7',
   location: "SFO",
   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -139,7 +139,7 @@ Event.create({
 )
 
 Event.create({
-  organizer_id: 5,
+  organizer_id: id,
   title: 'Party 8',
   location: "SFO",
   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -152,7 +152,7 @@ Event.create({
 )
 
 Event.create({
-  organizer_id: 5,
+  organizer_id: id,
   title: 'Party 9',
   location: "SFO",
   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -165,7 +165,7 @@ Event.create({
 )
 
 Event.create({
-  organizer_id: 5,
+  organizer_id: id,
   title: 'Party 10',
   location: "SFO",
   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -176,3 +176,5 @@ Event.create({
   end_date: '2018-03-05T19:00',
   }
 )
+
+Event.all.each { |evt| Ticket.create(event_id: evt.id, quantity: 100, price: 0, ticket_name: "RSVP") }

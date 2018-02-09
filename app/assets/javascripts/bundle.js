@@ -26648,10 +26648,8 @@ var App = function App(store) {
       _react2.default.createElement(_route_util.ProtectedRoute, { path: '/users/:userId', component: _user_show_container2.default }),
       _react2.default.createElement(_route_util.ProtectedRoute, { path: '/user', component: _event_index_container2.default }),
       _react2.default.createElement(_route_util.ProtectedRoute, { path: '/events/new', component: _event_form_container2.default }),
-      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/events/:eventId',
+      _react2.default.createElement(_reactRouterDom.Route, { path: '/events/:eventId',
         component: _event_show_container2.default }),
-      _react2.default.createElement(_route_util.ProtectedRoute, { path: '/events/:eventId/rsvp',
-        component: _rsvp_container2.default }),
       _react2.default.createElement(_reactRouterDom.Route, { path: '/index', render: function render() {
           return 'home';
         } }),
@@ -26664,7 +26662,9 @@ var App = function App(store) {
           );
         }
       })
-    )
+    ),
+    _react2.default.createElement(_route_util.ProtectedRoute, { path: '/events/:eventId/rsvp',
+      component: _rsvp_container2.default })
   );
 };
 exports.default = App;
@@ -27162,7 +27162,8 @@ var Navbar = function (_React$Component) {
         null,
         _react2.default.createElement(
           _reactRouterDom.Link,
-          { to: '/users/' + this.props.userId },
+          {
+            to: '/users/' + this.props.userId },
           'Profile ',
           this.props.userId
         )
@@ -27624,7 +27625,7 @@ var EventForm = function (_React$Component) {
       this.props.errors.tickets.map(function (el) {
         if (el === "Ticket name can't be blank") result.tName = " * Ticket name can't be blank";
         if (el === "Quantity can't be blank") result.tQty = " * Quantity can't be blank and must be a number";
-        if (el === "Price can't be blank") result.tPrice = " * Quantity can't be blank and must be a number";
+        if (el === "Price can't be blank") result.tPrice = " * Price can't be blank and must be a number";
       });
       return result;
     }
@@ -31141,6 +31142,8 @@ var _rsvp2 = _interopRequireDefault(_rsvp);
 
 var _rsvp_actions = __webpack_require__(246);
 
+var _ticket_actions = __webpack_require__(238);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
@@ -31154,8 +31157,10 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
   return {
     createRSVP: function createRSVP(rsvp) {
       return dispatch((0, _rsvp_actions.createRSVP)(rsvp));
+    },
+    fetchTicket: function fetchTicket(id) {
+      return dispatch((0, _ticket_actions.fetchTicket)(id));
     }
-
   };
 };
 
@@ -31180,6 +31185,10 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(6);
 
+var _merge = __webpack_require__(66);
+
+var _merge2 = _interopRequireDefault(_merge);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -31196,18 +31205,36 @@ var Rsvp = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Rsvp.__proto__ || Object.getPrototypeOf(Rsvp)).call(this, props));
 
-    _this.state = props.rsvp;
-    var a = { quantity: undefined, event_id: _this.props.match.params.eventId };
+    _this.state = {
+      quantity: undefined,
+      event_id: _this.props.match.params.eventId,
+      ticketQty: undefined
+    };
     _this.handleSubmit = _this.handleSubmit.bind(_this);
-
+    _this.soldOut = _this.soldOut.bind(_this);
+    _this.register = _this.register.bind(_this);
+    _this.home = _this.home.bind(_this);
     return _this;
   }
 
   _createClass(Rsvp, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      var _this2 = this;
+
+      this.props.fetchTicket(parseInt(this.props.match.params.eventId)).then(function (ticket) {
+        _this2.setState((0, _merge2.default)({}, _this2.state, { ticketQty: ticket.ticket.quantity }));
+      });
+    }
+  }, {
     key: 'handleSubmit',
     value: function handleSubmit(e) {
+      var _this3 = this;
+
       e.preventDefault();
-      this.props.createRSVP(this.state);
+      this.props.createRSVP(this.state).then(function () {
+        return _this3.props.history.push("/");
+      });
     }
   }, {
     key: 'handleChange',
@@ -31215,22 +31242,30 @@ var Rsvp = function (_React$Component) {
       this.setState({ quantity: e.target.value, event_id: this.props.match.params.eventId });
     }
   }, {
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
+    key: 'soldOut',
+    value: function soldOut() {
       return _react2.default.createElement(
-        'header',
-        { className: 'profile-page' },
+        'div',
+        { className: 'sold-register' },
         _react2.default.createElement(
           'h1',
           null,
-          'Register'
-        ),
+          'Sorry this event is sold out.'
+        )
+      );
+    }
+  }, {
+    key: 'register',
+    value: function register() {
+      var _this4 = this;
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'sold-register' },
         _react2.default.createElement(
           'select',
           { className: 'ticket-num', onChange: function onChange(e) {
-              return _this2.handleChange(e);
+              return _this4.handleChange(e);
             } },
           _react2.default.createElement(
             'option',
@@ -31265,8 +31300,64 @@ var Rsvp = function (_React$Component) {
         ),
         _react2.default.createElement(
           'div',
-          { className: 'register', onClick: this.handleSubmit },
-          'Register for Event'
+          { className: 'rsvp-footer' },
+          _react2.default.createElement(
+            'div',
+            { className: 'register', onClick: this.handleSubmit },
+            'Register for Event'
+          )
+        )
+      );
+    }
+  }, {
+    key: 'home',
+    value: function home(e) {
+      e.preventDefault();
+      var id = this.props.match.params.eventId;
+      this.props.history.push('/events/' + id);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var remaining = this.state.ticketQty ? this.state.ticketQty : 0;
+      var buttons = void 0;
+      if (remaining > 0) {
+        buttons = this.register();
+      } else {
+        buttons = this.soldOut();
+      }
+      // if (this.props === undefined) return null;
+      return _react2.default.createElement(
+        'header',
+        { className: 'rsvp-page' },
+        _react2.default.createElement(
+          'div',
+          { className: 'rsvp-inner' },
+          _react2.default.createElement(
+            'div',
+            { className: 'rsvp-headerbar' },
+            _react2.default.createElement(
+              'h1',
+              { className: 'rsvp-title' },
+              'Register'
+            ),
+            _react2.default.createElement(
+              'button',
+              { className: 'close-form', onClick: this.home },
+              _react2.default.createElement(
+                'div',
+                null,
+                'x'
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'h3',
+            { className: 'tickets-remaining' },
+            'Remaining tickets available: ',
+            remaining
+          ),
+          buttons
         )
       );
     }

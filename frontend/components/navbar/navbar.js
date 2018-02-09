@@ -31,8 +31,12 @@ class Navbar extends React.Component {
   profile(e){
     // e.preventDefault();
 
-    let profile = this.props.loggedIn ? <div><Link to={`/users/${this.props.userId}`}>Profile {this.props.userId}</Link></div> : <div></div>;
-    return profile
+    let profile = this.props.loggedIn ?
+      <div><Link
+        to={`/users/${this.props.userId}`}>
+        Profile {this.props.userId}
+      </Link></div> : <div></div>;
+    return profile;
   }
 
 

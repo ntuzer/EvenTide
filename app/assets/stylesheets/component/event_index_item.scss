@@ -6,13 +6,17 @@
   padding: 15px;
 }
 
+
 .e-i-box {
   // border: 1px solid red;
   width: 330px;
   height: 300px;
   background: white;
   border-bottom: 1px solid gray;
+}
 
+.e-i-box:hover {
+  box-shadow: 2px 2px 0 0 rgba(0,0,0,.1);
 }
 
 .ii-upper{

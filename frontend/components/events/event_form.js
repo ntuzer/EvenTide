@@ -87,7 +87,7 @@ class EventForm extends React.Component {
     this.props.errors.tickets.map(el => {
       if(el === "Ticket name can't be blank") result.tName = " * Ticket name can't be blank";
       if(el === "Quantity can't be blank") result.tQty = " * Quantity can't be blank and must be a number";
-      if(el === "Price can't be blank") result.tPrice = " * Quantity can't be blank and must be a number";
+      if(el === "Price can't be blank") result.tPrice = " * Price can't be blank and must be a number";
     });
     return result;
   }

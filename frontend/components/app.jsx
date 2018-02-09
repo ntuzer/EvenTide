@@ -21,7 +21,7 @@ const App = (store) => {
   // console.log('App file');
   return (
     <div>
-    <Route path="/" component={NavbarContainer} />
+      <Route path="/" component={NavbarContainer} />
       <Switch>
         <Route exact path="/" component={EventIndexContainer} />
         <AuthRoute path="/login" component={SessionFormContainer} />
@@ -29,10 +29,8 @@ const App = (store) => {
         <ProtectedRoute path='/users/:userId' component={UserShowContainer} />
         <ProtectedRoute path='/user' component={EventIndexContainer} />
         <ProtectedRoute path='/events/new' component={EventFormContainer} />
-        <Route exact path='/events/:eventId'
+        <Route path='/events/:eventId'
           component={EventShowContainer} />
-        <ProtectedRoute path='/events/:eventId/rsvp'
-          component={RsvpContainer} />
         <Route path="/index" render={() => 'home'} />
         <Route path="/" render={(props) => {
           props.history.push('/index');
@@ -41,6 +39,8 @@ const App = (store) => {
           }
         />
       </Switch>
+      <ProtectedRoute path='/events/:eventId/rsvp'
+      component={RsvpContainer} />
     </div>
   );
 };
