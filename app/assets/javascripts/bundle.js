@@ -28125,7 +28125,7 @@ exports.default = EventForm;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
+/* WEBPACK VAR INJECTION */(function(process) {
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -28147,14 +28147,33 @@ var _root_reducer2 = _interopRequireDefault(_root_reducer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
+// const configureStore = (preloadedState = {}) => {
+//   // console.log('Initialized THE STORE');
+//   return createStore(
+//     rootReducer,
+//     preloadedState,
+//     applyMiddleware(thunk)
+//   );
+// };
+
+var middlewares = [_reduxThunk2.default];
+
+if (process.env.NODE_ENV !== 'production') {
+  // must use 'require' (import only allowed at top of file)
+  var _require = __webpack_require__(158),
+      _logger = _require.logger;
+
+  middlewares.push(_logger);
+}
+
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  // console.log('Initialized THE STORE');
-  return (0, _redux.createStore)(_root_reducer2.default, preloadedState, (0, _redux.applyMiddleware)(_reduxThunk2.default));
+  return (0, _redux.createStore)(_root_reducer2.default, preloadedState, _redux.applyMiddleware.apply(undefined, middlewares));
 };
 
 exports.default = configureStore;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 /* 158 */
