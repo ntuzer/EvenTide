@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :tickets, only: [:show, :create, :destroy]
     resources :rsvps, only: [:create, :show, :destroy]
     resources :bookmarks, only: [:create, :index, :show, :destroy]
+    resources :categories, only: [:show]
   end
 
   root "static_pages#root"
