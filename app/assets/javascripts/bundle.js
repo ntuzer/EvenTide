@@ -31051,6 +31051,8 @@ var _user_show = __webpack_require__(243);
 
 var _user_show2 = _interopRequireDefault(_user_show);
 
+var _bookmark_actions = __webpack_require__(249);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
@@ -31060,7 +31062,21 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   };
 };
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps, null)(_user_show2.default);
+var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+  return {
+    fetchBookmarks: function fetchBookmarks() {
+      return dispatch((0, _bookmark_actions.fetchBookmarks)());
+    },
+    fetchBookmark: function fetchBookmark(id) {
+      return dispatch((0, _bookmark_actions.fetchBookmark)(id));
+    },
+    removeBookmark: function removeBookmark(id) {
+      return dispatch((0, _bookmark_actions.removeBookmark)(id));
+    }
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_user_show2.default);
 
 /***/ }),
 /* 243 */
@@ -31081,6 +31097,10 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(6);
 
+var _event_index_item = __webpack_require__(233);
+
+var _event_index_item2 = _interopRequireDefault(_event_index_item);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -31092,16 +31112,35 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var UserShow = function (_React$Component) {
   _inherits(UserShow, _React$Component);
 
-  function UserShow() {
+  function UserShow(props) {
     _classCallCheck(this, UserShow);
 
-    return _possibleConstructorReturn(this, (UserShow.__proto__ || Object.getPrototypeOf(UserShow)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (UserShow.__proto__ || Object.getPrototypeOf(UserShow)).call(this, props));
+
+    _this.state = undefined;
+    return _this;
   }
 
   _createClass(UserShow, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      var _this2 = this;
+
+      this.props.fetchBookmarks().then(function (bks) {
+        if (bks === undefined) return null;
+        var events = void 0;
+        // bks.bookmarks.map(el => {
+        //
+        // })
+        _this2.setState(bks);
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
-
+      console.log("est", this.state);
+      if (this.state === undefined) return null;
+      // debugger;
       return _react2.default.createElement(
         'div',
         { className: 'profile-outer' },
@@ -31135,6 +31174,12 @@ var UserShow = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = UserShow;
+
+// {
+//   Object.values(this.state.bookmarks).map(bk => {
+//     <EventIndexItem key={bk.id}
+//   })
+// }
 
 /***/ }),
 /* 244 */

@@ -10,13 +10,17 @@ class Api::BookmarksController < ApplicationController
       render json: @bookmark.errors.full_messages, status: 422
     end
   end
-  
+
   def show
     @bookmark = Bookmark.find_by(id: params[:id])
   end
 
   def index
     @bookmarks = Bookmark.all.where(user_id: current_user.id)
+    arr = [];
+    @bookmarks.each { |bk| arr.push(bk.event_id) }
+    @events = Event.find(arr)
+    render :index
   end
 
   def destroy
