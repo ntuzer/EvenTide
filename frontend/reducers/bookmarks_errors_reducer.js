@@ -7,7 +7,7 @@ export default (state = [], action) => {
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_BOOKMARK_ERRORS:
-      return action.errors;
+      return state;
     default:
       return state;
   }

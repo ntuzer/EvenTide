@@ -4503,6 +4503,8 @@ var _store2 = _interopRequireDefault(_store);
 
 var _event_actions = __webpack_require__(37);
 
+var _bookmark_actions = __webpack_require__(249);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -4519,10 +4521,10 @@ document.addEventListener('DOMContentLoaded', function () {
   } else {
     store = (0, _store2.default)();
   }
-  // window.store = store;
+  window.store = store;
   // window.getState = store.getState;
   // window.dispatch = store.dispatch;
-  // window.createEvent = createEvent;
+  window.removeBookmark = _bookmark_actions.removeBookmark;
   // console.log('does it come back?');
   _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 });
@@ -27332,7 +27334,6 @@ var _event_index2 = _interopRequireDefault(_event_index);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  console.log("eic state", state);
   return {
     events: Object.values(state.events),
     bookmarks: Object.values(state.bookmarks)
@@ -27426,10 +27427,12 @@ var EventIndex = function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      console.log("events index", this.props);
       if (this.props.events === undefined) return null;
       if (this.props.bookmarks === undefined) return null;
-      var events = this.props.bookmarks;
+      var eArr = [];
+      this.props.bookmarks.map(function (el) {
+        return eArr.push(el.id);
+      });
       return _react2.default.createElement(
         'div',
         { className: 'event-index' },
@@ -27447,8 +27450,9 @@ var EventIndex = function (_React$Component) {
             { className: 'event-main' },
             this.shuffle(this.props.events).slice(0, 9).map(function (event) {
               var bool = "false";
-              if (events.includes(event)) bool = "true";
+              if (eArr.includes(event.id)) bool = "true";
               return _react2.default.createElement(_event_index_item2.default, { key: event.id,
+                bookmark: bool,
                 createBookmark: _this2.props.createBookmark,
                 removeBookmark: _this2.props.removeBookmark, event: event });
             })
@@ -30578,8 +30582,6 @@ var EventIndexItem = function EventIndexItem(_ref) {
   var category = "category";
   var icon = bookmark === "true" ? "fas fa-bookmark" : "far fa-bookmark";
   var method = bookmark === "true" ? removeBookmark : createBookmark;
-  console.log("method", method);
-  console.log("icon", icon);
   return _react2.default.createElement(
     'div',
     { key: event.id, className: 'e-i-i' },
@@ -30643,8 +30645,7 @@ var EventIndexItem = function EventIndexItem(_ref) {
                 return method(event.id);
               } },
             _react2.default.createElement('i', { className: icon })
-          ),
-          _react2.default.createElement(_reactRouterDom.Link, { to: '/' })
+          )
         )
       )
     )
@@ -31155,7 +31156,6 @@ var _bookmark_actions = __webpack_require__(249);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  console.log('us mstp', state);
   return {
     loggedIn: Boolean(state.session.currentUser),
     email: state.session.currentUser.email,
@@ -31221,14 +31221,13 @@ var UserShow = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (UserShow.__proto__ || Object.getPrototypeOf(UserShow)).call(this, props));
 
-    console.log('propsss', props);
     _this.state = undefined;
     return _this;
   }
 
   _createClass(UserShow, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
       var _this2 = this;
 
       this.props.fetchBookmarks().then(function (bks) {
@@ -31239,6 +31238,8 @@ var UserShow = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this3 = this;
+
       if (this.state === null) return null;
       var events = Object.values(this.state);
       return _react2.default.createElement(
@@ -31268,7 +31269,10 @@ var UserShow = function (_React$Component) {
             'div',
             { className: 'user-show-body' },
             events.map(function (evt) {
-              return _react2.default.createElement(_event_index_item2.default, { key: evt.id, bookmark: 'true', event: evt });
+              return _react2.default.createElement(_event_index_item2.default, { key: evt.id,
+                createBookmark: _this3.props.createBookmark,
+                removeBookmark: _this3.props.removeBookmark,
+                bookmark: 'true', event: evt });
             })
           )
         )
@@ -31776,7 +31780,7 @@ exports.default = function () {
   Object.freeze(state);
   switch (action.type) {
     case _bookmark_actions.RECEIVE_BOOKMARK_ERRORS:
-      return action.errors;
+      return state;
     default:
       return state;
   }

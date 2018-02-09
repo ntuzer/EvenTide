@@ -25,5 +25,13 @@ class Api::BookmarksController < ApplicationController
   end
 
   def destroy
+    id = params[:id].to_i
+    @bookmark = Bookmark.find_by(event_id: id)
+    if @bookmark
+      @bookmark.delete
+      render :show
+    else
+      render json: ["Unauthorized"], status: 403
+    end
   end
 end

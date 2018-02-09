@@ -8,7 +8,6 @@ import {
       } from '../../actions/bookmark_actions';
 
 const mapStateToProps = (state, ownProps) => {
-  console.log('us mstp', state);
   return {
     loggedIn: Boolean(state.session.currentUser),
     email: state.session.currentUser.email,

@@ -11,7 +11,6 @@ import {
 import EventIndex from './event_index';
 
 const mapStateToProps = (state, ownProps) => {
-    console.log("eic state", state);
   return {
     events: Object.values(state.events),
     bookmarks: Object.values(state.bookmarks)

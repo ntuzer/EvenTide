@@ -1,9 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-
-
-
 const EventIndexItem = ({ event, bookmark, removeBookmark, createBookmark }) => {
   if (event === undefined) return null;
   if (createBookmark === undefined) return null;
@@ -13,8 +10,6 @@ const EventIndexItem = ({ event, bookmark, removeBookmark, createBookmark }) => 
   let category = "category";
   let icon = bookmark === "true" ? "fas fa-bookmark" : "far fa-bookmark";
   let method = bookmark === "true" ? removeBookmark : createBookmark;
-  console.log("method", method);
-  console.log("icon", icon);
   return (
     <div key={event.id} className="e-i-i">
       <div className="e-i-box">
@@ -40,7 +35,6 @@ const EventIndexItem = ({ event, bookmark, removeBookmark, createBookmark }) => 
           <Link to="/">#{category}</Link>
           <div className="ii-bookmark">
             <div onClick={() => method(event.id)}><i className={icon}></i></div>
-            <Link to="/"></Link>
           </div>
         </div>
       </div>

@@ -8,6 +8,7 @@
 
 User.destroy_all
 Event.destroy_all
+Bookmark.destroy_all
 
 User.create(email: "test", password: "password")
 User.create(email: "rewel", password: "password")
