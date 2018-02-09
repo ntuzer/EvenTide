@@ -1,0 +1,27 @@
+.profile-outer{
+  min-height: 100%;
+}
+
+
+.profile-page {
+  height: 180px;
+  border-bottom: 1px solid #D2D6DF;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+}
+.user-show-body-outer{
+  background: #f8f8fa;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  top: 242px;
+  left: 0;
+  right: 0;
+}
+
+.user-show-body {
+
+}

@@ -6,15 +6,24 @@ class UserShow extends React.Component {
   render(){
 
     return(
-      <header className="profile-page">
-        <h1>USERSHOW</h1>
-        <div className="profile-bar">
-          Hi {this.props.email}!
-        </div>
-        <div className="profile-event-links">
-          Your Events
-        </div>
-      </header>
+      <div className="profile-outer">
+        <header className="profile-page">
+          <div></div>
+          <div className="profile-bar">
+            Hi {this.props.email}!
+          </div>
+          <div className="profile-event-links">
+            Your Events
+          </div>
+        </header>
+        <section className="user-show-body-outer">
+          <div className="user-show-body">
+            {
+              
+            }
+          </div>
+        </section>
+      </div>
     );
   }
 }

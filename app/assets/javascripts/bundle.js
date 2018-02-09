@@ -27770,19 +27770,6 @@ var EventForm = function (_React$Component) {
       newState[type] = value;
       this.setState(newState);
     }
-    // freeTicket(){
-    //
-    // }
-    //
-    // paidTicket(){
-    //
-    // }
-    //
-    // donation(){
-    //
-    // }
-
-
   }, {
     key: 'render',
     value: function render() {
@@ -27896,8 +27883,26 @@ var EventForm = function (_React$Component) {
                   { className: 'errors' },
                   errors.end
                 ),
-                _react2.default.createElement('input', { type: 'datetime-local', onChange: this.update("event", "end_date"),
+                _react2.default.createElement('input', {
+                  type: 'datetime-local',
+                  onChange: this.update("event", "end_date"),
                   value: this.state.event.end_date })
+              ),
+              _react2.default.createElement('br', null),
+              _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement('br', null),
+                'Event Image ',
+                _react2.default.createElement(
+                  'h1',
+                  { className: 'errors' },
+                  errors.image
+                ),
+                _react2.default.createElement('input', { type: 'text', onChange: this.update("event", "event_image_url"),
+                  placeholder: 'Enter an image url',
+                  value: this.state.event.event_image_url
+                })
               ),
               _react2.default.createElement('br', null),
               _react2.default.createElement(
@@ -31095,24 +31100,29 @@ var UserShow = function (_React$Component) {
     value: function render() {
 
       return _react2.default.createElement(
-        'header',
-        { className: 'profile-page' },
+        'div',
+        { className: 'profile-outer' },
         _react2.default.createElement(
-          'h1',
-          null,
-          'USERSHOW'
+          'header',
+          { className: 'profile-page' },
+          _react2.default.createElement('div', null),
+          _react2.default.createElement(
+            'div',
+            { className: 'profile-bar' },
+            'Hi ',
+            this.props.email,
+            '!'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'profile-event-links' },
+            'Your Events'
+          )
         ),
         _react2.default.createElement(
-          'div',
-          { className: 'profile-bar' },
-          'Hi ',
-          this.props.email,
-          '!'
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'profile-event-links' },
-          'Your Events'
+          'section',
+          { className: 'user-show-body-outer' },
+          _react2.default.createElement('div', { className: 'user-show-body' })
         )
       );
     }

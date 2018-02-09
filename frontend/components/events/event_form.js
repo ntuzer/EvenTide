@@ -70,8 +70,6 @@ class EventForm extends React.Component {
 
   }
 
-
-
   prettyErrors(){
     let result = {
       title: "", location: "", description: "",
@@ -179,18 +177,6 @@ class EventForm extends React.Component {
     newState[type] = value;
     this.setState(newState);
   }
-  // freeTicket(){
-  //
-  // }
-  //
-  // paidTicket(){
-  //
-  // }
-  //
-  // donation(){
-  //
-  // }
-
 
   render(){
     let divStyle = {paddingTop: 0};
@@ -245,9 +231,21 @@ class EventForm extends React.Component {
               <label>
                 <br/>
                 Ends <h1 className="errors">{errors.end}</h1>
-                <input type="datetime-local" onChange={this.update("event", "end_date")}
-                 value={this.state.event.end_date}></input>
+                <input
+                  type="datetime-local"
+                  onChange={this.update("event", "end_date")}
+                  value={this.state.event.end_date}>
+                </input>
               </label>
+              <br/>
+               <div>
+                 <br/>
+                 Event Image <h1 className="errors">{errors.image}</h1>
+                 <input type="text" onChange={this.update("event", "event_image_url")}
+                 placeholder="Enter an image url"
+                 value={this.state.event.event_image_url}
+                 ></input>
+               </div>
               <br/>
               <div>
                 Description <h1 className="errors">{errors.description}</h1>
