@@ -6,12 +6,13 @@ import {
         removeBookmark,
         createBookmark,
       } from '../../actions/bookmark_actions';
-
+import { fetchEvents } from '../../actions/event_actions';
 const mapStateToProps = (state, ownProps) => {
   return {
     loggedIn: Boolean(state.session.currentUser),
     email: state.session.currentUser.email,
-    bookmarks: Object.values(state.bookmarks)
+    bookmarks: Object.values(state.bookmarks),
+    events: Object.values(state.events)
   };
 };
 
@@ -20,7 +21,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     createBookmark: id => dispatch(createBookmark(id)),
     fetchBookmarks: () => dispatch(fetchBookmarks()),
     fetchBookmark: id => dispatch(fetchBookmark(id)),
-    removeBookmark:  id => dispatch(removeBookmark(id))
+    removeBookmark:  id => dispatch(removeBookmark(id)),
+    fetchEvents: () => dispatch(fetchEvents()),
   };
 };
 

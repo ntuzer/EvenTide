@@ -27447,10 +27447,10 @@ var EventIndex = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'event-main' },
-            this.shuffle(this.props.events).slice(0, 9).map(function (event) {
+            this.props.events.slice(0, 9).map(function (event) {
               var bool = "false";
               if (eArr.includes(event.id)) bool = "true";
-              return _react2.default.createElement(_event_index_item2.default, { key: event.id,
+              return _react2.default.createElement(_event_index_item2.default, { key: event.id + Date.now(),
                 bookmark: bool,
                 createBookmark: _this2.props.createBookmark,
                 removeBookmark: _this2.props.removeBookmark, event: event });
@@ -28151,7 +28151,7 @@ var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   // console.log('Initialized THE STORE');
-  return (0, _redux.createStore)(_root_reducer2.default, preloadedState, (0, _redux.applyMiddleware)(_reduxThunk2.default));
+  return (0, _redux.createStore)(_root_reducer2.default, preloadedState, (0, _redux.applyMiddleware)(_reduxThunk2.default, _reduxLogger2.default));
 };
 
 exports.default = configureStore;
@@ -30730,6 +30730,8 @@ var _reactRedux = __webpack_require__(7);
 
 var _event_actions = __webpack_require__(37);
 
+var _bookmark_actions = __webpack_require__(249);
+
 var _event_show = __webpack_require__(235);
 
 var _event_show2 = _interopRequireDefault(_event_show);
@@ -30748,6 +30750,18 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
   return {
     fetchEvent: function fetchEvent(eventId) {
       return dispatch((0, _event_actions.fetchEvent)(eventId));
+    },
+    createBookmark: function createBookmark(id) {
+      return dispatch((0, _bookmark_actions.createBookmark)(id));
+    },
+    fetchBookmarks: function fetchBookmarks() {
+      return dispatch((0, _bookmark_actions.fetchBookmarks)());
+    },
+    fetchBookmark: function fetchBookmark(id) {
+      return dispatch((0, _bookmark_actions.fetchBookmark)(id));
+    },
+    removeBookmark: function removeBookmark(id) {
+      return dispatch((0, _bookmark_actions.removeBookmark)(id));
     }
   };
 };
@@ -30787,7 +30801,6 @@ var EventShow = function (_React$Component) {
   function EventShow(props) {
     _classCallCheck(this, EventShow);
 
-    // console.log('constructor', this.props);
     var _this = _possibleConstructorReturn(this, (EventShow.__proto__ || Object.getPrototypeOf(EventShow)).call(this, props));
 
     _this.state = _this.props.event;
@@ -30800,13 +30813,9 @@ var EventShow = function (_React$Component) {
     value: function componentDidMount() {
       // console.log('before',this.props);
       this.props.fetchEvent(this.props.eventId);
+      // this.props.fetchBookmark(this.props.eventId);
       // console.log('after',this.props);
     }
-
-    // componentWillReceiveProps(nextProps) {
-    //   this.props.fetchEvent(nextProps.match.params.eventId);
-    // }
-
   }, {
     key: 'prettyDate',
     value: function prettyDate(event) {
@@ -31152,13 +31161,16 @@ var _user_show2 = _interopRequireDefault(_user_show);
 
 var _bookmark_actions = __webpack_require__(249);
 
+var _event_actions = __webpack_require__(37);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     loggedIn: Boolean(state.session.currentUser),
     email: state.session.currentUser.email,
-    bookmarks: Object.values(state.bookmarks)
+    bookmarks: Object.values(state.bookmarks),
+    events: Object.values(state.events)
   };
 };
 
@@ -31175,6 +31187,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
     },
     removeBookmark: function removeBookmark(id) {
       return dispatch((0, _bookmark_actions.removeBookmark)(id));
+    },
+    fetchEvents: function fetchEvents() {
+      return dispatch((0, _event_actions.fetchEvents)());
     }
   };
 };
@@ -31227,20 +31242,20 @@ var UserShow = function (_React$Component) {
   _createClass(UserShow, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var _this2 = this;
 
-      this.props.fetchBookmarks().then(function (bks) {
-        if (bks === undefined) return null;
-        return _this2.setState(Object.values(bks.bookmarks));
-      });
+      this.props.fetchEvents().then(this.props.fetchBookmarks());
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
+      var _this2 = this;
 
-      if (this.state === null) return null;
-      var events = Object.values(this.state);
+      if (this.props.events === undefined) return null;
+      var events = this.props.bookmarks;
+      var eArr = [];
+      this.props.bookmarks.map(function (el) {
+        return eArr.push(el.id);
+      });
       return _react2.default.createElement(
         'div',
         { className: 'profile-outer' },
@@ -31271,10 +31286,12 @@ var UserShow = function (_React$Component) {
               'div',
               { className: 'user-show-body' },
               events.map(function (evt) {
+                var bool = "false";
+                if (eArr.includes(evt.id)) bool = "true";
                 return _react2.default.createElement(_event_index_item2.default, { key: evt.id,
-                  createBookmark: _this3.props.createBookmark,
-                  removeBookmark: _this3.props.removeBookmark,
-                  bookmark: 'true', event: evt });
+                  createBookmark: _this2.props.createBookmark,
+                  removeBookmark: _this2.props.removeBookmark,
+                  bookmark: bool, event: evt });
               })
             )
           )
@@ -31634,7 +31651,11 @@ var bookmarksReducer = function bookmarksReducer() {
     case _bookmark_actions.RECEIVE_BOOKMARKS:
       return (0, _merge3.default)({}, preloadedState, action.bookmarks);
     case _bookmark_actions.RECEIVE_BOOKMARK:
-      return (0, _merge3.default)({}, preloadedState, _defineProperty({}, action.id, action.bookmark));
+      return (0, _merge3.default)({}, preloadedState, _defineProperty({}, action.bookmark.id, action.bookmark));
+    case _bookmark_actions.REMOVE_BOOKMARK:
+      newState = (0, _merge3.default)({}, preloadedState);
+      delete newState[action.bookmark.id];
+      return newState;
     default:
       return preloadedState;
   }
@@ -31652,7 +31673,7 @@ exports.default = bookmarksReducer;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.createBookmark = exports.removeBookmark = exports.fetchBookmark = exports.fetchBookmarks = exports.receiveErrors = exports.RECEIVE_BOOKMARK_ERRORS = exports.RECEIVE_BOOKMARK = exports.RECEIVE_BOOKMARKS = undefined;
+exports.createBookmark = exports.removeBookmark = exports.fetchBookmark = exports.fetchBookmarks = exports.deleteBookmark = exports.receiveErrors = exports.REMOVE_BOOKMARK = exports.RECEIVE_BOOKMARK_ERRORS = exports.RECEIVE_BOOKMARK = exports.RECEIVE_BOOKMARKS = undefined;
 
 var _bookmarks_api_util = __webpack_require__(250);
 
@@ -31663,6 +31684,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 var RECEIVE_BOOKMARKS = exports.RECEIVE_BOOKMARKS = 'RECEIVE_BOOKMARKS';
 var RECEIVE_BOOKMARK = exports.RECEIVE_BOOKMARK = 'RECEIVE_BOOKMARK';
 var RECEIVE_BOOKMARK_ERRORS = exports.RECEIVE_BOOKMARK_ERRORS = 'RECEIVE_BOOKMARK_ERRORS';
+var REMOVE_BOOKMARK = exports.REMOVE_BOOKMARK = 'REMOVE_BOOKMARK';
 
 var receiveBookmarks = function receiveBookmarks(bookmarks) {
   return {
@@ -31682,6 +31704,13 @@ var receiveErrors = exports.receiveErrors = function receiveErrors(errors) {
   return {
     type: RECEIVE_BOOKMARK_ERRORS,
     errors: errors
+  };
+};
+
+var deleteBookmark = exports.deleteBookmark = function deleteBookmark(bookmark) {
+  return {
+    type: REMOVE_BOOKMARK,
+    bookmark: bookmark
   };
 };
 
@@ -31707,7 +31736,9 @@ var fetchBookmark = exports.fetchBookmark = function fetchBookmark(id) {
 
 var removeBookmark = exports.removeBookmark = function removeBookmark(id) {
   return function (dispatch) {
-    return BookAPIUtil.removeBookmark(id).then(null, function (err) {
+    return BookAPIUtil.removeBookmark(id).then(function (bk) {
+      return dispatch(deleteBookmark(bk));
+    }, function (err) {
       return dispatch(receiveErrors(err.responseJSON));
     });
   };

@@ -33,10 +33,10 @@ class EventIndex extends React.Component {
           <h1>Local events for you.</h1>
           <div className="event-main">
             {
-              this.shuffle(this.props.events).slice(0, 9).map(event => {
+              this.props.events.slice(0, 9).map(event => {
                 let bool = "false";
                 if (eArr.includes(event.id)) bool = "true";
-                return <EventIndexItem key={event.id}
+                return <EventIndexItem key={event.id + Date.now()}
                   bookmark={bool}
                   createBookmark={this.props.createBookmark}
                   removeBookmark={this.props.removeBookmark} event={event} />;

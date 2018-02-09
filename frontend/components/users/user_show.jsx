@@ -9,17 +9,15 @@ class UserShow extends React.Component {
   }
 
   componentDidMount(){
-    this.props.fetchBookmarks().then(
-       bks => {
-         if (bks === undefined) return null;
-         return this.setState(Object.values(bks.bookmarks));
-       }
-     );
+
+    this.props.fetchEvents().then(this.props.fetchBookmarks());
   }
 
   render(){
-    if (this.state === null) return null;
-    let events = Object.values(this.state);
+    if (this.props.events === undefined) return null;
+    let events = this.props.bookmarks;
+    let eArr = [];
+    this.props.bookmarks.map(el => eArr.push(el.id));
     return(
       <div className="profile-outer">
         <header className="profile-page">
@@ -36,10 +34,12 @@ class UserShow extends React.Component {
             <div className="user-show-body">
               {
                 events.map(evt => {
+                  let bool = "false";
+                  if (eArr.includes(evt.id)) bool = "true";
                   return <EventIndexItem key={evt.id}
                     createBookmark={this.props.createBookmark}
                     removeBookmark={this.props.removeBookmark}
-                    bookmark="true" event={evt} />;
+                    bookmark={bool} event={evt} />;
                 })
               }
             </div>

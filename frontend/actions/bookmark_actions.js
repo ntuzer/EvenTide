@@ -3,6 +3,7 @@ import * as BookAPIUtil from '../util/bookmarks_api_util';
 export const RECEIVE_BOOKMARKS = 'RECEIVE_BOOKMARKS';
 export const RECEIVE_BOOKMARK = 'RECEIVE_BOOKMARK';
 export const RECEIVE_BOOKMARK_ERRORS = 'RECEIVE_BOOKMARK_ERRORS';
+export const REMOVE_BOOKMARK = 'REMOVE_BOOKMARK';
 
 const receiveBookmarks = bookmarks => {
   return {
@@ -25,6 +26,14 @@ export const receiveErrors = errors => {
   };
 };
 
+export const deleteBookmark = bookmark => {
+  return {
+    type: REMOVE_BOOKMARK,
+    bookmark
+  };
+};
+
+
 export const fetchBookmarks = () => dispatch => {
   return BookAPIUtil.fetchBookmarks().then(bks => (
     dispatch(receiveBookmarks(bks))
@@ -42,7 +51,9 @@ export const fetchBookmark = (id) => dispatch => {
 };
 
 export const removeBookmark = (id) => dispatch => {
-  return BookAPIUtil.removeBookmark(id).then(null, err => (
+  return BookAPIUtil.removeBookmark(id).then(bk => (
+    dispatch(deleteBookmark(bk))
+  ), err => (
     dispatch(receiveErrors(err.responseJSON))
   ));
 };

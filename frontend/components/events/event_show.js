@@ -5,7 +5,6 @@ import { Link, withRouter, Redirect } from 'react-router-dom';
 class EventShow extends React.Component {
   constructor(props){
     super(props);
-    // console.log('constructor', this.props);
     this.state = this.props.event;
     this.prettyDate = this.prettyDate.bind(this);
   }
@@ -13,13 +12,10 @@ class EventShow extends React.Component {
   componentDidMount(){
     // console.log('before',this.props);
     this.props.fetchEvent(this.props.eventId);
+    // this.props.fetchBookmark(this.props.eventId);
     // console.log('after',this.props);
   }
 
-
-  // componentWillReceiveProps(nextProps) {
-  //   this.props.fetchEvent(nextProps.match.params.eventId);
-  // }
 
   prettyDate(event){
     let dateObj = new Date(event.start_date).toString();

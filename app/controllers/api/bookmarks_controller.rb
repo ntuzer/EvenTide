@@ -6,7 +6,9 @@ class Api::BookmarksController < ApplicationController
     @bookmark = Bookmark.new(event_id: id)
     @bookmark.user_id = current_user.id
     if @bookmark.save
-      render :show
+      @event = Event.find_by(id: @bookmark.event_id)
+      render 'api/events/show'
+      # render :show
     else
       render json: @bookmark.errors.full_messages, status: 422
     end
@@ -29,7 +31,8 @@ class Api::BookmarksController < ApplicationController
     @bookmark = Bookmark.find_by(event_id: id)
     if @bookmark
       @bookmark.delete
-      render :show
+      @event = Event.find_by(id: @bookmark.event_id)
+      render 'api/events/show'
     else
       render json: ["Unauthorized"], status: 403
     end
