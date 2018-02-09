@@ -11,19 +11,14 @@ class UserShow extends React.Component {
     this.props.fetchBookmarks().then(
       bks => {
         if (bks === undefined) return null;
-        let events;
-        // bks.bookmarks.map(el => {
-        //
-        // })
-        this.setState(bks);
+        return this.setState(Object.values(bks.bookmarks));
       }
     );
   }
 
   render(){
-    console.log("est", this.state);
-    if (this.state === undefined) return null;
-    // debugger;
+    if (this.state === null) return null;
+    let events = Object.values(this.state);
     return(
       <div className="profile-outer">
         <header className="profile-page">
@@ -37,6 +32,12 @@ class UserShow extends React.Component {
         </header>
         <section className="user-show-body-outer">
           <div className="user-show-body">
+            {
+              events.map(evt => {
+                return <EventIndexItem key={evt.id} event={evt} />;
+              })
+            }
+
           </div>
         </section>
       </div>

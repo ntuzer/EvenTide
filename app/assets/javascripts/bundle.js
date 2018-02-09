@@ -31128,19 +31128,14 @@ var UserShow = function (_React$Component) {
 
       this.props.fetchBookmarks().then(function (bks) {
         if (bks === undefined) return null;
-        var events = void 0;
-        // bks.bookmarks.map(el => {
-        //
-        // })
-        _this2.setState(bks);
+        return _this2.setState(Object.values(bks.bookmarks));
       });
     }
   }, {
     key: 'render',
     value: function render() {
-      console.log("est", this.state);
-      if (this.state === undefined) return null;
-      // debugger;
+      if (this.state === null) return null;
+      var events = Object.values(this.state);
       return _react2.default.createElement(
         'div',
         { className: 'profile-outer' },
@@ -31164,7 +31159,13 @@ var UserShow = function (_React$Component) {
         _react2.default.createElement(
           'section',
           { className: 'user-show-body-outer' },
-          _react2.default.createElement('div', { className: 'user-show-body' })
+          _react2.default.createElement(
+            'div',
+            { className: 'user-show-body' },
+            events.map(function (evt) {
+              return _react2.default.createElement(_event_index_item2.default, { key: evt.id, event: evt });
+            })
+          )
         )
       );
     }
