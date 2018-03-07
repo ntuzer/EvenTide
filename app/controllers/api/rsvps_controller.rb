@@ -15,6 +15,11 @@ class Api::RsvpsController < ApplicationController
 
   def index
     @rsvps = Rsvp.all.where(user_id: current_user.id)
+    arr = []
+    @rsvps
+    # .ticket_id
+
+    @events = Event.all.where
   end
 
   def show

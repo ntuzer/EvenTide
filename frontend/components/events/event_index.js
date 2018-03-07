@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, withRouter, Redirect } from 'react-router-dom';
 import EventIndexItem from './event_index_item';
+import Banner from '../banner/banner_container';
 
 
 class EventIndex extends React.Component {
@@ -29,6 +30,7 @@ class EventIndex extends React.Component {
     return (
       <div className="event-index">
         <div className="event-inner">
+          <Banner />
           <div className="event-spacer"></div>
           <h1>Local events for you.</h1>
           <div className="event-main">

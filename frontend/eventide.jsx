@@ -20,10 +20,10 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     store = configureStore();
   }
-  window.store = store;
+  // window.store = store;
   // window.getState = store.getState;
   // window.dispatch = store.dispatch;
-  window.removeBookmark = removeBookmark;
+  // window.removeBookmark = removeBookmark;
   // console.log('does it come back?');
   ReactDOM.render(<Root store={store} />, root);
 });

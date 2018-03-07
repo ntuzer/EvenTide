@@ -1,26 +1,24 @@
 {
   "name": "EvenTide",
-  "private": true,
-  "dependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.24.1",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-redux": "^5.0.6",
-    "react-router-dom": "^4.2.2",
-    "redux": "^3.7.2",
-    "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.2.0",
-    "webpack": "^3.10.0"
-  },
-  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
   "version": "1.0.0",
+  "description": "",
   "main": "webpack.config.js",
   "directories": {
-    "lib": "lib",
     "test": "test"
+  },
+  "dependencies": {
+    "babel-core": "^6.13.2",
+    "babel-loader": "^6.2.4",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.11.1",
+    "lodash": "^4.16.4",
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.6.1",
+    "redux": "^3.5.2",
+    "redux-thunk": "^2.1.0",
+    "webpack": "^2.2.1"
   },
   "devDependencies": {
     "redux-logger": "^3.0.6"
@@ -30,11 +28,6 @@
     "postinstall": "webpack",
     "webpack": "webpack --watch"
   },
-  "engines": {
-    "npm": "5.6.0",
-    "node": "9.3.0"
-  },
-  "keywords": [],
-  "author": "",
+  "author": "RG",
   "license": "ISC"
 }
