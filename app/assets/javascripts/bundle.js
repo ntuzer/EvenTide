@@ -13904,9 +13904,6 @@ var Banner = function (_React$Component) {
   _createClass(Banner, [{
     key: 'render',
     value: function render() {
-      console.log();
-      var local = [bn4, bn2, bn3, bn1];
-      var src = local[this.state.count];
       return _react2.default.createElement(
         'div',
         { className: 'banner' },

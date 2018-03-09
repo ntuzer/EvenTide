@@ -19,14 +19,6 @@ class Banner extends React.Component {
   //   src={src}
   // ></img>
   render(){
-    console.log();
-    const local = [
-      bn4,
-      bn2,
-      bn3,
-      bn1,
-    ];
-    let src=local[this.state.count];
     return (
       <div className="banner">
         <figure>
