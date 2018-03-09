@@ -1639,7 +1639,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.deleteTicket = exports.createTicket = exports.fetchTicket = exports.receiveErrors = exports.RECEIVE_TICKET_ERRORS = exports.RECEIVE_TICKET = undefined;
 
-var _tickets_api_util = __webpack_require__(231);
+var _tickets_api_util = __webpack_require__(230);
 
 var TicketAPIUtil = _interopRequireWildcard(_tickets_api_util);
 
@@ -4776,7 +4776,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.fetchEventsByCategory = exports.receiveErrors = exports.RECEIVE_CATEGORY_ERRORS = exports.RECEIVE_EVENTS_CATEGORIES = undefined;
 
-var _categories_api_util = __webpack_require__(251);
+var _categories_api_util = __webpack_require__(250);
 
 var CatAPI = _interopRequireWildcard(_categories_api_util);
 
@@ -4828,7 +4828,7 @@ var _root = __webpack_require__(97);
 
 var _root2 = _interopRequireDefault(_root);
 
-var _store = __webpack_require__(241);
+var _store = __webpack_require__(240);
 
 var _store2 = _interopRequireDefault(_store);
 
@@ -26941,19 +26941,19 @@ var _event_index_container = __webpack_require__(157);
 
 var _event_index_container2 = _interopRequireDefault(_event_index_container);
 
-var _event_form_container = __webpack_require__(230);
+var _event_form_container = __webpack_require__(229);
 
 var _event_form_container2 = _interopRequireDefault(_event_form_container);
 
-var _event_show_container = __webpack_require__(233);
+var _event_show_container = __webpack_require__(232);
 
 var _event_show_container2 = _interopRequireDefault(_event_show_container);
 
-var _user_show_container = __webpack_require__(235);
+var _user_show_container = __webpack_require__(234);
 
 var _user_show_container2 = _interopRequireDefault(_user_show_container);
 
-var _rsvp_container = __webpack_require__(237);
+var _rsvp_container = __webpack_require__(236);
 
 var _rsvp_container2 = _interopRequireDefault(_rsvp_container);
 
@@ -27841,6 +27841,10 @@ var _banner_container = __webpack_require__(161);
 
 var _banner_container2 = _interopRequireDefault(_banner_container);
 
+var _box = __webpack_require__(255);
+
+var _box2 = _interopRequireDefault(_box);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27892,15 +27896,16 @@ var EventIndex = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         { className: 'event-index' },
+        _react2.default.createElement(_banner_container2.default, null),
         _react2.default.createElement(
           'div',
           { className: 'event-inner' },
-          _react2.default.createElement(_banner_container2.default, null),
+          _react2.default.createElement(_box2.default, null),
           _react2.default.createElement('div', { className: 'event-spacer' }),
           _react2.default.createElement(
             'h1',
             null,
-            'Local events for you.'
+            'Events for you in San Francisco, CA, United States'
           ),
           _react2.default.createElement(
             'div',
@@ -27982,10 +27987,10 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var bn1 = "/assets/b1.png";
-var bn2 = "/assets/b2.png";
-var bn3 = "/assets/b3.png";
-var bn4 = "/assets/b4.jpg";
+var bn1 = "/assets/b8.jpg";
+var bn2 = "/assets/b6.jpg";
+var bn3 = "/assets/b7.jpg";
+var bn4 = "/assets/b5.jpg";
 
 var Banner = function (_React$Component) {
   _inherits(Banner, _React$Component);
@@ -28009,7 +28014,7 @@ var Banner = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      setInterval(this.changePic, 4000);
+      setInterval(this.changePic, 8000);
     }
   }, {
     key: 'render',
@@ -28020,9 +28025,8 @@ var Banner = function (_React$Component) {
         'div',
         { className: 'banner' },
         _react2.default.createElement('img', { className: 'banner-img',
-          src: src,
-          width: '100%',
-          height: '300px' })
+          src: src
+        })
       );
     }
   }]);
@@ -30142,8 +30146,7 @@ module.exports = isIterateeCall;
 
 
 /***/ }),
-/* 229 */,
-/* 230 */
+/* 229 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30159,7 +30162,7 @@ var _event_actions = __webpack_require__(9);
 
 var _ticket_actions = __webpack_require__(29);
 
-var _event_form = __webpack_require__(232);
+var _event_form = __webpack_require__(231);
 
 var _event_form2 = _interopRequireDefault(_event_form);
 
@@ -30197,7 +30200,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_event_form2.default);
 
 /***/ }),
-/* 231 */
+/* 230 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30227,7 +30230,7 @@ var deleteTicket = exports.deleteTicket = function deleteTicket(ticketId) {
 };
 
 /***/ }),
-/* 232 */
+/* 231 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30827,7 +30830,7 @@ exports.default = EventForm;
 // </form>
 
 /***/ }),
-/* 233 */
+/* 232 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30843,7 +30846,7 @@ var _event_actions = __webpack_require__(9);
 
 var _bookmark_actions = __webpack_require__(11);
 
-var _event_show = __webpack_require__(234);
+var _event_show = __webpack_require__(233);
 
 var _event_show2 = _interopRequireDefault(_event_show);
 
@@ -30882,7 +30885,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_event_show2.default);
 
 /***/ }),
-/* 234 */
+/* 233 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31083,7 +31086,7 @@ var EventShow = function (_React$Component) {
 exports.default = EventShow;
 
 /***/ }),
-/* 235 */
+/* 234 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31095,7 +31098,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _reactRedux = __webpack_require__(6);
 
-var _user_show = __webpack_require__(236);
+var _user_show = __webpack_require__(235);
 
 var _user_show2 = _interopRequireDefault(_user_show);
 
@@ -31137,7 +31140,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_user_show2.default);
 
 /***/ }),
-/* 236 */
+/* 235 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31252,7 +31255,7 @@ exports.default = UserShow;
 // }
 
 /***/ }),
-/* 237 */
+/* 236 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31264,11 +31267,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _reactRedux = __webpack_require__(6);
 
-var _rsvp = __webpack_require__(238);
+var _rsvp = __webpack_require__(237);
 
 var _rsvp2 = _interopRequireDefault(_rsvp);
 
-var _rsvp_actions = __webpack_require__(239);
+var _rsvp_actions = __webpack_require__(238);
 
 var _ticket_actions = __webpack_require__(29);
 
@@ -31295,7 +31298,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_rsvp2.default);
 
 /***/ }),
-/* 238 */
+/* 237 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31498,7 +31501,7 @@ var Rsvp = function (_React$Component) {
 exports.default = Rsvp;
 
 /***/ }),
-/* 239 */
+/* 238 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31509,7 +31512,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.createRSVP = exports.receiveErrors = exports.RECEIVE_RSVP_ERRORS = exports.RECEIVE_RSVP = undefined;
 
-var _rsvps_api_util = __webpack_require__(240);
+var _rsvps_api_util = __webpack_require__(239);
 
 var RsvpAPIUtil = _interopRequireWildcard(_rsvps_api_util);
 
@@ -31544,7 +31547,7 @@ var createRSVP = exports.createRSVP = function createRSVP(rsvp) {
 };
 
 /***/ }),
-/* 240 */
+/* 239 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31562,7 +31565,7 @@ var createRSVP = exports.createRSVP = function createRSVP(rsvp) {
 };
 
 /***/ }),
-/* 241 */
+/* 240 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31574,11 +31577,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(20);
 
-var _reduxThunk = __webpack_require__(242);
+var _reduxThunk = __webpack_require__(241);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-var _root_reducer = __webpack_require__(243);
+var _root_reducer = __webpack_require__(242);
 
 var _root_reducer2 = _interopRequireDefault(_root_reducer);
 
@@ -31611,7 +31614,7 @@ var configureStore = function configureStore() {
 exports.default = configureStore;
 
 /***/ }),
-/* 242 */
+/* 241 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31640,7 +31643,7 @@ thunk.withExtraArgument = createThunkMiddleware;
 exports['default'] = thunk;
 
 /***/ }),
-/* 243 */
+/* 242 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31652,27 +31655,27 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(20);
 
-var _session_reducer = __webpack_require__(244);
+var _session_reducer = __webpack_require__(243);
 
 var _session_reducer2 = _interopRequireDefault(_session_reducer);
 
-var _errors_reducer = __webpack_require__(245);
+var _errors_reducer = __webpack_require__(244);
 
 var _errors_reducer2 = _interopRequireDefault(_errors_reducer);
 
-var _events_reducer = __webpack_require__(252);
+var _events_reducer = __webpack_require__(251);
 
 var _events_reducer2 = _interopRequireDefault(_events_reducer);
 
-var _tickets_reducer = __webpack_require__(253);
+var _tickets_reducer = __webpack_require__(252);
 
 var _tickets_reducer2 = _interopRequireDefault(_tickets_reducer);
 
-var _bookmarks_reducer = __webpack_require__(254);
+var _bookmarks_reducer = __webpack_require__(253);
 
 var _bookmarks_reducer2 = _interopRequireDefault(_bookmarks_reducer);
 
-var _categories_reducer = __webpack_require__(255);
+var _categories_reducer = __webpack_require__(254);
 
 var _categories_reducer2 = _interopRequireDefault(_categories_reducer);
 
@@ -31692,7 +31695,7 @@ var rootReducer = (0, _redux.combineReducers)({
 exports.default = rootReducer;
 
 /***/ }),
-/* 244 */
+/* 243 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31733,7 +31736,7 @@ var sessionReducer = function sessionReducer() {
 exports.default = sessionReducer;
 
 /***/ }),
-/* 245 */
+/* 244 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31745,23 +31748,23 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(20);
 
-var _session_errors_reducer = __webpack_require__(246);
+var _session_errors_reducer = __webpack_require__(245);
 
 var _session_errors_reducer2 = _interopRequireDefault(_session_errors_reducer);
 
-var _events_errors_reducer = __webpack_require__(247);
+var _events_errors_reducer = __webpack_require__(246);
 
 var _events_errors_reducer2 = _interopRequireDefault(_events_errors_reducer);
 
-var _tickets_errors_reducer = __webpack_require__(248);
+var _tickets_errors_reducer = __webpack_require__(247);
 
 var _tickets_errors_reducer2 = _interopRequireDefault(_tickets_errors_reducer);
 
-var _bookmarks_errors_reducer = __webpack_require__(249);
+var _bookmarks_errors_reducer = __webpack_require__(248);
 
 var _bookmarks_errors_reducer2 = _interopRequireDefault(_bookmarks_errors_reducer);
 
-var _categories_error_reducer = __webpack_require__(250);
+var _categories_error_reducer = __webpack_require__(249);
 
 var _categories_error_reducer2 = _interopRequireDefault(_categories_error_reducer);
 
@@ -31776,7 +31779,7 @@ exports.default = (0, _redux.combineReducers)({
 });
 
 /***/ }),
-/* 246 */
+/* 245 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31805,7 +31808,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 247 */
+/* 246 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31832,7 +31835,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 248 */
+/* 247 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31858,7 +31861,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 249 */
+/* 248 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31885,7 +31888,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 250 */
+/* 249 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31912,7 +31915,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 251 */
+/* 250 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31930,7 +31933,7 @@ var fetchEventsByCategory = exports.fetchEventsByCategory = function fetchEvents
 };
 
 /***/ }),
-/* 252 */
+/* 251 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31974,7 +31977,7 @@ var eventsReducer = function eventsReducer() {
 exports.default = eventsReducer;
 
 /***/ }),
-/* 253 */
+/* 252 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32011,7 +32014,7 @@ var ticketsReducer = function ticketsReducer() {
 exports.default = ticketsReducer;
 
 /***/ }),
-/* 254 */
+/* 253 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32054,7 +32057,7 @@ var bookmarksReducer = function bookmarksReducer() {
 exports.default = bookmarksReducer;
 
 /***/ }),
-/* 255 */
+/* 254 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32087,6 +32090,53 @@ var categoriesReducer = function categoriesReducer() {
 };
 
 exports.default = categoriesReducer;
+
+/***/ }),
+/* 255 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Box = function Box(_ref) {
+  var event = _ref.event,
+      bookmark = _ref.bookmark,
+      removeBookmark = _ref.removeBookmark,
+      createBookmark = _ref.createBookmark;
+
+
+  return _react2.default.createElement(
+    "div",
+    { className: "search-box" },
+    _react2.default.createElement(
+      "h1",
+      { className: "abcdef" },
+      "Find your next experience"
+    ),
+    _react2.default.createElement(
+      "div",
+      { className: "search-bar" },
+      _react2.default.createElement("div", { className: "search-bar-left" }),
+      _react2.default.createElement(
+        "div",
+        { className: "search-bar-right" },
+        "Search"
+      )
+    )
+  );
+};
+
+exports.default = Box;
 
 /***/ })
 /******/ ]);

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link, withRouter, Redirect } from 'react-router-dom';
 import merge from 'lodash/merge';
-const bn1 = "/assets/b1.png";
-const bn2 = "/assets/b2.png";
-const bn3 = "/assets/b3.png";
-const bn4 = "/assets/b4.jpg";
+const bn1 = "/assets/b8.jpg";
+const bn2 = "/assets/b6.jpg";
+const bn3 = "/assets/b7.jpg";
+const bn4 = "/assets/b5.jpg";
 
 
 class Banner extends React.Component {
@@ -20,7 +20,7 @@ class Banner extends React.Component {
   }
 
   componentDidMount(){
-    setInterval(this.changePic, 4000);
+    setInterval(this.changePic, 8000);
   }
 
 
@@ -36,8 +36,7 @@ class Banner extends React.Component {
       <div className="banner">
         <img className="banner-img"
           src={src}
-          width="100%"
-          height="300px" ></img>
+        ></img>
       </div>
     );
   }
