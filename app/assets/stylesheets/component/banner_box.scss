@@ -2,6 +2,7 @@
   width: 100%;
   min-height: 200px;
   max-height: 500px;
+  overflow: hidden;
 }
 
 .search-box {
@@ -69,3 +70,35 @@
 .search-bar-right:hover {
   background-color: #b83514;
 }
+
+@keyframes slidy {
+0% { left: 0%; }
+20% { left: 0%; }
+25% { left: -100%; }
+45% { left: -100%; }
+50% { left: -200%; }
+70% { left: -200%; }
+75% { left: -300%; }
+95% { left: -300%; }
+100% { left: -400%; }
+}
+
+.banner{
+  overflow: hidden;
+}
+
+.banner figure{
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  max-height: 500px;
+  width: 500%;
+
+  margin: 0;
+  left: 0;
+  text-align: left;
+  font-size: 0;
+  animation: 30s slidy infinite;
+}
+
+.banner figure img { width: 20%; float: left; }

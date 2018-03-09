@@ -13893,35 +13893,32 @@ var Banner = function (_React$Component) {
   function Banner(props) {
     _classCallCheck(this, Banner);
 
-    var _this = _possibleConstructorReturn(this, (Banner.__proto__ || Object.getPrototypeOf(Banner)).call(this, props));
-
-    _this.state = { count: 0 };
-    _this.changePic = _this.changePic.bind(_this);
-    return _this;
+    return _possibleConstructorReturn(this, (Banner.__proto__ || Object.getPrototypeOf(Banner)).call(this, props));
   }
 
+  // <img className="banner-img"
+  //   src={src}
+  // ></img>
+
+
   _createClass(Banner, [{
-    key: 'changePic',
-    value: function changePic() {
-      var newCount = (this.state.count + 1) % 4;
-      this.setState({ count: newCount });
-    }
-  }, {
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      setInterval(this.changePic, 8000);
-    }
-  }, {
     key: 'render',
     value: function render() {
+      console.log();
       var local = [bn4, bn2, bn3, bn1];
       var src = local[this.state.count];
       return _react2.default.createElement(
         'div',
         { className: 'banner' },
-        _react2.default.createElement('img', { className: 'banner-img',
-          src: src
-        })
+        _react2.default.createElement(
+          'figure',
+          null,
+          _react2.default.createElement('img', { src: 'assets/b8.jpg', alt: true }),
+          _react2.default.createElement('img', { src: 'assets/b6.jpg', alt: true }),
+          _react2.default.createElement('img', { src: 'assets/b7.jpg', alt: true }),
+          _react2.default.createElement('img', { src: 'assets/b5.jpg', alt: true }),
+          _react2.default.createElement('img', { src: 'assets/b8.jpg', alt: true })
+        )
       );
     }
   }]);
@@ -13987,7 +13984,7 @@ var Box = function Box(_ref) {
     { className: "search-box" },
     _react2.default.createElement(
       "h1",
-      { className: "abcdef" },
+      null,
       "Find your next experience"
     ),
     _react2.default.createElement(

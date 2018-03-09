@@ -10,21 +10,16 @@ const bn4 = "/assets/b5.jpg";
 class Banner extends React.Component {
   constructor(props){
     super(props);
-    this.state = {count: 0};
-    this.changePic = this.changePic.bind(this);
-  }
-
-  changePic(){
-    let newCount = (this.state.count + 1) % 4;
-    this.setState({count: newCount});
-  }
-
-  componentDidMount(){
-    setInterval(this.changePic, 8000);
   }
 
 
+
+
+  // <img className="banner-img"
+  //   src={src}
+  // ></img>
   render(){
+    console.log();
     const local = [
       bn4,
       bn2,
@@ -34,9 +29,13 @@ class Banner extends React.Component {
     let src=local[this.state.count];
     return (
       <div className="banner">
-        <img className="banner-img"
-          src={src}
-        ></img>
+        <figure>
+          <img src="assets/b8.jpg" alt></img>
+          <img src="assets/b6.jpg" alt></img>
+          <img src="assets/b7.jpg" alt></img>
+          <img src="assets/b5.jpg" alt></img>
+          <img src="assets/b8.jpg" alt></img>
+        </figure>
       </div>
     );
   }
