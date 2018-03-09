@@ -59,7 +59,7 @@ class Navbar extends React.Component {
           <div className="navRight">
             { this.createEventButton() }
             <div className="user">
-              <button onClick={this.uporout}>{inorout}</button>
+              <div className="create" onClick={this.uporout}>{inorout}</div>
             </div>
             {
               button
