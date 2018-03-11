@@ -7,7 +7,7 @@ import { fetchTicket } from '../../actions/ticket_actions';
 const mapStateToProps = (state, ownProps) => {
   return {
     event: state.events[ownProps.match.params.eventId],
-
+    userId: state.session.currentUser.id
   };
 };
 

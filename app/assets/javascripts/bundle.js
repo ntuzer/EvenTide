@@ -15425,7 +15425,7 @@ var Rsvp = function (_React$Component) {
       var _this3 = this;
 
       e.preventDefault();
-      var location = '/events/' + this.state.event_id;
+      var location = '/users/' + this.props.userId + '/tickets';
       this.props.createRSVP(this.state).then(function () {
         return _this3.props.history.push(location);
       });
@@ -15587,8 +15587,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
-    event: state.events[ownProps.match.params.eventId]
-
+    event: state.events[ownProps.match.params.eventId],
+    userId: state.session.currentUser.id
   };
 };
 
