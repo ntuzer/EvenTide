@@ -57,7 +57,13 @@
   justify-content: center;
   align-items: center;
   padding-left: 10px;
+  cursor: pointer;
 }
+
+.show-bar-icon:hover {
+  color: #f6682F;
+}
+
 
 .show-register {
   height: 44px;

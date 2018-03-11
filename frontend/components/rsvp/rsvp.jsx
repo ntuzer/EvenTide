@@ -49,7 +49,6 @@ class Rsvp extends React.Component {
     return (
       <div className="sold-register">
         <select className="ticket-num" onChange={e => this.handleChange(e)}>
-          <option value="0">0</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>

@@ -14906,13 +14906,16 @@ var EventShow = function (_React$Component) {
       var bookmark = "false";
 
       this.props.bookmarks.map(function (el) {
-        el.id === _this2.props.event.id ? bookmark = "true" : bookmark = "false";
+        // if (el.id === this.props.event.id && !bookmark) {
+        //   bookmark = "true"
+        // }
+        el.id === _this2.props.event.id ? bookmark = "true" : null;
       });
       var icon = bookmark === "true" ? "fas fa-bookmark fa-lg" : "far fa-bookmark fa-lg";
       var bookIt = bookmark === "true" ? this.props.removeBookmark : this.props.createBookmark;
       var prettyDate = this.prettyDate(event);
       if (!this.props.loggedIn) bookIt = function bookIt() {
-        return _this2.props.history.push('/abcdef');
+        return _this2.props.history.push('/modal');
       };
       return _react2.default.createElement(
         'div',
@@ -15461,11 +15464,6 @@ var Rsvp = function (_React$Component) {
           { className: 'ticket-num', onChange: function onChange(e) {
               return _this4.handleChange(e);
             } },
-          _react2.default.createElement(
-            'option',
-            { value: '0' },
-            '0'
-          ),
           _react2.default.createElement(
             'option',
             { value: '1' },

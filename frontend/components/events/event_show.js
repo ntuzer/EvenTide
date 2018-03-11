@@ -40,12 +40,16 @@ class EventShow extends React.Component {
     let bookmark = "false";
 
     this.props.bookmarks.map(el => {
-      el.id === this.props.event.id ? bookmark = "true" : bookmark = "false";
+      // if (el.id === this.props.event.id && !bookmark) {
+      //   bookmark = "true"
+      // }
+      el.id === this.props.event.id ? bookmark = "true" : null;
+
     });
     let icon = bookmark === "true" ? "fas fa-bookmark fa-lg" : "far fa-bookmark fa-lg";
     let bookIt = bookmark === "true" ? this.props.removeBookmark : this.props.createBookmark;
     let prettyDate = this.prettyDate(event);
-    if (!this.props.loggedIn) bookIt = () => this.props.history.push('/abcdef');
+    if (!this.props.loggedIn) bookIt = () => this.props.history.push('/modal');
     return (
       <div className="event-back">
         <div className="event-show">
