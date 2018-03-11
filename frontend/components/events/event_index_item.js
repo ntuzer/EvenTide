@@ -9,7 +9,10 @@ const EventIndexItem = ({ event, bookmark, removeBookmark, createBookmark }) => 
   let date = `${dateObj.slice(0,3)}, ${dateObj.slice(4,15)}`;
   let category = "category";
   let icon = bookmark === "true" ? "fas fa-bookmark" : "far fa-bookmark";
-  let method = bookmark === "true" ? removeBookmark : createBookmark;
+  let bookIt = bookmark === "true" ? removeBookmark : createBookmark;
+  if (!this.props.loggedIn) bookIt = () => this.props.history.push('/abcdef');
+
+
   return (
     <div key={event.id} className="e-i-i">
       <div className="e-i-box">
@@ -34,7 +37,7 @@ const EventIndexItem = ({ event, bookmark, removeBookmark, createBookmark }) => 
         <div className="ii-footer">
           <Link to="/">#{category}</Link>
           <div className="ii-bookmark">
-            <div onClick={() => method(event.id)}><i className={icon}></i></div>
+            <div onClick={() => bookIt(event.id)}><i className={icon}></i></div>
           </div>
         </div>
       </div>

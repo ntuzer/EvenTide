@@ -8368,7 +8368,11 @@ var EventIndexItem = function EventIndexItem(_ref) {
   var date = dateObj.slice(0, 3) + ', ' + dateObj.slice(4, 15);
   var category = "category";
   var icon = bookmark === "true" ? "fas fa-bookmark" : "far fa-bookmark";
-  var method = bookmark === "true" ? removeBookmark : createBookmark;
+  var bookIt = bookmark === "true" ? removeBookmark : createBookmark;
+  if (!undefined.props.loggedIn) bookIt = function bookIt() {
+    return undefined.props.history.push('/abcdef');
+  };
+
   return _react2.default.createElement(
     'div',
     { key: event.id, className: 'e-i-i' },
@@ -8429,7 +8433,7 @@ var EventIndexItem = function EventIndexItem(_ref) {
           _react2.default.createElement(
             'div',
             { onClick: function onClick() {
-                return method(event.id);
+                return bookIt(event.id);
               } },
             _react2.default.createElement('i', { className: icon })
           )
@@ -14857,7 +14861,6 @@ var EventShow = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (EventShow.__proto__ || Object.getPrototypeOf(EventShow)).call(this, props));
 
     _this.prettyDate = _this.prettyDate.bind(_this);
-    _this.modal = _this.modal.bind(_this);
     return _this;
   }
 
@@ -14885,11 +14888,6 @@ var EventShow = function (_React$Component) {
       return { dateObj: dateObj, dateEnd: dateEnd, ampm1: ampm1, ampm2: ampm2, times: times, mon: mon, day: day, date: date, price: price };
     }
   }, {
-    key: 'modal',
-    value: function modal(event) {
-      this.props.history.push('/abcdef');
-    }
-  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -14904,9 +14902,9 @@ var EventShow = function (_React$Component) {
       var icon = bookmark === "true" ? "fas fa-bookmark fa-lg" : "far fa-bookmark fa-lg";
       var bookIt = bookmark === "true" ? this.props.removeBookmark : this.props.createBookmark;
       var prettyDate = this.prettyDate(event);
-      if (!this.props.loggedIn) {
-        bookIt = this.modal;
-      }
+      if (!this.props.loggedIn) bookIt = function bookIt() {
+        return _this2.props.history.push('/abcdef');
+      };
       return _react2.default.createElement(
         'div',
         { className: 'event-back' },
@@ -14948,7 +14946,9 @@ var EventShow = function (_React$Component) {
             { className: 'show-bar' },
             _react2.default.createElement(
               'div',
-              { key: Date.now(), className: 'show-bar-icon', onClick: function onClick() {
+              { key: Date.now(),
+                className: 'show-bar-icon',
+                onClick: function onClick() {
                   return bookIt(event.id);
                 } },
               _react2.default.createElement('i', { className: icon })
