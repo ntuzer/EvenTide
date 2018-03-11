@@ -13824,6 +13824,9 @@ var App = function App(store) {
       _react2.default.createElement(_route_util.AuthRoute, { path: '/login', component: _session_form_container2.default }),
       _react2.default.createElement(_route_util.AuthRoute, { path: '/signup', component: _session_form_container2.default }),
       _react2.default.createElement(_route_util.ProtectedRoute, { path: '/users/:userId', component: _user_show_container2.default }),
+      _react2.default.createElement(_route_util.ProtectedRoute, { path: '/users/:userId/bookmarks', component: _user_show_container2.default }),
+      _react2.default.createElement(_route_util.ProtectedRoute, { path: '/users/:userId/tickets', component: _user_show_container2.default }),
+      _react2.default.createElement(_route_util.ProtectedRoute, { path: '/users/:userId/events', component: _user_show_container2.default }),
       _react2.default.createElement(_route_util.ProtectedRoute, { path: '/user', component: _event_index_container2.default }),
       _react2.default.createElement(_route_util.ProtectedRoute, { path: '/events/new', component: _event_form_container2.default }),
       _react2.default.createElement(_reactRouterDom.Route, { path: '/events/:eventId',
@@ -15941,6 +15944,8 @@ var UserShow = function (_React$Component) {
     value: function componentDidMount() {
 
       this.props.fetchEvents().then(this.props.fetchBookmarks());
+      var path = this.props.location.pathname.split("/");
+      if (path.length === 3) this.props.history.push(this.props.userId + '/bookmarks');
     }
   }, {
     key: 'render',
@@ -15948,11 +15953,19 @@ var UserShow = function (_React$Component) {
       var _this2 = this;
 
       if (this.props.events === undefined) return null;
+
       var events = this.props.bookmarks;
       var eArr = [];
       this.props.bookmarks.map(function (el) {
         return eArr.push(el.id);
       });
+
+      var path = this.props.location.pathname.split("/");
+
+      var bookmark = path[path.length - 1] === "bookmarks" ? "active-item" : "profile-event-links-items";
+      var tickets = path[path.length - 1] === "tickets" ? "active-item" : "profile-event-links-items";
+      var evts = path[path.length - 1] === "events" ? "active-item" : "profile-event-links-items";
+
       return _react2.default.createElement(
         'div',
         { className: 'profile-outer' },
@@ -15970,7 +15983,24 @@ var UserShow = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'profile-event-links' },
-            'Your Events'
+            _react2.default.createElement(
+              _reactRouterDom.Link,
+              { to: '/users/' + this.props.userId + '/bookmarks',
+                className: bookmark },
+              'Bookmarks'
+            ),
+            _react2.default.createElement(
+              _reactRouterDom.Link,
+              { to: '/users/' + this.props.userId + '/tickets',
+                className: tickets },
+              'Tickets'
+            ),
+            _react2.default.createElement(
+              _reactRouterDom.Link,
+              { to: '/users/' + this.props.userId + '/events',
+                className: evts },
+              'Scheduled Events'
+            )
           )
         ),
         _react2.default.createElement(
@@ -16036,7 +16066,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     loggedIn: Boolean(state.session.currentUser),
     email: state.session.currentUser.email,
     bookmarks: Object.values(state.bookmarks),
-    events: Object.values(state.events)
+    events: Object.values(state.events),
+    userId: state.session.currentUser.id
   };
 };
 

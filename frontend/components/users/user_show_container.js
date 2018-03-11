@@ -12,7 +12,8 @@ const mapStateToProps = (state, ownProps) => {
     loggedIn: Boolean(state.session.currentUser),
     email: state.session.currentUser.email,
     bookmarks: Object.values(state.bookmarks),
-    events: Object.values(state.events)
+    events: Object.values(state.events),
+    userId: state.session.currentUser.id
   };
 };
 

@@ -27,6 +27,9 @@ const App = (store) => {
         <AuthRoute path="/login" component={SessionFormContainer} />
         <AuthRoute path="/signup" component={SessionFormContainer} />
         <ProtectedRoute path='/users/:userId' component={UserShowContainer} />
+        <ProtectedRoute path='/users/:userId/bookmarks' component={UserShowContainer} />
+        <ProtectedRoute path='/users/:userId/tickets' component={UserShowContainer} />
+        <ProtectedRoute path='/users/:userId/events' component={UserShowContainer} />
         <ProtectedRoute path='/user' component={EventIndexContainer} />
         <ProtectedRoute path='/events/new' component={EventFormContainer} />
         <Route path='/events/:eventId'

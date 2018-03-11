@@ -30,3 +30,22 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+.profile-event-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.profile-event-links-items {
+  margin: 10px 10px;
+}
+
+.profile-event-links-items:hover {
+  color: blue;
+}
+
+.active-item {
+  margin: 10px 10px;
+  color: orange;
+}

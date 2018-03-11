@@ -11,13 +11,29 @@ class UserShow extends React.Component {
   componentDidMount(){
 
     this.props.fetchEvents().then(this.props.fetchBookmarks());
+    let path = this.props.location.pathname.split("/");
+    if (path.length === 3) this.props.history.push(`${this.props.userId}/bookmarks`);
   }
+
+
+
 
   render(){
     if (this.props.events === undefined) return null;
+
     let events = this.props.bookmarks;
     let eArr = [];
     this.props.bookmarks.map(el => eArr.push(el.id));
+
+    let path = this.props.location.pathname.split("/");
+
+    let bookmark = path[path.length - 1] === "bookmarks" ?
+      "active-item" : "profile-event-links-items";
+    let tickets = path[path.length - 1] === "tickets" ?
+      "active-item" : "profile-event-links-items";
+    let evts = path[path.length - 1] === "events" ?
+      "active-item" : "profile-event-links-items";
+
     return(
       <div className="profile-outer">
         <header className="profile-page">
@@ -26,7 +42,12 @@ class UserShow extends React.Component {
             Hi {this.props.email}!
           </div>
           <div className="profile-event-links">
-            Your Events
+            <Link to={`/users/${this.props.userId}/bookmarks`}
+              className={bookmark}>Bookmarks</Link>
+            <Link to={`/users/${this.props.userId}/tickets`}
+              className={tickets}>Tickets</Link>
+            <Link to={`/users/${this.props.userId}/events`}
+              className={evts}>Scheduled Events</Link>
           </div>
         </header>
         <section className="user-show-body-outer">
@@ -45,6 +66,8 @@ class UserShow extends React.Component {
             </div>
           </div>
         </section>
+
+
       </div>
     );
   }
