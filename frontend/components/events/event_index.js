@@ -42,6 +42,7 @@ class EventIndex extends React.Component {
                 if (eArr.includes(event.id)) bool = "true";
                 return <EventIndexItem key={event.id + Date.now()}
                   bookmark={bool}
+                  loggedIn={this.props.loggedIn}
                   createBookmark={this.props.createBookmark}
                   removeBookmark={this.props.removeBookmark} event={event} />;
               }

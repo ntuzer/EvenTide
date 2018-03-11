@@ -58,6 +58,7 @@ class UserShow extends React.Component {
                   let bool = "false";
                   if (eArr.includes(evt.id)) bool = "true";
                   return <EventIndexItem key={evt.id}
+                    loggedIn = "true"
                     createBookmark={this.props.createBookmark}
                     removeBookmark={this.props.removeBookmark}
                     bookmark={bool} event={evt} />;

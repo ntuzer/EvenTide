@@ -14766,6 +14766,7 @@ var EventIndex = function (_React$Component) {
               if (eArr.includes(event.id)) bool = "true";
               return _react2.default.createElement(_event_index_item2.default, { key: event.id + Date.now(),
                 bookmark: bool,
+                loggedIn: _this2.props.loggedIn,
                 createBookmark: _this2.props.createBookmark,
                 removeBookmark: _this2.props.removeBookmark, event: event });
             })
@@ -16014,6 +16015,7 @@ var UserShow = function (_React$Component) {
                 var bool = "false";
                 if (eArr.includes(evt.id)) bool = "true";
                 return _react2.default.createElement(_event_index_item2.default, { key: evt.id,
+                  loggedIn: 'true',
                   createBookmark: _this2.props.createBookmark,
                   removeBookmark: _this2.props.removeBookmark,
                   bookmark: bool, event: evt });
