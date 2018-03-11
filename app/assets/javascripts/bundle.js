@@ -16724,7 +16724,7 @@ var Protected = function Protected(_ref2) {
   // console.log('PROTECTED');
   // console.log("route util protected");
   return _react2.default.createElement(_reactRouterDom.Route, { path: path, render: function render(props) {
-      return loggedIn ? _react2.default.createElement(Component, props) : _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' });
+      return loggedIn ? _react2.default.createElement(Component, props) : _react2.default.createElement(_reactRouterDom.Redirect, { to: '/login' });
     } });
 };
 
