@@ -15254,14 +15254,10 @@ var Navbar = function (_React$Component) {
       // e.preventDefault();
 
       var profile = this.props.loggedIn ? _react2.default.createElement(
-        'div',
-        { className: 'user' },
-        _react2.default.createElement(
-          _reactRouterDom.Link,
-          {
-            to: '/users/' + this.props.userId },
-          'My Profile'
-        )
+        _reactRouterDom.Link,
+        { className: 'user',
+          to: '/users/' + this.props.userId },
+        'My Profile'
       ) : _react2.default.createElement('div', null);
       return profile;
     }
@@ -15278,16 +15274,12 @@ var Navbar = function (_React$Component) {
           'nav',
           null,
           _react2.default.createElement(
-            'div',
-            { className: 'navleft' },
+            _reactRouterDom.Link,
+            { to: '/', className: 'navleft' },
             _react2.default.createElement(
-              _reactRouterDom.Link,
-              { to: '/' },
-              _react2.default.createElement(
-                'p',
-                { className: 'logo' },
-                'EvenTide'
-              )
+              'p',
+              { className: 'logo' },
+              'EvenTide'
             )
           ),
           _react2.default.createElement(
@@ -15296,12 +15288,8 @@ var Navbar = function (_React$Component) {
             this.createEventButton(),
             _react2.default.createElement(
               'div',
-              { className: 'user' },
-              _react2.default.createElement(
-                'div',
-                { className: 'create', onClick: this.uporout },
-                inorout
-              )
+              { className: 'user', onClick: this.uporout },
+              inorout
             ),
             button
           )

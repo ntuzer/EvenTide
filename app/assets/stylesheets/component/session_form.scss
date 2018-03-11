@@ -20,7 +20,7 @@
 }
 
 .growing-box{
-  animation: growtransition 0.2s;
+  animation: growtransition 0.5s;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -69,7 +69,7 @@
   padding-top: 80px;
 }
 .e-circle {
-  animation: etransition 0.6s;
+  animation: etransition 0.8s;
   height: 72px;
   width: 72px;
   margin-bottom: 24px;
@@ -166,7 +166,9 @@
   background: lightgrey;
   border-radius: 40px;
   height: 40px;
-  color: $logo;
+  color: darkorange;
+  text-shadow: .5px .5px darkgray;
+  font-weight: 400;
   display: flex;
   justify-content: center;
   margin-top: 15px;
@@ -174,4 +176,5 @@
 
 .demo-user:hover {
   background-image: radial-gradient(farthest-corner at 0% 100%,lightgrey 0,darkgray 100%);
+  color:black;
 }

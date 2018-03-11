@@ -32,10 +32,10 @@ class Navbar extends React.Component {
     // e.preventDefault();
 
     let profile = this.props.loggedIn ?
-      <div className="user"><Link
+      <Link className="user"
         to={`/users/${this.props.userId}`}>
         My Profile
-      </Link></div> : <div></div>;
+      </Link> : <div></div>;
     return profile;
   }
 
@@ -48,19 +48,18 @@ class Navbar extends React.Component {
       <header className='navbar'>
         <nav>
 
-          <div className="navleft">
-            <Link to="/" >
+
+            <Link to="/" className="navleft">
               <p className="logo">
                 EvenTide
               </p>
             </Link>
-          </div>
+
 
           <div className="navRight">
             { this.createEventButton() }
-            <div className="user">
-              <div className="create" onClick={this.uporout}>{inorout}</div>
-            </div>
+
+              <div className="user" onClick={this.uporout}>{inorout}</div>
             {
               button
             }
