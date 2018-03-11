@@ -14857,6 +14857,7 @@ var EventShow = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (EventShow.__proto__ || Object.getPrototypeOf(EventShow)).call(this, props));
 
     _this.prettyDate = _this.prettyDate.bind(_this);
+    _this.modal = _this.modal.bind(_this);
     return _this;
   }
 
@@ -14884,6 +14885,11 @@ var EventShow = function (_React$Component) {
       return { dateObj: dateObj, dateEnd: dateEnd, ampm1: ampm1, ampm2: ampm2, times: times, mon: mon, day: day, date: date, price: price };
     }
   }, {
+    key: 'modal',
+    value: function modal(event) {
+      this.props.history.push('/abcdef');
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -14896,9 +14902,11 @@ var EventShow = function (_React$Component) {
         el.id === _this2.props.event.id ? bookmark = "true" : bookmark = "false";
       });
       var icon = bookmark === "true" ? "fas fa-bookmark fa-lg" : "far fa-bookmark fa-lg";
-      var method = bookmark === "true" ? this.props.removeBookmark : this.props.createBookmark;
+      var bookIt = bookmark === "true" ? this.props.removeBookmark : this.props.createBookmark;
       var prettyDate = this.prettyDate(event);
-
+      if (!this.props.loggedIn) {
+        bookIt = this.modal;
+      }
       return _react2.default.createElement(
         'div',
         { className: 'event-back' },
@@ -14941,7 +14949,7 @@ var EventShow = function (_React$Component) {
             _react2.default.createElement(
               'div',
               { key: Date.now(), className: 'show-bar-icon', onClick: function onClick() {
-                  return method(event.id);
+                  return bookIt(event.id);
                 } },
               _react2.default.createElement('i', { className: icon })
             ),
@@ -15045,9 +15053,8 @@ var _event_show2 = _interopRequireDefault(_event_show);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  // console.log('escOP',ownProps);
-
   return {
+    loggedIn: Boolean(state.session.currentUser),
     event: state.events[ownProps.match.params.eventId],
     eventId: ownProps.match.params.eventId,
     bookmarks: Object.values(state.bookmarks)

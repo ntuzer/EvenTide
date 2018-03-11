@@ -11,9 +11,8 @@ import {
 import EventShow from './event_show';
 
 const mapStateToProps = (state, ownProps) => {
-  // console.log('escOP',ownProps);
-  
   return {
+    loggedIn: Boolean(state.session.currentUser),
     event: state.events[ownProps.match.params.eventId],
     eventId: ownProps.match.params.eventId,
     bookmarks: Object.values(state.bookmarks)

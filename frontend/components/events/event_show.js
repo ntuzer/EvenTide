@@ -7,6 +7,7 @@ class EventShow extends React.Component {
     super(props);
     // this.state = this.props.event;
     this.prettyDate = this.prettyDate.bind(this);
+    this.modal = this.modal.bind(this);
   }
 
   componentDidMount(){
@@ -33,6 +34,10 @@ class EventShow extends React.Component {
     return { dateObj, dateEnd, ampm1, ampm2, times, mon, day, date, price };
   }
 
+  modal(event){
+    this.props.history.push('/abcdef');
+  }
+
   render(){
     let event = this.props.event;
     if (event === undefined) return null;
@@ -42,9 +47,11 @@ class EventShow extends React.Component {
       el.id === this.props.event.id ? bookmark = "true" : bookmark = "false";
     });
     let icon = bookmark === "true" ? "fas fa-bookmark fa-lg" : "far fa-bookmark fa-lg";
-    let method = bookmark === "true" ? this.props.removeBookmark : this.props.createBookmark;
+    let bookIt = bookmark === "true" ? this.props.removeBookmark : this.props.createBookmark;
     let prettyDate = this.prettyDate(event);
-
+    if (!this.props.loggedIn) {
+      bookIt = this.modal;
+    }
     return (
       <div className="event-back">
         <div className="event-show">
@@ -61,7 +68,7 @@ class EventShow extends React.Component {
           </div>
 
           <div className="show-bar">
-            <div key={Date.now()} className="show-bar-icon" onClick={() => method(event.id)}><i className={icon}></i></div>
+            <div key={Date.now()} className="show-bar-icon" onClick={() => bookIt(event.id)}><i className={icon}></i></div>
             <Link to={`/events/${event.id}/rsvp`}
               className="show-register">Register</Link>
           </div>
