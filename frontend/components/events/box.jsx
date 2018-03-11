@@ -6,7 +6,7 @@ const Box = ({ event, bookmark, removeBookmark, createBookmark }) => {
     <div className="search-box">
       <h1>Find your next experience</h1>
       <div className="search-bar">
-        <div className="search-bar-left"></div>
+        <input className="search-bar-left" placeholder="Search events or categories"></input>
         <div className="search-bar-right">Search</div>
       </div>
     </div>

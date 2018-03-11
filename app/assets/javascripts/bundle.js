@@ -13987,7 +13987,7 @@ var Box = function Box(_ref) {
     _react2.default.createElement(
       "div",
       { className: "search-bar" },
-      _react2.default.createElement("div", { className: "search-bar-left" }),
+      _react2.default.createElement("input", { className: "search-bar-left", placeholder: "Search events or categories" }),
       _react2.default.createElement(
         "div",
         { className: "search-bar-right" },
@@ -15640,7 +15640,7 @@ var SessionForm = function (_React$Component) {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
       if (nextProps.loggedIn) {
-        this.props.history.push('/index');
+        this.props.history.push('/');
       }
 
       if (nextProps.location !== this.props.location) {
