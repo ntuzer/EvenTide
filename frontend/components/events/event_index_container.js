@@ -12,6 +12,7 @@ import EventIndex from './event_index';
 
 const mapStateToProps = (state, ownProps) => {
   return {
+    loggedIn: Boolean(state.session.currentUser),
     events: Object.values(state.events),
     bookmarks: Object.values(state.bookmarks)
   };

@@ -8356,7 +8356,8 @@ var _reactRouterDom = __webpack_require__(10);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var EventIndexItem = function EventIndexItem(_ref) {
-  var event = _ref.event,
+  var loggedIn = _ref.loggedIn,
+      event = _ref.event,
       bookmark = _ref.bookmark,
       removeBookmark = _ref.removeBookmark,
       createBookmark = _ref.createBookmark;
@@ -8369,9 +8370,13 @@ var EventIndexItem = function EventIndexItem(_ref) {
   var category = "category";
   var icon = bookmark === "true" ? "fas fa-bookmark" : "far fa-bookmark";
   var bookIt = bookmark === "true" ? removeBookmark : createBookmark;
-  if (!undefined.props.loggedIn) bookIt = function bookIt() {
+  if (!loggedIn) bookIt = function bookIt() {
     return undefined.props.history.push('/abcdef');
   };
+
+  /*
+    CONVERT INTO A REACT COMPONENT
+    */
 
   return _react2.default.createElement(
     'div',
@@ -14797,6 +14802,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
+    loggedIn: Boolean(state.session.currentUser),
     events: Object.values(state.events),
     bookmarks: Object.values(state.bookmarks)
   };

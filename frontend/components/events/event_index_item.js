@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const EventIndexItem = ({ event, bookmark, removeBookmark, createBookmark }) => {
+const EventIndexItem = ({ loggedIn, event, bookmark, removeBookmark, createBookmark }) => {
   if (event === undefined) return null;
   if (createBookmark === undefined) return null;
   let price = event.max_price - event.min_price === 0 ? "Free" : `$${event.max_price - event.min_price}`;
@@ -10,7 +10,17 @@ const EventIndexItem = ({ event, bookmark, removeBookmark, createBookmark }) => 
   let category = "category";
   let icon = bookmark === "true" ? "fas fa-bookmark" : "far fa-bookmark";
   let bookIt = bookmark === "true" ? removeBookmark : createBookmark;
-  if (!this.props.loggedIn) bookIt = () => this.props.history.push('/abcdef');
+  if (!loggedIn) bookIt = () => this.props.history.push('/abcdef');
+
+
+  /*
+
+
+  CONVERT INTO A REACT COMPONENT
+
+
+  */
+
 
 
   return (
