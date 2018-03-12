@@ -1,4 +1,5 @@
 class Api::RsvpsController < ApplicationController
+  
   def create
 
     @rsvp = Rsvp.new(rsvp_params)
@@ -14,12 +15,9 @@ class Api::RsvpsController < ApplicationController
   end
 
   def index
-    @rsvps = Rsvp.all.where(user_id: current_user.id)
-    arr = []
-    @rsvps
-    # .ticket_id
-
-    @events = Event.all.where
+    rsvps = Rsvp.all.where(user_id: current_user.id)
+    @hsh = {}
+    rsvps.each {|r| @hsh[r] = r.event}
   end
 
   def show
