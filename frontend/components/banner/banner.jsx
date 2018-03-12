@@ -22,11 +22,11 @@ class Banner extends React.Component {
     return (
       <div className="banner">
         <figure>
-          <img src="assets/b8.jpg" alt></img>
-          <img src="assets/b6.jpg" alt></img>
-          <img src="assets/b7.jpg" alt></img>
-          <img src="assets/b5.jpg" alt></img>
-          <img src="assets/b8.jpg" alt></img>
+          <img src="https://raw.githubusercontent.com/ntuzer/EvenTide/master/app/assets/images/b8.jpg" alt></img>
+          <img src="https://raw.githubusercontent.com/ntuzer/EvenTide/master/app/assets/images/b6.jpg" alt></img>
+          <img src="https://raw.githubusercontent.com/ntuzer/EvenTide/master/app/assets/images/b7.jpg" alt></img>
+          <img src="https://raw.githubusercontent.com/ntuzer/EvenTide/master/app/assets/images/b5.jpg" alt></img>
+          <img src="https://raw.githubusercontent.com/ntuzer/EvenTide/master/app/assets/images/b8.jpg" alt></img>
         </figure>
       </div>
     );

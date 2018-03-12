@@ -13933,11 +13933,11 @@ var Banner = function (_React$Component) {
         _react2.default.createElement(
           'figure',
           null,
-          _react2.default.createElement('img', { src: 'assets/b8.jpg', alt: true }),
-          _react2.default.createElement('img', { src: 'assets/b6.jpg', alt: true }),
-          _react2.default.createElement('img', { src: 'assets/b7.jpg', alt: true }),
-          _react2.default.createElement('img', { src: 'assets/b5.jpg', alt: true }),
-          _react2.default.createElement('img', { src: 'assets/b8.jpg', alt: true })
+          _react2.default.createElement('img', { src: 'https://raw.githubusercontent.com/ntuzer/EvenTide/master/app/assets/images/b8.jpg', alt: true }),
+          _react2.default.createElement('img', { src: 'https://raw.githubusercontent.com/ntuzer/EvenTide/master/app/assets/images/b6.jpg', alt: true }),
+          _react2.default.createElement('img', { src: 'https://raw.githubusercontent.com/ntuzer/EvenTide/master/app/assets/images/b7.jpg', alt: true }),
+          _react2.default.createElement('img', { src: 'https://raw.githubusercontent.com/ntuzer/EvenTide/master/app/assets/images/b5.jpg', alt: true }),
+          _react2.default.createElement('img', { src: 'https://raw.githubusercontent.com/ntuzer/EvenTide/master/app/assets/images/b8.jpg', alt: true })
         )
       );
     }
