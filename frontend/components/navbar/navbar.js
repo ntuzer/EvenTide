@@ -13,7 +13,7 @@ class Navbar extends React.Component {
     e.preventDefault();
     if (this.props.loggedIn) {
       this.props.signOut();
-      // this.props.history.push("/");
+      this.props.history.push("/");
     } else {
       this.props.history.push("/login");
     }
