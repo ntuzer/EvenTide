@@ -10,6 +10,7 @@
   border-radius: 5px;
   background: white;
   border: 1px solid lightgrey;
+  z-index: 10;
 }
 
 .show-top {
@@ -21,6 +22,7 @@
 .show-top img {
   width: 720px;
   height: 360px;
+  border-top-left-radius: 5px;
 }
 
 .show-top-right{
