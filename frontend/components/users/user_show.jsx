@@ -44,7 +44,7 @@ class UserShow extends React.Component {
         </div>
       </section>
     );
-  }
+  }  
 
   subPage(){
     let path = this.props.location.pathname.split("/");
