@@ -13722,7 +13722,7 @@ module.exports = __webpack_require__(307);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.createRSVP = exports.receiveErrors = exports.RECEIVE_RSVP_ERRORS = exports.RECEIVE_RSVP = undefined;
+exports.createRSVP = exports.receiveErrors = exports.RECEIVE_RSVP_ERRORS = exports.RECEIVE_RSVPS = undefined;
 
 var _rsvps_api_util = __webpack_require__(191);
 
@@ -13730,14 +13730,14 @@ var RsvpAPIUtil = _interopRequireWildcard(_rsvps_api_util);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-var RECEIVE_RSVP = exports.RECEIVE_RSVP = 'RECEIVE_RSVP';
+var RECEIVE_RSVPS = exports.RECEIVE_RSVPS = 'RECEIVE_RSVP';
 var RECEIVE_RSVP_ERRORS = exports.RECEIVE_RSVP_ERRORS = 'RECEIVE_RSVP_ERRORS';
 
-var receiveRSVP = function receiveRSVP(rsvp) {
+var receiveRSVPS = function receiveRSVPS(rsvps) {
   // console.log('action receiveEvents');
   return {
-    type: RECEIVE_RSVP,
-    rsvp: rsvp
+    type: RECEIVE_RSVPS,
+    rsvps: rsvps
   };
 };
 
@@ -13751,7 +13751,7 @@ var receiveErrors = exports.receiveErrors = function receiveErrors(errors) {
 var createRSVP = exports.createRSVP = function createRSVP(rsvp) {
   return function (dispatch) {
     return RsvpAPIUtil.createRSVP(rsvp).then(function (sRsvp) {
-      return dispatch(receiveRSVP(sRsvp));
+      return dispatch(receiveRSVPS(sRsvp));
     }, function (err) {
       return dispatch(receiveErrors(err.responseJSON));
     });
@@ -15568,13 +15568,12 @@ var _rsvp2 = _interopRequireDefault(_rsvp);
 
 var _rsvp_actions = __webpack_require__(153);
 
-var _ticket_actions = __webpack_require__(39);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
+  console.log('estado: ' + state);
   return {
-    event: state.events[ownProps.match.params.eventId],
+    rsvps: state.rsvps,
     userId: state.session.currentUser.id
   };
 };
@@ -15584,8 +15583,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
     createRSVP: function createRSVP(rsvp) {
       return dispatch((0, _rsvp_actions.createRSVP)(rsvp));
     },
-    fetchTicket: function fetchTicket(id) {
-      return dispatch((0, _ticket_actions.fetchTicket)(id));
+    receiveRSVPS: function receiveRSVPS() {
+      return dispatch((0, _rsvp_actions.receiveRSVPS)());
     }
   };
 };

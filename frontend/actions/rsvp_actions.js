@@ -1,14 +1,14 @@
 import * as RsvpAPIUtil from '../util/rsvps_api_util';
 
-export const RECEIVE_RSVP = 'RECEIVE_RSVP';
+export const RECEIVE_RSVPS = 'RECEIVE_RSVP';
 export const RECEIVE_RSVP_ERRORS = 'RECEIVE_RSVP_ERRORS';
 
 
-const receiveRSVP = rsvp => {
+const receiveRSVPS = rsvps => {
   // console.log('action receiveEvents');
   return {
-    type: RECEIVE_RSVP,
-    rsvp
+    type: RECEIVE_RSVPS,
+    rsvps
   };
 };
 
@@ -21,7 +21,7 @@ export const receiveErrors = errors => {
 
 export const createRSVP = rsvp => dispatch => {
   return RsvpAPIUtil.createRSVP(rsvp).then(sRsvp => (
-      dispatch(receiveRSVP(sRsvp))
+      dispatch(receiveRSVPS(sRsvp))
     ), err => (
       dispatch(receiveErrors(err.responseJSON))
     ));

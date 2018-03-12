@@ -1,12 +1,13 @@
 import { connect } from 'react-redux';
 import Rsvp from './rsvp';
-import { createRSVP } from '../../actions/rsvp_actions';
-import { fetchTicket } from '../../actions/ticket_actions';
+import { createRSVP, receiveRSVPS } from '../../actions/rsvp_actions';
+
 
 
 const mapStateToProps = (state, ownProps) => {
+  console.log(`estado: ${state}`);
   return {
-    event: state.events[ownProps.match.params.eventId],
+    rsvps: state.rsvps,
     userId: state.session.currentUser.id
   };
 };
@@ -14,7 +15,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     createRSVP: rsvp => dispatch(createRSVP(rsvp)),
-    fetchTicket: id => dispatch(fetchTicket(id))
+    receiveRSVPS: () => dispatch(receiveRSVPS())
   };
 };
 
