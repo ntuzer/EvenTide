@@ -49,6 +49,13 @@ class Api::EventsController < ApplicationController
 
   def myEvents
     @events = Event.find_by(organizer_id: current_user.id)
+    begin
+      @events.first
+    rescue
+      @events = [@events]
+    end
+    @events = [] if @events.nil?
+    render :index
   end
 
   private
