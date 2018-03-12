@@ -15936,6 +15936,10 @@ var _tickets_container = __webpack_require__(406);
 
 var _tickets_container2 = _interopRequireDefault(_tickets_container);
 
+var _my_events_container = __webpack_require__(409);
+
+var _my_events_container2 = _interopRequireDefault(_my_events_container);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -16009,7 +16013,7 @@ var UserShow = function (_React$Component) {
       } else if (path[path.length - 1] === "tickets") {
         return _react2.default.createElement(_tickets_container2.default, null);
       } else if (path[path.length - 1] === "events") {
-        // return (<Evts />);
+        return _react2.default.createElement(_my_events_container2.default, null);
       }
     }
   }, {
@@ -35353,6 +35357,168 @@ var rsvpReducer = function rsvpReducer() {
 };
 
 exports.default = rsvpReducer;
+
+/***/ }),
+/* 408 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(10);
+
+var _event_index_item = __webpack_require__(87);
+
+var _event_index_item2 = _interopRequireDefault(_event_index_item);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var MyEvents = function (_React$Component) {
+  _inherits(MyEvents, _React$Component);
+
+  function MyEvents(props) {
+    _classCallCheck(this, MyEvents);
+
+    return _possibleConstructorReturn(this, (MyEvents.__proto__ || Object.getPrototypeOf(MyEvents)).call(this, props));
+  }
+
+  _createClass(MyEvents, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.props.fetchMyEvents();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      if (Object.keys(this.props.events).length === 0) return null;
+      var events = Object.values(this.props.events);
+      var eArr = [];
+      return _react2.default.createElement(
+        'section',
+        { className: 'user-show-body-outer' },
+        _react2.default.createElement(
+          'div',
+          { className: 'u-s-b-o' },
+          _react2.default.createElement(
+            'div',
+            { className: 'user-show-body' },
+            events.map(function (evt) {
+              var bool = "false";
+              if (eArr.includes(evt.id)) bool = "true";
+              return _react2.default.createElement(_event_index_item2.default, { key: evt.id,
+                loggedIn: 'true',
+                createBookmark: _this2.props.createBookmark,
+                removeBookmark: _this2.props.removeBookmark,
+                bookmark: bool, event: evt });
+            })
+          )
+        )
+      );
+    }
+  }]);
+
+  return MyEvents;
+}(_react2.default.Component);
+
+exports.default = MyEvents;
+// <div key={evt.id} className="e-i-i">
+//   <div className="e-i-box">
+//     <div className="ii-upper">
+//       <Link to={`/events/${evt.id}`}>
+//
+//         <div className="img-div">
+//           <img className="ii-img"
+//             src={evt.event_image_url}
+//             height="165" width="330" alt=""></img>
+//           <span>{evt.price}</span>
+//         </div>
+//
+//         <div className="ii-text">
+//           <div className="ii-t-date">{evt.start_date}</div>
+//           <div className="ii-t-title">{evt.title}</div>
+//           <div className="ii-t-location">{evt.location}</div>
+//         </div>
+//       </Link>
+//     </div>
+//
+//     <div className="ii-footer">
+//       <Link to="/">#{evt.category}</Link>
+//       <div className="ii-bookmark">
+//
+//       </div>
+//     </div>
+//   </div>
+// </div>
+
+/***/ }),
+/* 409 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _reactRedux = __webpack_require__(15);
+
+var _event_actions = __webpack_require__(21);
+
+var _my_events = __webpack_require__(408);
+
+var _my_events2 = _interopRequireDefault(_my_events);
+
+var _bookmark_actions = __webpack_require__(25);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  return {
+    loggedIn: Boolean(state.session.currentUser),
+    events: state.events
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+  return {
+    fetchMyEvents: function fetchMyEvents() {
+      return dispatch((0, _event_actions.fetchMyEvents)());
+    },
+    createBookmark: function createBookmark(id) {
+      return dispatch((0, _bookmark_actions.createBookmark)(id));
+    },
+    fetchBookmarks: function fetchBookmarks() {
+      return dispatch((0, _bookmark_actions.fetchBookmarks)());
+    },
+    fetchBookmark: function fetchBookmark(id) {
+      return dispatch((0, _bookmark_actions.fetchBookmark)(id));
+    },
+    removeBookmark: function removeBookmark(id) {
+      return dispatch((0, _bookmark_actions.removeBookmark)(id));
+    }
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_my_events2.default);
 
 /***/ })
 /******/ ]);

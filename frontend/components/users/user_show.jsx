@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, withRouter, Redirect } from 'react-router-dom';
 import EventIndexItem from '../events/event_index_item';
 import TicketIndex from '../tickets/tickets_container';
+import Evts from '../events/my_events_container';
 
 
 class UserShow extends React.Component {
@@ -44,7 +45,7 @@ class UserShow extends React.Component {
         </div>
       </section>
     );
-  }  
+  }
 
   subPage(){
     let path = this.props.location.pathname.split("/");
@@ -53,7 +54,7 @@ class UserShow extends React.Component {
     } else if (path[path.length - 1] === "tickets") {
       return (<TicketIndex />);
     } else if (path[path.length - 1] === "events") {
-      // return (<Evts />);
+      return (<Evts />);
     }
   }
 
