@@ -16685,6 +16685,12 @@ var fetchEvents = exports.fetchEvents = function fetchEvents() {
     method: 'GET'
   });
 };
+var fetchMyEvents = exports.fetchMyEvents = function fetchMyEvents() {
+  return $.ajax({
+    url: 'api/myEvents',
+    method: 'GET'
+  });
+};
 var fetchEvent = exports.fetchEvent = function fetchEvent(id) {
   return $.ajax({
     url: 'api/events/' + id,

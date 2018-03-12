@@ -4,6 +4,12 @@ export const fetchEvents = () => {
     method: 'GET',
   });
 };
+export const fetchMyEvents = () => {
+  return $.ajax({
+    url: 'api/myEvents',
+    method: 'GET',
+  });
+};
 export const fetchEvent = (id) => {
   return $.ajax({
     url: `api/events/${id}`,
