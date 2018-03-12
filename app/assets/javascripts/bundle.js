@@ -35242,9 +35242,6 @@ var TicketIndex = function (_React$Component) {
 
       if (Object.keys(this.props.rsvps).length === 0) return null;
       var rsvps = Object.values(this.props.rsvps);
-
-      console.log('what is');
-      console.log(rsvps);
       return _react2.default.createElement(
         'section',
         { className: 'user-show-body-outer' },
@@ -35340,7 +35337,6 @@ var _my_tickets2 = _interopRequireDefault(_my_tickets);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  console.log(state);
   return {
     loggedIn: Boolean(state.session.currentUser),
     rsvps: state.rsvps

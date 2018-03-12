@@ -5,7 +5,6 @@ import {
 import TicketIndex from './my_tickets';
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(state);
   return {
     loggedIn: Boolean(state.session.currentUser),
     rsvps: state.rsvps

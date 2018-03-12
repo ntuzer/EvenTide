@@ -31,9 +31,6 @@ class TicketIndex extends React.Component {
   render(){
     if (Object.keys(this.props.rsvps).length === 0) return null;
     let rsvps = Object.values(this.props.rsvps);
-
-    console.log('what is');
-    console.log(rsvps);
     return (
       <section className="user-show-body-outer">
         <div className="u-s-b-o">
