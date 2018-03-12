@@ -48,6 +48,15 @@ export const fetchEvents = () => dispatch => {
   ));
 };
 
+export const fetchMyEvents = () => dispatch => {
+  // console.log('action fetchEvents');
+  return EventAPIUtil.fetchEvents().then(events => (
+    dispatch(receiveAllEvents(events))
+  ), err => (
+    dispatch(receiveErrors(err.responseJSON))
+  ));
+};
+
 export const fetchEvent = id => dispatch => {
   // console.log('action fetch event');
   return EventAPIUtil.fetchEvent(id).then(event => (

@@ -2299,7 +2299,7 @@ module.exports = DOMProperty;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.deleteEvent = exports.updateEvent = exports.createEvent = exports.fetchEvent = exports.fetchEvents = exports.receiveErrors = exports.RECEIVE_MY_EVENTS = exports.RECEIVE_EVENT_ERRORS = exports.RECEIVE_EVENT = exports.RECEIVE_EVENTS = undefined;
+exports.deleteEvent = exports.updateEvent = exports.createEvent = exports.fetchEvent = exports.fetchMyEvents = exports.fetchEvents = exports.receiveErrors = exports.RECEIVE_MY_EVENTS = exports.RECEIVE_EVENT_ERRORS = exports.RECEIVE_EVENT = exports.RECEIVE_EVENTS = undefined;
 
 var _events_api_util = __webpack_require__(189);
 
@@ -2344,6 +2344,17 @@ var receiveErrors = exports.receiveErrors = function receiveErrors(errors) {
 };
 
 var fetchEvents = exports.fetchEvents = function fetchEvents() {
+  return function (dispatch) {
+    // console.log('action fetchEvents');
+    return EventAPIUtil.fetchEvents().then(function (events) {
+      return dispatch(receiveAllEvents(events));
+    }, function (err) {
+      return dispatch(receiveErrors(err.responseJSON));
+    });
+  };
+};
+
+var fetchMyEvents = exports.fetchMyEvents = function fetchMyEvents() {
   return function (dispatch) {
     // console.log('action fetchEvents');
     return EventAPIUtil.fetchEvents().then(function (events) {
