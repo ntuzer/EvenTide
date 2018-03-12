@@ -15255,6 +15255,7 @@ var Navbar = function (_React$Component) {
       e.preventDefault();
       if (this.props.loggedIn) {
         this.props.signOut();
+        // this.props.history.push("/");
       } else {
         this.props.history.push("/login");
       }
@@ -35209,7 +35210,10 @@ var TicketIndex = function (_React$Component) {
   function TicketIndex(props) {
     _classCallCheck(this, TicketIndex);
 
-    return _possibleConstructorReturn(this, (TicketIndex.__proto__ || Object.getPrototypeOf(TicketIndex)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (TicketIndex.__proto__ || Object.getPrototypeOf(TicketIndex)).call(this, props));
+
+    _this.prettyDate = _this.prettyDate.bind(_this);
+    return _this;
   }
 
   _createClass(TicketIndex, [{
@@ -35218,8 +35222,24 @@ var TicketIndex = function (_React$Component) {
       this.props.fetchTickets();
     }
   }, {
+    key: 'prettyDate',
+    value: function prettyDate(event) {
+      var dateObj = new Date(event.start_date).toString();
+      var dateEnd = new Date(event.end_date).toString();
+      var ampm1 = parseInt(dateObj.slice(16, 18)) > 12 ? "PM" : "AM";
+      var ampm2 = parseInt(dateEnd.slice(16, 18)) > 12 ? "PM" : "AM";
+      var times = dateObj.slice(16, 21) + ' ' + ampm1 + ' - ' + dateEnd.slice(16, 21) + ' ' + ampm2;
+      var mon = '' + dateObj.slice(4, 7);
+      var day = '' + dateObj.slice(8, 10);
+      var date = dateObj.slice(0, 3) + ', ' + dateObj.slice(4, 15);
+      var price = event.max_price - event.min_price === 0 ? "Free" : '$' + (event.max_price - event.min_price);
+      return { dateObj: dateObj, dateEnd: dateEnd, ampm1: ampm1, ampm2: ampm2, times: times, mon: mon, day: day, date: date, price: price };
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       if (Object.keys(this.props.rsvps).length === 0) return null;
       var rsvps = Object.values(this.props.rsvps);
 
@@ -35234,30 +35254,47 @@ var TicketIndex = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'user-show-body' },
-            rsvps.map(function (rsvp) {
-              return _react2.default.createElement(
-                'div',
-                { className: 'ticket-item', key: rsvp.rsvp.id },
-                _react2.default.createElement('img', { src: rsvp.event.event_image_url, alt: '' }),
-                _react2.default.createElement(
-                  'h3',
-                  null,
-                  rsvp.event.title
-                ),
-                _react2.default.createElement(
-                  'h2',
-                  null,
-                  'Ticket Purchase Id ',
-                  rsvp.rsvp.id
-                ),
-                _react2.default.createElement(
-                  'h1',
-                  null,
-                  'Qty: ',
-                  rsvp.rsvp.quantity
-                )
-              );
-            })
+            _react2.default.createElement(
+              'div',
+              { className: 'my-tickets' },
+              rsvps.map(function (rsvp) {
+                var datos = _this2.prettyDate(rsvp.event);
+                return _react2.default.createElement(
+                  'div',
+                  { className: 'ticket-item', key: rsvp.rsvp.id },
+                  _react2.default.createElement('img', { src: rsvp.event.event_image_url, alt: '' }),
+                  _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(
+                      'h3',
+                      null,
+                      rsvp.event.title
+                    ),
+                    _react2.default.createElement(
+                      'h2',
+                      null,
+                      'Date: ',
+                      datos.mon,
+                      ' ',
+                      datos.day
+                    ),
+                    _react2.default.createElement(
+                      'h2',
+                      null,
+                      'Order Id: ',
+                      rsvp.rsvp.id
+                    ),
+                    _react2.default.createElement(
+                      'h1',
+                      null,
+                      'Qty: ',
+                      rsvp.rsvp.quantity
+                    )
+                  )
+                );
+              })
+            )
           )
         )
       );

@@ -1,0 +1,42 @@
+.my-tickets {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  flex-direction: column;
+}
+
+.ticket-item {
+  width: 800px;
+  height: 200px;
+  border: 1px solid gray;
+  border-radius: 2px;
+  margin: 30px;
+  display: flex;
+  flex-direction: row;
+}
+
+.ticket-item img {
+  height: inherit;
+  width: auto;
+  overflow: hidden;
+}
+
+.ticket-item div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.ticket-item h3 {
+
+}
+
+.ticket-item h2 {
+
+}
+
+.ticket-item h1 {
+
+}
