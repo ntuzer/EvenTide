@@ -8,11 +8,13 @@ import events from './events_reducer';
 import tickets from './tickets_reducer';
 import bookmarks from './bookmarks_reducer';
 import categories from './categories_reducer';
+import rsvps from './rsvp_reducer';
 
 const rootReducer = combineReducers({
   session,
   events,
   tickets,
+  rsvps,
   bookmarks,
   categories,
   errors,

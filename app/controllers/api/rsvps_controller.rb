@@ -1,5 +1,6 @@
 class Api::RsvpsController < ApplicationController
-  
+  before_action :require_logged_in, only: [:index, :create, :destroy]
+
   def create
 
     @rsvp = Rsvp.new(rsvp_params)
@@ -18,10 +19,6 @@ class Api::RsvpsController < ApplicationController
     rsvps = Rsvp.all.where(user_id: current_user.id)
     @hsh = {}
     rsvps.each {|r| @hsh[r] = r.event}
-  end
-
-  def show
-
   end
 
   def destroy

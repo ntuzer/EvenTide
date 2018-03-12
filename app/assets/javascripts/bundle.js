@@ -13722,7 +13722,7 @@ module.exports = __webpack_require__(307);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.createRSVP = exports.receiveErrors = exports.RECEIVE_RSVP_ERRORS = exports.RECEIVE_RSVPS = undefined;
+exports.fetchTickets = exports.createRSVP = exports.receiveErrors = exports.RECEIVE_RSVP_ERRORS = exports.RECEIVE_RSVPS = undefined;
 
 var _rsvps_api_util = __webpack_require__(191);
 
@@ -13734,7 +13734,8 @@ var RECEIVE_RSVPS = exports.RECEIVE_RSVPS = 'RECEIVE_RSVP';
 var RECEIVE_RSVP_ERRORS = exports.RECEIVE_RSVP_ERRORS = 'RECEIVE_RSVP_ERRORS';
 
 var receiveRSVPS = function receiveRSVPS(rsvps) {
-  // console.log('action receiveEvents');
+  // console.log('action receiveRsvps');
+  // console.log(rsvps);
   return {
     type: RECEIVE_RSVPS,
     rsvps: rsvps
@@ -13752,6 +13753,16 @@ var createRSVP = exports.createRSVP = function createRSVP(rsvp) {
   return function (dispatch) {
     return RsvpAPIUtil.createRSVP(rsvp).then(function (sRsvp) {
       return dispatch(receiveRSVPS(sRsvp));
+    }, function (err) {
+      return dispatch(receiveErrors(err.responseJSON));
+    });
+  };
+};
+
+var fetchTickets = exports.fetchTickets = function fetchTickets() {
+  return function (dispatch) {
+    return RsvpAPIUtil.fetchTickets().then(function (tickets) {
+      return dispatch(receiveRSVPS(tickets));
     }, function (err) {
       return dispatch(receiveErrors(err.responseJSON));
     });
@@ -15568,12 +15579,14 @@ var _rsvp2 = _interopRequireDefault(_rsvp);
 
 var _rsvp_actions = __webpack_require__(153);
 
+var _ticket_actions = __webpack_require__(39);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  console.log('estado: ' + state);
+
   return {
-    rsvps: state.rsvps,
+
     userId: state.session.currentUser.id
   };
 };
@@ -15585,6 +15598,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
     },
     receiveRSVPS: function receiveRSVPS() {
       return dispatch((0, _rsvp_actions.receiveRSVPS)());
+    },
+    fetchTicket: function fetchTicket(id) {
+      return dispatch((0, _ticket_actions.fetchTicket)(id));
     }
   };
 };
@@ -15905,6 +15921,10 @@ var _event_index_item = __webpack_require__(87);
 
 var _event_index_item2 = _interopRequireDefault(_event_index_item);
 
+var _tickets_container = __webpack_require__(406);
+
+var _tickets_container2 = _interopRequireDefault(_tickets_container);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15922,6 +15942,8 @@ var UserShow = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (UserShow.__proto__ || Object.getPrototypeOf(UserShow)).call(this, props));
 
     _this.state = undefined;
+    _this.subPage = _this.subPage.bind(_this);
+    _this.bookmarks = _this.bookmarks.bind(_this);
     return _this;
   }
 
@@ -15931,26 +15953,63 @@ var UserShow = function (_React$Component) {
 
       this.props.fetchEvents().then(this.props.fetchBookmarks());
       var path = this.props.location.pathname.split("/");
-      if (path.length === 3) this.props.history.push(this.props.userId + '/bookmarks');
+      if (path.length === 3) {
+        this.props.history.push(this.props.userId + '/bookmarks');
+      }
     }
   }, {
-    key: 'render',
-    value: function render() {
+    key: 'bookmarks',
+    value: function bookmarks() {
       var _this2 = this;
-
-      if (this.props.events === undefined) return null;
 
       var events = this.props.bookmarks;
       var eArr = [];
       this.props.bookmarks.map(function (el) {
         return eArr.push(el.id);
       });
+      return _react2.default.createElement(
+        'section',
+        { className: 'user-show-body-outer' },
+        _react2.default.createElement(
+          'div',
+          { className: 'u-s-b-o' },
+          _react2.default.createElement(
+            'div',
+            { className: 'user-show-body' },
+            events.map(function (evt) {
+              var bool = "false";
+              if (eArr.includes(evt.id)) bool = "true";
+              return _react2.default.createElement(_event_index_item2.default, { key: evt.id,
+                loggedIn: 'true',
+                createBookmark: _this2.props.createBookmark,
+                removeBookmark: _this2.props.removeBookmark,
+                bookmark: bool, event: evt });
+            })
+          )
+        )
+      );
+    }
+  }, {
+    key: 'subPage',
+    value: function subPage() {
+      var path = this.props.location.pathname.split("/");
+      if (path[path.length - 1] === "bookmarks") {
+        return this.bookmarks();
+      } else if (path[path.length - 1] === "tickets") {
+        return _react2.default.createElement(_tickets_container2.default, null);
+      } else if (path[path.length - 1] === "events") {
+        // return (<Evts />);
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      if (this.props.events === undefined) return null;
 
       var path = this.props.location.pathname.split("/");
-
-      var bookmark = path[path.length - 1] === "bookmarks" ? "active-item" : "profile-event-links-items";
-      var tickets = path[path.length - 1] === "tickets" ? "active-item" : "profile-event-links-items";
-      var evts = path[path.length - 1] === "events" ? "active-item" : "profile-event-links-items";
+      var bookmark = path[3] === "bookmarks" ? "active-item" : "profile-event-links-items";
+      var tickets = path[3] === "tickets" ? "active-item" : "profile-event-links-items";
+      var evts = path[3] === "events" ? "active-item" : "profile-event-links-items";
 
       return _react2.default.createElement(
         'div',
@@ -15989,27 +16048,7 @@ var UserShow = function (_React$Component) {
             )
           )
         ),
-        _react2.default.createElement(
-          'section',
-          { className: 'user-show-body-outer' },
-          _react2.default.createElement(
-            'div',
-            { className: 'u-s-b-o' },
-            _react2.default.createElement(
-              'div',
-              { className: 'user-show-body' },
-              events.map(function (evt) {
-                var bool = "false";
-                if (eArr.includes(evt.id)) bool = "true";
-                return _react2.default.createElement(_event_index_item2.default, { key: evt.id,
-                  loggedIn: 'true',
-                  createBookmark: _this2.props.createBookmark,
-                  removeBookmark: _this2.props.removeBookmark,
-                  bookmark: bool, event: evt });
-              })
-            )
-          )
-        )
+        this.subPage()
       );
     }
   }]);
@@ -16018,12 +16057,6 @@ var UserShow = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = UserShow;
-
-// {
-//   Object.values(this.state.bookmarks).map(bk => {
-//     <EventIndexItem key={bk.id}
-//   })
-// }
 
 /***/ }),
 /* 173 */
@@ -16414,19 +16447,24 @@ var _categories_reducer = __webpack_require__(178);
 
 var _categories_reducer2 = _interopRequireDefault(_categories_reducer);
 
+var _rsvp_reducer = __webpack_require__(407);
+
+var _rsvp_reducer2 = _interopRequireDefault(_rsvp_reducer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import entities from './entities_reducer';
-// import ui from './ui_reducer';
 var rootReducer = (0, _redux.combineReducers)({
   session: _session_reducer2.default,
   events: _events_reducer2.default,
   tickets: _tickets_reducer2.default,
+  rsvps: _rsvp_reducer2.default,
   bookmarks: _bookmarks_reducer2.default,
   categories: _categories_reducer2.default,
   errors: _errors_reducer2.default
 });
 
+// import entities from './entities_reducer';
+// import ui from './ui_reducer';
 exports.default = rootReducer;
 
 /***/ }),
@@ -16550,11 +16588,12 @@ var ticketsReducer = function ticketsReducer() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments[1];
 
+
   Object.freeze(preloadedState);
   var newState = void 0;
   switch (action.type) {
     case _ticket_actions.RECEIVE_TICKET:
-      return (0, _merge3.default)({}, preloadedState, _defineProperty({}, action.id, action));
+      return (0, _merge3.default)({}, preloadedState, _defineProperty({}, action.event_id, action));
     default:
       return preloadedState;
   }
@@ -16754,6 +16793,13 @@ var createRSVP = exports.createRSVP = function createRSVP(rsvp) {
     url: 'api/rsvps',
     method: 'POST',
     data: { rsvp: rsvp }
+  });
+};
+
+var fetchTickets = exports.fetchTickets = function fetchTickets() {
+  return $.ajax({
+    url: '/api/rsvps',
+    method: 'GET'
   });
 };
 
@@ -35108,6 +35154,188 @@ module.exports = function(originalModule) {
 	return module;
 };
 
+
+/***/ }),
+/* 405 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(10);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var TicketIndex = function (_React$Component) {
+  _inherits(TicketIndex, _React$Component);
+
+  function TicketIndex(props) {
+    _classCallCheck(this, TicketIndex);
+
+    return _possibleConstructorReturn(this, (TicketIndex.__proto__ || Object.getPrototypeOf(TicketIndex)).call(this, props));
+  }
+
+  _createClass(TicketIndex, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.props.fetchTickets();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      if (Object.keys(this.props.rsvps).length === 0) return null;
+      var rsvps = Object.values(this.props.rsvps);
+
+      console.log('what is');
+      console.log(rsvps);
+      return _react2.default.createElement(
+        'section',
+        { className: 'user-show-body-outer' },
+        _react2.default.createElement(
+          'div',
+          { className: 'u-s-b-o' },
+          _react2.default.createElement(
+            'div',
+            { className: 'user-show-body' },
+            rsvps.map(function (rsvp) {
+              return _react2.default.createElement(
+                'div',
+                { className: 'ticket-item', key: rsvp.rsvp.id },
+                _react2.default.createElement('img', { src: rsvp.event.event_image_url, alt: '' }),
+                _react2.default.createElement(
+                  'h3',
+                  null,
+                  rsvp.event.title
+                ),
+                _react2.default.createElement(
+                  'h2',
+                  null,
+                  'Ticket Purchase Id ',
+                  rsvp.rsvp.id
+                ),
+                _react2.default.createElement(
+                  'h1',
+                  null,
+                  'Qty: ',
+                  rsvp.rsvp.quantity
+                )
+              );
+            })
+          )
+        )
+      );
+    }
+  }]);
+
+  return TicketIndex;
+}(_react2.default.Component);
+
+exports.default = TicketIndex;
+
+// {
+//   events.map(evt => {
+//     let bool = "false";
+//     if (eArr.includes(evt.id)) bool = "true";
+//     return <EventIndexItem key={evt.id}
+//       loggedIn = "true"
+//       createBookmark={this.props.createBookmark}
+//       removeBookmark={this.props.removeBookmark}
+//       bookmark={bool} event={evt} />;
+//   })
+// }
+
+/***/ }),
+/* 406 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _reactRedux = __webpack_require__(15);
+
+var _rsvp_actions = __webpack_require__(153);
+
+var _my_tickets = __webpack_require__(405);
+
+var _my_tickets2 = _interopRequireDefault(_my_tickets);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  console.log(state);
+  return {
+    loggedIn: Boolean(state.session.currentUser),
+    rsvps: state.rsvps
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+  return {
+    fetchTickets: function fetchTickets() {
+      return dispatch((0, _rsvp_actions.fetchTickets)());
+    }
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_my_tickets2.default);
+
+/***/ }),
+/* 407 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _merge = __webpack_require__(19);
+
+var _merge2 = _interopRequireDefault(_merge);
+
+var _rsvp_actions = __webpack_require__(153);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var rsvpReducer = function rsvpReducer() {
+  var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments[1];
+
+  // console.log("redus");
+  // console.log(action);
+  Object.freeze(preloadedState);
+  var newState = void 0;
+  switch (action.type) {
+    case _rsvp_actions.RECEIVE_RSVPS:
+      newState = (0, _merge2.default)({}, action.rsvps);
+      return newState;
+    default:
+      return preloadedState;
+  }
+};
+
+exports.default = rsvpReducer;
 
 /***/ })
 /******/ ]);

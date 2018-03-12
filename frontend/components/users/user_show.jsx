@@ -1,37 +1,71 @@
 import React from 'react';
 import { Link, withRouter, Redirect } from 'react-router-dom';
 import EventIndexItem from '../events/event_index_item';
+import TicketIndex from '../tickets/tickets_container';
+
 
 class UserShow extends React.Component {
   constructor(props){
     super(props);
     this.state = undefined;
+    this.subPage = this.subPage.bind(this);
+    this.bookmarks = this.bookmarks.bind(this);
   }
 
   componentDidMount(){
 
     this.props.fetchEvents().then(this.props.fetchBookmarks());
     let path = this.props.location.pathname.split("/");
-    if (path.length === 3) this.props.history.push(`${this.props.userId}/bookmarks`);
+    if (path.length === 3) {
+      this.props.history.push(`${this.props.userId}/bookmarks`);
+    }
   }
 
+  bookmarks(){
+    let events = this.props.bookmarks;
+    let eArr = [];
+    this.props.bookmarks.map(el => eArr.push(el.id));
+    return (
+      <section className="user-show-body-outer">
+        <div className="u-s-b-o">
+          <div className="user-show-body">
+            {
+              events.map(evt => {
+                let bool = "false";
+                if (eArr.includes(evt.id)) bool = "true";
+                return <EventIndexItem key={evt.id}
+                  loggedIn = "true"
+                  createBookmark={this.props.createBookmark}
+                  removeBookmark={this.props.removeBookmark}
+                  bookmark={bool} event={evt} />;
+              })
+            }
+          </div>
+        </div>
+      </section>
+    );
+  }
 
-
+  subPage(){
+    let path = this.props.location.pathname.split("/");
+    if (path[path.length - 1] === "bookmarks"){
+      return this.bookmarks();
+    } else if (path[path.length - 1] === "tickets") {
+      return (<TicketIndex />);
+    } else if (path[path.length - 1] === "events") {
+      // return (<Evts />);
+    }
+  }
 
   render(){
     if (this.props.events === undefined) return null;
 
-    let events = this.props.bookmarks;
-    let eArr = [];
-    this.props.bookmarks.map(el => eArr.push(el.id));
-
     let path = this.props.location.pathname.split("/");
-
-    let bookmark = path[path.length - 1] === "bookmarks" ?
+    let bookmark = path[3] === "bookmarks" ?
       "active-item" : "profile-event-links-items";
-    let tickets = path[path.length - 1] === "tickets" ?
+    let tickets = path[3] === "tickets" ?
       "active-item" : "profile-event-links-items";
-    let evts = path[path.length - 1] === "events" ?
+    let evts = path[3] === "events" ?
       "active-item" : "profile-event-links-items";
 
     return(
@@ -48,25 +82,14 @@ class UserShow extends React.Component {
               className={tickets}>Tickets</Link>
             <Link to={`/users/${this.props.userId}/events`}
               className={evts}>Scheduled Events</Link>
+
           </div>
         </header>
-        <section className="user-show-body-outer">
-          <div className="u-s-b-o">
-            <div className="user-show-body">
-              {
-                events.map(evt => {
-                  let bool = "false";
-                  if (eArr.includes(evt.id)) bool = "true";
-                  return <EventIndexItem key={evt.id}
-                    loggedIn = "true"
-                    createBookmark={this.props.createBookmark}
-                    removeBookmark={this.props.removeBookmark}
-                    bookmark={bool} event={evt} />;
-                })
-              }
-            </div>
-          </div>
-        </section>
+
+
+        {
+          this.subPage()
+        }
 
 
       </div>
@@ -75,12 +98,3 @@ class UserShow extends React.Component {
 }
 
 export default UserShow;
-
-
-
-
-// {
-//   Object.values(this.state.bookmarks).map(bk => {
-//     <EventIndexItem key={bk.id}
-//   })
-// }

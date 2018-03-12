@@ -5,11 +5,12 @@ import {
 } from '../actions/ticket_actions';
 
 const ticketsReducer = (preloadedState = {}, action) => {
+
   Object.freeze(preloadedState);
   let newState;
   switch (action.type) {
     case RECEIVE_TICKET:
-      return merge({}, preloadedState, {[action.id]: action});
+      return merge({}, preloadedState, {[action.event_id]: action});
     default:
       return preloadedState;
   }

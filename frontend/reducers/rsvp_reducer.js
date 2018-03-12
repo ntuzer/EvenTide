@@ -6,6 +6,8 @@ import {
 } from '../actions/rsvp_actions';
 
 const rsvpReducer = (preloadedState = {}, action) => {
+  // console.log("redus");
+  // console.log(action);
   Object.freeze(preloadedState);
   let newState;
   switch (action.type) {

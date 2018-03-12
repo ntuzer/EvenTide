@@ -5,3 +5,10 @@ export const createRSVP = rsvp => {
     data: { rsvp }
   });
 };
+
+export const fetchTickets = () => {
+  return $.ajax({
+    url: '/api/rsvps',
+    method: 'GET',
+  });
+};

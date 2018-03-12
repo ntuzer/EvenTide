@@ -5,7 +5,8 @@ export const RECEIVE_RSVP_ERRORS = 'RECEIVE_RSVP_ERRORS';
 
 
 const receiveRSVPS = rsvps => {
-  // console.log('action receiveEvents');
+  // console.log('action receiveRsvps');
+  // console.log(rsvps);
   return {
     type: RECEIVE_RSVPS,
     rsvps
@@ -25,4 +26,13 @@ export const createRSVP = rsvp => dispatch => {
     ), err => (
       dispatch(receiveErrors(err.responseJSON))
     ));
+};
+
+
+export const fetchTickets = () => dispatch => {
+  return RsvpAPIUtil.fetchTickets().then(tickets => (
+    dispatch(receiveRSVPS(tickets))
+  ), err => (
+    dispatch(receiveErrors(err.responseJSON))
+  ));
 };

@@ -1,30 +1,24 @@
 import { connect } from 'react-redux';
 import {
-  fetchEvents, fetchEvent, createEvent, deleteEvent
-} from '../../actions/event_actions';
-import {
-        fetchBookmarks,
-        fetchBookmark,
-        removeBookmark,
-        createBookmark,
-      } from '../../actions/bookmark_actions';
-import EventIndex from './event_index';
+        fetchTickets
+      } from '../../actions/rsvp_actions';
+import TicketIndex from './my_tickets';
 
 const mapStateToProps = (state, ownProps) => {
+  console.log(state);
   return {
     loggedIn: Boolean(state.session.currentUser),
-    events: Object.values(state.events),
-    bookmarks: Object.values(state.bookmarks)
+    rsvps: state.rsvps
   };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    
+    fetchTickets: () => dispatch(fetchTickets()),
   };
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(EventIndex);
+)(TicketIndex);
