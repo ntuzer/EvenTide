@@ -47,6 +47,10 @@ class Api::EventsController < ApplicationController
     end
   end
 
+  def myEvents
+    @events = Event.find_by(organizer_id: current_user.id)
+  end
+
   private
 
   def event_params

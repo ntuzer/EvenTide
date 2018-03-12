@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :rsvps, only: [:create, :show, :index, :destroy]
     resources :bookmarks, only: [:create, :index, :show, :destroy]
     resources :categories, only: [:show]
+    get 'myEvents', to: 'events#myEvents'
   end
 
   root "static_pages#root"
