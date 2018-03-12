@@ -8,7 +8,11 @@ class Event < ApplicationRecord
     class_name: :Ticket
 
   belongs_to :organizer,
-  primary_key: :id,
-  foreign_key: :organizer_id,
-  class_name: :User
+    primary_key: :id,
+    foreign_key: :organizer_id,
+    class_name: :User
+
+  has_many :rsvps,
+    through: :tickets,
+    source: :rsvps
 end
