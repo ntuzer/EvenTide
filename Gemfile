@@ -48,6 +48,8 @@ group :development, :test do
   gem 'byebug'
   # gem 'web-console', '~> 2.0'
   gem 'spring'
+  gem 'rspec-rails', '~> 3.7'
+  gem 'rspec_junit_formatter'
 end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.

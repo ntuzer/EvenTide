@@ -11,7 +11,6 @@
     "npm": "5.6.0"
   },
   "dependencies": {
-    "babel-core": "^6.13.2",
     "babel-loader": "^6.2.4",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.11.1",
@@ -26,10 +25,14 @@
     "webpack": "^2.2.1"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-jest": "^22.4.3",
+    "jest": "^22.4.3",
     "redux-logger": "^3.0.6"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+
+    "test": "jest",
     "postinstall": "webpack",
     "webpack": "webpack --watch"
   },
