@@ -1,7 +1,7 @@
 # EvenTide
 EvenTide is a clone of EventBrite. It is a web app created from the ground up using React, Redux, with a Rails backend.
 
-[EvenTide live](https://eventide-eventbrite-clone.herokuapp.com/)
+[EvenTide live](https://eventide-app.herokuapp.com/)
 
 ![](https://github.com/ntuzer/EvenTide/blob/master/wireframes/screenshots/home.png?raw=true)
 
