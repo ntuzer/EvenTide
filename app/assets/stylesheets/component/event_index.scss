@@ -1,7 +1,7 @@
 .event-index {
   font-family: Lato;
   background: #f8f8fa;
-  color: #45494E;
+  color: #45494e;
 }
 
 .event-spacer {
@@ -21,7 +21,6 @@
   font-size: 25px;
   line-height: 30px;
   font-weight: 500;
-  // border: 1px solid red;
   margin-left: auto;
   margin-right: auto;
 }
@@ -29,4 +28,5 @@
 .event-main {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
